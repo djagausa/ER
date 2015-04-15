@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "DefaultAerobic.h"
+#import "WeightLiftingEvent.h"
 
 @interface Add_Aerobic_VC : UIViewController
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) DefaultWeightLifting *defaulAerobicEvent;
+
 
 @end

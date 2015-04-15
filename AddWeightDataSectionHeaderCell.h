@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AddWeightDataSectionHeaderCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *date;
 
 @end

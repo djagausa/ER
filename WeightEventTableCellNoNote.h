@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface WeightEventTableCellNoNote : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *weight;
+@property (weak, nonatomic) IBOutlet UILabel *setCount;
+@property (weak, nonatomic) IBOutlet UILabel *repsCount;
 @end

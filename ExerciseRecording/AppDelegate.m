@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "EventViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UINavigationController* navigationController = (UINavigationController*) self.window.rootViewController;
+    EventViewController* controller = (EventViewController*)navigationController.topViewController;
+    NSAssert([controller isKindOfClass:[EventViewController class]], @"Should have an item view controller");
+    
+    [controller setManagedObjectContext:self.managedObjectContext];
     return YES;
 }
 
@@ -52,6 +59,8 @@
 
 - (NSURL *)applicationDocumentsDirectory {
     // The directory the application uses to store the Core Data store file. This code uses a directory named "com.gwc.ExerciseRecording" in the application's documents directory.
+    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
+
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

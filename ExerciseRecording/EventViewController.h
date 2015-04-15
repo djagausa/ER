@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  EventViewController.h
 //  ExerciseRecording
 //
 //  Created by Douglas Alexander on 3/7/15.
@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface EventViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 
 @end
 

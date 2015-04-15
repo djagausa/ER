@@ -10,4 +10,8 @@
 
 @interface WeightEventTVC : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *setCount;
+@property (weak, nonatomic) IBOutlet UILabel *repsCount;
+@property (weak, nonatomic) IBOutlet UILabel *weight;
+@property (weak, nonatomic) IBOutlet UILabel *note;
 @end

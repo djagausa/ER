@@ -1,5 +1,5 @@
 //
-//  AddSpecificDataVC.h
+//  AddWeightDataVC.h
 //  ExerciseRecording
 //
 //  Created by Douglas Alexander on 3/23/15.
@@ -7,7 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "DefaultWeightLifting.h"
+#import "WeightLiftingEvent.h"
 
-@interface AddSpecificDataVC : UIViewController
+@interface AddWeightDataVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) DefaultWeightLifting *defaultWeightLifting;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UITextField *setInput;
+@property (weak, nonatomic) IBOutlet UITextField *repsInput;
+@property (weak, nonatomic) IBOutlet UITextField *weightInput;
+@property (weak, nonatomic) IBOutlet UITableView *weightEventsTable;
+@property (weak, nonatomic) IBOutlet UITextView *note;
+@property (weak, nonatomic) IBOutlet UISwitch *noteSwitch;
+
+- (IBAction)noteSwitchChanged:(id)sender;
+- (IBAction)setCountField:(id)sender;
+- (IBAction)repCountField:(id)sender;
+- (IBAction)weightField:(id)sender;
+- (IBAction)addData:(id)sender;
 @end

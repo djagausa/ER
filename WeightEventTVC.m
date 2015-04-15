@@ -10,4 +10,11 @@
 
 @implementation WeightEventTVC
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    [self.contentView setNeedsLayout];
+    [self.contentView layoutIfNeeded];
+    self.note.preferredMaxLayoutWidth = CGRectGetWidth(self.note.frame);
+}
 @end

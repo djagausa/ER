@@ -7,8 +7,15 @@
 //
 
 #import "AddEventDataTVC.h"
+#import "DefaultAerobic.h"
+#import "DefaultWeightLifting.h"
 
 @interface AddEventDataTVC ()
+
+@property (nonatomic, strong) NSArray *weightLiftingDefaultObjects;
+@property (nonatomic, strong) NSArray *aerobicDefaultObjects;
+@property (nonatomic, strong) DefaultWeightLifting *defaultWeightLifting;
+@property (nonatomic, strong) DefaultAerobic *defaultAerobic;
 
 @end
 
@@ -22,6 +29,7 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self fetchEvents];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,70 +39,182 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    NSInteger count = 0;
+    
+    if (self.weightLiftingDefaultObjects.count > 0)
+    {
+        count++;
+    }
+    
+    if (self.aerobicDefaultObjects.count > 0)
+    {
+        count++;
+    }
+    return count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle;
+    
+    switch (section) {
+        case 0:
+            if (self.aerobicDefaultObjects.count > 0) {
+                headerTitle = @"Aerobic Events";
+            }
+            else
+            {
+                headerTitle = @"Weight Lifting Events";
+            }
+            break;
+            
+        case 1:
+            headerTitle = @"Weight Lifting Events";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return headerTitle;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = 0;
+    
+    switch (section) {
+        case 0:
+            if (self.aerobicDefaultObjects.count > 0) {
+                count = self.aerobicDefaultObjects.count;
+            }
+            else
+            {
+                count = self.weightLiftingDefaultObjects.count;
+                
+            }
+            break;
+        
+        case 1:
+            count = self.weightLiftingDefaultObjects.count;
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+    return count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+
+    switch (indexPath.section) {
+        case 0:
+            if (self.aerobicDefaultObjects.count > 0)
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"AerobicEventCell" forIndexPath:indexPath];
+                DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
+                cell.textLabel.text = event.eventName;
+            }
+            else
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"WeightEventCell" forIndexPath:indexPath];
+                DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
+                cell.textLabel.text = event.eventName;
+            }
+            break;
+            
+        case 1:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"WeightEventCell" forIndexPath:indexPath];
+            DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
+            cell.textLabel.text = event.eventName;
+        }
+            break;
+
+        default:
+            break;
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
 }
-*/
+#pragma mark - Fetched results controller
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void) fetchEvents
+{
+    NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DefaultWeightLifting" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequst setEntity:entity];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:YES];
+    [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
+    [fetchRequst setPredicate:filter];
+    
+    NSError *error;
+    self.weightLiftingDefaultObjects = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
+    
+    fetchRequst = [[NSFetchRequest alloc] init];
+    entity = [NSEntityDescription entityForName:@"DefaultAerobic" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequst setEntity:entity];
+    self.aerobicDefaultObjects = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
+    
+    for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
+        NSLog(@"Event Name: %@",defaultWL.eventName);
+    }
+    
+    for (DefaultWeightLifting *defaultA in self.aerobicDefaultObjects) {
+        NSLog(@"Event Name: %@",defaultA.eventName);
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *) sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    switch (indexPath.section) {
+        case 0:
+            if (self.aerobicDefaultObjects.count > 0)
+            {
+                self.defaultAerobic = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
+            }
+            else
+            {
+                self.defaultWeightLifting = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
+            }
+            break;
+            
+        case 1:
+        {
+            self.defaultWeightLifting = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+    if ([[segue identifier] isEqualToString:@"addWeightData"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        [[segue destinationViewController] setDefaultWeightLifting:self.defaultWeightLifting];
+    }
+    else if ([[segue identifier] isEqualToString:@"addAerobicData"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        [[segue destinationViewController] setDefaultAerobic:self.defaultAerobic];
+    }
 }
-*/
+
 
 @end

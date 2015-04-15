@@ -7,14 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */; };
+		2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */; };
+		2D7D7C321AC0C5950069E888 /* AddWeightDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */; };
+		2D7D7C501AC21A1F0069E888 /* DefaultAerobic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */; };
+		2D7D7C5C1AC21C540069E888 /* Add Aerobic VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C5B1AC21C540069E888 /* Add Aerobic VC.m */; };
+		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
+		2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */; };
+		2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */; };
+		2D7D7C6E1AC834B30069E888 /* DefaultWeightLifting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C6D1AC834B30069E888 /* DefaultWeightLifting.m */; };
+		2D7D7C741ACFF2C80069E888 /* WeightEventTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */; };
 		2DBCE8411AAB98EB00303DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8401AAB98EB00303DE1 /* main.m */; };
 		2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */; };
 		2DBCE8471AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */; };
-		2DBCE84A1AAB98EB00303DE1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8491AAB98EB00303DE1 /* ViewController.m */; };
+		2DBCE84A1AAB98EB00303DE1 /* EventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8491AAB98EB00303DE1 /* EventViewController.m */; };
 		2DBCE84D1AAB98EB00303DE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */; };
 		2DBCE84F1AAB98EB00303DE1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */; };
 		2DBCE8521AAB98EB00303DE1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */; };
 		2DBCE85E1AAB98EC00303DE1 /* ExerciseRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */; };
+		2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */; };
+		2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */; };
+		2DFD820F1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */; };
+		2DFD82121ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,20 +43,49 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D7D7C0C1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
+		2D7D7C0F1ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
+		2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataTVC.h; sourceTree = "<group>"; };
+		2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataTVC.m; sourceTree = "<group>"; };
+		2D7D7C301AC0C5950069E888 /* AddWeightDataVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightDataVC.h; sourceTree = "<group>"; };
+		2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightDataVC.m; sourceTree = "<group>"; };
+		2D7D7C4E1AC21A1F0069E888 /* DefaultAerobic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAerobic.h; sourceTree = "<group>"; };
+		2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultAerobic.m; sourceTree = "<group>"; };
+		2D7D7C5A1AC21C540069E888 /* Add Aerobic VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Add Aerobic VC.h"; sourceTree = "<group>"; };
+		2D7D7C5B1AC21C540069E888 /* Add Aerobic VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Add Aerobic VC.m"; sourceTree = "<group>"; };
+		2D7D7C601AC4D9A80069E888 /* AerobicEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AerobicEvent.h; sourceTree = "<group>"; };
+		2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AerobicEvent.m; sourceTree = "<group>"; };
+		2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelper.m; sourceTree = "<group>"; };
+		2D7D7C651AC69CC20069E888 /* CoreDataHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataHelper.h; sourceTree = "<group>"; };
+		2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightLiftingEvent.h; sourceTree = "<group>"; };
+		2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightLiftingEvent.m; sourceTree = "<group>"; };
+		2D7D7C6C1AC834B30069E888 /* DefaultWeightLifting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultWeightLifting.h; sourceTree = "<group>"; };
+		2D7D7C6D1AC834B30069E888 /* DefaultWeightLifting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultWeightLifting.m; sourceTree = "<group>"; };
+		2D7D7C721ACFF2C80069E888 /* WeightEventTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightEventTVC.h; sourceTree = "<group>"; };
+		2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightEventTVC.m; sourceTree = "<group>"; };
 		2DBCE83B1AAB98EB00303DE1 /* ExerciseRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerciseRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBCE83F1AAB98EB00303DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DBCE8401AAB98EB00303DE1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2DBCE8421AAB98EB00303DE1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExerciseRecording.xcdatamodel; sourceTree = "<group>"; };
-		2DBCE8481AAB98EB00303DE1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2DBCE8491AAB98EB00303DE1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2DBCE8481AAB98EB00303DE1 /* EventViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EventViewController.h; path = ExerciseRecording/EventViewController.h; sourceTree = "<group>"; };
+		2DBCE8491AAB98EB00303DE1 /* EventViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EventViewController.m; path = ExerciseRecording/EventViewController.m; sourceTree = "<group>"; };
 		2DBCE84C1AAB98EB00303DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2DBCE8511AAB98EB00303DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2DBCE8571AAB98EC00303DE1 /* ExerciseRecordingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExerciseRecordingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBCE85C1AAB98EC00303DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseRecordingTests.m; sourceTree = "<group>"; };
+		2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseCategory.plist; sourceTree = "<group>"; };
+		2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupExerciseInfoViewController.h; sourceTree = "<group>"; };
+		2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupExreciseInfoViewController.m; sourceTree = "<group>"; };
+		2DFD820D1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightDataSectionHeaderCell.h; sourceTree = "<group>"; };
+		2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightDataSectionHeaderCell.m; sourceTree = "<group>"; };
+		2DFD82101ADDDB3600BD9D86 /* WeightEventTableCellNoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightEventTableCellNoNote.h; sourceTree = "<group>"; };
+		2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightEventTableCellNoNote.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +106,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D7D7C051ABDC13D0069E888 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2D7D7C0F1ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
+				2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
+				2D7D7C0C1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.h */,
+				2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		2DBCE8321AAB98EB00303DE1 = {
 			isa = PBXGroup;
 			children = (
+				2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */,
 				2DBCE83D1AAB98EB00303DE1 /* ExerciseRecording */,
+				2DBCE8731AACDB3000303DE1 /* ControllerFiles */,
+				2DBCE8721AACDAEB00303DE1 /* DataFiles */,
+				2D7D7C051ABDC13D0069E888 /* Utilities */,
 				2DBCE85A1AAB98EC00303DE1 /* ExerciseRecordingTests */,
 				2DBCE83C1AAB98EB00303DE1 /* Products */,
 			);
@@ -85,12 +144,6 @@
 			children = (
 				2DBCE8421AAB98EB00303DE1 /* AppDelegate.h */,
 				2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */,
-				2DBCE8481AAB98EB00303DE1 /* ViewController.h */,
-				2DBCE8491AAB98EB00303DE1 /* ViewController.m */,
-				2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */,
-				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
-				2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */,
-				2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */,
 				2DBCE83E1AAB98EB00303DE1 /* Supporting Files */,
 			);
 			path = ExerciseRecording;
@@ -99,8 +152,11 @@
 		2DBCE83E1AAB98EB00303DE1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */,
 				2DBCE83F1AAB98EB00303DE1 /* Info.plist */,
 				2DBCE8401AAB98EB00303DE1 /* main.m */,
+				2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */,
+				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -120,6 +176,47 @@
 				2DBCE85C1AAB98EC00303DE1 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2DBCE8721AACDAEB00303DE1 /* DataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2D7D7C651AC69CC20069E888 /* CoreDataHelper.h */,
+				2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */,
+				2D7D7C601AC4D9A80069E888 /* AerobicEvent.h */,
+				2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */,
+				2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */,
+				2D7D7C6C1AC834B30069E888 /* DefaultWeightLifting.h */,
+				2D7D7C6D1AC834B30069E888 /* DefaultWeightLifting.m */,
+				2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */,
+				2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */,
+				2D7D7C4E1AC21A1F0069E888 /* DefaultAerobic.h */,
+				2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */,
+			);
+			name = DataFiles;
+			sourceTree = "<group>";
+		};
+		2DBCE8731AACDB3000303DE1 /* ControllerFiles */ = {
+			isa = PBXGroup;
+			children = (
+				2D7D7C721ACFF2C80069E888 /* WeightEventTVC.h */,
+				2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */,
+				2D7D7C5A1AC21C540069E888 /* Add Aerobic VC.h */,
+				2D7D7C5B1AC21C540069E888 /* Add Aerobic VC.m */,
+				2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */,
+				2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */,
+				2D7D7C301AC0C5950069E888 /* AddWeightDataVC.h */,
+				2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */,
+				2DBCE8481AAB98EB00303DE1 /* EventViewController.h */,
+				2DBCE8491AAB98EB00303DE1 /* EventViewController.m */,
+				2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */,
+				2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */,
+				2DFD820D1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.h */,
+				2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */,
+				2DFD82101ADDDB3600BD9D86 /* WeightEventTableCellNoNote.h */,
+				2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */,
+			);
+			name = ControllerFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +301,7 @@
 			files = (
 				2DBCE84D1AAB98EB00303DE1 /* Main.storyboard in Resources */,
 				2DBCE8521AAB98EB00303DE1 /* LaunchScreen.xib in Resources */,
+				2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */,
 				2DBCE84F1AAB98EB00303DE1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,9 +320,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */,
 				2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */,
+				2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				2D7D7C741ACFF2C80069E888 /* WeightEventTVC.m in Sources */,
+				2DFD82121ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m in Sources */,
+				2D7D7C501AC21A1F0069E888 /* DefaultAerobic.m in Sources */,
+				2D7D7C5C1AC21C540069E888 /* Add Aerobic VC.m in Sources */,
 				2DBCE8471AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld in Sources */,
-				2DBCE84A1AAB98EB00303DE1 /* ViewController.m in Sources */,
+				2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				2D7D7C6E1AC834B30069E888 /* DefaultWeightLifting.m in Sources */,
+				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
+				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,
+				2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */,
+				2DFD820F1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m in Sources */,
+				2D7D7C321AC0C5950069E888 /* AddWeightDataVC.m in Sources */,
+				2DBCE84A1AAB98EB00303DE1 /* EventViewController.m in Sources */,
+				2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */,
 				2DBCE8411AAB98EB00303DE1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,6 +366,7 @@
 				2DBCE84C1AAB98EB00303DE1 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ExerciseRecording;
 			sourceTree = "<group>";
 		};
 		2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */ = {
@@ -418,6 +531,7 @@
 				2DBCE8631AAB98EC00303DE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2DBCE8641AAB98EC00303DE1 /* Build configuration list for PBXNativeTarget "ExerciseRecordingTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +540,7 @@
 				2DBCE8661AAB98EC00303DE1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
@@ -436,7 +551,8 @@
 				2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */,
 			);
 			currentVersion = 2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */;
-			path = ExerciseRecording.xcdatamodeld;
+			name = ExerciseRecording.xcdatamodeld;
+			path = ExerciseRecording/ExerciseRecording.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
