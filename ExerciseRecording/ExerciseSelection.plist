@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>WeigthLifting</key>
+	<array>
+		<string>Back Exension</string>
+		<string>Calf Extension</string>
+		<string>Ab Crunch</string>
+	</array>
+	<key>Aerobic</key>
+	<array>
+		<string>Running</string>
+		<string>Walking</string>
+		<string>Bicycling</string>
+	</array>
+</dict>
+</plist>
