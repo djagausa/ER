@@ -28,7 +28,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"SetupEventData"]) {
+    if ([[segue identifier] isEqualToString:@"SelectEventToAdd"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
     } else if ([[segue identifier] isEqualToString:@"AddEventData"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
