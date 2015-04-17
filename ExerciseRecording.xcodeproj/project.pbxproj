@@ -32,6 +32,7 @@
 		2DFD82121ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */; };
 		2DFD82141ADF33C000BD9D86 /* ExerciseSelection.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */; };
 		2DFD82171ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */; };
+		2DFD821E1ADFBD0F00BD9D86 /* DefaultEventSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,9 @@
 		2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseSelection.plist; sourceTree = "<group>"; };
 		2DFD82151ADF37DD00BD9D86 /* SelectEventToAddTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectEventToAddTableViewController.h; sourceTree = "<group>"; };
 		2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectEventToAddTableViewController.m; sourceTree = "<group>"; };
+		2DFD821C1ADFBD0F00BD9D86 /* DefaultEventSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultEventSelection.h; sourceTree = "<group>"; };
+		2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultEventSelection.m; sourceTree = "<group>"; };
+		2DFD821F1AE085C800BD9D86 /* Support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Support.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +152,12 @@
 		2DBCE83D1AAB98EB00303DE1 /* ExerciseRecording */ = {
 			isa = PBXGroup;
 			children = (
+				2DBCE83E1AAB98EB00303DE1 /* Supporting Files */,
 				2DBCE8421AAB98EB00303DE1 /* AppDelegate.h */,
 				2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */,
-				2DBCE83E1AAB98EB00303DE1 /* Supporting Files */,
+				2DFD821C1ADFBD0F00BD9D86 /* DefaultEventSelection.h */,
+				2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */,
+				2DFD821F1AE085C800BD9D86 /* Support.h */,
 			);
 			path = ExerciseRecording;
 			sourceTree = "<group>";
@@ -356,6 +363,7 @@
 				2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				2D7D7C6E1AC834B30069E888 /* DefaultWeightLifting.m in Sources */,
 				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
+				2DFD821E1ADFBD0F00BD9D86 /* DefaultEventSelection.m in Sources */,
 				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,
 				2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */,
 				2DFD820F1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m in Sources */,

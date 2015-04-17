@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "DefaultWeightLifting.h"
 #import "DefaultAerobic.h"
-
+#import "Support.h"
 
 @interface SetupExrciseInfoViewController ()
 
@@ -46,6 +46,7 @@
     self.exerciseActivitySelectionTable.tableHeaderView = headerView;
     
     self.categoryCode = self.exerciseCategory.count;
+    self.defaultEventSelection = [[DefaultEventSelection alloc] init];
     
     [[self saveButton] setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [[self saveButton] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

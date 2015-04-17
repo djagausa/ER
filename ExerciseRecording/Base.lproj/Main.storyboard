@@ -176,6 +176,7 @@
             <objects>
                 <tableViewController id="bTu-QF-v3d" customClass="SelectEventToAddTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WGe-Vz-QXt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
@@ -196,7 +197,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="4Oa-qj-bg2" kind="show" id="dPM-vZ-fsf"/>
+                                    <segue destination="4Oa-qj-bg2" kind="show" identifier="SetupWithDefaultEvent" id="dPM-vZ-fsf"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -207,7 +208,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Event To Add" id="InJ-V9-AG3">
                         <barButtonItem key="backBarButtonItem" title=" " id="dBP-j1-djN"/>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="Uok-hC-LZY"/>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="Uok-hC-LZY">
+                            <connections>
+                                <action selector="newButtonSelected:" destination="bTu-QF-v3d" id="5OM-uq-YNr"/>
+                                <segue destination="4Oa-qj-bg2" kind="show" identifier="SetupWithNewEvent" id="AWb-jP-PZQ"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vs-9M-UKD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -814,7 +820,8 @@
                                                             <exclude reference="TK7-dB-zaU"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="117" y="1" width="70" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="EWe-pp-rg7"/>
                                                             <include reference="TK7-dB-zaU"/>
@@ -826,6 +833,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="20" y="22" width="280" height="21"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3f-vp-XPz">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -846,7 +856,8 @@
                                                             <exclude reference="nsB-oY-HVq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="228" y="1" width="45" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="QhQ-6e-ilM"/>
                                                             <include reference="nsB-oY-HVq"/>
@@ -1072,15 +1083,15 @@
                                                     <exclude reference="uSc-O5-BMZ"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="1Ha-zW-SvY"/>
-                                                    <exclude reference="Mpj-uq-A03"/>
-                                                    <exclude reference="ZQy-E8-bgt"/>
                                                     <exclude reference="AHA-PH-HwX"/>
                                                     <exclude reference="UFe-t7-v1d"/>
                                                     <exclude reference="yZr-5y-RzA"/>
                                                     <exclude reference="lnz-Lq-G5w"/>
                                                     <exclude reference="nD5-eZ-INt"/>
                                                     <exclude reference="uJD-gJ-mPt"/>
+                                                    <exclude reference="1Ha-zW-SvY"/>
+                                                    <exclude reference="Mpj-uq-A03"/>
+                                                    <exclude reference="ZQy-E8-bgt"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1090,15 +1101,15 @@
                                                     <include reference="uSc-O5-BMZ"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="1Ha-zW-SvY"/>
-                                                    <include reference="Mpj-uq-A03"/>
-                                                    <include reference="ZQy-E8-bgt"/>
                                                     <include reference="AHA-PH-HwX"/>
                                                     <include reference="UFe-t7-v1d"/>
                                                     <include reference="yZr-5y-RzA"/>
                                                     <include reference="lnz-Lq-G5w"/>
                                                     <include reference="nD5-eZ-INt"/>
                                                     <include reference="uJD-gJ-mPt"/>
+                                                    <include reference="1Ha-zW-SvY"/>
+                                                    <include reference="Mpj-uq-A03"/>
+                                                    <include reference="ZQy-E8-bgt"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1351,4 +1362,7 @@
             <point key="canvasLocation" x="40" y="-529.5"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="AWb-jP-PZQ"/>
+    </inferredMetricsTieBreakers>
 </document>
