@@ -8,15 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
-typedef NS_ENUM(NSInteger, ExerciseCategory) {
-    kWeights = 0,
-    kWalking,
-    kStretching,
-    kRunning,
-    kEliptical,
-    kBicycling
-};
+#import "DefaultEventSelection.h"
 
 @interface SetupExrciseInfoViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *exerciseName;
@@ -27,6 +19,8 @@ typedef NS_ENUM(NSInteger, ExerciseCategory) {
 @property (weak, nonatomic) IBOutlet UITextField *default3;
 @property (weak, nonatomic) IBOutlet UISwitch *enableSwitch;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+
 - (IBAction)saveData:(id)sender;
 
 @property  NSInteger categoryCode;

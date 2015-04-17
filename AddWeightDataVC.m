@@ -12,6 +12,7 @@
 #import "WeightEventTVC.h"
 #import "AddWeightDataSectionHeaderCell.h"
 #import "WeightEventTableCellNoNote.h"
+#import "Support.h"
 
 @interface AddWeightDataVC () <UITextViewDelegate>
 
@@ -24,13 +25,6 @@
 
 @property (nonatomic, strong) CoreDataHelper                *coreDataHelper;
 @end
-
-typedef NS_ENUM(NSInteger, WeightCells) {
-    kSet = 0,
-    kReps,
-    kWeight,
-    kNote
-};
 
 static NSString *CellIdentifier = @"WeightEventCell";
 static NSString *CellIdentifierNoNote = @"WeightEventCellNoNote";

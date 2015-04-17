@@ -7,22 +7,21 @@
 //
 
 #import "SelectEventToAddTableViewController.h"
+#import "SetupExerciseInfoViewController.h"
+#import "DefaultEventSelection.h"
+#import "Support.h"
 
 @interface SelectEventToAddTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray    *weightExerciseEvents;
-@property (nonatomic, strong) NSMutableArray    *aerobicExerciseEvents;
-@property (nonatomic, strong) NSDictionary      *categoryDictionary;
+@property (nonatomic, strong) NSMutableArray        *weightExerciseEvents;
+@property (nonatomic, strong) NSMutableArray        *aerobicExerciseEvents;
+@property (nonatomic, strong) NSDictionary          *categoryDictionary;
+@property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+- (IBAction)newButtonSelected:(id)sender;
 
 @end
 
 static NSString *cellIdentification = @"SelectEventToAddCell";
-
-typedef NS_ENUM(NSInteger, EventCateogory) {
-    WeightCategory,
-    AerobicCategory
-};
-
 
 @implementation SelectEventToAddTableViewController
 
@@ -47,6 +46,10 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)newButtonSelected:(id)sender
+{
+    
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -81,20 +84,18 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
     switch (indexPath.section) {
         case WeightCategory:
         {
-            cell.textLabel.text = [self.weightExerciseEvents objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEvents[indexPath.row][@"Name"]];
             break;
         }
         
         case AerobicCategory:
         {
-            cell.textLabel.text = [self.aerobicExerciseEvents objectAtIndex:indexPath.row];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEvents[indexPath.row][@"Name"]];
         }
             
         default:
             break;
     }
-    
-    
     return cell;
 }
 
@@ -102,8 +103,12 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"SelectEventToAdd"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    } else if ([[segue identifier] isEqualToString:@"AddEventData"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        
+    }
 }
 
 
