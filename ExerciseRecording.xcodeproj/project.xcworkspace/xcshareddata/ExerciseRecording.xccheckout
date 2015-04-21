@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6B6D8A7F-43B0-4533-84BF-135912ECAF85</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ExerciseRecording</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</key>
+		<string>https://github.com/djagausa/ER.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ExerciseRecording.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/djagausa/ER.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ExerciseRecording</string>
+		</dict>
+	</array>
+</dict>
+</plist>
