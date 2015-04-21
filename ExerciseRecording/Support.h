@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, WeightCells) {
 };
 
 typedef NS_ENUM(NSInteger, EventCateogory) {
-    WeightCategory,
-    AerobicCategory
+    AerobicCategory,
+    WeightCategory
 };
 #endif

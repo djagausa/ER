@@ -11,18 +11,31 @@
 #import "DefaultWeightLifting.h"
 #import "DefaultAerobic.h"
 #import "Support.h"
+#import "SelectEventToAddTableViewController.h"
 
 @interface SetupExrciseInfoViewController ()
 
 @property (nonatomic, strong) NSArray *exerciseCategory;
+@property NSInteger categoryCode;
 
 @end
 
 @implementation SetupExrciseInfoViewController
 
+-(instancetype)init
+{
+    self = [super init];
+    
+    if (self) {
+        
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     [[self exerciseName] setDelegate: self];
     [[self default1] setDelegate: self];
     [[self default2] setDelegate: self];
@@ -55,10 +68,25 @@
 //    self.saveButton.userInteractionEnabled = NO;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.defaultEventSelection = [self.delegate eventDataHasChangedTo];
+    
+    self.categoryCode = [self.defaultEventSelection.eventCategory integerValue];
+    self.exerciseName.text = self.defaultEventSelection.eventName;
+    if (self.categoryCode != -1) {
+        [self setupInputEntries:self.categoryCode];
+    }
+    [self verifyParametersReceived];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -100,11 +128,11 @@
     }
     return cell;
 }
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.exerciseCategory[indexPath.row][@"Name"]];
 }
-
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,45 +140,58 @@
     // Return NO if you do not want the specified item to be editable.
     return NO;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.categoryCode = [self.exerciseCategory[indexPath.row][@"Code"]integerValue];
     [self verifyParametersReceived];
-    
-    switch (self.categoryCode) {
-        case kWeights:     // weights
-            [self enableTwoInputs];
-            [self weightText];
-            break;
-        
-        case kWalking:
-        case kRunning:
-            [self enableOneInput];
-            [self walkingText];
-            break;
-            
-        case kStretching:
-            [self enableZeroInputs];
-            break;
-            
-        case kEliptical:
-            [self enableOneInput];
-            [self elipticalText];
-          break;
-        
-        case kBicycling:
-            [self enableThreeInputs];
-            [self bicyclingText];
-            break;
-            
-        default:
-            break;
-    }
-
+    [self setupInputEntries:self.categoryCode];
     [tableView reloadData];
     
 }
 
+-(void)setupInputEntries:(NSInteger)categoryCode
+{
+    switch (categoryCode) {
+        case kWeights:
+        {
+            [self enableTwoInputs];
+            [self weightText];
+            break;
+        }
+            
+        case kWalking:
+        case kRunning:
+        {
+            [self enableOneInput];
+            [self walkingText];
+            break;
+        }
+            
+        case kStretching:
+        {
+            [self enableZeroInputs];
+            break;
+        }
+            
+        case kEliptical:
+        {
+            [self enableOneInput];
+            [self elipticalText];
+            break;
+        }
+            
+        case kBicycling:
+        {
+            [self enableThreeInputs];
+            [self bicyclingText];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
 - (void)enableThreeInputs
 {
     [self.default1 setEnabled:YES];

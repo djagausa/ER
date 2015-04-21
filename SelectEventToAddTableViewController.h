@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DefaultEventSelection.h"
+#import "SetupExerciseInfoViewController.h"
 
-@interface SelectEventToAddTableViewController : UITableViewController
+@interface SelectEventToAddTableViewController : UITableViewController <SetupExrciseInfoViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) SetupExrciseInfoViewController *setupExerciseInfo;
 
 @end

@@ -13,10 +13,11 @@
 
 @interface SelectEventToAddTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray        *weightExerciseEvents;
-@property (nonatomic, strong) NSMutableArray        *aerobicExerciseEvents;
+@property (nonatomic, strong) NSArray        *weightExerciseEvents;
+@property (nonatomic, strong) NSArray        *aerobicExerciseEvents;
 @property (nonatomic, strong) NSDictionary          *categoryDictionary;
 @property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+
 - (IBAction)newButtonSelected:(id)sender;
 
 @end
@@ -37,8 +38,10 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.weightExerciseEvents = self.categoryDictionary[@"WeightLifting"];
     self.aerobicExerciseEvents = self.categoryDictionary[@"Aerobic"];
     
-    [self.weightExerciseEvents sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-    [self.aerobicExerciseEvents sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES];
+    self.weightExerciseEvents = [self.weightExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
+    self.aerobicExerciseEvents = [self.aerobicExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
+    self.defaultEventSelection = [[DefaultEventSelection alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,9 +49,15 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     // Dispose of any resources that can be recreated.
 }
 
+- (DefaultEventSelection *)eventDataHasChangedTo
+{
+    return self.defaultEventSelection;
+}
+
 - (IBAction)newButtonSelected:(id)sender
 {
-    
+    self.defaultEventSelection.eventCategory = @(-1);
+    self.defaultEventSelection.eventName = @"";
 }
 #pragma mark - Table view data source
 
@@ -99,16 +108,66 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *sectionTitle;
+    
+    switch (section) {
+        case WeightCategory:
+        {
+            sectionTitle = @"Weight Event";
+            break;
+        }
+            
+        case AerobicCategory:
+        {
+            sectionTitle = @"Aerobic Event";
+            break;
+        }
+            
+        default:
+            break;
+    }
+    return sectionTitle;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case AerobicCategory:
+        {
+            self.defaultEventSelection.eventCategory = self.aerobicExerciseEvents[indexPath.row][@"Category"];
+            self.defaultEventSelection.eventName = self.aerobicExerciseEvents[indexPath.row][@"Name"];
+            break;
+        }
+        case WeightCategory:
+        {
+            self.defaultEventSelection.eventCategory = self.weightExerciseEvents[indexPath.row][@"Category"];
+            self.defaultEventSelection.eventName = self.weightExerciseEvents[indexPath.row][@"Name"];
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"SelectEventToAdd"]) {
+//    if ([[segue identifier] isEqualToString:@"SetupWithDefaultEvent"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    } else if ([[segue identifier] isEqualToString:@"AddEventData"]) {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        
-    }
+        SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
+        setupExerciseViewController.delegate = self;
+//    }
+
+//    if ([[segue identifier] isEqualToString:@"SetupWithNewEvent"]) {
+//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+//    } else if ([[segue identifier] isEqualToString:@"SetupWithDefaultEvent"]) {
+//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+//        
+//    }
 }
 
 

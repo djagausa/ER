@@ -82,14 +82,14 @@
 		2DBCE8571AAB98EC00303DE1 /* ExerciseRecordingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExerciseRecordingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBCE85C1AAB98EC00303DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExerciseRecordingTests.m; sourceTree = "<group>"; };
-		2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseCategory.plist; sourceTree = "<group>"; };
+		2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ExerciseCategory.plist; path = ExerciseRecording/ExerciseCategory.plist; sourceTree = "<group>"; };
 		2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupExerciseInfoViewController.h; sourceTree = "<group>"; };
 		2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupExreciseInfoViewController.m; sourceTree = "<group>"; };
 		2DFD820D1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightDataSectionHeaderCell.h; sourceTree = "<group>"; };
 		2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightDataSectionHeaderCell.m; sourceTree = "<group>"; };
 		2DFD82101ADDDB3600BD9D86 /* WeightEventTableCellNoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightEventTableCellNoNote.h; sourceTree = "<group>"; };
 		2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightEventTableCellNoNote.m; sourceTree = "<group>"; };
-		2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExerciseSelection.plist; sourceTree = "<group>"; };
+		2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ExerciseSelection.plist; path = ExerciseRecording/ExerciseSelection.plist; sourceTree = "<group>"; };
 		2DFD82151ADF37DD00BD9D86 /* SelectEventToAddTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectEventToAddTableViewController.h; sourceTree = "<group>"; };
 		2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectEventToAddTableViewController.m; sourceTree = "<group>"; };
 		2DFD821C1ADFBD0F00BD9D86 /* DefaultEventSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultEventSelection.h; sourceTree = "<group>"; };
@@ -165,12 +165,10 @@
 		2DBCE83E1AAB98EB00303DE1 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */,
 				2DBCE83F1AAB98EB00303DE1 /* Info.plist */,
 				2DBCE8401AAB98EB00303DE1 /* main.m */,
 				2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */,
 				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
-				2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -195,6 +193,8 @@
 		2DBCE8721AACDAEB00303DE1 /* DataFiles */ = {
 			isa = PBXGroup;
 			children = (
+				2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */,
+				2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */,
 				2D7D7C651AC69CC20069E888 /* CoreDataHelper.h */,
 				2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */,
 				2D7D7C601AC4D9A80069E888 /* AerobicEvent.h */,

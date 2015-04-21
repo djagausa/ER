@@ -10,7 +10,7 @@
 
 @interface DefaultEventSelection : NSObject
 
-@property (nonatomic, assign) NSInteger eventCategory;
+@property (nonatomic, strong) NSNumber *eventCategory;
 @property (nonatomic, copy) NSString *eventName;
 
 -(instancetype) init;
