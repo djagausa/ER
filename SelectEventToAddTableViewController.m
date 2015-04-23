@@ -9,14 +9,23 @@
 #import "SelectEventToAddTableViewController.h"
 #import "SetupExerciseInfoViewController.h"
 #import "DefaultEventSelection.h"
+#import "CoreDataHelper.h"
 #import "Support.h"
+#import "DefaultWeightLifting.h"
+#import "DefaultAerobic.h"
 
 @interface SelectEventToAddTableViewController ()
 
-@property (nonatomic, strong) NSArray        *weightExerciseEvents;
-@property (nonatomic, strong) NSArray        *aerobicExerciseEvents;
+@property (nonatomic, strong) NSArray               *weightExerciseEvents;
+@property (nonatomic, strong) NSArray               *aerobicExerciseEvents;
+@property (nonatomic, strong) NSMutableArray        *weightExerciseEventsCopy;
+@property (nonatomic, strong) NSMutableArray        *aerobicExerciseEventsCopy;
+@property (nonatomic, strong) NSArray               *weightExerciseExistingEvents;
+@property (nonatomic, strong) NSArray               *aerobicExerciseExistingEvents;
+
 @property (nonatomic, strong) NSDictionary          *categoryDictionary;
 @property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+@property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
 
 - (IBAction)newButtonSelected:(id)sender;
 
@@ -29,19 +38,57 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-     self.clearsSelectionOnViewWillAppear = NO;
+    self.coreDataHelper = [[CoreDataHelper alloc]init];
+    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+    self.defaultEventSelection = [[DefaultEventSelection alloc]init];
+    self.weightExerciseEventsCopy = [[NSMutableArray alloc]init];
+    self.aerobicExerciseEventsCopy = [[NSMutableArray alloc]init];
     
+    // Uncomment the following line to preserve selection between presentations.
+    self.clearsSelectionOnViewWillAppear = NO;
+
+    [self fetchPredefinedEvents];
+}
+
+-(void)fetchPredefinedEvents
+{
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ExerciseSelection" ofType:@"plist"];
     self.categoryDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-
+    
     self.weightExerciseEvents = self.categoryDictionary[@"WeightLifting"];
     self.aerobicExerciseEvents = self.categoryDictionary[@"Aerobic"];
+    
+    self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
+    self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
+  
+    self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
+    self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];
+    
+    for (DefaultWeightLifting *defaultWL in self.weightExerciseExistingEvents) {
+        for (int i = 0; i < self.weightExerciseEventsCopy.count; ++i) {
+            if ([defaultWL.eventName isEqualToString: self.weightExerciseEventsCopy [i][@"Name"]])
+            {
+                [self.weightExerciseEventsCopy removeObjectAtIndex:i];
+                break;
+            }
+        }
+    }
+    
+    for (DefaultAerobic *defaultA in self.aerobicExerciseExistingEvents) {
+        for (int i = 0; i< self.aerobicExerciseEventsCopy.count; ++i) {
+            if ([defaultA.eventName isEqualToString: self.aerobicExerciseEventsCopy[i][@"Name"]]) {
+                [self.aerobicExerciseEventsCopy removeObjectAtIndex:i];
+                break;
+            }
+        }
+    }
+    
+    self.weightExerciseEvents = [NSArray arrayWithArray:self.weightExerciseEventsCopy];
+    self.aerobicExerciseEvents = [NSArray arrayWithArray:self.aerobicExerciseEventsCopy];
     
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES];
     self.weightExerciseEvents = [self.weightExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
     self.aerobicExerciseEvents = [self.aerobicExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
-    self.defaultEventSelection = [[DefaultEventSelection alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {

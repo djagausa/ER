@@ -9,13 +9,15 @@
 #import "AddEventDataTVC.h"
 #import "DefaultAerobic.h"
 #import "DefaultWeightLifting.h"
+#import "CoreDataHelper.h"
 
 @interface AddEventDataTVC ()
 
-@property (nonatomic, strong) NSArray *weightLiftingDefaultObjects;
-@property (nonatomic, strong) NSArray *aerobicDefaultObjects;
-@property (nonatomic, strong) DefaultWeightLifting *defaultWeightLifting;
-@property (nonatomic, strong) DefaultAerobic *defaultAerobic;
+@property (nonatomic, strong) NSArray               *weightLiftingDefaultObjects;
+@property (nonatomic, strong) NSArray               *aerobicDefaultObjects;
+@property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
+@property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
+@property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
 
 @end
 
@@ -29,6 +31,9 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.coreDataHelper = [[CoreDataHelper alloc] init];
+    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+
     [self fetchEvents];
 }
 
@@ -150,29 +155,15 @@
 
 - (void) fetchEvents
 {
-    NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DefaultWeightLifting" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequst setEntity:entity];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:YES];
-    [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
-    [fetchRequst setPredicate:filter];
-    
-    NSError *error;
-    self.weightLiftingDefaultObjects = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
-    
-    fetchRequst = [[NSFetchRequest alloc] init];
-    entity = [NSEntityDescription entityForName:@"DefaultAerobic" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequst setEntity:entity];
-    self.aerobicDefaultObjects = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
-    
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
+        
     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
         NSLog(@"Event Name: %@",defaultWL.eventName);
     }
     
-    for (DefaultWeightLifting *defaultA in self.aerobicDefaultObjects) {
+    for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
         NSLog(@"Event Name: %@",defaultA.eventName);
     }
 }

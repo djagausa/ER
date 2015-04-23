@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CoreDataHelper.h"
 #import "WeightLiftingEvent.h"
+#import "DefaultWeightLifting.h"
 
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
@@ -62,6 +63,23 @@
     [self fetchItemsMatching:nil forAttribute:nil sortingBy:nil withPredicate:nil groupBy:nil];
 }
 
+- (NSArray*)fetchDefaultDataFor:(NSString *)entityName
+{
+    NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequst setEntity:entity];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:YES];
+    [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
+    [fetchRequst setPredicate:filter];
+    
+    NSError *error;
+    NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
+
+    return defaultData;
+}
 #pragma mark - Info
 - (NSInteger)numberOfSections
 {

@@ -24,7 +24,7 @@
 
 - (void)fetchData;
 - (void)fetchItemsMatching:(NSString *)searchString forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy;
-
+- (NSArray*)fetchDefaultDataFor:(NSString *)entityName;
 - (BOOL)save;
 - (NSManagedObject *)newObject;
 - (BOOL)clearData;

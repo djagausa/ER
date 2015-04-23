@@ -57,6 +57,7 @@ BOOL setCountInitialized;
     self.note.delegate = self;
     self.note.text = notePlaceHolder;
     [self.noteSwitch setOn:NO];
+    setCountInitialized = NO;
     
 }
 
@@ -128,10 +129,10 @@ BOOL setCountInitialized;
 
     self.repsInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.numOfReps];
     self.weightInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.weight];
-    
     self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.defaultWeightLifting.eventName];
-
     self.dateLabel.text = [self dateToFormatMMddyyy:[NSDate date]];
+    self.setCount = @(0);
+    [self updateSetCount];
     
     [self refresh];
     
