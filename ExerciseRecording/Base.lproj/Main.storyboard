@@ -48,7 +48,6 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cy5-Pw-9GC">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="400" id="4Q9-zB-aq0"/>
                                     <constraint firstAttribute="height" constant="44" id="AQ6-2D-Gay"/>
                                 </constraints>
                                 <items>
@@ -57,17 +56,19 @@
                                             <segue destination="bTu-QF-v3d" kind="show" identifier="SelectEventToAdd" id="hmq-kp-BQk"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem title="Edit Exercise Data" width="170" id="Xie-Rk-OB6"/>
+                                    <barButtonItem title="Edit Exercise Data" width="170" id="Xie-Rk-OB6">
+                                        <connections>
+                                            <segue destination="VVK-ut-0xp" kind="show" id="TwG-qQ-hVP"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="4Q9-zB-aq0"/>
                                         <exclude reference="AQ6-2D-Gay"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="4Q9-zB-aq0"/>
                                         <include reference="AQ6-2D-Gay"/>
                                     </mask>
                                 </variation>
@@ -123,13 +124,13 @@
                                 <exclude reference="kCB-0W-BXk"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="4lI-O0-UcL"/>
-                                <exclude reference="GVw-ks-BU3"/>
+                                <exclude reference="tbO-vL-SPM"/>
                                 <exclude reference="HIz-cq-Slu"/>
                                 <exclude reference="gFE-fP-uON"/>
+                                <exclude reference="4lI-O0-UcL"/>
+                                <exclude reference="GVw-ks-BU3"/>
                                 <exclude reference="YTo-0N-qWM"/>
                                 <exclude reference="nX7-l3-9Ka"/>
-                                <exclude reference="tbO-vL-SPM"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -138,8 +139,8 @@
                                 <include reference="kCB-0W-BXk"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="GVw-ks-BU3"/>
                                 <include reference="HIz-cq-Slu"/>
+                                <include reference="GVw-ks-BU3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -147,11 +148,11 @@
                                 <include reference="cy5-Pw-9GC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="4lI-O0-UcL"/>
+                                <include reference="tbO-vL-SPM"/>
                                 <include reference="gFE-fP-uON"/>
+                                <include reference="4lI-O0-UcL"/>
                                 <include reference="YTo-0N-qWM"/>
                                 <include reference="nX7-l3-9Ka"/>
-                                <include reference="tbO-vL-SPM"/>
                             </mask>
                         </variation>
                     </view>
@@ -473,6 +474,74 @@
             </objects>
             <point key="canvasLocation" x="1552.5" y="257.25"/>
         </scene>
+        <!--Edit Event-->
+        <scene sceneID="oZe-qn-sFt">
+            <objects>
+                <tableViewController id="VVK-ut-0xp" customClass="EditEventTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rq3-gE-guy">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EditEventCell" textLabel="UZa-zQ-iKB" style="IBUITableViewCellStyleDefault" id="9ya-VM-bZG">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ya-VM-bZG" id="zfF-Hu-cx1">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UZa-zQ-iKB">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="FcW-bx-r8c" kind="show" identifier="EditeEventData" id="UvL-Tk-pcj"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="VVK-ut-0xp" id="Icy-uH-bRY"/>
+                            <outlet property="delegate" destination="VVK-ut-0xp" id="Gpg-nl-bld"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Edit Event" id="aYI-xl-uEM">
+                        <barButtonItem key="backBarButtonItem" title="  " id="Js2-eX-jgg"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3w-i2-xSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1417.5" y="1015.5"/>
+        </scene>
+        <!--Edit Selected Event Table View Controller-->
+        <scene sceneID="idv-TB-oo4">
+            <objects>
+                <tableViewController id="FcW-bx-r8c" customClass="EditSelectedEventTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="TNZ-5F-zDz">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="lKA-G1-Zcm">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lKA-G1-Zcm" id="Yj6-xg-qww">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="FcW-bx-r8c" id="ZQX-zX-tcD"/>
+                            <outlet property="delegate" destination="FcW-bx-r8c" id="WHP-Mc-Y2x"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="QaD-Ce-56Q"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Yf-Ca-hR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-628.5" y="1015.5"/>
+        </scene>
         <!--Select Event-->
         <scene sceneID="Cek-dn-nZ2">
             <objects>
@@ -535,7 +604,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1yD-7m-a0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781" y="924"/>
+            <point key="canvasLocation" x="778.5" y="1062.75"/>
         </scene>
         <!--Add Weight DataVC-->
         <scene sceneID="Y3B-7s-pVP">
@@ -1311,7 +1380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V69-JJ-Zgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1489.5" y="924"/>
+            <point key="canvasLocation" x="1494" y="1062.75"/>
         </scene>
         <!--Add AerobicVC-->
         <scene sceneID="3QX-I5-ZK4">
@@ -1329,7 +1398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGI-nE-oqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1624" y="1710"/>
+            <point key="canvasLocation" x="1494" y="1759.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0oO-He-Bt6">

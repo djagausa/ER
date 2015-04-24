@@ -133,8 +133,6 @@
 // Delete one object
 - (BOOL)deleteObject:(NSManagedObject *)object
 {
-    [self fetchData];
-    if (!self.fetchedResultsController.fetchedObjects.count) return NO;
     [self.managedObjectContext.undoManager beginUndoGrouping];
     [self.managedObjectContext deleteObject:object];
     [self.managedObjectContext.undoManager endUndoGrouping];

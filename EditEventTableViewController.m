@@ -1,0 +1,220 @@
+//
+//  EditEventTableViewController.m
+//  ExerciseRecording
+//
+//  Created by Douglas Alexander on 4/23/15.
+//  Copyright (c) 2015 Douglas Alexander. All rights reserved.
+//
+
+#import "EditEventTableViewController.h"
+#import "CoreDataHelper.h"
+#import "DefaultWeightLifting.h"
+#import "DefaultAerobic.h"
+#import "Support.h"
+#import "SelectedEditEvent.h"
+
+@interface EditEventTableViewController ()
+
+@property (nonatomic, strong) NSArray               *weightLiftingDefaultObjects;
+@property (nonatomic, strong) NSArray               *aerobicDefaultObjects;
+@property (nonatomic, strong) NSMutableArray        *weightLiftingDefaultObjectsCopy;
+@property (nonatomic, strong) NSMutableArray        *aerobicDefaultObjectsCopy;
+@property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
+@property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
+@property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
+@property (nonatomic, strong) SelectedEditEvent     *selectedEditEvent;
+
+@end
+
+@implementation EditEventTableViewController 
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.selectedEditEvent = [[SelectedEditEvent alloc]init];
+    
+    // Uncomment the following line to preserve selection between presentations.
+    self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    self.coreDataHelper = [[CoreDataHelper alloc] init];
+    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+    
+    [self fetchEvents];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (SelectedEditEvent *)selectEventDataIs
+{
+    return self.selectedEditEvent;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    NSInteger count = 0;
+    
+    if (self.weightLiftingDefaultObjectsCopy.count > 0)
+    {
+        count++;
+    }
+    
+    if (self.aerobicDefaultObjectsCopy.count > 0)
+    {
+        count++;
+    }
+    return count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger count = 0;
+    
+    switch (section) {
+        case AerobicCategory:
+            if (self.aerobicDefaultObjectsCopy.count > 0) {
+                count = self.aerobicDefaultObjectsCopy.count;
+            }
+            else
+            {
+                count = self.weightLiftingDefaultObjectsCopy.count;
+                
+            }
+            break;
+            
+        case WeightCategory:
+            count = self.weightLiftingDefaultObjectsCopy.count;
+            break;
+            
+        default:
+            break;
+    }
+    return count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+    
+    switch (indexPath.section) {
+        case AerobicCategory:
+            if (self.aerobicDefaultObjects.count > 0)
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
+                DefaultAerobic *event = [self.aerobicDefaultObjectsCopy objectAtIndex:indexPath.row];
+                cell.textLabel.text = event.eventName;
+            }
+            else
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
+                DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
+                cell.textLabel.text = event.eventName;
+            }
+            break;
+            
+        case WeightCategory:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
+            DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
+            cell.textLabel.text = event.eventName;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return cell;
+
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle;
+    
+    switch (section) {
+        case AerobicCategory:
+            if (self.aerobicDefaultObjects.count > 0) {
+                headerTitle = @"Aerobic Events";
+            }
+            else
+            {
+                headerTitle = @"Weight Lifting Events";
+            }
+            break;
+            
+        case WeightCategory:
+            headerTitle = @"Weight Lifting Events";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return headerTitle;
+}
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        switch (indexPath.section) {
+            case AerobicCategory:
+                if (self.aerobicDefaultObjects.count > 0)
+                {
+                    [self.coreDataHelper deleteObject:self.aerobicDefaultObjectsCopy[indexPath.row]];
+                    [self.aerobicDefaultObjectsCopy removeObjectAtIndex:indexPath.row];
+                }
+                else
+                {
+                    [self.coreDataHelper deleteObject:self.weightLiftingDefaultObjectsCopy[indexPath.row]];
+                    [self.weightLiftingDefaultObjectsCopy removeObjectAtIndex:indexPath.row];
+                }
+                break;
+                
+            case WeightCategory:
+            {
+                [self.coreDataHelper deleteObject:self.weightLiftingDefaultObjectsCopy[indexPath.row]];
+                [self.weightLiftingDefaultObjectsCopy removeObjectAtIndex:indexPath.row];
+            }
+                break;
+                
+            default:
+                break;
+        }
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+
+#pragma  mark - CoreData
+
+- (void) fetchEvents
+{
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
+    self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
+    self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
+}
+
+@end

@@ -108,8 +108,6 @@
         default:
             break;
     }
-    
-    
     return count;
 }
 
@@ -158,7 +156,8 @@
     
     self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
     self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
-        
+
+    /*
     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
         NSLog(@"Event Name: %@",defaultWL.eventName);
     }
@@ -166,6 +165,7 @@
     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
         NSLog(@"Event Name: %@",defaultA.eventName);
     }
+    */
 }
 
 #pragma mark - Navigation
