@@ -8,10 +8,23 @@
 
 #import "EditSelectedEventTableViewController.h"
 #import "SelectedEditEvent.h"
+#import "CoreDataHelper.h"
+#import "WeightLiftingEvent.h"
+#import "EditWeightTableViewCell.h"
+#import "WeightLiftingEvent.h"
+#import "AerobicEvent.h"
+#import "Support.h"
 
 @interface EditSelectedEventTableViewController ()
 
-@property SelectedEditEvent *selectEditEvent;
+@property (nonatomic, strong) NSMutableArray        *weightLiftingEventCopy;
+@property (nonatomic, strong) NSMutableArray        *aerobicEventCopy;
+
+@property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
+@property (nonatomic, strong) SelectedEditEvent     *selectEditEvent;
+@property (nonatomic, strong) WeightLiftingEvent    *weightLiftingEvent;
+@property (nonatomic, strong) AerobicEvent          *aerobicEvent;
+@property (strong, nonatomic) IBOutlet UITableView *editSelectedEventTable;
 
 @end
 
@@ -27,9 +40,16 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
 //     Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = self.selectEditEvent.eventName;
     
+    self.coreDataHelper = [[CoreDataHelper alloc] init];
+    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     
+    self.editSelectedEventTable.estimatedRowHeight = 44.0f;
+    self.editSelectedEventTable.rowHeight = UITableViewAutomaticDimension;
+
+    [self fetchEvents];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,57 +64,111 @@
     return 1;
 }
 
+#pragma mark - Table view data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+   return self.weightLiftingEventCopy.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell;
     
-    // Configure the cell...
-    
+    static NSDateFormatter *dateFormatter = nil;
+
+    if (!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setCalendar:[NSCalendar currentCalendar]];
+        
+        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
+        [dateFormatter setDateFormat:formatTemplate];
+    }
+
+    switch (self.selectEditEvent.eventCategory) {
+        case kWeights:
+            {
+                EditWeightTableViewCell *cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:@"EditWeightCell"];
+                WeightLiftingEvent *weightEvent = [self.weightLiftingEventCopy objectAtIndex:indexPath.row];
+                NSString *convertedDate = [dateFormatter stringFromDate:weightEvent.date];
+                NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
+                
+                cell.weightDate.text = formattedDate;
+                cell.weightSet.text = [NSString stringWithFormat:@"Set: %@", weightEvent.setNumber];
+                cell.weightReps.text = [NSString stringWithFormat:@"Reps: %@", weightEvent.repCount];
+                cell.weightWeight.text = [NSString stringWithFormat:@"Weight: %@", weightEvent.weight];
+                cell.weightNote.text = weightEvent.notes;
+                return cell;
+            }
+            break;
+        case kWalking:
+        case kRunning:
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditRunningCell" forIndexPath:indexPath];
+                
+            }
+            break;
+        case kStretching:
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditStretchingCell" forIndexPath:indexPath];
+                
+            }
+            break;
+        case kEliptical:
+            {
+                
+            }
+            break;
+        case kBicycling:
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EditBicyclingCell" forIndexPath:indexPath];
+            }
+            break;
+        default:
+            break;
+    }
     return cell;
+    
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+       
+        switch (self.selectEditEvent.eventCategory) {
+            case kWeights:
+            {
+                [self.coreDataHelper deleteObject:self.coreDataHelper.fetchedResultsController.fetchedObjects[indexPath.row]];
+                [self.weightLiftingEventCopy removeObjectAtIndex:indexPath.row] ;
+            }
+                break;
+            case kWalking:
+            case kRunning:
+            {
+                
+            }
+                break;
+            case kStretching:
+            {
+                
+            }
+                break;
+            case kEliptical:
+            {
+                
+            }
+                break;
+            case kBicycling:
+            {
+            }
+                break;
+            default:
+                break;
+        }
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -102,6 +176,38 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
+#pragma  mark - CoreData
+
+- (void) fetchEvents
+{
+    switch (self.selectEditEvent.eventCategory) {
+        case kWeights:
+            {
+                [self.coreDataHelper fetchItemsMatching:@"WeightLiftingEvent"
+                                           forAttribute:nil
+                                              sortingBy:@"date"
+                                          withPredicate:[[self selectEditEvent] eventName] groupBy:nil];
+            }
+            self.weightLiftingEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+            {
+                [self.coreDataHelper fetchItemsMatching:@"AerobicEvent"
+                                           forAttribute:nil
+                                              sortingBy:@"date"
+                                          withPredicate:[[self selectEditEvent] eventName] groupBy:nil];
+            }
+            break;
+
+         default:
+            break;
+    }
+}
 
 @end

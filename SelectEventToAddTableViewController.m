@@ -58,8 +58,8 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.weightExerciseEvents = self.categoryDictionary[@"WeightLifting"];
     self.aerobicExerciseEvents = self.categoryDictionary[@"Aerobic"];
     
-    self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
-    self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
+    self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES];
+    self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES];
   
     self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
     self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];

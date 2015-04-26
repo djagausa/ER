@@ -164,7 +164,37 @@
     return YES;
 }
 */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case AerobicCategory:
+            if (self.aerobicDefaultObjects.count > 0)
+            {
+                DefaultAerobic *event = [self.aerobicDefaultObjectsCopy objectAtIndex:indexPath.row];
+                self.selectedEditEvent.eventName = event.eventName;
+                self.selectedEditEvent.eventCategory = [event.category integerValue];
+            }
+            else
+            {
+                DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
+                self.selectedEditEvent.eventName = event.eventName;
+                self.selectedEditEvent.eventCategory = [event.category integerValue];
+            }
+            break;
+            
+        case WeightCategory:
+        {
+            DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
+            self.selectedEditEvent.eventName = event.eventName;
+            self.selectedEditEvent.eventCategory = [event.category integerValue];
+        }
+            break;
+            
+        default:
+            break;
+    }
 
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,16 +233,17 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    EditSelectedEventTableViewController *editSelectedTableViewController = [segue destinationViewController];
+    editSelectedTableViewController.delegate = self;
 }
 
 #pragma  mark - CoreData
 
 - (void) fetchEvents
 {
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting"];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic"];
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES ];
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
 }

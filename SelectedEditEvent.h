@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Support.h"
 
 @interface SelectedEditEvent : NSObject
 
-@property (nonatomic, strong) NSNumber *eventCategory;
+@property (nonatomic, assign) ExerciseCategory eventCategory;
 @property (nonatomic, copy) NSString *eventName;
 
 -(instancetype) init;

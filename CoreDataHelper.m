@@ -16,13 +16,11 @@
 @implementation CoreDataHelper
 
 #pragma mark - Core Data
-- (void)fetchItemsMatching:(NSString *)searchString forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy
+- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:self.entityName inManagedObjectContext:self.managedObjectContext];
-    
-//    [fetchRequest setResultType:NSDictionaryResultType];
-    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+        
     // set Attributes
     if ([attribute length] > 0) {
         NSAttributeDescription *searchAttribute = [entity.attributesByName objectForKey:attribute];
@@ -63,13 +61,13 @@
     [self fetchItemsMatching:nil forAttribute:nil sortingBy:nil withPredicate:nil groupBy:nil];
 }
 
-- (NSArray*)fetchDefaultDataFor:(NSString *)entityName
+- (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequst setEntity:entity];
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending];
     [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
@@ -80,6 +78,7 @@
 
     return defaultData;
 }
+
 #pragma mark - Info
 - (NSInteger)numberOfSections
 {
@@ -92,10 +91,10 @@
     return sectionInfo.numberOfObjects;
 }
 
-- (NSInteger)numberOfEntities
+- (NSInteger)numberOfEntities:(NSString *)entityName
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:[NSEntityDescription entityForName:_entityName inManagedObjectContext:self.managedObjectContext]];
+    [request setEntity:[NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext]];
     [request setIncludesSubentities:YES];
     
     NSError __autoreleasing *error;
@@ -141,25 +140,10 @@
 }
 
 // Create new object
-- (NSManagedObject *)newObject
+- (NSManagedObject *)newObject:(NSString *)entityName
 {
-    NSManagedObject *object = [NSEntityDescription insertNewObjectForEntityForName:self.entityName inManagedObjectContext:self.managedObjectContext];
+    NSManagedObject *object = [NSEntityDescription insertNewObjectForEntityForName:entityName inManagedObjectContext:self.managedObjectContext];
     return object;
 }
-
-/*
-#pragma mark - Init
-- (BOOL)hasStore
-{
-    if (!_entityName)
-    {
-        NSLog(@"Error: entity name not set");
-        return NO;
-    }
-    
-    NSString *path = [NSString stringWithFormat:@"%@/%@-collection.sqlite", DOCUMENTS_FOLDER, _entityName];
-    return [[NSFileManager defaultManager] fileExistsAtPath:path];
-}
-*/
 
 @end

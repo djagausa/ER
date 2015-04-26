@@ -16,14 +16,10 @@
 
 @interface AddWeightDataVC () <UITextViewDelegate>
 
-@property (nonatomic, assign) NSInteger                     numberOfSections;
-@property (nonatomic, assign) NSInteger                     numberOfItems;
-@property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) NSNumber                      *setCount;
 @property (nonatomic, strong) NSString                      *notes;
 @property (nonatomic, strong) NSNumber                      *sectionZeroRowCount;
 
-@property (nonatomic, strong) CoreDataHelper                *coreDataHelper;
 @end
 
 static NSString *CellIdentifier = @"WeightEventCell";
@@ -38,14 +34,6 @@ BOOL setCountInitialized;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    UIBarButtonItem *saveBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveAction)];
-//    
-//    self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:saveBarButtonItem, nil];
-    
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    self.coreDataHelper.entityName = @"WeightLiftingEvent";
-    self.coreDataHelper.defaultSortAttribute = @"date";
     [self fetchWeightEvents];
     [self setupInitialValues];
     
@@ -138,15 +126,6 @@ BOOL setCountInitialized;
     
 }
 
-- (NSString *)dateToFormatMMddyyy:(NSDate *)date
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSString *convertedDate = [dateFormatter stringFromDate:[NSDate date]];
-    NSString *formattedDate = [[NSString alloc] initWithFormat:@"Date: %@", convertedDate];
-
-    return formattedDate;
-}
 - (void)updateSetCount
 {
     self.setCount = @(self.setCount.intValue + 1) ;
@@ -184,7 +163,7 @@ BOOL setCountInitialized;
     NSUndoManager *manager = self.coreDataHelper.managedObjectContext.undoManager;
     [manager beginUndoGrouping];
     {
-        WeightLiftingEvent *weightLiftingEvent = (WeightLiftingEvent *)[self.coreDataHelper newObject];
+        WeightLiftingEvent *weightLiftingEvent = (WeightLiftingEvent *)[self.coreDataHelper newObject:@"WeightLiftingEvent"];
         [self setupNewWeightLiftingEvent:weightLiftingEvent];
     }
     [manager endUndoGrouping];
@@ -256,20 +235,6 @@ BOOL setCountInitialized;
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 22.0f;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    return 0.01f;
-}
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return [[UIView alloc] initWithFrame:CGRectZero];
-}
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     AddWeightDataSectionHeaderCell *sectionHeader = [self.weightEventsTable dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
@@ -328,17 +293,6 @@ BOOL setCountInitialized;
 {
     [self saveAction];
 }
-
-#pragma mark - Core Data
-- (void)fetchWeightEvents
-{
-    [self.coreDataHelper fetchItemsMatching:@"WeightLiftingEvent"
-                               forAttribute:nil
-                                  sortingBy:@"date"
-                              withPredicate:[[self defaultWeightLifting] eventName] groupBy:nil];
-}
-
-
 
 /*
 #pragma mark - Navigation
