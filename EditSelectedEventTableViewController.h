@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "SelectedEditEvent.h"
+#import "EditEventViewController.h"
 
 @protocol EditSelectedEventTableViewControllerDelegate <NSObject>
 - (SelectedEditEvent *)selectEventDataIs;
 @end
 
-@interface EditSelectedEventTableViewController : UITableViewController
+@interface EditSelectedEventTableViewController : UITableViewController <EditEventViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) id <EditSelectedEventTableViewControllerDelegate> delegate;
+@property (nonatomic, strong) EditStoredEventData *storedEventData;
 
 @end

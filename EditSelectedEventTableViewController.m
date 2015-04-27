@@ -35,6 +35,8 @@
     
     self.selectEditEvent = [[SelectedEditEvent alloc]init];
     self.selectEditEvent = [self.delegate selectEventDataIs];
+
+    self.storedEventData =[[EditStoredEventData alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -57,6 +59,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.editSelectedEventTable reloadData];
+}
+ -(EditStoredEventData *)storedEventDataIs
+{
+    return self.storedEventData;
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -69,7 +80,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
    return self.weightLiftingEventCopy.count;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
@@ -169,12 +179,50 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (self.selectEditEvent.eventCategory) {
+        case kWeights:
+            {
+                WeightLiftingEvent *weightEvent = [self.weightLiftingEventCopy objectAtIndex:indexPath.row];
+                self.storedEventData.weightEvent = weightEvent;
+                self.storedEventData.exerciseCategory = kWeights;
+            }
+            break;
+        case kWalking:
+        case kRunning:
+            {
+                
+            }
+            break;
+        case kStretching:
+            {
+                
+            }
+            break;
+        case kEliptical:
+            {
+                
+            }
+            break;
+        case kBicycling:
+            {
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    EditEventViewController *editEventViewController = [segue destinationViewController];
+    editEventViewController.delegate = self;
 }
 
 #pragma  mark - CoreData

@@ -14,8 +14,6 @@
 
 @interface AddWeightDataVC : AbstractWeightDataViewController <UITableViewDataSource, UITableViewDelegate>
 
-//@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-//@property (nonatomic, strong) DefaultWeightLifting *defaultWeightLifting;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *setInput;
 @property (weak, nonatomic) IBOutlet UITextField *repsInput;

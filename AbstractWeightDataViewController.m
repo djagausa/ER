@@ -102,7 +102,6 @@
                               withPredicate:[[self defaultWeightLifting] eventName] groupBy:nil];
 }
 
-
 /*
 #pragma mark - Navigation
 

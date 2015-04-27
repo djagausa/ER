@@ -169,10 +169,6 @@ BOOL setCountInitialized;
     [manager endUndoGrouping];
     [manager setActionName:@"Add"];
     [self.coreDataHelper save];
-    [self updateSetCount];
-    [self setupNoteInputTextField];
-    [self refresh];
-
 }
 
 - (void)setupNoteInputTextField
@@ -292,6 +288,9 @@ BOOL setCountInitialized;
 - (IBAction)addData:(id)sender
 {
     [self saveAction];
+    [self updateSetCount];
+    [self setupNoteInputTextField];
+    [self refresh];
 }
 
 /*
