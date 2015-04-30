@@ -7,16 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AbstractWeightDataViewController.h"
-#import "EditStoredEventData.h"
+#import "AbstractEventDataViewController.h"
+#import "SelectedEvent.h"
 
-@protocol EditEventViewControllerDelegate <NSObject>
-- (EditStoredEventData *)storedEventDataIs;
-@end
+@interface EditEventViewController : AbstractEventDataViewController
 
-@interface EditEventViewController : AbstractWeightDataViewController
-
-@property (nonatomic, strong) id <EditEventViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *lineOneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lineTwoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lineThreeLabel;

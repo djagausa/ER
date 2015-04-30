@@ -14,6 +14,7 @@
 #import "WeightLiftingEvent.h"
 #import "AerobicEvent.h"
 #import "Support.h"
+#import "SelectedEvent.h"
 
 @interface EditSelectedEventTableViewController ()
 
@@ -24,7 +25,8 @@
 @property (nonatomic, strong) SelectedEditEvent     *selectEditEvent;
 @property (nonatomic, strong) WeightLiftingEvent    *weightLiftingEvent;
 @property (nonatomic, strong) AerobicEvent          *aerobicEvent;
-@property (strong, nonatomic) IBOutlet UITableView *editSelectedEventTable;
+@property (strong, nonatomic) IBOutlet UITableView  *editSelectedEventTable;
+@property (nonatomic, strong) SelectedEvent         *selectedEvent;
 
 @end
 
@@ -36,7 +38,7 @@
     self.selectEditEvent = [[SelectedEditEvent alloc]init];
     self.selectEditEvent = [self.delegate selectEventDataIs];
 
-    self.storedEventData =[[EditStoredEventData alloc]init];
+    self.selectedEvent =[[SelectedEvent alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -59,15 +61,17 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.editSelectedEventTable reloadData];
 }
- -(EditStoredEventData *)storedEventDataIs
+
+- (SelectedEvent *)selectedEventDataIs
 {
-    return self.storedEventData;
+    return self.selectedEvent;
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -185,8 +189,8 @@
         case kWeights:
             {
                 WeightLiftingEvent *weightEvent = [self.weightLiftingEventCopy objectAtIndex:indexPath.row];
-                self.storedEventData.weightEvent = weightEvent;
-                self.storedEventData.exerciseCategory = kWeights;
+                self.selectedEvent.weightLiftingEvent = weightEvent;
+                self.selectedEvent.eventCategory = kWeights;
             }
             break;
         case kWalking:

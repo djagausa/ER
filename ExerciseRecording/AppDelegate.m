@@ -24,6 +24,7 @@
     NSAssert([controller isKindOfClass:[EventViewController class]], @"Should have an item view controller");
     
     [controller setManagedObjectContext:self.managedObjectContext];
+
     return YES;
 }
 

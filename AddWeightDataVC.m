@@ -24,7 +24,6 @@
 
 static NSString *CellIdentifier = @"WeightEventCell";
 static NSString *CellIdentifierNoNote = @"WeightEventCellNoNote";
-static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
 static NSString *notePlaceHolder = @"Enter a note for this set:";
 
 BOOL setCountInitialized;
@@ -33,6 +32,8 @@ BOOL setCountInitialized;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     
     [self fetchWeightEvents];
     [self setupInitialValues];
@@ -46,6 +47,9 @@ BOOL setCountInitialized;
     self.note.text = notePlaceHolder;
     [self.noteSwitch setOn:NO];
     setCountInitialized = NO;
+    
+    self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
+
     
 }
 
@@ -117,7 +121,6 @@ BOOL setCountInitialized;
 
     self.repsInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.numOfReps];
     self.weightInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.weight];
-    self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.defaultWeightLifting.eventName];
     self.dateLabel.text = [self dateToFormatMMddyyy:[NSDate date]];
     self.setCount = @(0);
     [self updateSetCount];
@@ -229,46 +232,6 @@ BOOL setCountInitialized;
         self.weightEventsTable.rowHeight = 22.0f;
         return cell;
     }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    AddWeightDataSectionHeaderCell *sectionHeader = [self.weightEventsTable dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
-    
-    id <NSFetchedResultsSectionInfo> theSection = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
-    
-    /*
-     Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
-     To display the section title, convert the year, month and day components to a string representation.
-     */
-    static NSDateFormatter *formatter = nil;
-    
-    if (!formatter)
-    {
-        formatter = [[NSDateFormatter alloc] init];
-        [formatter setCalendar:[NSCalendar currentCalendar]];
-        
-        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
-        [formatter setDateFormat:formatTemplate];
-    }
-    
-    NSInteger numericSection = [[theSection name] integerValue];
-    NSInteger year = numericSection / 1000;
-    NSInteger month = (numericSection - (year * 1000)) /100;
-    NSInteger day = (numericSection - (year * 1000)) - (month * 100);
-    
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.year = year;
-    dateComponents.month = month;
-    dateComponents.day = day;
-    
-    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
-    
-    NSString *titleString = [formatter stringFromDate:date];
-    
-    sectionHeader.date.text = titleString;
-    
-    return sectionHeader;
 }
 
 - (IBAction)noteSwitchChanged:(id)sender

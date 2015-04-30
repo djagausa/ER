@@ -10,8 +10,6 @@
 
 @interface EditEventViewController ()
 
-@property (nonatomic, strong) EditStoredEventData *storedEventData;
-
 @end
 
 @implementation EditEventViewController
@@ -20,10 +18,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.storedEventData = [[EditStoredEventData alloc]init];
-    self.storedEventData = [self.delegate storedEventDataIs];
     [self hideEntries];
-    [self setupDisplayfor:self.storedEventData.exerciseCategory];
+    [self setupDisplayfor:self.selectedEvent.eventCategory];
 }
 
 - (void)hideEntries
@@ -48,22 +44,22 @@
     switch (exerciseCatergory) {
         case kWeights:
             {
-                self.navigationItem.title = self.storedEventData.weightEvent.defaultEvent.eventName;
+                self.navigationItem.title = self.selectedEvent.weightLiftingEvent.defaultEvent.eventName;
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                 [dateFormatter setCalendar:[NSCalendar currentCalendar]];
                 
                 NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
                 [dateFormatter setDateFormat:formatTemplate];
-                NSString *convertedDate = [dateFormatter stringFromDate:self.storedEventData.weightEvent.date];
+                NSString *convertedDate = [dateFormatter stringFromDate:self.selectedEvent.weightLiftingEvent.date];
 
                 [self setupLine:self.eventDateLabel labelText:@"Date:" inputLine:self.eventDateInputText originalValue:convertedDate];
-                [self setupLine:self.lineOneLabel labelText:@"Set:" inputLine:self.lineOneInputText originalValue:[NSString stringWithFormat:@"%@", self.storedEventData.weightEvent.setNumber]];
-                [self setupLine:self.lineTwoLabel labelText:@"Reps:" inputLine:self.lineTwoInputText originalValue:[NSString stringWithFormat:@"%@", self.storedEventData.weightEvent.repCount]];
-                [self setupLine:self.lineThreeLabel labelText:@"Weight:" inputLine:self.lineThreeInputText originalValue:[NSString stringWithFormat:@"%@", self.storedEventData.weightEvent.weight]];
+                [self setupLine:self.lineOneLabel labelText:@"Set:" inputLine:self.lineOneInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.setNumber]];
+                [self setupLine:self.lineTwoLabel labelText:@"Reps:" inputLine:self.lineTwoInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.repCount]];
+                [self setupLine:self.lineThreeLabel labelText:@"Weight:" inputLine:self.lineThreeInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.weight]];
 
-                if ([self.storedEventData.weightEvent.notes length] > 0) {
+                if ([self.selectedEvent.weightLiftingEvent.notes length] > 0) {
                     self.lineFourLabel.text = @"Note:";
-                    self.noteInput.text = self.storedEventData.weightEvent.notes;
+                    self.noteInput.text = self.selectedEvent.weightLiftingEvent.notes;
                     [self.lineFourLabel setHidden:NO];
                     [self.noteInput setHidden:NO];
                     [self.noteInput setEditable:YES];
@@ -125,11 +121,11 @@
 }
 
 - (IBAction)updateButton:(id)sender {
-    self.storedEventData.weightEvent.setNumber = [NSNumber numberWithInt: [self.lineOneInputText.text intValue]];
-    self.storedEventData.weightEvent.repCount = [NSNumber numberWithInt:[self.lineTwoInputText.text intValue]];
-    self.storedEventData.weightEvent.weight = [NSNumber numberWithInt:[self.lineThreeInputText.text intValue]];
+    self.selectedEvent.weightLiftingEvent.setNumber = [NSNumber numberWithInt: [self.lineOneInputText.text intValue]];
+    self.selectedEvent.weightLiftingEvent.repCount = [NSNumber numberWithInt:[self.lineTwoInputText.text intValue]];
+    self.selectedEvent.weightLiftingEvent.weight = [NSNumber numberWithInt:[self.lineThreeInputText.text intValue]];
     if ([self.noteInput.text length] > 0 ) {
-        self.storedEventData.weightEvent.notes = self.noteInput.text;
+        self.selectedEvent.weightLiftingEvent.notes = self.noteInput.text;
     }
     [self.coreDataHelper save];
 }

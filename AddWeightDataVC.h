@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AbstractWeightDataViewController.h"
+#import "AbstractEventDataViewController.h"
 #import <CoreData/CoreData.h>
 #import "DefaultWeightLifting.h"
 #import "WeightLiftingEvent.h"
 
-@interface AddWeightDataVC : AbstractWeightDataViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AddWeightDataVC : AbstractEventDataViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *setInput;
