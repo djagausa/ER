@@ -8,7 +8,7 @@
 
 #import "SelectEventToAddTableViewController.h"
 #import "SetupExerciseInfoViewController.h"
-#import "DefaultEventSelection.h"
+#import "SelectedEvent.h"
 #import "CoreDataHelper.h"
 #import "Support.h"
 #import "DefaultWeightLifting.h"
@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSArray               *aerobicExerciseExistingEvents;
 
 @property (nonatomic, strong) NSDictionary          *categoryDictionary;
-@property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+@property (nonatomic, strong) SelectedEvent         *selectedEvent;
 @property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
 
 - (IBAction)newButtonSelected:(id)sender;
@@ -40,7 +40,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     
     self.coreDataHelper = [[CoreDataHelper alloc]init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    self.defaultEventSelection = [[DefaultEventSelection alloc]init];
+    self.selectedEvent = [[SelectedEvent alloc]init];
     self.weightExerciseEventsCopy = [[NSMutableArray alloc]init];
     self.aerobicExerciseEventsCopy = [[NSMutableArray alloc]init];
     
@@ -101,15 +101,15 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (DefaultEventSelection *)eventDataHasChangedTo
+- (SelectedEvent *)eventDataHasChangedTo
 {
-    return self.defaultEventSelection;
+    return self.selectedEvent;
 }
 
 - (IBAction)newButtonSelected:(id)sender
 {
-    self.defaultEventSelection.eventCategory = @(-1);
-    self.defaultEventSelection.eventName = @"";
+    self.selectedEvent.eventCategory = -1;
+    self.selectedEvent.eventName = @"";
 }
 #pragma mark - Table view data source
 
@@ -188,14 +188,14 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     switch (indexPath.section) {
         case AerobicCategory:
         {
-            self.defaultEventSelection.eventCategory = self.aerobicExerciseEvents[indexPath.row][@"Category"];
-            self.defaultEventSelection.eventName = self.aerobicExerciseEvents[indexPath.row][@"Name"];
+            self.selectedEvent.eventCategory = [self.aerobicExerciseEvents[indexPath.row][@"Category"] integerValue];
+            self.selectedEvent.eventName = self.aerobicExerciseEvents[indexPath.row][@"Name"];
             break;
         }
         case WeightCategory:
         {
-            self.defaultEventSelection.eventCategory = self.weightExerciseEvents[indexPath.row][@"Category"];
-            self.defaultEventSelection.eventName = self.weightExerciseEvents[indexPath.row][@"Name"];
+            self.selectedEvent.eventCategory = [self.weightExerciseEvents[indexPath.row][@"Category"] integerValue];
+            self.selectedEvent.eventName = self.weightExerciseEvents[indexPath.row][@"Name"];
             break;
         }
             

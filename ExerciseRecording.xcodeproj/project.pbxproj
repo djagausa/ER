@@ -10,17 +10,15 @@
 		2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */; };
 		2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */; };
-		2D7D7C321AC0C5950069E888 /* AddWeightDataVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */; };
+		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C501AC21A1F0069E888 /* DefaultAerobic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */; };
 		2D7D7C5C1AC21C540069E888 /* Add Aerobic VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C5B1AC21C540069E888 /* Add Aerobic VC.m */; };
 		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
 		2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */; };
 		2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */; };
 		2D7D7C6E1AC834B30069E888 /* DefaultWeightLifting.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C6D1AC834B30069E888 /* DefaultWeightLifting.m */; };
-		2D7D7C741ACFF2C80069E888 /* WeightEventTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */; };
 		2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */; };
 		2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */; };
-		2DB6F4281AEA3A9600FCE207 /* SelectedEditEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4271AEA3A9600FCE207 /* SelectedEditEvent.m */; };
 		2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */; };
 		2DB6F4311AEBDD1000FCE207 /* EditWeightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4301AEBDD1000FCE207 /* EditWeightTableViewCell.m */; };
 		2DB6F4341AEBF39D00FCE207 /* EditRunningTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4331AEBF39D00FCE207 /* EditRunningTableViewCell.m */; };
@@ -34,6 +32,9 @@
 		2DB93FED1AF116140062AB0D /* HistoryEventSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FEC1AF116140062AB0D /* HistoryEventSelectTableViewController.m */; };
 		2DB93FF11AF151160062AB0D /* SelectedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FF01AF151160062AB0D /* SelectedEvent.m */; };
 		2DB93FF41AF23AC20062AB0D /* EventHistoryPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FF31AF23AC20062AB0D /* EventHistoryPlotViewController.m */; };
+		2DB93FFA1AF383E40062AB0D /* EventHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FF91AF383E40062AB0D /* EventHistoryViewController.m */; };
+		2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FFC1AF6AAE90062AB0D /* EventTableViewCell.m */; };
+		2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB940001AF844FA0062AB0D /* EventDataSectionHeaderCell.m */; };
 		2DBCE8411AAB98EB00303DE1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8401AAB98EB00303DE1 /* main.m */; };
 		2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */; };
 		2DBCE8471AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */; };
@@ -44,11 +45,8 @@
 		2DBCE85E1AAB98EC00303DE1 /* ExerciseRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */; };
 		2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */; };
 		2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */; };
-		2DFD820F1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */; };
-		2DFD82121ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */; };
 		2DFD82141ADF33C000BD9D86 /* ExerciseSelection.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */; };
 		2DFD82171ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */; };
-		2DFD821E1ADFBD0F00BD9D86 /* DefaultEventSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,8 +80,8 @@
 		2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataTVC.h; sourceTree = "<group>"; };
 		2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataTVC.m; sourceTree = "<group>"; };
-		2D7D7C301AC0C5950069E888 /* AddWeightDataVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightDataVC.h; sourceTree = "<group>"; };
-		2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightDataVC.m; sourceTree = "<group>"; };
+		2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataViewController.h; sourceTree = "<group>"; };
+		2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataViewController.m; sourceTree = "<group>"; };
 		2D7D7C4E1AC21A1F0069E888 /* DefaultAerobic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultAerobic.h; sourceTree = "<group>"; };
 		2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultAerobic.m; sourceTree = "<group>"; };
 		2D7D7C5A1AC21C540069E888 /* Add Aerobic VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Add Aerobic VC.h"; sourceTree = "<group>"; };
@@ -96,14 +94,10 @@
 		2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightLiftingEvent.m; sourceTree = "<group>"; };
 		2D7D7C6C1AC834B30069E888 /* DefaultWeightLifting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultWeightLifting.h; sourceTree = "<group>"; };
 		2D7D7C6D1AC834B30069E888 /* DefaultWeightLifting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultWeightLifting.m; sourceTree = "<group>"; };
-		2D7D7C721ACFF2C80069E888 /* WeightEventTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightEventTVC.h; sourceTree = "<group>"; };
-		2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightEventTVC.m; sourceTree = "<group>"; };
 		2DB6F41D1AE9075600FCE207 /* EditEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEventTableViewController.h; sourceTree = "<group>"; };
 		2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventTableViewController.m; sourceTree = "<group>"; };
 		2DB6F4201AE9C3B000FCE207 /* EditSelectedEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSelectedEventTableViewController.h; sourceTree = "<group>"; };
 		2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditSelectedEventTableViewController.m; sourceTree = "<group>"; };
-		2DB6F4261AEA3A9600FCE207 /* SelectedEditEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectedEditEvent.h; path = ../SelectedEditEvent.h; sourceTree = "<group>"; };
-		2DB6F4271AEA3A9600FCE207 /* SelectedEditEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelectedEditEvent.m; path = ../SelectedEditEvent.m; sourceTree = "<group>"; };
 		2DB6F42C1AEAADCA00FCE207 /* AbstractEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractEventDataViewController.h; sourceTree = "<group>"; };
 		2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractEventDataViewController.m; sourceTree = "<group>"; };
 		2DB6F42F1AEBDD1000FCE207 /* EditWeightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditWeightTableViewCell.h; sourceTree = "<group>"; };
@@ -127,6 +121,13 @@
 		2DB93FF01AF151160062AB0D /* SelectedEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedEvent.m; sourceTree = "<group>"; };
 		2DB93FF21AF23AC20062AB0D /* EventHistoryPlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHistoryPlotViewController.h; sourceTree = "<group>"; };
 		2DB93FF31AF23AC20062AB0D /* EventHistoryPlotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventHistoryPlotViewController.m; sourceTree = "<group>"; };
+		2DB93FF81AF383E40062AB0D /* EventHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventHistoryViewController.h; sourceTree = "<group>"; };
+		2DB93FF91AF383E40062AB0D /* EventHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventHistoryViewController.m; sourceTree = "<group>"; };
+		2DB93FFB1AF6AAE80062AB0D /* EventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventTableViewCell.h; sourceTree = "<group>"; };
+		2DB93FFC1AF6AAE90062AB0D /* EventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewCell.m; sourceTree = "<group>"; };
+		2DB93FFE1AF83F860062AB0D /* ExerciseRecording 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 2.xcdatamodel"; sourceTree = "<group>"; };
+		2DB93FFF1AF844FA0062AB0D /* EventDataSectionHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataSectionHeaderCell.h; sourceTree = "<group>"; };
+		2DB940001AF844FA0062AB0D /* EventDataSectionHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataSectionHeaderCell.m; sourceTree = "<group>"; };
 		2DBCE83B1AAB98EB00303DE1 /* ExerciseRecording.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExerciseRecording.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBCE83F1AAB98EB00303DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DBCE8401AAB98EB00303DE1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -144,15 +145,9 @@
 		2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ExerciseCategory.plist; path = ExerciseRecording/ExerciseCategory.plist; sourceTree = "<group>"; };
 		2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupExerciseInfoViewController.h; sourceTree = "<group>"; };
 		2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupExreciseInfoViewController.m; sourceTree = "<group>"; };
-		2DFD820D1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddWeightDataSectionHeaderCell.h; sourceTree = "<group>"; };
-		2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddWeightDataSectionHeaderCell.m; sourceTree = "<group>"; };
-		2DFD82101ADDDB3600BD9D86 /* WeightEventTableCellNoNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightEventTableCellNoNote.h; sourceTree = "<group>"; };
-		2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightEventTableCellNoNote.m; sourceTree = "<group>"; };
 		2DFD82131ADF33C000BD9D86 /* ExerciseSelection.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ExerciseSelection.plist; path = ExerciseRecording/ExerciseSelection.plist; sourceTree = "<group>"; };
 		2DFD82151ADF37DD00BD9D86 /* SelectEventToAddTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectEventToAddTableViewController.h; sourceTree = "<group>"; };
 		2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectEventToAddTableViewController.m; sourceTree = "<group>"; };
-		2DFD821C1ADFBD0F00BD9D86 /* DefaultEventSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultEventSelection.h; sourceTree = "<group>"; };
-		2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultEventSelection.m; sourceTree = "<group>"; };
 		2DFD821F1AE085C800BD9D86 /* Support.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Support.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -236,12 +231,8 @@
 				2DBCE83E1AAB98EB00303DE1 /* Supporting Files */,
 				2DBCE8421AAB98EB00303DE1 /* AppDelegate.h */,
 				2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */,
-				2DFD821C1ADFBD0F00BD9D86 /* DefaultEventSelection.h */,
-				2DFD821D1ADFBD0F00BD9D86 /* DefaultEventSelection.m */,
 				2DB93FEF1AF151160062AB0D /* SelectedEvent.h */,
 				2DB93FF01AF151160062AB0D /* SelectedEvent.m */,
-				2DB6F4261AEA3A9600FCE207 /* SelectedEditEvent.h */,
-				2DB6F4271AEA3A9600FCE207 /* SelectedEditEvent.m */,
 				2DFD821F1AE085C800BD9D86 /* Support.h */,
 			);
 			path = ExerciseRecording;
@@ -302,12 +293,14 @@
 				2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */,
 				2D7D7C5A1AC21C540069E888 /* Add Aerobic VC.h */,
 				2D7D7C5B1AC21C540069E888 /* Add Aerobic VC.m */,
-				2D7D7C301AC0C5950069E888 /* AddWeightDataVC.h */,
-				2D7D7C311AC0C5950069E888 /* AddWeightDataVC.m */,
+				2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */,
+				2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */,
 				2DB6F43B1AEE50C700FCE207 /* EditEventViewController.h */,
 				2DB6F43C1AEE50C700FCE207 /* EditEventViewController.m */,
 				2DBCE8481AAB98EB00303DE1 /* EventViewController.h */,
 				2DBCE8491AAB98EB00303DE1 /* EventViewController.m */,
+				2DB93FF81AF383E40062AB0D /* EventHistoryViewController.h */,
+				2DB93FF91AF383E40062AB0D /* EventHistoryViewController.m */,
 				2DB93FF21AF23AC20062AB0D /* EventHistoryPlotViewController.h */,
 				2DB93FF31AF23AC20062AB0D /* EventHistoryPlotViewController.m */,
 				2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */,
@@ -339,12 +332,6 @@
 		2DFD82191ADF398F00BD9D86 /* TableCells */ = {
 			isa = PBXGroup;
 			children = (
-				2DFD820D1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.h */,
-				2DFD820E1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m */,
-				2DFD82101ADDDB3600BD9D86 /* WeightEventTableCellNoNote.h */,
-				2DFD82111ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m */,
-				2D7D7C721ACFF2C80069E888 /* WeightEventTVC.h */,
-				2D7D7C731ACFF2C80069E888 /* WeightEventTVC.m */,
 				2DB6F42F1AEBDD1000FCE207 /* EditWeightTableViewCell.h */,
 				2DB6F4301AEBDD1000FCE207 /* EditWeightTableViewCell.m */,
 				2DB6F4321AEBF39D00FCE207 /* EditRunningTableViewCell.h */,
@@ -353,6 +340,10 @@
 				2DB6F4361AEBF4A300FCE207 /* EditBicycleTableViewCell.m */,
 				2DB6F4381AEBF56400FCE207 /* EditStretchingTableViewCell.h */,
 				2DB6F4391AEBF56400FCE207 /* EditStretchingTableViewCell.m */,
+				2DB93FFB1AF6AAE80062AB0D /* EventTableViewCell.h */,
+				2DB93FFC1AF6AAE90062AB0D /* EventTableViewCell.m */,
+				2DB93FFF1AF844FA0062AB0D /* EventDataSectionHeaderCell.h */,
+				2DB940001AF844FA0062AB0D /* EventDataSectionHeaderCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -480,12 +471,13 @@
 				2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */,
 				2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */,
 				2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */,
 				2DB6F4311AEBDD1000FCE207 /* EditWeightTableViewCell.m in Sources */,
-				2D7D7C741ACFF2C80069E888 /* WeightEventTVC.m in Sources */,
-				2DFD82121ADDDB3600BD9D86 /* WeightEventTableCellNoNote.m in Sources */,
+				2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */,
 				2DB6F4341AEBF39D00FCE207 /* EditRunningTableViewCell.m in Sources */,
 				2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */,
 				2DB6F43D1AEE50C700FCE207 /* EditEventViewController.m in Sources */,
+				2DB93FFA1AF383E40062AB0D /* EventHistoryViewController.m in Sources */,
 				2D7D7C501AC21A1F0069E888 /* DefaultAerobic.m in Sources */,
 				2DB93FF11AF151160062AB0D /* SelectedEvent.m in Sources */,
 				2D7D7C5C1AC21C540069E888 /* Add Aerobic VC.m in Sources */,
@@ -496,14 +488,11 @@
 				2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */,
 				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
 				2DB6F43A1AEBF56400FCE207 /* EditStretchingTableViewCell.m in Sources */,
-				2DFD821E1ADFBD0F00BD9D86 /* DefaultEventSelection.m in Sources */,
 				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,
 				2DB6F4371AEBF4A300FCE207 /* EditBicycleTableViewCell.m in Sources */,
 				2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */,
 				2DB93FEA1AF0FE400062AB0D /* AbstractEventDataTableViewController.m in Sources */,
-				2DB6F4281AEA3A9600FCE207 /* SelectedEditEvent.m in Sources */,
-				2DFD820F1ADB045A00BD9D86 /* AddWeightDataSectionHeaderCell.m in Sources */,
-				2D7D7C321AC0C5950069E888 /* AddWeightDataVC.m in Sources */,
+				2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */,
 				2DBCE84A1AAB98EB00303DE1 /* EventViewController.m in Sources */,
 				2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */,
 				2DB93FED1AF116140062AB0D /* HistoryEventSelectTableViewController.m in Sources */,
@@ -738,9 +727,10 @@
 		2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2DB93FFE1AF83F860062AB0D /* ExerciseRecording 2.xcdatamodel */,
 				2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */,
 			);
-			currentVersion = 2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */;
+			currentVersion = 2DB93FFE1AF83F860062AB0D /* ExerciseRecording 2.xcdatamodel */;
 			name = ExerciseRecording.xcdatamodeld;
 			path = ExerciseRecording/ExerciseRecording.xcdatamodeld;
 			sourceTree = "<group>";

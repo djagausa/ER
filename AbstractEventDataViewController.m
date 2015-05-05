@@ -9,11 +9,9 @@
 #import "AbstractEventDataViewController.h"
 #import "CoreDataHelper.h"
 #import "WeightLiftingEvent.h"
-#import "WeightEventTVC.h"
-#import "AddWeightDataSectionHeaderCell.h"
-#import "WeightEventTableCellNoNote.h"
+#import "EventDataSectionHeaderCell.h"
+#import "EventTableViewCell.h"
 #import "Support.h"
-#import "AddWeightDataSectionHeaderCell.h"
 
 @interface AbstractEventDataViewController ()
 
@@ -24,6 +22,8 @@
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
+static NSString *CellIdentifier = @"EventCell";
+
 
 @implementation AbstractEventDataViewController
 
@@ -33,16 +33,10 @@ static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
     self.selectedEvent = [[SelectedEvent alloc] init];
     self.selectedEvent = [self.delegate selectedEventDataIs];
     
-    //    UIBarButtonItem *saveBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveAction)];
-    //
-    //    self.navigationItem.rightBarButtonItems = [[NSArray alloc] initWithObjects:saveBarButtonItem, nil];
-    
     self.coreDataHelper = [[CoreDataHelper alloc] init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.coreDataHelper.defaultSortAttribute = @"date";
-    [self fetchWeightEvents];
-    
-//    self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
+    [self fetchEvents];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,7 +78,7 @@ static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
         {
-            AddWeightDataSectionHeaderCell *sectionHeader = [tableView dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
+            EventDataSectionHeaderCell *sectionHeader = [tableView dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
             
             id <NSFetchedResultsSectionInfo> theSection = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
             /*
@@ -128,12 +122,80 @@ static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
     return nil;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch ([self selectedEvent].eventCategory) {
+        case kWeights:
+            {
+                WeightLiftingEvent *weightEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
+                
+                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
+                cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
+                cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
+                cell.note.text = weightEvent.notes;
+                tableView.estimatedRowHeight = 44.0f;
+                tableView.rowHeight = UITableViewAutomaticDimension;
+                return cell;
+            }
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+            {
+                AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
+                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                switch ([[self selectedEvent] eventCategory]) {
+                    case kBicycling:
+                        {
+                            cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                            cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                            cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
+                            cell.note.text = aerobicEvent.note;
+                            tableView.estimatedRowHeight = 44.0f;
+                            tableView.rowHeight = UITableViewAutomaticDimension;
+                            return cell;
+                        }
+                        break;
+                    case kWalking:
+                    case kRunning:
+                    {
+                        cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                        cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                        cell.label3.hidden = YES;;
+                        cell.note.text = aerobicEvent.note;
+                        tableView.estimatedRowHeight = 44.0f;
+                        tableView.rowHeight = UITableViewAutomaticDimension;
+                        return cell;
+                    }
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            break;
+    }
+    return nil;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger count = [[self.coreDataHelper.fetchedResultsController sections] count];
     return count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
+    
+    NSInteger count = [sectionInfo numberOfObjects];
+    
+    return count;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 22.0f;
@@ -150,7 +212,7 @@ static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
 
 #pragma mark - Core Data
 
-- (void)fetchWeightEvents
+- (void)fetchEvents
 {
     switch ([self selectedEvent].eventCategory) {
         case kWeights:

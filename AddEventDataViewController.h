@@ -12,19 +12,23 @@
 #import "DefaultWeightLifting.h"
 #import "WeightLiftingEvent.h"
 
-@interface AddWeightDataVC : AbstractEventDataViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AddEventDataViewController : AbstractEventDataViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UITextField *setInput;
-@property (weak, nonatomic) IBOutlet UITextField *repsInput;
-@property (weak, nonatomic) IBOutlet UITextField *weightInput;
-@property (weak, nonatomic) IBOutlet UITableView *weightEventsTable;
 @property (weak, nonatomic) IBOutlet UITextView *note;
 @property (weak, nonatomic) IBOutlet UISwitch *noteSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *in1Label;
+@property (weak, nonatomic) IBOutlet UITextField *in2Label;
+@property (weak, nonatomic) IBOutlet UITextField *in3Label;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UITableView *eventTable;
 
 - (IBAction)noteSwitchChanged:(id)sender;
-- (IBAction)setCountField:(id)sender;
-- (IBAction)repCountField:(id)sender;
-- (IBAction)weightField:(id)sender;
 - (IBAction)addData:(id)sender;
+- (IBAction)in1Input:(id)sender;
+- (IBAction)in2Input:(id)sender;
+- (IBAction)in3Input:(id)sender;
+
 @end

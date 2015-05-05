@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DefaultEventSelection.h"
+#import "SelectedEvent.h"
 #import "SetupExerciseInfoViewController.h"
 
 @interface SelectEventToAddTableViewController : UITableViewController <SetupExrciseInfoViewControllerDelegate>

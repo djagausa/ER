@@ -7,7 +7,7 @@
 //
 
 #import "AddEventDataTVC.h"
-#import "AddWeightDataVC.h"
+#import "AddEventDataViewController.h"
 #import "Support.h"
 #import "SelectedEvent.h"
 
@@ -111,7 +111,7 @@
     
     if ([[segue identifier] isEqualToString:@"addWeightData"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        AddWeightDataVC *addWeightDataVC = [segue destinationViewController];
+        AddEventDataViewController *addWeightDataVC = [segue destinationViewController];
         addWeightDataVC.delegate = self;
     }
     else if ([[segue identifier] isEqualToString:@"addAerobicData"]) {

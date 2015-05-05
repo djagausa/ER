@@ -6,15 +6,13 @@
 //  Copyright (c) 2015 Douglas Alexander. All rights reserved.
 //
 
-#import "AddWeightDataVC.h"
+#import "AddEventDataViewController.h"
 #import "CoreDataHelper.h"
 #import "WeightLiftingEvent.h"
-#import "WeightEventTVC.h"
-#import "AddWeightDataSectionHeaderCell.h"
-#import "WeightEventTableCellNoNote.h"
+#import "EventTableViewCell.h"
 #import "Support.h"
 
-@interface AddWeightDataVC () <UITextViewDelegate>
+@interface AddEventDataViewController () <UITextViewDelegate>
 
 @property (nonatomic, strong) NSNumber                      *setCount;
 @property (nonatomic, strong) NSString                      *notes;
@@ -22,20 +20,20 @@
 
 @end
 
-static NSString *CellIdentifier = @"WeightEventCell";
-static NSString *CellIdentifierNoNote = @"WeightEventCellNoNote";
+static NSString *CellIdentifier = @"EventCell";
+static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 static NSString *notePlaceHolder = @"Enter a note for this set:";
 
 BOOL setCountInitialized;
 
-@implementation AddWeightDataVC
+@implementation AddEventDataViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     
-    [self fetchWeightEvents];
+    [self fetchEvents];
     [self setupInitialValues];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -49,8 +47,6 @@ BOOL setCountInitialized;
     setCountInitialized = NO;
     
     self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
-
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,9 +55,8 @@ BOOL setCountInitialized;
     // loading of the table cells don't expand correctly.
     
     [super viewDidAppear:animated];
-    [self.weightEventsTable reloadData];
+    [self.eventTable reloadData];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -77,7 +72,7 @@ BOOL setCountInitialized;
 
 - (void)didChangePreferredContentSize:(NSNotification *)notification
 {
-    [self.weightEventsTable reloadData];
+    [self.eventTable reloadData];
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
@@ -118,12 +113,24 @@ BOOL setCountInitialized;
 
 - (void)setupInitialValues
 {
+    switch (self.selectedEvent.eventCategory) {
+        case kWeights:
+            {
+                self.label1.text = @"Set";
+                self.label2.text = @"Reps";
+                self.label3.text = @"Weight";
+                self.in2Label.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.numOfReps];
+                self.in3Label.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.weight];
+                self.dateLabel.text = [self dateToFormatMMddyyy:[NSDate date]];
+                self.setCount = @(0);
+                [self updateSetCount];
+            }
+            break;
+            
+        default:
+            break;
+    }
 
-    self.repsInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.numOfReps];
-    self.weightInput.text = [NSString stringWithFormat:@"%@", self.defaultWeightLifting.weight];
-    self.dateLabel.text = [self dateToFormatMMddyyy:[NSDate date]];
-    self.setCount = @(0);
-    [self updateSetCount];
     
     [self refresh];
     
@@ -132,7 +139,7 @@ BOOL setCountInitialized;
 - (void)updateSetCount
 {
     self.setCount = @(self.setCount.intValue + 1) ;
-    self.setInput.text = [NSString stringWithFormat:@"%@", self.setCount];
+    self.in1Label.text = [NSString stringWithFormat:@"%@", self.setCount];
 }
 
 - (void)setupNewWeightLiftingEvent:(WeightLiftingEvent *)weightLiftingEvent
@@ -150,13 +157,13 @@ BOOL setCountInitialized;
 
     weightLiftingEvent.date = [calendar dateFromComponents:dateComponents];
     weightLiftingEvent.setNumber = self.setCount;
-    weightLiftingEvent.repCount = @([self.repsInput.text integerValue]);
+    weightLiftingEvent.repCount = @([self.in2Label.text integerValue]);
     if ([self.note.text isEqualToString:notePlaceHolder]) {
         weightLiftingEvent.notes = @"";
     } else {
         weightLiftingEvent.notes = self.note.text;
     }
-    weightLiftingEvent.weight= @([self.weightInput.text integerValue]);
+    weightLiftingEvent.weight= @([self.in3Label.text integerValue]);
     weightLiftingEvent.defaultEvent = self.defaultWeightLifting;
     
 }
@@ -183,8 +190,8 @@ BOOL setCountInitialized;
 
 - (void)refresh
 {
-    [self fetchWeightEvents];
-    [[self weightEventsTable] reloadData];
+    [self fetchEvents];
+    [[self eventTable] reloadData];
 }
 
 #pragma mark - Table view methods
@@ -215,28 +222,28 @@ BOOL setCountInitialized;
         [self initializeSetCount:weightEvent];
     }
     if ([self.noteSwitch isOn]) {
-        WeightEventTVC *cell = [self.weightEventsTable dequeueReusableCellWithIdentifier:CellIdentifier];
-        cell.setCount.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
-        cell.repsCount.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
-        cell.weight.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
+        EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
+        cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
+        cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
         cell.note.hidden = NO;
         cell.note.text = weightEvent.notes;
-        self.weightEventsTable.estimatedRowHeight = 44.0f;
-        self.weightEventsTable.rowHeight = UITableViewAutomaticDimension;
+        tableView.estimatedRowHeight = 44.0f;
+        tableView.rowHeight = UITableViewAutomaticDimension;
         return cell;
     } else {
-        WeightEventTableCellNoNote *cell = [self.weightEventsTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
-        cell.setCount.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
-        cell.repsCount.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
-        cell.weight.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
-        self.weightEventsTable.rowHeight = 22.0f;
+        EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
+        cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
+        cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
+        cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
+        self.eventTable.rowHeight = 22.0f;
         return cell;
     }
 }
 
 - (IBAction)noteSwitchChanged:(id)sender
 {
-    [[self weightEventsTable] reloadData];
+    [[self eventTable] reloadData];
 }
 
 - (IBAction)setCountField:(id)sender {
@@ -254,6 +261,15 @@ BOOL setCountInitialized;
     [self updateSetCount];
     [self setupNoteInputTextField];
     [self refresh];
+}
+
+- (IBAction)in1Input:(id)sender {
+}
+
+- (IBAction)in2Input:(id)sender {
+}
+
+- (IBAction)in3Input:(id)sender {
 }
 
 /*

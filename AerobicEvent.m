@@ -22,5 +22,6 @@
 @dynamic category;
 @dynamic section;
 @dynamic defaultAerobic;
+@dynamic note;
 
 @end

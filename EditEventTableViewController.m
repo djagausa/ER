@@ -11,7 +11,7 @@
 #import "DefaultWeightLifting.h"
 #import "DefaultAerobic.h"
 #import "Support.h"
-#import "SelectedEditEvent.h"
+#import "SelectedEvent.h"
 
 @interface EditEventTableViewController ()
 
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
 @property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
 @property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
-@property (nonatomic, strong) SelectedEditEvent     *selectedEditEvent;
+@property (nonatomic, strong) SelectedEvent         *selectedEvent;
 
 @end
 
@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectedEditEvent = [[SelectedEditEvent alloc]init];
+    self.selectedEvent = [[SelectedEvent alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -49,9 +49,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (SelectedEditEvent *)selectEventDataIs
+- (SelectedEvent *)selectEventDataIs
 {
-    return self.selectedEditEvent;
+    return self.selectedEvent;
 }
 
 #pragma mark - Table view data source
@@ -171,22 +171,22 @@
             if (self.aerobicDefaultObjects.count > 0)
             {
                 DefaultAerobic *event = [self.aerobicDefaultObjectsCopy objectAtIndex:indexPath.row];
-                self.selectedEditEvent.eventName = event.eventName;
-                self.selectedEditEvent.eventCategory = [event.category integerValue];
+                self.selectedEvent.eventName = event.eventName;
+                self.selectedEvent.eventCategory = [event.category integerValue];
             }
             else
             {
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
-                self.selectedEditEvent.eventName = event.eventName;
-                self.selectedEditEvent.eventCategory = [event.category integerValue];
+                self.selectedEvent.eventName = event.eventName;
+                self.selectedEvent.eventCategory = [event.category integerValue];
             }
             break;
             
         case WeightCategory:
         {
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
-            self.selectedEditEvent.eventName = event.eventName;
-            self.selectedEditEvent.eventCategory = [event.category integerValue];
+            self.selectedEvent.eventName = event.eventName;
+            self.selectedEvent.eventCategory = [event.category integerValue];
         }
             break;
             

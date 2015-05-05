@@ -7,7 +7,6 @@
 //
 
 #import "EditSelectedEventTableViewController.h"
-#import "SelectedEditEvent.h"
 #import "CoreDataHelper.h"
 #import "WeightLiftingEvent.h"
 #import "EditWeightTableViewCell.h"
@@ -22,7 +21,7 @@
 @property (nonatomic, strong) NSMutableArray        *aerobicEventCopy;
 
 @property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
-@property (nonatomic, strong) SelectedEditEvent     *selectEditEvent;
+@property (nonatomic, strong) SelectedEvent         *selectEditEvent;
 @property (nonatomic, strong) WeightLiftingEvent    *weightLiftingEvent;
 @property (nonatomic, strong) AerobicEvent          *aerobicEvent;
 @property (strong, nonatomic) IBOutlet UITableView  *editSelectedEventTable;
@@ -35,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectEditEvent = [[SelectedEditEvent alloc]init];
+    self.selectEditEvent = [[SelectedEvent alloc]init];
     self.selectEditEvent = [self.delegate selectEventDataIs];
 
     self.selectedEvent =[[SelectedEvent alloc]init];

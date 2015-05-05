@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "DefaultEventSelection.h"
+#import "SelectedEvent.h"
 
 @protocol SetupExrciseInfoViewControllerDelegate <NSObject>
-- (DefaultEventSelection *)eventDataHasChangedTo;
+- (SelectedEvent *)eventDataHasChangedTo;
 @end
 
 @interface SetupExrciseInfoViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *default3;
 @property (weak, nonatomic) IBOutlet UISwitch *enableSwitch;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) DefaultEventSelection *defaultEventSelection;
+@property (nonatomic, strong) SelectedEvent *selectedEvent;
 @property (nonatomic, strong) id <SetupExrciseInfoViewControllerDelegate> delegate;
 
 - (instancetype)init;

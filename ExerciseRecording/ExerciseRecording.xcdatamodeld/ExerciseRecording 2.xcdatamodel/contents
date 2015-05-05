@@ -9,6 +9,7 @@
         <attribute name="heartRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="section" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <relationship name="defaultAerobic" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DefaultAerobic" inverseName="areobicEvents" inverseEntity="DefaultAerobic" syncable="YES"/>
     </entity>
@@ -40,7 +41,7 @@
         <relationship name="defaultEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DefaultWeightLifting" inverseName="liftingEvents" inverseEntity="DefaultWeightLifting" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="193"/>
+        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="210"/>
         <element name="DefaultAerobic" positionX="-461" positionY="17" width="128" height="163"/>
         <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="133"/>
         <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="148"/>

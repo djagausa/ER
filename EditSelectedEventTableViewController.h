@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SelectedEditEvent.h"
+#import "SelectedEvent.h"
 #import "EditEventViewController.h"
 
 @protocol EditSelectedEventTableViewControllerDelegate <NSObject>
-- (SelectedEditEvent *)selectEventDataIs;
+- (SelectedEvent *)selectEventDataIs;
 @end
 
 @interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate>

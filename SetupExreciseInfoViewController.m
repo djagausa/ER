@@ -59,7 +59,7 @@
     self.exerciseActivitySelectionTable.tableHeaderView = headerView;
     
     self.categoryCode = self.exerciseCategory.count;
-    self.defaultEventSelection = [[DefaultEventSelection alloc] init];
+    self.selectedEvent = [[SelectedEvent alloc] init];
     
     [[self saveButton] setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
     [[self saveButton] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -72,10 +72,10 @@
 {
     [super viewWillAppear:animated];
     
-    self.defaultEventSelection = [self.delegate eventDataHasChangedTo];
+    self.selectedEvent = [self.delegate eventDataHasChangedTo];
     
-    self.categoryCode = [self.defaultEventSelection.eventCategory integerValue];
-    self.exerciseName.text = self.defaultEventSelection.eventName;
+    self.categoryCode = self.selectedEvent.eventCategory;
+    self.exerciseName.text = self.selectedEvent.eventName;
     if (self.categoryCode != -1) {
         [self setupInputEntries:self.categoryCode];
     }

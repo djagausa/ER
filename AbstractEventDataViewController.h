@@ -17,7 +17,7 @@
 -(SelectedEvent *)selectedEventDataIs;
 @end
 
-@interface AbstractEventDataViewController : UIViewController
+@interface AbstractEventDataViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext    *managedObjectContext;
 @property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;
@@ -25,7 +25,7 @@
 @property (nonatomic, strong) id<AbstractEventDataDelegate> delegate;
 @property (nonatomic, strong) SelectedEvent              *selectedEvent;
 
--(void)fetchWeightEvents;
+-(void)fetchEvents;
 - (NSString *)dateToFormatMMddyyy:(NSDate *)date;
 
 @end
