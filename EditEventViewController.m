@@ -121,6 +121,7 @@
 }
 
 - (IBAction)updateButton:(id)sender {
+    
     self.selectedEvent.weightLiftingEvent.setNumber = [NSNumber numberWithInt: [self.lineOneInputText.text intValue]];
     self.selectedEvent.weightLiftingEvent.repCount = [NSNumber numberWithInt:[self.lineTwoInputText.text intValue]];
     self.selectedEvent.weightLiftingEvent.weight = [NSNumber numberWithInt:[self.lineThreeInputText.text intValue]];

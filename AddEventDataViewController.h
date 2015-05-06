@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UITableView *eventTable;
+@property (weak, nonatomic) IBOutlet UILabel *hrdLab1;
+@property (weak, nonatomic) IBOutlet UILabel *hdrLab2;
+@property (weak, nonatomic) IBOutlet UILabel *hdrLab3;
 
 - (IBAction)noteSwitchChanged:(id)sender;
 - (IBAction)addData:(id)sender;

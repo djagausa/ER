@@ -16,8 +16,8 @@
 
 @interface SelectEventToAddTableViewController ()
 
-@property (nonatomic, strong) NSArray               *weightExerciseEvents;
-@property (nonatomic, strong) NSArray               *aerobicExerciseEvents;
+@property (nonatomic, strong) NSMutableArray               *weightExerciseEvents;
+@property (nonatomic, strong) NSMutableArray               *aerobicExerciseEvents;
 @property (nonatomic, strong) NSMutableArray        *weightExerciseEventsCopy;
 @property (nonatomic, strong) NSMutableArray        *aerobicExerciseEventsCopy;
 @property (nonatomic, strong) NSArray               *weightExerciseExistingEvents;
@@ -41,8 +41,8 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.coreDataHelper = [[CoreDataHelper alloc]init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.selectedEvent = [[SelectedEvent alloc]init];
-    self.weightExerciseEventsCopy = [[NSMutableArray alloc]init];
-    self.aerobicExerciseEventsCopy = [[NSMutableArray alloc]init];
+//    self.weightExerciseEvents = [[NSMutableArray alloc]init];
+//    self.aerobicExerciseEvents = [[NSMutableArray alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -69,6 +69,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
     self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];
     
+    // eliminate events that have already been added
     for (DefaultWeightLifting *defaultWL in self.weightExerciseExistingEvents) {
         for (int i = 0; i < self.weightExerciseEventsCopy.count; ++i) {
             if ([defaultWL.eventName isEqualToString: self.weightExerciseEventsCopy [i][@"Name"]])
@@ -81,19 +82,17 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     
     for (DefaultAerobic *defaultA in self.aerobicExerciseExistingEvents) {
         for (int i = 0; i< self.aerobicExerciseEventsCopy.count; ++i) {
-            if ([defaultA.eventName isEqualToString: self.aerobicExerciseEventsCopy[i][@"Name"]]) {
+            if ([defaultA.eventName isEqualToString: self.aerobicExerciseEventsCopy[i][@"Name"]])
+            {
                 [self.aerobicExerciseEventsCopy removeObjectAtIndex:i];
                 break;
             }
         }
     }
     
-    self.weightExerciseEvents = [NSArray arrayWithArray:self.weightExerciseEventsCopy];
-    self.aerobicExerciseEvents = [NSArray arrayWithArray:self.aerobicExerciseEventsCopy];
-    
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES];
-    self.weightExerciseEvents = [self.weightExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
-    self.aerobicExerciseEvents = [self.aerobicExerciseEvents sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
+    [self.weightExerciseEventsCopy sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
+    [self.aerobicExerciseEventsCopy sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -123,13 +122,13 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     switch (section) {
         case WeightCategory:
         {
-            count = self.weightExerciseEvents.count;
+            count = self.weightExerciseEventsCopy.count;
             break;
         }
             
         case AerobicCategory:
         {
-            count = self.aerobicExerciseEvents.count;
+            count = self.aerobicExerciseEventsCopy.count;
             break;
         }
             
@@ -145,13 +144,13 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     switch (indexPath.section) {
         case WeightCategory:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEvents[indexPath.row][@"Name"]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEventsCopy[indexPath.row][@"Name"]];
             break;
         }
         
         case AerobicCategory:
         {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEvents[indexPath.row][@"Name"]];
+            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEventsCopy[indexPath.row][@"Name"]];
         }
             
         default:
@@ -188,14 +187,16 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     switch (indexPath.section) {
         case AerobicCategory:
         {
-            self.selectedEvent.eventCategory = [self.aerobicExerciseEvents[indexPath.row][@"Category"] integerValue];
-            self.selectedEvent.eventName = self.aerobicExerciseEvents[indexPath.row][@"Name"];
+            self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
+            self.selectedEvent.eventName = self.aerobicExerciseEventsCopy[indexPath.row][@"Name"];
+            [self.aerobicExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
         case WeightCategory:
         {
-            self.selectedEvent.eventCategory = [self.weightExerciseEvents[indexPath.row][@"Category"] integerValue];
-            self.selectedEvent.eventName = self.weightExerciseEvents[indexPath.row][@"Name"];
+            self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
+            self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
+            [self.weightExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
             

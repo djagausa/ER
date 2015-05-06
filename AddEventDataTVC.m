@@ -44,7 +44,7 @@
         case 0:
             if (self.aerobicDefaultObjects.count > 0)
             {
-                cell = [tableView dequeueReusableCellWithIdentifier:@"AerobicCell" forIndexPath:indexPath];
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
             }
@@ -109,14 +109,14 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if ([[segue identifier] isEqualToString:@"addWeightData"]) {
+//    if ([[segue identifier] isEqualToString:@"addWeightData"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        AddEventDataViewController *addWeightDataVC = [segue destinationViewController];
-        addWeightDataVC.delegate = self;
-    }
-    else if ([[segue identifier] isEqualToString:@"addAerobicData"]) {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    }
+        AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+        addEventDataVC.delegate = self;
+//    }
+//    else if ([[segue identifier] isEqualToString:@"addAerobicData"]) {
+//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+//    }
 }
 
 

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "DefaultWeightLifting.h"
+#import "DefaultAerobic.h"
 #import "WeightLiftingEvent.h"
 #import "CoreDataHelper.h"
 #import "SelectedEvent.h"
@@ -21,6 +22,7 @@
 
 @property (nonatomic, strong) NSManagedObjectContext    *managedObjectContext;
 @property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;
+@property (nonatomic, strong) DefaultAerobic            *defaultAerobic;
 @property (nonatomic, strong) CoreDataHelper            *coreDataHelper;
 @property (nonatomic, strong) id<AbstractEventDataDelegate> delegate;
 @property (nonatomic, strong) SelectedEvent              *selectedEvent;
