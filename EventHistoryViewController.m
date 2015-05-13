@@ -24,6 +24,7 @@
     self.navigationItem.title = [NSString stringWithFormat:@"%@ History", self.selectedEvent.eventName];
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
+    self.defaultAerobic = self.selectedEvent.defaultAerobicData;
     
     [self fetchEvents];
     [self setupLabels];
@@ -60,14 +61,18 @@
             break;
         case kBicycling:
             {
-                
+                self.label1.text = @"Time";
+                self.label2.text = @"AVG HR";
+                self.label3.text = @"CAD";
             }
             break;
         case kWalking:
         case kRunning:
         case kEliptical:
             {
-                
+                self.label1.text = @"Time";
+                self.label2.text = @"AVG HR";
+                self.label3.text = @"Distance";
             }
             break;
         default:

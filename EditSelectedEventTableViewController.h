@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SelectedEvent.h"
 #import "EditEventViewController.h"
+#import "SetupExerciseInfoViewController.h"
+
 
 @protocol EditSelectedEventTableViewControllerDelegate <NSObject>
 - (SelectedEvent *)selectEventDataIs;
 @end
 
-@interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate>
+@interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate, SetupExrciseInfoViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) id <EditSelectedEventTableViewControllerDelegate> delegate;

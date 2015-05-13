@@ -108,15 +108,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
-//    if ([[segue identifier] isEqualToString:@"addWeightData"]) {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        AddEventDataViewController *addEventDataVC = [segue destinationViewController];
-        addEventDataVC.delegate = self;
-//    }
-//    else if ([[segue identifier] isEqualToString:@"addAerobicData"]) {
-//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-//    }
+    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+    addEventDataVC.delegate = self;
 }
 
 

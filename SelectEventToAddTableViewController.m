@@ -16,8 +16,8 @@
 
 @interface SelectEventToAddTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray               *weightExerciseEvents;
-@property (nonatomic, strong) NSMutableArray               *aerobicExerciseEvents;
+@property (nonatomic, strong) NSMutableArray        *weightExerciseEvents;
+@property (nonatomic, strong) NSMutableArray        *aerobicExerciseEvents;
 @property (nonatomic, strong) NSMutableArray        *weightExerciseEventsCopy;
 @property (nonatomic, strong) NSMutableArray        *aerobicExerciseEventsCopy;
 @property (nonatomic, strong) NSArray               *weightExerciseExistingEvents;
@@ -41,8 +41,6 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.coreDataHelper = [[CoreDataHelper alloc]init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.selectedEvent = [[SelectedEvent alloc]init];
-//    self.weightExerciseEvents = [[NSMutableArray alloc]init];
-//    self.aerobicExerciseEvents = [[NSMutableArray alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -63,8 +61,8 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     self.weightExerciseEvents = self.categoryDictionary[@"WeightLifting"];
     self.aerobicExerciseEvents = self.categoryDictionary[@"Aerobic"];
     
-    self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES];
-    self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES];
+    self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES usePredicate:YES];
+    self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES usePredicate:YES];
   
     self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
     self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];
@@ -100,7 +98,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (SelectedEvent *)eventDataHasChangedTo
+- (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;
 }
@@ -109,7 +107,10 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 {
     self.selectedEvent.eventCategory = -1;
     self.selectedEvent.eventName = @"";
+    
+    [self performSegueWithIdentifier: @"SetupEvent" sender:sender];
 }
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -209,9 +210,10 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
-        setupExerciseViewController.delegate = self;
+    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
+    setupExerciseViewController.delegate = self;
+    setupExerciseViewController.editMode = NO;
 }
 
 

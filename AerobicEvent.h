@@ -23,6 +23,6 @@
 @property (nonatomic, retain) NSNumber * mode;
 @property (nonatomic, retain) NSNumber * category;
 @property (nonatomic, retain) NSNumber * section;
-@property (nonatomic, retain) DefaultAerobic *defaultAerobic;
+@property (nonatomic, retain) DefaultAerobic *defaultEvent;
 
 @end

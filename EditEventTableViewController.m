@@ -44,6 +44,12 @@
     [self fetchEvents];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -100,6 +106,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
     
+    NSNumber *eventEnable;
+    
     switch (indexPath.section) {
         case AerobicCategory:
             if (self.aerobicDefaultObjects.count > 0)
@@ -107,12 +115,14 @@
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjectsCopy objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                eventEnable = event.enabled;
             }
             else
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                eventEnable = event.enabled;
             }
             break;
             
@@ -121,12 +131,19 @@
             cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
             cell.textLabel.text = event.eventName;
+            eventEnable = event.enabled;
         }
             break;
             
         default:
             break;
     }
+    if ([eventEnable isEqualToNumber:@(0)]) {
+        cell.backgroundColor = [UIColor redColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
+
     return cell;
 
 }
@@ -242,8 +259,8 @@
 
 - (void) fetchEvents
 {
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES ];
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES usePredicate:NO];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES usePredicate:NO];
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
 }

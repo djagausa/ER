@@ -32,6 +32,7 @@ BOOL setCountInitialized;
     [super viewDidLoad];
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
+    self.defaultAerobic = self.selectedEvent.defaultAerobicData;
     
     [self fetchEvents];
     [self setupInitialValues];
@@ -132,12 +133,23 @@ BOOL setCountInitialized;
                 self.label1.text = self.hrdLab1.text = @"Time";
                 self.label2.text = self.hdrLab2.text = @"Avg HR";
                 self.label3.text = self.hdrLab3.text = @"CAD";
-                self.in1Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.totalTime];
+                self.in1Label.text = [NSString stringWithFormat:@"%ld:%02ld", [self.defaultAerobic.totalTime integerValue]/60, [self.defaultAerobic.totalTime integerValue] % 60];
                 self.in2Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.desiredHR];
                 self.in3Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.cadence];
             }
             break;
-            
+        case kWalking:
+        case kRunning:
+            {
+                self.label1.text = self.hrdLab1.text = @"Time";
+                self.label2.text = self.hdrLab2.text = @"Avg HR";
+                self.label3.text = self.hdrLab3.text = @"Distance";
+                self.in1Label.text = @"HH:MM";
+                self.in2Label.text = @"";
+                self.in3Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.distance];
+            }
+            break;
+
         default:
             break;
     }
@@ -185,18 +197,47 @@ BOOL setCountInitialized;
     weightLiftingEvent.defaultEvent = self.defaultWeightLifting;
 }
 
+- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
+    
+    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
+    NSInteger lengthInMinutes = 0;
+    for (int i = 0 ; i != tokens.count ; i++) {
+        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
+    }
+    return @(lengthInMinutes);
+}
+
 - (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent
 {
     aerobicEvent.date = [self setupDate];
-    aerobicEvent.duration = @([self.in1Label.text integerValue]);
-    aerobicEvent.heartRate = @([self.in2Label.text integerValue]);
     if ([self.note.text isEqualToString:notePlaceHolder]) {
         aerobicEvent.note = @"";
     } else {
         aerobicEvent.note = self.note.text;
     }
-    aerobicEvent.cadenace= @([self.in3Label.text integerValue]);
-    aerobicEvent.defaultAerobic = self.defaultAerobic;
+    aerobicEvent.defaultEvent = self.defaultAerobic;
+    aerobicEvent.category = @(self.selectedEvent.eventCategory);
+
+    switch (self.selectedEvent.eventCategory) {
+        case kBicycling:
+            {
+                aerobicEvent.duration = [self convertTimeToNumber: self.in1Label.text];
+                aerobicEvent.heartRate = @([self.in2Label.text integerValue]);
+                aerobicEvent.cadenace = @([self.in3Label.text integerValue]);
+            }
+            break;
+        case kRunning:
+        case kWalking:
+        {
+            aerobicEvent.duration = [self convertTimeToNumber: self.in1Label.text];
+            aerobicEvent.heartRate = @([self.in2Label.text integerValue]);
+            aerobicEvent.distance = @([self.in3Label.text integerValue]);
+        }
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)saveAction
@@ -212,15 +253,11 @@ BOOL setCountInitialized;
             }
             break;
             
-        case kBicycling:
+        default:
             {
                 AerobicEvent *aerobicEvent = (AerobicEvent *)[self.coreDataHelper newObject:@"AerobicEvent"];
                 [self setupNewAerobicEvent:aerobicEvent];
             }
-            break;
-
-            
-        default:
             break;
     }
     [manager endUndoGrouping];
@@ -295,10 +332,11 @@ BOOL setCountInitialized;
         case kBicycling:
             {
                 AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
- 
+                NSInteger duration = [aerobicEvent.duration integerValue];
+
                 if ([self.noteSwitch isOn]) {
                     EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.duration];
+                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                     cell.note.hidden = NO;
@@ -308,7 +346,7 @@ BOOL setCountInitialized;
                     return cell;
                 } else {
                     EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
-                    cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.duration];
+                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                     self.eventTable.rowHeight = 22.0f;
@@ -316,7 +354,34 @@ BOOL setCountInitialized;
                 }
             }
             break;
-            
+
+        case kWalking:
+        case kRunning:
+            {
+                AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
+                NSInteger duration = [aerobicEvent.duration integerValue];
+
+                if ([self.noteSwitch isOn]) {
+                    EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
+                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                    cell.note.hidden = NO;
+                    cell.note.text = aerobicEvent.note;
+                    tableView.estimatedRowHeight = 44.0f;
+                    tableView.rowHeight = UITableViewAutomaticDimension;
+                    return cell;
+                } else {
+                    EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
+                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
+                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                    self.eventTable.rowHeight = 22.0f;
+                    return cell;
+                }
+            }
+            break;
+
             
         default:
             break;

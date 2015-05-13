@@ -66,7 +66,7 @@ static NSString *CellIdentifier = @"EventCell";
 {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSString *convertedDate = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *convertedDate = [dateFormatter stringFromDate:date];
     NSString *formattedDate = [[NSString alloc] initWithFormat:@"Date: %@", convertedDate];
     
     return formattedDate;
@@ -75,51 +75,41 @@ static NSString *CellIdentifier = @"EventCell";
 #pragma mark - Table view methods
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    switch (self.selectedEvent.eventCategory) {
-        case kWeights:
-        {
-            EventDataSectionHeaderCell *sectionHeader = [tableView dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
-            
-            id <NSFetchedResultsSectionInfo> theSection = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
-            /*
-             Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
-             To display the section title, convert the year, month and day components to a string representation.
-             */
-            static NSDateFormatter *formatter = nil;
-            
-            if (!formatter)
-            {
-                formatter = [[NSDateFormatter alloc] init];
-                [formatter setCalendar:[NSCalendar currentCalendar]];
-                
-                NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
-                [formatter setDateFormat:formatTemplate];
-            }
-            
-            NSInteger numericSection = [[theSection name] integerValue];
-            NSInteger year = numericSection / 1000;
-            NSInteger month = (numericSection - (year * 1000)) /100;
-            NSInteger day = (numericSection - (year * 1000)) - (month * 100);
-            
-            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-            dateComponents.year = year;
-            dateComponents.month = month;
-            dateComponents.day = day;
-            
-            NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
-            
-            NSString *titleString = [formatter stringFromDate:date];
-            
-            sectionHeader.date.text = titleString;
-            
-            return sectionHeader;
-        }
-            break;
-            
-        default:
-            break;
+    EventDataSectionHeaderCell *sectionHeader = [tableView dequeueReusableCellWithIdentifier:SectionHeaderCellIdentifier];
+    
+    id <NSFetchedResultsSectionInfo> theSection = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
+    /*
+     Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
+     To display the section title, convert the year, month and day components to a string representation.
+     */
+    static NSDateFormatter *formatter = nil;
+    
+    if (!formatter)
+    {
+        formatter = [[NSDateFormatter alloc] init];
+        [formatter setCalendar:[NSCalendar currentCalendar]];
+        
+        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
+        [formatter setDateFormat:formatTemplate];
     }
-    return nil;
+    
+    NSInteger numericSection = [[theSection name] integerValue];
+    NSInteger year = numericSection / 1000;
+    NSInteger month = (numericSection - (year * 1000)) /100;
+    NSInteger day = (numericSection - (year * 1000)) - (month * 100);
+    
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.year = year;
+    dateComponents.month = month;
+    dateComponents.day = day;
+    
+    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
+    
+    NSString *titleString = [formatter stringFromDate:date];
+    
+    sectionHeader.date.text = titleString;
+    
+    return sectionHeader;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -151,7 +141,7 @@ static NSString *CellIdentifier = @"EventCell";
                 switch ([[self selectedEvent] eventCategory]) {
                     case kBicycling:
                         {
-                            cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                            cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
                             cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                             cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                             cell.note.text = aerobicEvent.note;
@@ -163,9 +153,9 @@ static NSString *CellIdentifier = @"EventCell";
                     case kWalking:
                     case kRunning:
                     {
-                        cell.label1.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                        cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
                         cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
-                        cell.label3.hidden = YES;;
+                        cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
                         cell.note.text = aerobicEvent.note;
                         tableView.estimatedRowHeight = 44.0f;
                         tableView.rowHeight = UITableViewAutomaticDimension;

@@ -76,19 +76,39 @@ id gestureRecognizerDelegate;
 
 - (void)findMinAndMax
 {
-    for (WeightLiftingEvent *weightEvent in self.coreDataHelper.fetchedResultsController.fetchedObjects) {
-        NSNumber *weight = weightEvent.weight;
-        if (weight < self.yMin) {
-            self.yMin = weight;
-        }
-        if (weight > self.yMax) {
-            self.yMax = weight;
-        }
+    switch (self.selectedEvent.eventCategory) {
+        case kWeights:
+            for (WeightLiftingEvent *weightEvent in self.coreDataHelper.fetchedResultsController.fetchedObjects) {
+                NSNumber *weight = weightEvent.weight;
+                if (weight < self.yMin) {
+                    self.yMin = weight;
+                }
+                if (weight > self.yMax) {
+                    self.yMax = weight;
+                }
+            }
+
+            break;
+            
+        default:
+            for (AerobicEvent *aerobicEvent in self.coreDataHelper.fetchedResultsController.fetchedObjects) {
+                NSNumber *hr = aerobicEvent.heartRate;
+                if (hr < self.yMin) {
+                    self.yMin = hr;
+                }
+                if (hr > self.yMax) {
+                    self.yMax = hr;
+                }
+            }
+            break;
     }
 }
 - (void)confingureHost
 {
-    self.hostView = [[CPTGraphHostingView alloc] initWithFrame:self.view.bounds];
+    CGRect windowRect = self.view.bounds;
+    CGSize navBarSize = self.navigationController.navigationBar.bounds.size;
+    windowRect = CGRectMake(windowRect.origin.x, windowRect.origin.y+navBarSize.height, windowRect.size.width, windowRect.size.height-60); // making space for period
+    self.hostView = [[CPTGraphHostingView alloc] initWithFrame:windowRect];
     self.hostView.allowPinchScaling = YES;
     [self.view addSubview:self.hostView];
 }
@@ -114,8 +134,8 @@ id gestureRecognizerDelegate;
 //    graph.titleDisplacement = CGPointMake(0.0f, -10.0f);
 //    
     // Set padding for plot area
-    [graph.plotAreaFrame setPaddingLeft:30.0f];
-    [graph.plotAreaFrame setPaddingBottom:30.0f];
+    [graph.plotAreaFrame setPaddingLeft:20.0f];
+    [graph.plotAreaFrame setPaddingBottom:20.0f];
     
     // Enable user interaction for plotspace
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
@@ -144,12 +164,12 @@ id gestureRecognizerDelegate;
     CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.2f)];
     plotSpace.yRange = yRange;
-    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue] -10) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] + 20 )];
+    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue]-15) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] + 20 )];
     plotSpace.globalYRange = plotSpace.yRange;
     
     //Create styles and symbol
     CPTMutableLineStyle *eventLineStyle = [eventPlot.dataLineStyle mutableCopy];
-    eventLineStyle.lineWidth = 2.5;
+    eventLineStyle.lineWidth = 1.5;
     eventLineStyle.lineColor = eventColor;
     eventPlot.dataLineStyle = eventLineStyle;
     CPTMutableLineStyle *eventSymbolLineStyle = [CPTMutableLineStyle lineStyle];
@@ -157,7 +177,7 @@ id gestureRecognizerDelegate;
     CPTPlotSymbol *eventSymbol = [CPTPlotSymbol ellipsePlotSymbol];
     eventSymbol.fill = [CPTFill fillWithColor:eventColor];
     eventSymbol.lineStyle = eventSymbolLineStyle;
-    eventSymbol.size = CGSizeMake(6.0f, 6.0f);
+    eventSymbol.size = CGSizeMake(4.0f, 4.0f);
     eventPlot.plotSymbol = eventSymbol;
     
 }
@@ -190,9 +210,9 @@ id gestureRecognizerDelegate;
     axisSet.xAxis.orthogonalCoordinateDecimal = CPTDecimalFromInt([self.yMin intValue]-5);
     
     CPTAxis *x = axisSet.xAxis;
-    x.title = @"Set";
+//    x.title = @"Set";
     x.titleTextStyle = axisTitleStyle;
-    x.titleOffset = 16.0f;
+    x.titleOffset = -20.0f;
     x.axisLineStyle = axisLineStyle;
     x.labelingPolicy = CPTAxisLabelingPolicyNone;
     x.labelTextStyle = axisTextStyle;
@@ -203,11 +223,17 @@ id gestureRecognizerDelegate;
     NSMutableSet *xLabels = [NSMutableSet setWithCapacity:eventCount];
     NSMutableSet *xLocations = [NSMutableSet setWithCapacity:eventCount];
     NSInteger i = 0;
-    for (int j = 1; j <= eventCount; ++j) {
-        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%d", j]  textStyle:x.labelTextStyle];
-        CGFloat location = i++;
+    NSInteger jump;
+    jump = eventCount / 30 +1;
+    NSString *date;
+    for (int j = 1; j <= eventCount; j += jump) {
+        date = [self plotDate:j-1];
+        CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%@", date]  textStyle:x.labelTextStyle];
+        CGFloat location = i;
+        i += jump;
         label.tickLocation = CPTDecimalFromCGFloat(location);
         label.offset = x.majorTickLength;
+        label.rotation = M_PI / 4;
         if (label) {
             [xLabels addObject:label];
             [xLocations addObject:[NSNumber numberWithFloat:location]];
@@ -232,11 +258,13 @@ id gestureRecognizerDelegate;
     y.tickDirection = CPTSignPositive;
     NSInteger majorIncrement = 5;
     NSInteger minorIncrement = 1;
-    CGFloat yMax = 150.0f;  // should determine dynamically based on max price
+    CGFloat yMax = [self.yMax floatValue] + 5.0;  // should determine dynamically based on max
+    CGFloat yMin = [self.yMin floatValue] - 5.0;  // should determine dynamically based on max
+
     NSMutableSet *yLabels = [NSMutableSet set];
     NSMutableSet *yMajorLocations = [NSMutableSet set];
     NSMutableSet *yMinorLocations = [NSMutableSet set];
-    for (NSInteger j = minorIncrement; j <= yMax; j += minorIncrement) {
+    for (NSInteger j = yMin; j <= yMax; j += minorIncrement) {
         NSUInteger mod = j % majorIncrement;
         if (mod == 0) {
             CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%li", (long)j] textStyle:y.labelTextStyle];
@@ -262,18 +290,68 @@ id gestureRecognizerDelegate;
     return self.coreDataHelper.fetchedResultsController.fetchedObjects.count;
 }
 
+- (NSString *)dateToFormatMMddyyy:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    NSString *convertedDate = [dateFormatter stringFromDate:date];
+    NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
+    
+    return formattedDate;
+}
+
+-(NSString *)plotDate:(NSUInteger)plotPoint
+{
+    NSString *date;
+    switch (self.selectedEvent.eventCategory) {
+        case kWeights:
+        {
+            WeightLiftingEvent *weightEvent = self.coreDataHelper.fetchedResultsController.fetchedObjects[plotPoint];
+            date = [self dateToFormatMMddyyy:weightEvent.date];
+        }
+            break;
+            
+        default:
+        {
+            AerobicEvent *aerobicEvent = self.coreDataHelper.fetchedResultsController.fetchedObjects[plotPoint];
+            date = [self dateToFormatMMddyyy:aerobicEvent.date];
+        }
+            break;
+    }
+    NSLog(@"Date: %@ for %lu", date, (unsigned long)plotPoint);
+    return date;
+}
+
 -(id)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)idx
 {
     switch (fieldEnum) {
         case CPTScatterPlotFieldX:
             {
+                NSLog(@"x value for %lu is %lu", (unsigned long)idx, (unsigned long)idx);
                 return [NSNumber numberWithUnsignedInteger:idx];
             }
             break;
         case CPTScatterPlotFieldY:
             {
-                WeightLiftingEvent *weightEvent = self.coreDataHelper.fetchedResultsController.fetchedObjects[idx];
-                return weightEvent.weight;
+                switch (self.selectedEvent.eventCategory) {
+                    case kWeights:
+                        {
+                            WeightLiftingEvent *weightEvent = self.coreDataHelper.fetchedResultsController.fetchedObjects[idx];
+                            NSLog(@"x value for %lu is %@", (unsigned long)idx, weightEvent.weight);
+
+                            return weightEvent.weight;
+                        }
+                        break;
+                        
+                    default:
+                        {
+                            AerobicEvent *aerobicEvent = self.coreDataHelper.fetchedResultsController.fetchedObjects[idx];
+                            NSLog(@"y value for %lu is %@", (unsigned long)idx, aerobicEvent.heartRate);
+
+                            return aerobicEvent.heartRate;
+                        }
+                        break;
+                }
             }
             break;
         default:

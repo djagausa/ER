@@ -15,12 +15,23 @@
 
 @interface SetupExrciseInfoViewController ()
 
-@property (nonatomic, strong) NSArray *exerciseCategory;
+@property (nonatomic, strong) NSArray           *exerciseCategory;
+@property (nonatomic, strong) NSMutableArray    *exerciseCategoryCopy;
+@property (nonatomic, strong) SelectedEvent     *selectedEvent;
 @property NSInteger categoryCode;
+@property (weak, nonatomic) IBOutlet UILabel *label1;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@property (weak, nonatomic) IBOutlet UILabel *label3;
+@property (weak, nonatomic) IBOutlet UILabel *label0;
+@property (weak, nonatomic) IBOutlet UISwitch *enableSwitchOutlet;
+- (IBAction)enableSwitchAction:(id)sender;
 
 @end
 
 @implementation SetupExrciseInfoViewController
+
+- (IBAction)saveButton:(id)sender {
+}
 
 -(instancetype)init
 {
@@ -35,44 +46,68 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [[self exerciseName] setDelegate: self];
-    [[self default1] setDelegate: self];
-    [[self default2] setDelegate: self];
-    [[self default3] setDelegate: self];
-    
-    [[self exerciseActivitySelectionTable] registerClass:[UITableViewCell class] forCellReuseIdentifier:@"ExerciseActivityCell"];
-    
+        
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ExerciseCategory" ofType:@"plist"];
     NSDictionary *categoryDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     
     self.exerciseCategory = categoryDictionary[@"ExerciseCategory"];
+    self.exerciseCategoryCopy = [NSMutableArray arrayWithArray:self.exerciseCategory];
+
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES];
+    [self.exerciseCategoryCopy sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-    labelView.textAlignment = NSTextAlignmentLeft;
-    labelView.backgroundColor = [UIColor blueColor];
-    labelView.textColor = [UIColor whiteColor];
-    labelView.text = @"Exercise Categories";
-    
-    [headerView addSubview:labelView];
-    self.exerciseActivitySelectionTable.tableHeaderView = headerView;
-    
-    self.categoryCode = self.exerciseCategory.count;
+    self.categoryCode = self.exerciseCategoryCopy.count;
     self.selectedEvent = [[SelectedEvent alloc] init];
     
-    [[self saveButton] setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-    [[self saveButton] setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    NSShadow *shadow = [NSShadow new];
+    [shadow setShadowColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
+    [shadow setShadowOffset:CGSizeMake(0, 1)];
     
-    [[self saveButton] setEnabled:NO];
-//    self.saveButton.userInteractionEnabled = NO;
+    NSDictionary *attributes = @{NSForegroundColorAttributeName: [UIColor blueColor]};
+    [[self saveButton] setTitleTextAttributes: attributes forState:UIControlStateNormal];
+    
+    attributes = @{NSForegroundColorAttributeName: [UIColor grayColor]};
+    [[self saveButton] setTitleTextAttributes: attributes forState:UIControlStateDisabled];
+
+    if (self.editMode == YES) {
+        [[self saveButton] setTitle:@"Update"];
+        [[self saveButton] setEnabled:YES];
+        [[self label0] setHidden:NO];
+        [[self enableSwitchOutlet] setHidden:NO];
+        [[self enableSwitchOutlet] setEnabled:YES];
+        
+    } else {
+        [[self saveButton] setTitle:@"Save" ];
+        [[self saveButton] setEnabled:NO];
+        [[self label0] setHidden:YES];
+        [[self enableSwitchOutlet] setHidden:YES];
+        [[self enableSwitchOutlet] setEnabled:NO];
+
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    self.selectedEvent = [self.delegate eventDataHasChangedTo];
+    self.selectedEvent = [self.delegate selectedEventDataIs];
+    
+    if (self.editMode == YES) {
+        NSArray *event = [[NSArray alloc]init];
+        switch (self.selectedEvent.eventCategory) {
+            case kWeights:
+                event = [self.coreDataHelper fetchEventDefaultDataFor:@"DefaultWeightLifting" forEvent:self.selectedEvent.eventName];
+                self.selectedEvent.defaultWeightLiftingData = [event objectAtIndex:0];
+                [self.enableSwitchOutlet setOn:(BOOL)self.selectedEvent.defaultWeightLiftingData.enabled];
+                break;
+                
+            default:
+                event = [self.coreDataHelper fetchEventDefaultDataFor:@"DefaultAerobic" forEvent:self.selectedEvent.eventName];
+                self.selectedEvent.defaultAerobicData = [event objectAtIndex:0];
+                [self.enableSwitchOutlet setOn:(BOOL)[self.selectedEvent.defaultAerobicData.enabled integerValue]];
+                break;
+        }
+    }
     
     self.categoryCode = self.selectedEvent.eventCategory;
     self.exerciseName.text = self.selectedEvent.eventName;
@@ -96,11 +131,15 @@
 
 - (void) verifyParametersReceived
 {
-    if (self.exerciseName.text.length > 0 && self.categoryCode < self.exerciseCategory.count )
+    if (self.exerciseName.text.length > 0 && self.categoryCode < self.exerciseCategoryCopy.count )
     {
         [[self saveButton] setEnabled:YES];
     }
 }
+
+- (IBAction)enableSwitchAction:(id)sender {
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -110,7 +149,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.exerciseCategory.count;
+    return self.exerciseCategoryCopy.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,6 +158,7 @@
     
     [self configureCell:cell atIndexPath:indexPath];
     
+    // place a check mark 
     if (indexPath.row == self.categoryCode) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
@@ -129,9 +169,32 @@
     return cell;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Exercise Categories";
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectZero];
+    UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
+    labelView.textAlignment = NSTextAlignmentLeft;
+    labelView.backgroundColor = [UIColor blueColor];
+    labelView.textColor = [UIColor whiteColor];
+    labelView.text = @"Exercise Categories";
+    
+    [headerView addSubview:labelView];
+    return headerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0f;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.exerciseCategory[indexPath.row][@"Name"]];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.exerciseCategoryCopy[indexPath.row][@"Name"]];
 }
 
 // Override to support conditional editing of the table view.
@@ -143,11 +206,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.categoryCode = [self.exerciseCategory[indexPath.row][@"Code"]integerValue];
+    self.categoryCode = [self.exerciseCategoryCopy[indexPath.row][@"Code"]integerValue];
     [self verifyParametersReceived];
     [self setupInputEntries:self.categoryCode];
     [tableView reloadData];
-    
 }
 
 -(void)setupInputEntries:(NSInteger)categoryCode
@@ -155,7 +217,6 @@
     switch (categoryCode) {
         case kWeights:
         {
-            [self enableTwoInputs];
             [self weightText];
             break;
         }
@@ -163,27 +224,23 @@
         case kWalking:
         case kRunning:
         {
-            [self enableOneInput];
             [self walkingText];
             break;
         }
             
         case kStretching:
         {
-            [self enableZeroInputs];
             break;
         }
             
         case kEliptical:
         {
-            [self enableOneInput];
             [self elipticalText];
             break;
         }
             
         case kBicycling:
         {
-            [self enableThreeInputs];
             [self bicyclingText];
             break;
         }
@@ -192,50 +249,11 @@
             break;
     }
 }
-- (void)enableThreeInputs
-{
-    [self.default1 setEnabled:YES];
-    [self.default1 setHidden:NO];
-    [self.default2 setEnabled:YES];
-    [self.default2 setHidden:NO];
-    [self.default3 setEnabled:YES];
-    [self.default3 setHidden:NO];
-}
-
-- (void)enableTwoInputs
-{
-    [self.default1 setEnabled:YES];
-    [self.default1 setHidden:NO];
-    [self.default2 setEnabled:YES];
-    [self.default2 setHidden:NO];
-    [self.default3 setEnabled:NO];
-    [self.default3 setHidden:YES];
-}
-
-- (void)enableOneInput
-{
-    [self.default1 setEnabled:YES];
-    [self.default1 setHidden:NO];
-    [self.default2 setEnabled:NO];
-    [self.default2 setHidden:YES];
-    [self.default3 setEnabled:NO];
-    [self.default3 setHidden:YES];
-}
-
-- (void)enableZeroInputs
-{
-    [self.default1 setEnabled:NO];
-    [self.default1 setHidden:YES];
-    [self.default2 setEnabled:NO];
-    [self.default2 setHidden:YES];
-    [self.default3 setEnabled:NO];
-    [self.default3 setHidden:YES];
-}
 
 - (void)resetDataEntry
 {
     self.exerciseName.text = @"";
-    self.categoryCode = self.exerciseCategory.count;
+    self.categoryCode = self.exerciseCategoryCopy.count;
     [self.exerciseActivitySelectionTable reloadData];
     [[self saveButton] setEnabled:NO];
     [self.default1 setEnabled:NO];
@@ -244,20 +262,37 @@
     [self.default1 setHidden:YES];
     [self.default2 setHidden:YES];
     [self.default3 setHidden:YES];
+    [self.label1 setHidden:YES];
+    [self.label2 setHidden:YES];
+    [self.label3 setHidden:YES];
+    [[self label0] setHidden:YES];
+    [[self enableSwitchOutlet] setHidden:YES];
+    [[self enableSwitchOutlet] setEnabled:NO];
 }
 
+- (void)setupDefaultEntry:(NSString *)placeHolderString value:(NSNumber *)value outlet:(UITextField *)outlet labelText:(NSString *)labelText label:(UILabel *)label
+{
+    label.text = labelText;
+    [label setHidden:NO];
+    [outlet setHidden:NO];
+    [outlet setEnabled:YES];
+    [label setFont:[UIFont systemFontOfSize:14.0f]];
+
+    if (self.editMode == YES) {
+        outlet.text = [NSString stringWithFormat:@"%@", value];
+    } else {
+        outlet.text = placeHolderString;
+    }
+}
 - (void)weightText
 {
-    self.default1.text = @"Default Weight";
-    self.default1.placeholder = @"Default Weight";
-    self.default2.text = @"Default Reps";
-    self.default2.placeholder = @"Default Reps";
+    [self setupDefaultEntry:@"Weight" value:self.selectedEvent.defaultWeightLiftingData.weight outlet:self.default1 labelText:@"Default Weight:" label:self.label1];
+    [self setupDefaultEntry:@"Reps" value:self.selectedEvent.defaultWeightLiftingData.numOfReps outlet:self.default2 labelText:@"Default Reps:" label:self.label2];
 }
 
 -  (void)walkingText
 {
-    self.default1.text = @"Default Miles";
-    self.default1.placeholder = @"Default Miles";
+    [self setupDefaultEntry:@"Miles" value:self.selectedEvent.defaultAerobicData.distance outlet:self.default1 labelText:@"Default Miles:" label:self.label1];
 }
 
 - (void)stretchingText
@@ -267,13 +302,10 @@
 
 - (void)bicyclingText
 {
-    self.default1.text = @"Default Time";
-    self.default1.placeholder = @"Default Time";
-    self.default2.text = @"Default HR";
-    self.default2.placeholder = @"Default HR";
-    self.default3.text = @"Default Cadance";
-    self.default3.placeholder = @"Default Cadance";
-    [self.default3 setFont:[UIFont systemFontOfSize:12.0f]];
+    [self setupDefaultEntry:@"Time" value:self.selectedEvent.defaultAerobicData.totalTime outlet:self.default1 labelText:@"Default Time:" label:self.label1];
+    [self setupDefaultEntry:@"HR" value:self.selectedEvent.defaultAerobicData.desiredHR  outlet:self.default2 labelText:@"Default HR:" label:self.label2];
+    [self setupDefaultEntry:@"Cadance" value:self.selectedEvent.defaultAerobicData.cadence outlet:self.default3 labelText:@"Default Cadance:" label:self.label3];
+//    [self.default3 setFont:[UIFont systemFontOfSize:12.0f]];
 }
 
 - (void)elipticalText
@@ -290,15 +322,55 @@
     DefaultWeightLifting *newDefaultWeightLifting;
     DefaultAerobic *newDefaultAerobic;
     
+    if (self.editMode == YES) {
+        // update existing objects.
+        switch (self.selectedEvent.eventCategory) {
+            case kWeights:
+                self.selectedEvent.defaultWeightLiftingData.numOfReps = [NSNumber numberWithInt:[self.default1.text intValue]];
+                self.selectedEvent.defaultWeightLiftingData.weight = [NSNumber numberWithInt:[self.default2.text intValue]];
+                self.selectedEvent.defaultWeightLiftingData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
+                break;
+                
+            default:
+                self.selectedEvent.defaultAerobicData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
+                 switch (self.selectedEvent.eventCategory) {
+                    case kRunning:
+                    case kWalking:
+                        {
+                            self.selectedEvent.defaultAerobicData.distance =[NSNumber numberWithInt: [self.default1.text intValue]];
+                        }
+                        break;
+                    case kBicycling:
+                        {
+                            self.selectedEvent.defaultAerobicData.totalTime = [NSNumber numberWithInt: [self.default1.text intValue]];
+                            self.selectedEvent.defaultAerobicData.desiredHR = [NSNumber numberWithInt: [self.default2.text intValue]];
+                            self.selectedEvent.defaultAerobicData.cadence =[NSNumber numberWithInt: [self.default3.text intValue]];
+                        }
+                        break;
+                    case kEliptical:
+                    {
+                        
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+                
+                break;
+        }
+
+        [self.coreDataHelper save];
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
     switch (self.categoryCode) {
         case kWeights:     // weights
             newDefaultWeightLifting = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultWeightLifting" inManagedObjectContext:context];
-            
             newDefaultWeightLifting.eventName = self.exerciseName.text;
             newDefaultWeightLifting.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
             newDefaultWeightLifting.weight = [NSNumber numberWithInteger:[self.default1.text integerValue]];
             newDefaultWeightLifting.numOfReps = [NSNumber numberWithInteger:[self.default2.text integerValue]];
-            newDefaultWeightLifting.enabled = [NSNumber numberWithBool:self.enableSwitch.isOn];
+            newDefaultWeightLifting.enabled = @(1);         // default is enabled on
             break;
             
         case kWalking:
@@ -307,15 +379,15 @@
             newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
             newDefaultAerobic.eventName = self.exerciseName.text;
             newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
-            newDefaultAerobic.category = [NSNumber numberWithInt:kEliptical];
-            newDefaultAerobic.enabled = [NSNumber numberWithBool:self.enableSwitch.isOn];
+            newDefaultAerobic.distance = [NSNumber numberWithInteger:[self.default1.text integerValue]];
+            newDefaultAerobic.enabled = @(1);           // default is enabled on
             break;
             
         case kBicycling:
             newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
             newDefaultAerobic.eventName = self.exerciseName.text;
             newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
-            newDefaultAerobic.enabled = [NSNumber numberWithBool:self.enableSwitch.isOn];
+            newDefaultAerobic.enabled = @(1);           // default is enabled on
             newDefaultAerobic.totalTime = [NSNumber numberWithInteger:[self.default1.text integerValue]];
             newDefaultAerobic.desiredHR = [NSNumber numberWithInteger:[self.default2.text integerValue]];
             newDefaultAerobic.cadence = [NSNumber numberWithInteger:[self.default3.text integerValue]];
@@ -328,13 +400,14 @@
             break;
     }
 
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        // Save the context.
+        NSError *error = nil;
+        if (![context save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
     }
     [ self resetDataEntry];
 }
@@ -347,5 +420,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

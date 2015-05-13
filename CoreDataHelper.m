@@ -61,7 +61,7 @@
     [self fetchItemsMatching:nil forAttribute:nil sortingBy:nil withPredicate:nil groupBy:nil];
 }
 
-- (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending
+- (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
@@ -70,15 +70,31 @@
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:sortKey ascending:ascending];
     [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
     
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
-    [fetchRequst setPredicate:filter];
-    
+    if (usePredicate) {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"enabled == YES"];
+        [fetchRequst setPredicate:filter];
+    }
+
     NSError *error;
     NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
 
     return defaultData;
 }
 
+- (NSArray*)fetchEventDefaultDataFor:(NSString *)entityName forEvent:(NSString *)eventName
+{
+    NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequst setEntity:entity];
+        
+    NSPredicate *filter = [NSPredicate predicateWithFormat:@"eventName == %@", eventName];
+    [fetchRequst setPredicate:filter];
+    
+    NSError *error;
+    NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
+    
+    return defaultData;
+}
 #pragma mark - Info
 - (NSInteger)numberOfSections
 {

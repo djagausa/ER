@@ -22,7 +22,8 @@
 
 - (void)fetchData;
 - (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy;
-- (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending;
+- (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
+- (NSArray*)fetchEventDefaultDataFor:(NSString *)entityName forEvent:(NSString *)eventName;
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;
 - (BOOL)clearData;

@@ -22,7 +22,7 @@
         <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="aerobicEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AerobicEvent" inverseName="defaultEvent" inverseEntity="AerobicEvent" syncable="YES"/>
+        <relationship name="aerobicEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AerobicEvent" inverseName="defaultEvent" inverseEntity="AerobicEvent" syncable="YES"/>
     </entity>
     <entity name="DefaultWeightLifting" representedClassName="DefaultWeightLifting" syncable="YES">
         <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -42,7 +42,7 @@
         <relationship name="defaultEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DefaultWeightLifting" inverseName="liftingEvents" inverseEntity="DefaultWeightLifting" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="223"/>
+        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="225"/>
         <element name="DefaultAerobic" positionX="-461" positionY="17" width="128" height="163"/>
         <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="133"/>
         <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="148"/>

@@ -9,23 +9,23 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "SelectedEvent.h"
+#import "AbstractEventDataViewController.h"
 
 @protocol SetupExrciseInfoViewControllerDelegate <NSObject>
-- (SelectedEvent *)eventDataHasChangedTo;
+- (SelectedEvent *)selectedEventDataIs;
 @end
 
-@interface SetupExrciseInfoViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface SetupExrciseInfoViewController : AbstractEventDataViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *exerciseName;
 @property (weak, nonatomic) IBOutlet UITableView *exerciseActivitySelectionTable;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet UITextField *default1;
 @property (weak, nonatomic) IBOutlet UITextField *default2;
 @property (weak, nonatomic) IBOutlet UITextField *default3;
-@property (weak, nonatomic) IBOutlet UISwitch *enableSwitch;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) SelectedEvent *selectedEvent;
-@property (nonatomic, strong) id <SetupExrciseInfoViewControllerDelegate> delegate;
+@property (nonatomic, assign) BOOL editMode;
+//@property (nonatomic, strong) id <SetupExrciseInfoViewControllerDelegate> delegate;
 
 - (instancetype)init;
 - (IBAction)saveData:(id)sender;

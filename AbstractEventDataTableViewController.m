@@ -143,18 +143,18 @@
 - (void) fetchEvents
 {
     
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES];
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES usePredicate:YES];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES usePredicate:YES];
     
-    /*
-     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
-     NSLog(@"Event Name: %@",defaultWL.eventName);
-     }
-     
-     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
-     NSLog(@"Event Name: %@",defaultA.eventName);
-     }
-     */
+
+//     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
+//     NSLog(@"Event Name: %@",defaultWL.eventName);
+//     }
+//     
+//     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
+//     NSLog(@"Event Name: %@",defaultA.eventName);
+//     }
+
 }
 
 @end
