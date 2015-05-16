@@ -306,7 +306,7 @@
     switch (self.selectEditEvent.eventCategory) {
         case kWeights:
             {
-                [self.coreDataHelper fetchItemsMatching:@"WeightLiftingEvent"
+                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsFileName
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:[[self selectEditEvent] eventName] groupBy:nil];
@@ -320,7 +320,7 @@
         case kEliptical:
         case kBicycling:
             {
-                [self.coreDataHelper fetchItemsMatching:@"AerobicEvent"
+                [self.coreDataHelper fetchItemsMatching:aerobicEventsFileName
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:[[self selectEditEvent] eventName] groupBy:nil];

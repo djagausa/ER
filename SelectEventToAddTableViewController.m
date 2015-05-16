@@ -103,6 +103,29 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     return self.selectedEvent;
 }
 
+- (void)selectedEventSaved:(NSString *)eventName exerciseCategory:(ExerciseCategory)exerciseCategory
+{
+    switch (exerciseCategory) {
+        case kWeights:
+            for (WeightLiftingEvent *weightEvent in self.weightExerciseEventsCopy) {
+                if ([eventName isEqualToString:[weightEvent valueForKey:@"Name"]]) {
+                    [self.weightExerciseEventsCopy removeObject:weightEvent];
+                    break;
+                }
+            }
+            break;
+            
+        default:
+            for (AerobicEvent *aerobicEvent in self.aerobicExerciseEventsCopy) {
+                if ([eventName isEqualToString:[aerobicEvent valueForKey:@"Name"]]) {
+                    [self.aerobicExerciseEventsCopy removeObject:aerobicEvent];
+                    break;
+                }
+            }
+            break;
+    }
+}
+
 - (IBAction)newButtonSelected:(id)sender
 {
     self.selectedEvent.eventCategory = -1;
@@ -190,14 +213,14 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
         {
             self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
             self.selectedEvent.eventName = self.aerobicExerciseEventsCopy[indexPath.row][@"Name"];
-            [self.aerobicExerciseEventsCopy removeObjectAtIndex:indexPath.row];
+//            [self.aerobicExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
         case WeightCategory:
         {
             self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
             self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
-            [self.weightExerciseEventsCopy removeObjectAtIndex:indexPath.row];
+//            [self.weightExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
             
@@ -212,7 +235,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
     SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
-    setupExerciseViewController.delegate = self;
+    setupExerciseViewController.delegate = (id <AbstractEventDataDelegate> )self;
     setupExerciseViewController.editMode = NO;
 }
 

@@ -65,6 +65,23 @@
     }
 }
 
+- (void) fetchEvents
+{
+    
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsFileName withSortKey:@"eventName" ascending:YES usePredicate:NO];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsFileName withSortKey:@"eventName" ascending:YES usePredicate:NO];
+    
+    
+    //     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
+    //     NSLog(@"Event Name: %@",defaultWL.eventName);
+    //     }
+    //
+    //     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
+    //     NSLog(@"Event Name: %@",defaultA.eventName);
+    //     }
+    
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

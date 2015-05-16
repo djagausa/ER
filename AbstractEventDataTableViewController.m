@@ -7,7 +7,7 @@
 //
 
 #import "AbstractEventDataTableViewController.h"
-
+#import "Support.h"
 
 @interface AbstractEventDataTableViewController ()
 
@@ -143,8 +143,8 @@
 - (void) fetchEvents
 {
     
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES usePredicate:YES];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES usePredicate:YES];
+    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsFileName withSortKey:@"eventName" ascending:YES usePredicate:YES];
+    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsFileName withSortKey:@"eventName" ascending:YES usePredicate:YES];
     
 
 //     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {

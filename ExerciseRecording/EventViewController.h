@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AbstractEventDataViewController.h"
 
-@interface EventViewController : UIViewController
+@interface EventViewController : AbstractEventDataViewController
 
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 

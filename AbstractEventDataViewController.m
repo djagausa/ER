@@ -207,7 +207,7 @@ static NSString *CellIdentifier = @"EventCell";
     switch ([self selectedEvent].eventCategory) {
         case kWeights:
             {
-                [self.coreDataHelper fetchItemsMatching:@"WeightLiftingEvent"
+                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsFileName
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:[[self selectedEvent] eventName] groupBy:nil];
@@ -220,7 +220,7 @@ static NSString *CellIdentifier = @"EventCell";
         case kEliptical:
         case kBicycling:
             {
-                [self.coreDataHelper fetchItemsMatching:@"AerobicEvent"
+                [self.coreDataHelper fetchItemsMatching:aerobicEventsFileName
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:[[self selectedEvent] eventName] groupBy:nil];

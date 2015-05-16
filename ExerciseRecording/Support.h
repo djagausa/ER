@@ -29,4 +29,11 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
     AerobicCategory,
     WeightCategory
 };
+
+static NSString *aerobicEventsFileName = @"AerobicEvent";
+static NSString *weightLiftingEventsFileName = @"WeightLiftingEvent";
+static NSString *aerobicDefaultEventsFileName = @"DefaultAerobic";
+static NSString *weightLiftingDefaultEventsFileName = @"DefaultWeightLifting";
+
+
 #endif

@@ -13,6 +13,7 @@
 
 @interface EventHistoryViewController ()
 @property (nonatomic, strong) SelectedEvent *selectedEvent;
+@property (weak, nonatomic) IBOutlet UIButton *viewChartButton;
 @end
 
 
@@ -37,6 +38,9 @@
     
     [super viewWillAppear:animated];
     [[self eventHistoryTable] reloadData];
+    if (self.coreDataHelper.fetchedResultsController.fetchedObjects.count == 0) {
+        [self.viewChartButton setEnabled:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,8 +90,6 @@
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
     EventHistoryPlotViewController *eventHistoryPlotViewController = [segue destinationViewController];
     eventHistoryPlotViewController.delegate = self;
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
 

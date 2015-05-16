@@ -25,13 +25,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *label0;
 @property (weak, nonatomic) IBOutlet UISwitch *enableSwitchOutlet;
 - (IBAction)enableSwitchAction:(id)sender;
-
+- (IBAction)eventNameInput:(id)sender;
 @end
 
-@implementation SetupExrciseInfoViewController
+BOOL eventSelectedFromLAvailableList;
 
-- (IBAction)saveButton:(id)sender {
-}
+@implementation SetupExrciseInfoViewController
 
 -(instancetype)init
 {
@@ -98,7 +97,7 @@
             case kWeights:
                 event = [self.coreDataHelper fetchEventDefaultDataFor:@"DefaultWeightLifting" forEvent:self.selectedEvent.eventName];
                 self.selectedEvent.defaultWeightLiftingData = [event objectAtIndex:0];
-                [self.enableSwitchOutlet setOn:(BOOL)self.selectedEvent.defaultWeightLiftingData.enabled];
+                [self.enableSwitchOutlet setOn:(BOOL)[self.selectedEvent.defaultWeightLiftingData.enabled integerValue]];
                 break;
                 
             default:
@@ -111,9 +110,12 @@
     
     self.categoryCode = self.selectedEvent.eventCategory;
     self.exerciseName.text = self.selectedEvent.eventName;
+    eventSelectedFromLAvailableList = NO;
     if (self.categoryCode != -1) {
         [self setupInputEntries:self.categoryCode];
+        eventSelectedFromLAvailableList = YES;
     }
+    
     [self verifyParametersReceived];
 
 }
@@ -129,15 +131,66 @@
     return YES;
 }
 
-- (void) verifyParametersReceived
+- (BOOL) verifyParametersReceived
 {
-    if (self.exerciseName.text.length > 0 && self.categoryCode < self.exerciseCategoryCopy.count )
+    BOOL verifiedOK = NO;
+    
+    if (self.exerciseName.text.length > 0 && self.categoryCode < self.exerciseCategoryCopy.count)
     {
         [[self saveButton] setEnabled:YES];
+        verifiedOK = YES;
+
+         // ensure that the event being ceated does not already exist.
+        if (eventSelectedFromLAvailableList == NO  && self.editMode == NO)
+        {
+            NSArray *event = [[NSArray alloc]init];
+            [self fetchEvents];
+            switch (self.categoryCode) {
+                case kWeights:
+                    event = [self.coreDataHelper fetchEventDefaultDataFor:@"DefaultWeightLifting" forEvent:self.exerciseName.text];
+                    for (DefaultWeightLifting *weightEvent in event)
+                    {
+                        if ([weightEvent.eventName isEqualToString:self.exerciseName.text])
+                        {
+                            [self.saveButton setEnabled:NO];
+                            [self presentAlertMesage:self.exerciseName.text];
+                            verifiedOK = NO;
+                            break;
+                        }
+                    }
+                    break;
+                    
+                default:
+                    event = [self.coreDataHelper fetchEventDefaultDataFor:@"DefaultAerobic" forEvent:self.exerciseName.text];
+                    for (DefaultAerobic *aerobicEvent in event)
+                    {
+                        if ([aerobicEvent.eventName isEqualToString:self.exerciseName.text])
+                        {
+                            [self.saveButton setEnabled:NO];
+                            [self presentAlertMesage:self.exerciseName.text];
+                            verifiedOK = NO;
+                            break;
+                        }
+                    }
+                    [[self saveButton] setEnabled:YES];
+                    break;
+            }
+        }
     }
+    return verifiedOK;
 }
 
+- (void)presentAlertMesage:(NSString *)eventName
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Event Name: %@ already exists!",eventName] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+    
+}
 - (IBAction)enableSwitchAction:(id)sender {
+}
+
+- (IBAction)eventNameInput:(id)sender {
+    [self verifyParametersReceived];
 }
 
 #pragma mark - Table view data source
@@ -326,8 +379,8 @@
         // update existing objects.
         switch (self.selectedEvent.eventCategory) {
             case kWeights:
-                self.selectedEvent.defaultWeightLiftingData.numOfReps = [NSNumber numberWithInt:[self.default1.text intValue]];
-                self.selectedEvent.defaultWeightLiftingData.weight = [NSNumber numberWithInt:[self.default2.text intValue]];
+                self.selectedEvent.defaultWeightLiftingData.numOfReps = [NSNumber numberWithInt:[self.default2.text intValue]];
+                self.selectedEvent.defaultWeightLiftingData.weight = [NSNumber numberWithInt:[self.default1.text intValue]];
                 self.selectedEvent.defaultWeightLiftingData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
                 break;
                 
@@ -408,6 +461,9 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+    if (self.editMode == NO) {  // if in edit mode no need to check for deleting an event from the pre-populated event list
+        [self.delegate selectedEventSaved:self.exerciseName.text exerciseCategory:self.categoryCode];
     }
     [ self resetDataEntry];
 }

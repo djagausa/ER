@@ -7,18 +7,52 @@
 //
 
 #import "EventViewController.h"
+#import "Support.h"
 
 @interface EventViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *addExerciseButton;
+@property (weak, nonatomic) IBOutlet UIButton *reviewExerciseButton;
 @end
 
 @implementation EventViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self configureTheButtons];
 }
 
+- (void)configureTheButtons
+{
+    //  only turn the buttons if event data exists
+    [self.addExerciseButton setEnabled:NO];
+    [self.reviewExerciseButton setEnabled:NO];
+    
+    // enable the review button only if events have been recorded
+    NSInteger count = [self.coreDataHelper numberOfEntities:aerobicEventsFileName];
+    
+    if (count == 0) {
+        count = [self.coreDataHelper numberOfEntities:weightLiftingEventsFileName];
+    }
+    
+    if (count > 0)
+    {
+        [self.reviewExerciseButton setEnabled:YES];
+    }
+
+    // enable the add button only if events to add have been setup
+    count = [self.coreDataHelper numberOfEntities:aerobicDefaultEventsFileName];
+    
+    if (count == 0) {
+        count = [self.coreDataHelper numberOfEntities:weightLiftingDefaultEventsFileName];
+    }
+    
+    if (count > 0)
+    {
+        [self.addExerciseButton setEnabled:YES];
+    }
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -29,11 +63,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-
-//    if ([[segue identifier] isEqualToString:@"SelectEventToAdd"]) {
-//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-//    } else if ([[segue identifier] isEqualToString:@"AddEventData"]) {
-//        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-//    }
 }
+
+
 @end

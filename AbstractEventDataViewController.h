@@ -15,7 +15,9 @@
 #import "SelectedEvent.h"
 
 @protocol AbstractEventDataDelegate <NSObject>
--(SelectedEvent *)selectedEventDataIs;
+- (SelectedEvent *)selectedEventDataIs;
+@optional
+- (void)selectedEventSaved:(NSString *)eventName exerciseCategory:(ExerciseCategory)exerciseCategory;
 @end
 
 @interface AbstractEventDataViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>

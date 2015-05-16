@@ -16,7 +16,7 @@
 - (SelectedEvent *)selectEventDataIs;
 @end
 
-@interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate, SetupExrciseInfoViewControllerDelegate>
+@interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) id <EditSelectedEventTableViewControllerDelegate> delegate;

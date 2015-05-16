@@ -193,5 +193,6 @@
     }
 
     [self.coreDataHelper save];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
