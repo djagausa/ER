@@ -66,6 +66,12 @@
     [self.editSelectedEventTable reloadData];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.editSelectedEventTable reloadData];
+
+}
 - (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;
