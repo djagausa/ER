@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F1077" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7P2-QE-0sB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7P2-QE-0sB">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csX-gb-FFf">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csX-gb-FFf">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -131,10 +131,10 @@
                                 <exclude reference="cy5-Pw-9GC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="HIz-cq-Slu"/>
-                                <exclude reference="gFE-fP-uON"/>
                                 <exclude reference="YTo-0N-qWM"/>
                                 <exclude reference="nX7-l3-9Ka"/>
+                                <exclude reference="HIz-cq-Slu"/>
+                                <exclude reference="gFE-fP-uON"/>
                                 <exclude reference="4lI-O0-UcL"/>
                                 <exclude reference="GVw-ks-BU3"/>
                                 <exclude reference="tbO-vL-SPM"/>
@@ -159,9 +159,9 @@
                                 <include reference="cy5-Pw-9GC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="gFE-fP-uON"/>
                                 <include reference="YTo-0N-qWM"/>
                                 <include reference="nX7-l3-9Ka"/>
+                                <include reference="gFE-fP-uON"/>
                                 <include reference="4lI-O0-UcL"/>
                                 <include reference="tbO-vL-SPM"/>
                             </mask>
@@ -603,7 +603,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                                 </variation>
                             </navigationBar>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="8yV-3w-MUb">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="8yV-3w-MUb">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="2Hg-Xp-e3H"/>
@@ -632,7 +632,7 @@
                                     <action selector="periodSelection:" destination="icJ-Ug-e5b" eventType="valueChanged" id="YTB-mp-rZz"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="gqT-B6-ZVc">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="gqT-B6-ZVc">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="PWd-Fn-qrB"/>
@@ -679,10 +679,10 @@
                                 <include reference="gqT-B6-ZVc"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="djS-AL-AXd"/>
                                 <include reference="5rt-kX-Q48"/>
                                 <include reference="y7n-i1-sCu"/>
                                 <include reference="yGW-zI-7zm"/>
-                                <include reference="djS-AL-AXd"/>
                             </mask>
                         </variation>
                     </view>
