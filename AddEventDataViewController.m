@@ -145,6 +145,7 @@ BOOL setCountInitialized;
                 self.label2.text = self.hdrLab2.text = @"Avg HR";
                 self.label3.text = self.hdrLab3.text = @"Distance";
                 self.in1Label.text = @"HH:MM";
+                self.in1Label.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
                 self.in2Label.text = @"";
                 self.in3Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.distance];
             }

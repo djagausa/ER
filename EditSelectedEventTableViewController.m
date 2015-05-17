@@ -49,7 +49,7 @@
     self.coreDataHelper = [[CoreDataHelper alloc] init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     
-    self.editSelectedEventTable.estimatedRowHeight = 44.0f;
+    self.editSelectedEventTable.estimatedRowHeight = 22.0f;
     self.editSelectedEventTable.rowHeight = UITableViewAutomaticDimension;
 
     [self fetchEvents];

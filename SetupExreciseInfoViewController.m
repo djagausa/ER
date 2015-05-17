@@ -339,12 +339,15 @@ BOOL eventSelectedFromLAvailableList;
 - (void)weightText
 {
     [self setupDefaultEntry:@"Weight" value:self.selectedEvent.defaultWeightLiftingData.weight outlet:self.default1 labelText:@"Default Weight:" label:self.label1];
+    self.default1.keyboardType = UIKeyboardTypeNumberPad;
     [self setupDefaultEntry:@"Reps" value:self.selectedEvent.defaultWeightLiftingData.numOfReps outlet:self.default2 labelText:@"Default Reps:" label:self.label2];
 }
 
 -  (void)walkingText
 {
     [self setupDefaultEntry:@"Miles" value:self.selectedEvent.defaultAerobicData.distance outlet:self.default1 labelText:@"Default Miles:" label:self.label1];
+    self.default1.keyboardType = UIKeyboardTypeNumberPad;
+
 }
 
 - (void)stretchingText
@@ -355,6 +358,7 @@ BOOL eventSelectedFromLAvailableList;
 - (void)bicyclingText
 {
     [self setupDefaultEntry:@"HH:MM" value:self.selectedEvent.defaultAerobicData.totalTime outlet:self.default1 labelText:@"Default Time:" label:self.label1];
+    self.default1.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     [self setupDefaultEntry:@"HR" value:self.selectedEvent.defaultAerobicData.desiredHR  outlet:self.default2 labelText:@"Default HR:" label:self.label2];
     [self setupDefaultEntry:@"Cadance" value:self.selectedEvent.defaultAerobicData.cadence outlet:self.default3 labelText:@"Default Cadance:" label:self.label3];
 //    [self.default3 setFont:[UIFont systemFontOfSize:12.0f]];
