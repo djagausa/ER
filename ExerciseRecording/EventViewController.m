@@ -58,11 +58,31 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Delegates
+- (void)eventAdded
+{
+    [self configureTheButtons];
+}
+
+- (void)exerciseDataAddedNotification
+{
+    [self configureTheButtons];
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    if ([segue.identifier isEqualToString:@"SelectEventToAdd"]) {
+        SelectEventToAddTableViewController *addController = [segue destinationViewController];
+        addController.eventAddedDelegate = self;
+    }
+    if ([segue.identifier isEqualToString:@"AddEventData"]) {
+        AddEventDataTVC *addController = [segue destinationViewController];
+        addController.exerciseDataAddedDelegate = self;
+    }
+
 }
 
 

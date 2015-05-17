@@ -17,7 +17,6 @@
 
 @property (nonatomic, strong) NSArray           *exerciseCategory;
 @property (nonatomic, strong) NSMutableArray    *exerciseCategoryCopy;
-@property (nonatomic, strong) SelectedEvent     *selectedEvent;
 @property NSInteger categoryCode;
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -355,7 +354,7 @@ BOOL eventSelectedFromLAvailableList;
 
 - (void)bicyclingText
 {
-    [self setupDefaultEntry:@"Time" value:self.selectedEvent.defaultAerobicData.totalTime outlet:self.default1 labelText:@"Default Time:" label:self.label1];
+    [self setupDefaultEntry:@"HH:MM" value:self.selectedEvent.defaultAerobicData.totalTime outlet:self.default1 labelText:@"Default Time:" label:self.label1];
     [self setupDefaultEntry:@"HR" value:self.selectedEvent.defaultAerobicData.desiredHR  outlet:self.default2 labelText:@"Default HR:" label:self.label2];
     [self setupDefaultEntry:@"Cadance" value:self.selectedEvent.defaultAerobicData.cadence outlet:self.default3 labelText:@"Default Cadance:" label:self.label3];
 //    [self.default3 setFont:[UIFont systemFontOfSize:12.0f]];
@@ -375,9 +374,11 @@ BOOL eventSelectedFromLAvailableList;
     DefaultWeightLifting *newDefaultWeightLifting;
     DefaultAerobic *newDefaultAerobic;
     
-    if (self.editMode == YES) {
+    if (self.editMode == YES)
+    {
         // update existing objects.
-        switch (self.selectedEvent.eventCategory) {
+        switch (self.selectedEvent.eventCategory)
+        {
             case kWeights:
                 self.selectedEvent.defaultWeightLiftingData.numOfReps = [NSNumber numberWithInt:[self.default2.text intValue]];
                 self.selectedEvent.defaultWeightLiftingData.weight = [NSNumber numberWithInt:[self.default1.text intValue]];
@@ -386,72 +387,73 @@ BOOL eventSelectedFromLAvailableList;
                 
             default:
                 self.selectedEvent.defaultAerobicData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
-                 switch (self.selectedEvent.eventCategory) {
-                    case kRunning:
-                    case kWalking:
-                        {
-                            self.selectedEvent.defaultAerobicData.distance =[NSNumber numberWithInt: [self.default1.text intValue]];
-                        }
-                        break;
-                    case kBicycling:
-                        {
-                            self.selectedEvent.defaultAerobicData.totalTime = [NSNumber numberWithInt: [self.default1.text intValue]];
-                            self.selectedEvent.defaultAerobicData.desiredHR = [NSNumber numberWithInt: [self.default2.text intValue]];
-                            self.selectedEvent.defaultAerobicData.cadence =[NSNumber numberWithInt: [self.default3.text intValue]];
-                        }
-                        break;
-                    case kEliptical:
+                 switch (self.selectedEvent.eventCategory)
                     {
-                        
-                    }
-                        break;
-                        
-                    default:
-                        break;
-                }
-                
+                            case kRunning:
+                            case kWalking:
+                                {
+                                    self.selectedEvent.defaultAerobicData.distance =[NSNumber numberWithInt: [self.default1.text intValue]];
+                                }
+                                break;
+                            case kBicycling:
+                                { 
+                                    self.selectedEvent.defaultAerobicData.totalTime = [self convertTimeToNumber: self.default1.text];
+                                    self.selectedEvent.defaultAerobicData.desiredHR = [NSNumber numberWithInt: [self.default2.text intValue]];
+                                    self.selectedEvent.defaultAerobicData.cadence =[NSNumber numberWithInt: [self.default3.text intValue]];
+                                }
+                                break;
+                            case kEliptical:
+                            {
+                                
+                            }
+                                break;
+                                
+                            default:
+                                break;
+                        }
                 break;
         }
 
         [self.coreDataHelper save];
         [self.navigationController popViewControllerAnimated:YES];
     } else {
-    switch (self.categoryCode) {
-        case kWeights:     // weights
-            newDefaultWeightLifting = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultWeightLifting" inManagedObjectContext:context];
-            newDefaultWeightLifting.eventName = self.exerciseName.text;
-            newDefaultWeightLifting.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
-            newDefaultWeightLifting.weight = [NSNumber numberWithInteger:[self.default1.text integerValue]];
-            newDefaultWeightLifting.numOfReps = [NSNumber numberWithInteger:[self.default2.text integerValue]];
-            newDefaultWeightLifting.enabled = @(1);         // default is enabled on
-            break;
-            
-        case kWalking:
-        case kRunning:
-        case kEliptical:
-            newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
-            newDefaultAerobic.eventName = self.exerciseName.text;
-            newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
-            newDefaultAerobic.distance = [NSNumber numberWithInteger:[self.default1.text integerValue]];
-            newDefaultAerobic.enabled = @(1);           // default is enabled on
-            break;
-            
-        case kBicycling:
-            newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
-            newDefaultAerobic.eventName = self.exerciseName.text;
-            newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
-            newDefaultAerobic.enabled = @(1);           // default is enabled on
-            newDefaultAerobic.totalTime = [NSNumber numberWithInteger:[self.default1.text integerValue]];
-            newDefaultAerobic.desiredHR = [NSNumber numberWithInteger:[self.default2.text integerValue]];
-            newDefaultAerobic.cadence = [NSNumber numberWithInteger:[self.default3.text integerValue]];
-            break;
+        switch (self.categoryCode)
+        {
+            case kWeights:     // weights
+                newDefaultWeightLifting = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultWeightLifting" inManagedObjectContext:context];
+                newDefaultWeightLifting.eventName = self.exerciseName.text;
+                newDefaultWeightLifting.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
+                newDefaultWeightLifting.weight = [NSNumber numberWithInteger:[self.default1.text integerValue]];
+                newDefaultWeightLifting.numOfReps = [NSNumber numberWithInteger:[self.default2.text integerValue]];
+                newDefaultWeightLifting.enabled = @(1);         // default is enabled on
+                break;
+                
+            case kWalking:
+            case kRunning:
+            case kEliptical:
+                newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
+                newDefaultAerobic.eventName = self.exerciseName.text;
+                newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
+                newDefaultAerobic.distance = [NSNumber numberWithInteger:[self.default1.text integerValue]];
+                newDefaultAerobic.enabled = @(1);           // default is enabled on
+                break;
+                
+            case kBicycling:
+                newDefaultAerobic = [NSEntityDescription insertNewObjectForEntityForName:@"DefaultAerobic" inManagedObjectContext:context];
+                newDefaultAerobic.eventName = self.exerciseName.text;
+                newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
+                newDefaultAerobic.enabled = @(1);           // default is enabled on
+                newDefaultAerobic.totalTime = [NSNumber numberWithInteger:[self.default1.text integerValue]];
+                newDefaultAerobic.desiredHR = [NSNumber numberWithInteger:[self.default2.text integerValue]];
+                newDefaultAerobic.cadence = [NSNumber numberWithInteger:[self.default3.text integerValue]];
+                break;
 
-        case kStretching:
-            break;
-            
-        default:
-            break;
-    }
+            case kStretching:
+                break;
+                
+            default:
+                break;
+        }
 
         // Save the context.
         NSError *error = nil;
@@ -461,8 +463,11 @@ BOOL eventSelectedFromLAvailableList;
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+        [self.setupDelegate eventDataSetupNotification];
     }
-    if (self.editMode == NO) {  // if in edit mode no need to check for deleting an event from the pre-populated event list
+    
+    if (self.editMode == NO)
+    {  // if in edit mode no need to check for deleting an event from the pre-populated event list
         [self.delegate selectedEventSaved:self.exerciseName.text exerciseCategory:self.categoryCode];
     }
     [ self resetDataEntry];

@@ -12,7 +12,6 @@
 #import "Support.h"
 
 @interface EventHistoryViewController ()
-@property (nonatomic, strong) SelectedEvent *selectedEvent;
 @property (weak, nonatomic) IBOutlet UIButton *viewChartButton;
 @end
 

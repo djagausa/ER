@@ -21,4 +21,5 @@
 @property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
 @property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
 
+- (NSNumber *)convertTimeToNumber:(NSString *)timeString;
 @end

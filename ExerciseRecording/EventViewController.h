@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "AbstractEventDataViewController.h"
+#import "SelectEventToAddTableViewController.h"
+#import "AddEventDataTVC.h"
 
-@interface EventViewController : AbstractEventDataViewController
-
-@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
+@interface EventViewController : AbstractEventDataViewController <SelectEventToAddTableViewControllerDelegate, AddEventDataTVCDelegate>
 
 @end
 

@@ -34,6 +34,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
+    
+    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
+    NSInteger lengthInMinutes = 0;
+    for (int i = 0 ; i != tokens.count ; i++) {
+        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
+    }
+    return @(lengthInMinutes);
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

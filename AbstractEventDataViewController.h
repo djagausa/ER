@@ -31,5 +31,5 @@
 
 -(void)fetchEvents;
 - (NSString *)dateToFormatMMddyyy:(NSDate *)date;
-
+- (NSNumber *)convertTimeToNumber:(NSString *)timeString;
 @end

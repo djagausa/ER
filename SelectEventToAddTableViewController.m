@@ -53,6 +53,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
+
 -(void)fetchPredefinedEvents
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ExerciseSelection" ofType:@"plist"];
@@ -133,6 +134,12 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     
     [self performSegueWithIdentifier: @"SetupEvent" sender:sender];
 }
+
+- (void)eventDataSetupNotification
+{
+    [self.eventAddedDelegate eventAdded];
+}
+
 
 #pragma mark - Table view data source
 
@@ -235,6 +242,7 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
     SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
+    setupExerciseViewController.setupDelegate = self;
     setupExerciseViewController.delegate = (id <AbstractEventDataDelegate> )self;
     setupExerciseViewController.editMode = NO;
 }

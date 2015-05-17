@@ -10,7 +10,15 @@
 #import <CoreData/CoreData.h>
 #import "AbstractEventDataTableViewController.h"
 #import "AbstractEventDataViewController.h"
+#import "AddEventDataViewController.h"
 
-@interface AddEventDataTVC : AbstractEventDataTableViewController <AbstractEventDataDelegate>
+@protocol AddEventDataTVCDelegate <NSObject>
+@optional
+- (void)exerciseDataAddedNotification;
+@end
+
+@interface AddEventDataTVC : AbstractEventDataTableViewController <AbstractEventDataDelegate, AddEventDataViewControllerDelegate>
+
+@property (nonatomic, strong) id<AddEventDataTVCDelegate> exerciseDataAddedDelegate;
 
 @end

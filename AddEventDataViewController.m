@@ -197,16 +197,6 @@ BOOL setCountInitialized;
     weightLiftingEvent.defaultEvent = self.defaultWeightLifting;
 }
 
-- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
-    
-    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
-    NSInteger lengthInMinutes = 0;
-    for (int i = 0 ; i != tokens.count ; i++) {
-        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
-    }
-    return @(lengthInMinutes);
-}
-
 - (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent
 {
     aerobicEvent.date = [self setupDate];
@@ -411,6 +401,7 @@ BOOL setCountInitialized;
     }
     [self setupNoteInputTextField];
     [self refresh];
+    [self.addEventDataDelegate exerciseDataAdded];
 }
 
 - (IBAction)in1Input:(id)sender {

@@ -20,12 +20,15 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="csX-gb-FFf">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="114" id="DaW-Cf-FjP"/>
+                                    <constraint firstAttribute="height" constant="114" id="DaW-Cf-FjP">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="165"/>
+                                    </constraint>
                                     <constraint firstAttribute="width" constant="199" id="GCg-SB-Yo9"/>
                                 </constraints>
-                                <state key="normal" title="Review Exercise Data">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <state key="normal" title="Review Exercise Data" backgroundImage="gear-purple-1">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled" title="No Recorded Data">
@@ -64,7 +67,7 @@
                                     </barButtonItem>
                                     <barButtonItem title="Edit Exercise Data" width="170" id="Xie-Rk-OB6">
                                         <connections>
-                                            <segue destination="VVK-ut-0xp" kind="show" id="TwG-qQ-hVP"/>
+                                            <segue destination="VVK-ut-0xp" kind="show" identifier="editEvent" id="TwG-qQ-hVP"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -81,14 +84,18 @@
                             </toolbar>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kCB-0W-BXk">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="156" id="HJj-K4-yZv">
                                         <variation key="heightClass=regular" constant="199"/>
                                     </constraint>
-                                    <constraint firstAttribute="height" constant="114" id="Hka-Ep-j6Q"/>
+                                    <constraint firstAttribute="height" constant="114" id="Hka-Ep-j6Q">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="165"/>
+                                    </constraint>
                                 </constraints>
-                                <state key="normal" title="Add Exercise Data">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Add Exercise Data" backgroundImage="gear-purple-1">
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -118,11 +125,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="kCB-0W-BXk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="52" id="4lI-O0-UcL"/>
+                            <constraint firstItem="kCB-0W-BXk" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="52" id="4lI-O0-UcL">
+                                <variation key="heightClass=regular-widthClass=compact" constant="40"/>
+                            </constraint>
                             <constraint firstAttribute="centerX" secondItem="kCB-0W-BXk" secondAttribute="centerX" id="GVw-ks-BU3"/>
                             <constraint firstAttribute="centerX" secondItem="csX-gb-FFf" secondAttribute="centerX" id="HIz-cq-Slu"/>
                             <constraint firstAttribute="trailing" secondItem="cy5-Pw-9GC" secondAttribute="trailing" id="YTo-0N-qWM"/>
-                            <constraint firstItem="csX-gb-FFf" firstAttribute="top" secondItem="kCB-0W-BXk" secondAttribute="bottom" constant="71" id="gFE-fP-uON"/>
+                            <constraint firstItem="csX-gb-FFf" firstAttribute="top" secondItem="kCB-0W-BXk" secondAttribute="bottom" constant="71" id="gFE-fP-uON">
+                                <variation key="heightClass=regular-widthClass=compact" constant="32"/>
+                            </constraint>
                             <constraint firstItem="cy5-Pw-9GC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nX7-l3-9Ka"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="cy5-Pw-9GC" secondAttribute="bottom" constant="8" id="tbO-vL-SPM"/>
                         </constraints>
@@ -738,7 +749,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S3w-i2-xSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-819" y="964.5"/>
+            <point key="canvasLocation" x="-810" y="982.5"/>
         </scene>
         <!--Edit Selected Event Table View Controller-->
         <scene sceneID="idv-TB-oo4">
@@ -2897,7 +2908,10 @@
             <point key="canvasLocation" x="798" y="-531"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear-purple-1" width="600" height="570"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dPM-vZ-fsf"/>
+        <segue reference="Wri-AE-L0n"/>
     </inferredMetricsTieBreakers>
 </document>

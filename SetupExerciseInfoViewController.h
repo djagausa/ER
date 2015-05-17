@@ -11,6 +11,13 @@
 #import "SelectedEvent.h"
 #import "AbstractEventDataViewController.h"
 
+@protocol SetupExrciseInfoViewControllerDelegate <NSObject>
+
+@optional
+- (void)eventDataSetupNotification;
+
+@end
+
 @interface SetupExrciseInfoViewController : AbstractEventDataViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *exerciseName;
@@ -19,8 +26,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *default1;
 @property (weak, nonatomic) IBOutlet UITextField *default2;
 @property (weak, nonatomic) IBOutlet UITextField *default3;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, assign) BOOL editMode;
+@property (nonatomic, strong) id<SetupExrciseInfoViewControllerDelegate> setupDelegate;
 
 - (instancetype)init;
 - (IBAction)saveData:(id)sender;

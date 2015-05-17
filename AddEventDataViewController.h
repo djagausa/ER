@@ -12,6 +12,11 @@
 #import "DefaultWeightLifting.h"
 #import "WeightLiftingEvent.h"
 
+@protocol AddEventDataViewControllerDelegate <NSObject>
+@optional
+- (void)exerciseDataAdded;
+@end
+
 @interface AddEventDataViewController : AbstractEventDataViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -27,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *hrdLab1;
 @property (weak, nonatomic) IBOutlet UILabel *hdrLab2;
 @property (weak, nonatomic) IBOutlet UILabel *hdrLab3;
+@property (strong, nonatomic) id<AddEventDataViewControllerDelegate>addEventDataDelegate;
 
 - (IBAction)noteSwitchChanged:(id)sender;
 - (IBAction)addData:(id)sender;

@@ -12,13 +12,15 @@
 #import "AbstractEventDataTableViewController.h"
 #import "SelectedEvent.h"
 
+
 @protocol SelectEventToAddTableViewControllerDelegate <NSObject>
-- (void)selectedEventAdded:(SelectedEvent *)event;
+- (void)eventAdded;
 @end
 
-@interface SelectEventToAddTableViewController : UITableViewController <AbstractEventDataDelegate>
+@interface SelectEventToAddTableViewController : UITableViewController <AbstractEventDataDelegate, SetupExrciseInfoViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) SetupExrciseInfoViewController *setupExerciseInfo;
+@property (nonatomic, strong) id<SelectEventToAddTableViewControllerDelegate> eventAddedDelegate;
 
 @end

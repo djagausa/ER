@@ -30,9 +30,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Delegates
 - (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;
+}
+
+- (void)exerciseDataAdded
+{
+    [self.exerciseDataAddedDelegate exerciseDataAddedNotification];
 }
 
 #pragma mark - Table View
@@ -111,6 +117,7 @@
     [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
     AddEventDataViewController *addEventDataVC = [segue destinationViewController];
     addEventDataVC.delegate = self;
+    addEventDataVC.addEventDataDelegate = self;
 }
 
 
