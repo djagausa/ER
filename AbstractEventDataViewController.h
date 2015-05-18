@@ -20,7 +20,7 @@
 - (void)selectedEventSaved:(NSString *)eventName exerciseCategory:(ExerciseCategory)exerciseCategory;
 @end
 
-@interface AbstractEventDataViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AbstractEventDataViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext    *managedObjectContext;
 @property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;

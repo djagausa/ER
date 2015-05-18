@@ -30,12 +30,21 @@
     [self setupLabels];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    // This really shouldn't need to be done per Apple's documentation, but the initial
+//    // loading of the table cells don't expand correctly.
+//    
+//    [super viewWillAppear:animated];
+//    [[self eventHistoryTable] reloadData];
+//    if (self.coreDataHelper.fetchedResultsController.fetchedObjects.count == 0) {
+//        [self.viewChartButton setEnabled:NO];
+//    }
+//}
+
+- (void)viewDidAppear:(BOOL)animated
 {
-    // This really shouldn't need to be done per Apple's documentation, but the initial
-    // loading of the table cells don't expand correctly.
-    
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [[self eventHistoryTable] reloadData];
     if (self.coreDataHelper.fetchedResultsController.fetchedObjects.count == 0) {
         [self.viewChartButton setEnabled:NO];

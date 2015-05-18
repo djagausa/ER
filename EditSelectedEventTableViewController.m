@@ -72,6 +72,7 @@
     [self.editSelectedEventTable reloadData];
 
 }
+
 - (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;

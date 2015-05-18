@@ -19,6 +19,7 @@
 @property (nonatomic, assign) NSInteger                     numberOfItems;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 
+
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
@@ -36,6 +37,10 @@ static NSString *CellIdentifier = @"EventCell";
     self.coreDataHelper = [[CoreDataHelper alloc] init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.coreDataHelper.defaultSortAttribute = @"date";
+
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    gestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:gestureRecognizer];
     [self fetchEvents];
 }
 
@@ -47,6 +52,11 @@ static NSString *CellIdentifier = @"EventCell";
     [super viewDidAppear:animated];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -58,6 +68,11 @@ static NSString *CellIdentifier = @"EventCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIContentSizeCategoryDidChangeNotification
                                                   object:nil];
+}
+
+- (void)hideKeyboard
+{
+    [self.view endEditing:YES];
 }
 
 #pragma mark - Init
@@ -134,9 +149,7 @@ static NSString *CellIdentifier = @"EventCell";
                 cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
                 cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
                 cell.note.text = weightEvent.notes;
-                tableView.estimatedRowHeight = 44.0f;
-                tableView.rowHeight = UITableViewAutomaticDimension;
-                return cell;
+               return cell;
             }
             break;
             
@@ -155,8 +168,6 @@ static NSString *CellIdentifier = @"EventCell";
                             cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                             cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                             cell.note.text = aerobicEvent.note;
-                            tableView.estimatedRowHeight = 44.0f;
-                            tableView.rowHeight = UITableViewAutomaticDimension;
                             return cell;
                         }
                         break;
@@ -167,8 +178,6 @@ static NSString *CellIdentifier = @"EventCell";
                         cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                         cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
                         cell.note.text = aerobicEvent.note;
-                        tableView.estimatedRowHeight = 44.0f;
-                        tableView.rowHeight = UITableViewAutomaticDimension;
                         return cell;
                     }
                         break;
@@ -180,6 +189,11 @@ static NSString *CellIdentifier = @"EventCell";
             break;
     }
     return nil;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

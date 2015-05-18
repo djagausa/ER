@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *enableSwitchOutlet;
 - (IBAction)enableSwitchAction:(id)sender;
 - (IBAction)eventNameInput:(id)sender;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 BOOL eventSelectedFromLAvailableList;
@@ -67,6 +68,10 @@ BOOL eventSelectedFromLAvailableList;
     attributes = @{NSForegroundColorAttributeName: [UIColor grayColor]};
     [[self saveButton] setTitleTextAttributes: attributes forState:UIControlStateDisabled];
 
+    self.default1.delegate = self;
+    self.default2.delegate = self;
+    self.default3.delegate = self;
+    
     if (self.editMode == YES) {
         [[self saveButton] setTitle:@"Update"];
         [[self saveButton] setEnabled:YES];
@@ -128,6 +133,18 @@ BOOL eventSelectedFromLAvailableList;
     [textField resignFirstResponder];
     [self verifyParametersReceived];
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    CGPoint scrollPoint = CGPointMake(0, 50);
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    CGPoint scrollPoint = CGPointMake(0, -64);
+
+    [self.scrollView setContentOffset:scrollPoint animated:YES];
 }
 
 - (BOOL) verifyParametersReceived
@@ -219,6 +236,11 @@ BOOL eventSelectedFromLAvailableList;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 22.0f;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

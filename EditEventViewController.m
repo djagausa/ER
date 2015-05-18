@@ -113,6 +113,28 @@
     [inputTextField setEnabled:YES];
     [inputTextField setHidden:NO];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    [textView  resignFirstResponder];
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+    }
+    
+    return YES;
+}
+
 /*
 #pragma mark - Navigation
 

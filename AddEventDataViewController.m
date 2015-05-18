@@ -17,11 +17,13 @@
 @property (nonatomic, strong) NSNumber                      *setCount;
 @property (nonatomic, strong) NSString                      *notes;
 @property (nonatomic, strong) NSNumber                      *sectionZeroRowCount;
+@property (nonatomic, strong) NSLayoutConstraint            *keyboardConstrtaints;
+@property (nonatomic, strong) IBOutlet UIScrollView         *scrollView;
+@property (nonatomic, strong) UITextField                   *selectedTextField;
 
 @end
 
 static NSString *CellIdentifier = @"EventCell";
-static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 static NSString *notePlaceHolder = @"Enter a note for this set:";
 
 BOOL setCountInitialized;
@@ -47,6 +49,8 @@ BOOL setCountInitialized;
     [self.noteSwitch setOn:NO];
     
     self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
+    
+    [self.eventTable setRowHeight:UITableViewAutomaticDimension];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -90,6 +94,23 @@ BOOL setCountInitialized;
     }
     [self.note resignFirstResponder];
 }
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"])
+    {
+        [textView resignFirstResponder];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 #pragma mark - Init
 - (void)initializeSetCount:(WeightLiftingEvent *)weightLiftingEvent
@@ -296,27 +317,25 @@ BOOL setCountInitialized;
             {
                 WeightLiftingEvent *weightEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
                 
-                if (indexPath.section == 0) {
+                if (indexPath.section == 0)
+                {
                     [self initializeSetCount:weightEvent];
                 }
+
+                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
+                cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
+                cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
+                
                 if ([self.noteSwitch isOn]) {
-                    EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
                     cell.note.hidden = NO;
                     cell.note.text = weightEvent.notes;
-                    tableView.estimatedRowHeight = 44.0f;
-                    tableView.rowHeight = UITableViewAutomaticDimension;
-                    return cell;
                 } else {
-                    EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
-                    cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
-                    self.eventTable.rowHeight = 22.0f;
-                    return cell;
+                    cell.note.hidden = YES;
+                    cell.note.text = nil;
                 }
+
+                return cell;
             }
             break;
             
@@ -325,24 +344,20 @@ BOOL setCountInitialized;
                 AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
                 NSInteger duration = [aerobicEvent.duration integerValue];
 
+                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
+                cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
+                
                 if ([self.noteSwitch isOn]) {
-                    EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
-                    tableView.estimatedRowHeight = 44.0f;
-                    tableView.rowHeight = UITableViewAutomaticDimension;
-                    return cell;
                 } else {
-                    EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
-                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
-                    self.eventTable.rowHeight = 22.0f;
-                    return cell;
+                    cell.note.hidden = YES;
+                    cell.note.text = nil;
                 }
+
+                return cell;
             }
             break;
 
@@ -352,24 +367,19 @@ BOOL setCountInitialized;
                 AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
                 NSInteger duration = [aerobicEvent.duration integerValue];
 
+                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
+                cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
+                cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
+                
                 if ([self.noteSwitch isOn]) {
-                    EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
-                    tableView.estimatedRowHeight = 44.0f;
-                    tableView.rowHeight = UITableViewAutomaticDimension;
-                    return cell;
                 } else {
-                    EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
-                    cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", duration/60, duration % 60];
-                    cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
-                    cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
-                    self.eventTable.rowHeight = 22.0f;
-                    return cell;
+                    cell.note.hidden = YES;
+                    cell.note.text = nil;
                 }
+                return cell;
             }
             break;
 

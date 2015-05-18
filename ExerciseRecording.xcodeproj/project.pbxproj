@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */; };
-		2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */; };
 		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C501AC21A1F0069E888 /* DefaultAerobic.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C4F1AC21A1F0069E888 /* DefaultAerobic.m */; };
@@ -71,10 +69,6 @@
 
 /* Begin PBXFileReference section */
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
-		2D7D7C0C1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
-		2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
-		2D7D7C0F1ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
-		2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataTVC.h; sourceTree = "<group>"; };
 		2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataTVC.m; sourceTree = "<group>"; };
 		2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataViewController.h; sourceTree = "<group>"; };
@@ -168,10 +162,6 @@
 		2D7D7C051ABDC13D0069E888 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2D7D7C0F1ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.h */,
-				2D7D7C101ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m */,
-				2D7D7C0C1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.h */,
-				2D7D7C0D1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -455,7 +445,6 @@
 				2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */,
 				2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */,
 				2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */,
-				2D7D7C0E1ABDCFFD0069E888 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */,
 				2DB6F4311AEBDD1000FCE207 /* EditEventTableViewCell.m in Sources */,
 				2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */,
@@ -466,7 +455,6 @@
 				2DB93FF11AF151160062AB0D /* SelectedEvent.m in Sources */,
 				2DB93FF41AF23AC20062AB0D /* EventHistoryPlotViewController.m in Sources */,
 				2DBCE8471AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld in Sources */,
-				2D7D7C111ABDD00F0069E888 /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				2D7D7C6E1AC834B30069E888 /* DefaultWeightLifting.m in Sources */,
 				2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */,
 				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
