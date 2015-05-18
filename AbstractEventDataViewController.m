@@ -24,7 +24,7 @@
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
 static NSString *CellIdentifier = @"EventCell";
-
+static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 
 @implementation AbstractEventDataViewController
 
@@ -139,16 +139,26 @@ static NSString *CellIdentifier = @"EventCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // had to define a specific cell because I didn't like the way auto layout performed
+    // during the first pass of the layout the cell height was wrong and then was corrected during the second pass
+    // this resulted in table collapsing
+    
     switch ([self selectedEvent].eventCategory) {
         case kWeights:
             {
                 WeightLiftingEvent *weightEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
-                
-                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                EventTableViewCell *cell;
+                if ([weightEvent.notes length] > 0) {
+                    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    cell.note.text = weightEvent.notes;
+                    tableView.rowHeight = 40.0f;
+                } else {
+                    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
+                    tableView.rowHeight = 22.0f;
+                }
                 cell.label1.text = [NSString stringWithFormat:@"%@", weightEvent.setNumber];
                 cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
                 cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
-                cell.note.text = weightEvent.notes;
                return cell;
             }
             break;
@@ -160,14 +170,22 @@ static NSString *CellIdentifier = @"EventCell";
         case kBicycling:
             {
                 AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
-                EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                EventTableViewCell *cell;
+                if ([aerobicEvent.note length] > 0) {
+                    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                    cell.note.text = aerobicEvent.note;
+                    tableView.rowHeight = 40.0f;
+                } else {
+                    cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
+                    tableView.rowHeight = 22.0f;
+                }
+                
                 switch ([[self selectedEvent] eventCategory]) {
                     case kBicycling:
                         {
                             cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
                             cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                             cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
-                            cell.note.text = aerobicEvent.note;
                             return cell;
                         }
                         break;
@@ -177,7 +195,6 @@ static NSString *CellIdentifier = @"EventCell";
                         cell.label1.text = [NSString stringWithFormat:@"%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
                         cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                         cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
-                        cell.note.text = aerobicEvent.note;
                         return cell;
                     }
                         break;
@@ -189,11 +206,6 @@ static NSString *CellIdentifier = @"EventCell";
             break;
     }
     return nil;
-}
-
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
