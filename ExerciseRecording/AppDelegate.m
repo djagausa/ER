@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "EventViewController.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -24,8 +26,20 @@
     NSAssert([controller isKindOfClass:[EventViewController class]], @"Should have an item view controller");
     
     [controller setManagedObjectContext:self.managedObjectContext];
+    [Fabric with:@[CrashlyticsKit]];
 
     return YES;
+}
+
+- (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    NSUInteger orientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    
+    if(self.window.rootViewController){
+        UIViewController *presentedViewController = [[(UINavigationController *)self.window.rootViewController viewControllers] lastObject];
+        orientations = [presentedViewController supportedInterfaceOrientations];
+    }
+    
+    return orientations;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

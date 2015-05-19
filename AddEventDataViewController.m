@@ -155,6 +155,7 @@ BOOL setCountInitialized;
                 self.label1.text = self.hrdLab1.text = @"Time";
                 self.label2.text = self.hdrLab2.text = @"Avg HR";
                 self.label3.text = self.hdrLab3.text = @"CAD";
+                self.in1Label.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
                 self.in1Label.text = [NSString stringWithFormat:@"%ld:%02ld", [self.defaultAerobic.totalTime integerValue]/60, [self.defaultAerobic.totalTime integerValue] % 60];
                 self.in2Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.desiredHR];
                 self.in3Label.text = [NSString stringWithFormat:@"%@", self.defaultAerobic.cadence];

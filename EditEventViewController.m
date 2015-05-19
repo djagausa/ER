@@ -86,7 +86,7 @@
                 {
                     [self setupLine:self.lineOneLabel labelText:@"Time:" inputLine:self.lineOneInputText originalValue:[NSString stringWithFormat:@"%ld:%02ld", [self.selectedEvent.aerobicEvent.duration integerValue]/ 60, [self.selectedEvent.aerobicEvent.duration integerValue] % 60]];
                     [self setupLine:self.lineTwoLabel labelText:@"Avg HR:" inputLine:self.lineTwoInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.aerobicEvent.heartRate]];
-                    [self setupLine:self.lineThreeLabel labelText:@"CAD:" inputLine:self.lineOneInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.aerobicEvent.cadenace]];
+                    [self setupLine:self.lineThreeLabel labelText:@"CAD:" inputLine:self.lineThreeInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.aerobicEvent.cadenace]];
                 }
                     break;
                 case kEliptical:

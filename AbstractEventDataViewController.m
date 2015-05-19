@@ -52,6 +52,10 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     [super viewDidAppear:animated];
 }
 
+- (NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];

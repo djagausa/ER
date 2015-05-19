@@ -29,6 +29,9 @@
 
 @end
 
+static NSString *cellWithNote = @"EditEventCell";
+static NSString *cellWithoutNote = @"EditEventCellNoNote";
+
 @implementation EditSelectedEventTableViewController
 
 - (void)viewDidLoad {
@@ -48,9 +51,6 @@
     
     self.coreDataHelper = [[CoreDataHelper alloc] init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    
-    self.editSelectedEventTable.estimatedRowHeight = 22.0f;
-    self.editSelectedEventTable.rowHeight = UITableViewAutomaticDimension;
 
     [self fetchEvents];
 }
@@ -151,6 +151,7 @@
         case 0:
             cell = [tableView dequeueReusableCellWithIdentifier:@"EditSetupCell"];
             cell.textLabel.text = @"Edit Setup Data";
+            tableView.rowHeight = 44.0;
             return cell;
             break;
             
@@ -168,8 +169,17 @@
             switch (self.selectEditEvent.eventCategory) {
                 case kWeights:
                     {
-                        EditEventTableViewCell *cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:@"EditEventCell"];
+                        EditEventTableViewCell *cell;
                         WeightLiftingEvent *weightEvent = [self.weightLiftingEventCopy objectAtIndex:indexPath.row];
+                        if ([weightEvent.notes length] > 0) {
+                            cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithNote];
+                            cell.eventNote.text = weightEvent.notes;
+                            tableView.rowHeight = 44.0f;
+                        } else {
+                            cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
+                            tableView.rowHeight = 22.0f;
+
+                        }
                         NSString *convertedDate = [dateFormatter stringFromDate:weightEvent.date];
                         NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
                         
@@ -177,19 +187,25 @@
                         cell.eventL1.text = [NSString stringWithFormat:@"Set: %@", weightEvent.setNumber];
                         cell.eventL2.text = [NSString stringWithFormat:@"Reps: %@", weightEvent.repCount];
                         cell.eventL3.text = [NSString stringWithFormat:@"Weight: %@", weightEvent.weight];
-                        cell.eventNote.text = weightEvent.notes;
                         return cell;
                     }
                     break;
                 default:
                     {
-                        EditEventTableViewCell *cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:@"EditEventCell"];
                         AerobicEvent *aerobicEvent = [self.aerobicEventCopy objectAtIndex:indexPath.row];
+                        EditEventTableViewCell *cell;
+                        if ([aerobicEvent.note length] > 0) {
+                            cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithNote];
+                            cell.eventNote.text = aerobicEvent.note;
+                            tableView.rowHeight = 44.0f;
+                        } else {
+                            cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
+                            tableView.rowHeight = 22.0f;
+                        }
                         NSString *convertedDate = [dateFormatter stringFromDate:aerobicEvent.date];
                         NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
                         
                         cell.eventDate.text = formattedDate;
-                        cell.eventNote.text = aerobicEvent.note;
 
                         switch (self.selectEditEvent.eventCategory) {
                             case kWalking:
@@ -291,19 +307,16 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"EditEvent"]) {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        EditEventViewController *editEventViewController = [segue destinationViewController];
-        editEventViewController.delegate = self;
-    }
-    
     if ([[segue identifier] isEqualToString:@"EditSetupData"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
         setupExerciseViewController.delegate = self;
         setupExerciseViewController.editMode = YES;
+    } else {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        EditEventViewController *editEventViewController = [segue destinationViewController];
+        editEventViewController.delegate = self;
     }
-
 }
 
 #pragma  mark - CoreData

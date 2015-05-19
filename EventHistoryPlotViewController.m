@@ -59,6 +59,10 @@ id gestureRecognizerDelegate;
     [self getEventsForSPecificRange];
 }
 
+- (NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -66,14 +70,13 @@ id gestureRecognizerDelegate;
     [self initPlot];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
+    [super viewDidDisappear:animated];
+     
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.delegate = gestureRecognizerDelegate;
     }
-
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
@@ -238,7 +241,7 @@ id gestureRecognizerDelegate;
                                 break;
                             case kBikeCadence:
                                 for (AerobicEvent *aerobicEvent in self.aerobicEvents) {
-                                    [self setMinMax:aerobicEvent.distance];
+                                    [self setMinMax:aerobicEvent.cadenace];
                                 }
                                 break;
                             default:
@@ -251,6 +254,16 @@ id gestureRecognizerDelegate;
                     break;
             }
             break;
+    }
+    // if min and max are equal then set 10 point apart
+    
+    if ([self.yMax isEqualToNumber: self.yMin]){
+        if ([self.yMin isLessThanOrEqualTo: @(5)]) {
+            self.yMax =  @([self.yMin integerValue] + 10);
+        } else {
+            self.yMax = @([self.yMax integerValue] + 5);
+            self.yMin = @([self.yMin integerValue] - 5);
+        }
     }
 }
 
@@ -313,7 +326,6 @@ id gestureRecognizerDelegate;
     yRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue] -6) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] +5)];
     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.4f)];
     plotSpace.yRange = yRange;
-//    plotSpace.yRange = [CPTPlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue]-15) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] + 20 )];
     plotSpace.globalYRange = plotSpace.yRange;
     
     //Create styles and symbol
@@ -359,7 +371,7 @@ id gestureRecognizerDelegate;
     axisSet.xAxis.orthogonalCoordinateDecimal = CPTDecimalFromInt([self.yMin intValue]-5);
     
     CPTAxis *x = axisSet.xAxis;
-    x.title = [self.activitySelectorOutlet titleForSegmentAtIndex:self.activitySelectorOutlet.selectedSegmentIndex];
+//    x.title = [self.activitySelectorOutlet titleForSegmentAtIndex:self.activitySelectorOutlet.selectedSegmentIndex];
     x.titleTextStyle = axisTitleStyle;
     x.titleOffset = -20.0f;
     x.axisLineStyle = axisLineStyle;
@@ -450,15 +462,13 @@ id gestureRecognizerDelegate;
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
         {
-            WeightLiftingEvent *weightEvent = self.weightLiftingEvents[0];
-            self.eventTitle = weightEvent.defaultEvent.eventName;
+            self.eventTitle = @"Weight";
         }
             break;
             
         default:
         {
-            AerobicEvent *aerobicEvent = self.aerobicEvents[0];
-            self.eventTitle = aerobicEvent.defaultEvent.eventName;
+            self.eventTitle = [self.activitySelectorOutlet titleForSegmentAtIndex:self.activitySelectorOutlet.selectedSegmentIndex];
         }
             break;
     }
@@ -526,6 +536,7 @@ id gestureRecognizerDelegate;
                             AerobicEvent *aerobicEvent = self.aerobicEvents[idx];
                             switch (self.selectedEvent.eventCategory) {
                                 case kWalking:
+                                case kRunning:
                                     {
                                         switch (self.activitySelectorOutlet.selectedSegmentIndex) {
                                             case kWalkHR:
@@ -545,6 +556,27 @@ id gestureRecognizerDelegate;
                                         }
                                     }
                                     break;
+                                case kBicycling:
+                                    {
+                                        switch (self.activitySelectorOutlet.selectedSegmentIndex) {
+                                            case kBikeHR:
+                                                NSLog(@"y value for %lu is %@", (unsigned long)idx, aerobicEvent.heartRate);
+                                                return aerobicEvent.heartRate;
+                                                break;
+                                            case kBikeTime:
+                                                NSLog(@"y value for %lu is %@", (unsigned long)idx, aerobicEvent.duration);
+                                                return aerobicEvent.duration;
+                                                break;
+                                            case kBikeCadence:
+                                                NSLog(@"y value for %lu is %@", (unsigned long)idx, aerobicEvent.cadenace);
+                                                return aerobicEvent.cadenace;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                    break;
+
                                     
                                 default:
                                     break;

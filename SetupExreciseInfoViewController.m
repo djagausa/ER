@@ -353,7 +353,11 @@ BOOL eventSelectedFromLAvailableList;
     [label setFont:[UIFont systemFontOfSize:14.0f]];
 
     if (self.editMode == YES) {
-        outlet.text = [NSString stringWithFormat:@"%@", value];
+        if ([labelText isEqualToString: @"Default Time:"]) {
+            outlet.text = [NSString stringWithFormat:@"%ld:%02ld", [value integerValue]/60, [value integerValue] % 60];
+        } else {
+            outlet.text = [NSString stringWithFormat:@"%@", value];
+        }
     } else {
         outlet.text = placeHolderString;
     }
