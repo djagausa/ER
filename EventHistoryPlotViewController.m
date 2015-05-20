@@ -37,17 +37,10 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     kBikeCadence
 };
 
-id gestureRecognizerDelegate;
-
 @implementation EventHistoryPlotViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        gestureRecognizerDelegate = self.navigationController.interactivePopGestureRecognizer.delegate;
-        self.navigationController.interactivePopGestureRecognizer.delegate = ( id <UIGestureRecognizerDelegate>) self;
-    }
     
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
@@ -59,7 +52,8 @@ id gestureRecognizerDelegate;
     [self getEventsForSPecificRange];
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
+- (NSUInteger)supportedInterfaceOrientations
+{
     return UIInterfaceOrientationMaskLandscape;
 }
 
@@ -73,12 +67,9 @@ id gestureRecognizerDelegate;
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-     
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.delegate = gestureRecognizerDelegate;
-    }
-    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
+    
+//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
 - (void)didReceiveMemoryWarning {
