@@ -59,7 +59,12 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     [self setupActivitySelector];
     [self initPlot];
 }

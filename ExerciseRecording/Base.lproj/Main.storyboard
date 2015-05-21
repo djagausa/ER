@@ -971,14 +971,14 @@
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="q0M-j6-p4o"/>
                                                     <exclude reference="Jvv-Mr-6Vd"/>
+                                                    <exclude reference="q0M-j6-p4o"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
-                                                    <include reference="q0M-j6-p4o"/>
                                                     <include reference="Jvv-Mr-6Vd"/>
+                                                    <include reference="q0M-j6-p4o"/>
                                                 </mask>
                                             </variation>
                                         </label>
@@ -1065,14 +1065,14 @@
                                             <exclude reference="8ri-2k-6w7"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="YNk-BH-fAk"/>
-                                            <exclude reference="4Gj-Qf-pMz"/>
-                                            <exclude reference="w1X-RJ-NWk"/>
                                             <exclude reference="P1t-cl-j97"/>
                                             <exclude reference="hKS-6a-bUM"/>
+                                            <exclude reference="4Gj-Qf-pMz"/>
+                                            <exclude reference="YNk-BH-fAk"/>
+                                            <exclude reference="w1X-RJ-NWk"/>
+                                            <exclude reference="AfD-r3-kkX"/>
                                             <exclude reference="Fmm-0j-EQ3"/>
                                             <exclude reference="OKO-Xm-Ijc"/>
-                                            <exclude reference="AfD-r3-kkX"/>
                                             <exclude reference="eBm-2u-SLw"/>
                                             <exclude reference="kv8-7z-qGq"/>
                                         </mask>
@@ -1085,14 +1085,14 @@
                                             <include reference="8ri-2k-6w7"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="YNk-BH-fAk"/>
-                                            <include reference="4Gj-Qf-pMz"/>
-                                            <include reference="w1X-RJ-NWk"/>
                                             <include reference="P1t-cl-j97"/>
                                             <include reference="hKS-6a-bUM"/>
+                                            <include reference="4Gj-Qf-pMz"/>
+                                            <include reference="YNk-BH-fAk"/>
+                                            <include reference="w1X-RJ-NWk"/>
+                                            <include reference="AfD-r3-kkX"/>
                                             <include reference="Fmm-0j-EQ3"/>
                                             <include reference="OKO-Xm-Ijc"/>
-                                            <include reference="AfD-r3-kkX"/>
                                             <include reference="eBm-2u-SLw"/>
                                             <include reference="kv8-7z-qGq"/>
                                         </mask>
@@ -3007,15 +3007,15 @@
                                                     <exclude reference="viP-MB-sou"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="mL6-qU-KHc"/>
-                                                    <exclude reference="3Jg-jr-EZb"/>
-                                                    <exclude reference="hHV-FO-ICd"/>
+                                                    <exclude reference="ABI-P3-eqB"/>
                                                     <exclude reference="GJ6-aM-iMT"/>
                                                     <exclude reference="jrK-s8-rqj"/>
-                                                    <exclude reference="ABI-P3-eqB"/>
-                                                    <exclude reference="O0E-u2-1vu"/>
-                                                    <exclude reference="NH6-M3-cdB"/>
+                                                    <exclude reference="3Jg-jr-EZb"/>
+                                                    <exclude reference="hHV-FO-ICd"/>
+                                                    <exclude reference="mL6-qU-KHc"/>
                                                     <exclude reference="Mtl-tt-raT"/>
+                                                    <exclude reference="NH6-M3-cdB"/>
+                                                    <exclude reference="O0E-u2-1vu"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -3025,15 +3025,15 @@
                                                     <include reference="viP-MB-sou"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="mL6-qU-KHc"/>
-                                                    <include reference="3Jg-jr-EZb"/>
-                                                    <include reference="hHV-FO-ICd"/>
+                                                    <include reference="ABI-P3-eqB"/>
                                                     <include reference="GJ6-aM-iMT"/>
                                                     <include reference="jrK-s8-rqj"/>
-                                                    <include reference="ABI-P3-eqB"/>
-                                                    <include reference="O0E-u2-1vu"/>
-                                                    <include reference="NH6-M3-cdB"/>
+                                                    <include reference="3Jg-jr-EZb"/>
+                                                    <include reference="hHV-FO-ICd"/>
+                                                    <include reference="mL6-qU-KHc"/>
                                                     <include reference="Mtl-tt-raT"/>
+                                                    <include reference="NH6-M3-cdB"/>
+                                                    <include reference="O0E-u2-1vu"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

@@ -32,7 +32,7 @@
 }
 
 - (NSUInteger)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
-    NSUInteger orientations = UIInterfaceOrientationMaskAllButUpsideDown;
+    NSUInteger orientations = UIInterfaceOrientationMaskPortrait;
     
     if(self.window.rootViewController){
         UIViewController *presentedViewController = [[(UINavigationController *)self.window.rootViewController viewControllers] lastObject];

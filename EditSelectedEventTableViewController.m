@@ -73,6 +73,10 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
 
 }
 
+- (NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 - (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;

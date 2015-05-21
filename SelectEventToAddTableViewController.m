@@ -54,6 +54,10 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     [self.tableView reloadData];
 }
 
+- (NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
 -(void)fetchPredefinedEvents
 {
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ExerciseSelection" ofType:@"plist"];

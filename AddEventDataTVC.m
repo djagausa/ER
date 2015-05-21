@@ -41,6 +41,9 @@
     [self.exerciseDataAddedDelegate exerciseDataAddedNotification];
 }
 
+- (NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
 #pragma mark - Table View
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

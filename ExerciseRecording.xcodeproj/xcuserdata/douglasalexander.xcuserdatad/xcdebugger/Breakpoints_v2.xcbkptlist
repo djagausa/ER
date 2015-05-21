@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EditEventTableViewController.m"
-            timestampString = "453075584.65108"
+            timestampString = "453860589.782349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EventHistoryPlotViewController.m"
-            timestampString = "453764212.436211"
+            timestampString = "453860265.261323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "-configureAxes"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,13 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EventHistoryPlotViewController.m"
-            timestampString = "453764212.436211"
+            timestampString = "453860265.261323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "456"
-            endingLineNumber = "456"
-            landmarkName = "@implementation EventHistoryPlotViewController"
-            landmarkType = "3">
+            startingLineNumber = "443"
+            endingLineNumber = "443"
+            landmarkName = "-configureAxes"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SelectEventToAddTableViewController.m"
-            timestampString = "453577961.646742"
+            timestampString = "453860589.782349"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-eventDataSetupNotification"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,12 +170,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ExerciseRecording/EventViewController.m"
-            timestampString = "453686132.058816"
+            timestampString = "453856307.253868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-eventAdded"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "-exerciseDataAddedNotification"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -202,12 +202,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ExerciseRecording/EventViewController.m"
-            timestampString = "453686132.058816"
+            timestampString = "453856307.253868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "-exerciseDataAddedNotification"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ExerciseRecording/EventViewController.m"
-            timestampString = "453686132.058816"
+            timestampString = "453856307.253868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "-prepareForSegue:sender:"
             landmarkType = "5">
          </BreakpointContent>
