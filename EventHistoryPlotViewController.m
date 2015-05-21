@@ -488,12 +488,27 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
 - (NSString *)plotDate:(NSUInteger)plotPoint
 {
     NSString *date;
+    static NSInteger setCount;
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
-        {
-            WeightLiftingEvent *weightEvent = self.weightLiftingEvents[plotPoint];
-            date = [self dateToFormatMMddyyy:weightEvent.date];
-        }
+            {
+                WeightLiftingEvent *weightEvent = self.weightLiftingEvents[plotPoint];
+                date = [self dateToFormatMMddyyy:weightEvent.date];
+
+                // only send back the first date in a set
+                if (plotPoint > 0) {
+                    WeightLiftingEvent *weightEventPrev = self.weightLiftingEvents[plotPoint-1];
+                    NSString *datePrev = [self dateToFormatMMddyyy:weightEventPrev.date];
+                    if ([datePrev isEqualToString:date]) {
+                        setCount += 1;
+                        date = [NSString stringWithFormat:@"%ld",setCount];
+                    } else {
+                        setCount = 1;
+                    }
+                } else {
+                    setCount = 1;
+                }
+            }
             break;
             
         default:
@@ -573,7 +588,6 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                                     }
                                     break;
 
-                                    
                                 default:
                                     break;
                             }
