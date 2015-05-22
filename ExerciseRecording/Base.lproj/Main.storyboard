@@ -189,6 +189,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addExerciseButton" destination="kCB-0W-BXk" id="Elj-CJ-eV4"/>
+                        <outlet property="editExercise" destination="Xie-Rk-OB6" id="fpM-Re-cRZ"/>
                         <outlet property="reviewExerciseButton" destination="csX-gb-FFf" id="ynk-rY-w8J"/>
                     </connections>
                 </viewController>
@@ -309,16 +310,6 @@
                                     <outlet property="delegate" destination="4Oa-qj-bg2" id="L9D-BN-OFr"/>
                                 </connections>
                             </tableView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Exercise Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQR-Kv-WOw" userLabel="ExerciseNameInput">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <connections>
-                                    <action selector="eventNameInput:" destination="4Oa-qj-bg2" eventType="editingDidEnd" id="CpO-wh-A7Y"/>
-                                </connections>
-                            </textField>
                             <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T2V-tA-ysT" userLabel="Default2">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
@@ -422,6 +413,16 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Exercise Name" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQR-Kv-WOw" userLabel="ExerciseNameInput">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <action selector="eventNameInput:" destination="4Oa-qj-bg2" eventType="editingDidEnd" id="CpO-wh-A7Y"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -482,7 +483,6 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="JUy-ta-akH"/>
-                                <exclude reference="LQR-Kv-WOw"/>
                                 <exclude reference="T2V-tA-ysT"/>
                                 <exclude reference="Kmz-CY-f90"/>
                                 <exclude reference="fM4-5v-9xc"/>
@@ -491,6 +491,7 @@
                                 <exclude reference="JCO-qe-WOz"/>
                                 <exclude reference="SUa-0V-90i"/>
                                 <exclude reference="d5K-yG-fIV"/>
+                                <exclude reference="LQR-Kv-WOw"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Dma-DZ-OVq"/>
@@ -525,10 +526,10 @@
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="JUy-ta-akH"/>
-                                <include reference="LQR-Kv-WOw"/>
                                 <include reference="T2V-tA-ysT"/>
                                 <include reference="Kmz-CY-f90"/>
                                 <include reference="d5K-yG-fIV"/>
+                                <include reference="LQR-Kv-WOw"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="7I8-k4-YiQ"/>
@@ -2180,7 +2181,7 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtQ-2Q-mQy" userLabel="SetInput">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 1" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtQ-2Q-mQy" userLabel="SetInput">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -2230,7 +2231,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 2" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJ2-a6-ODl" userLabel="WeightInput">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 2" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hJ2-a6-ODl" userLabel="WeightInput">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
@@ -2258,7 +2259,7 @@
                                     <outlet property="delegate" destination="sr1-KO-kbA" id="fAX-rH-5rp"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 3" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cAy-cw-UHk" userLabel="RepsInput">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="In 3" borderStyle="roundedRect" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cAy-cw-UHk" userLabel="RepsInput">
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>

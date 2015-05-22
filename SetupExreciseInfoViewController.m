@@ -15,20 +15,24 @@
 
 @interface SetupExrciseInfoViewController ()
 
-@property (nonatomic, strong) NSArray           *exerciseCategory;
-@property (nonatomic, strong) NSMutableArray    *exerciseCategoryCopy;
-@property NSInteger categoryCode;
-@property (weak, nonatomic) IBOutlet UILabel *label1;
-@property (weak, nonatomic) IBOutlet UILabel *label2;
-@property (weak, nonatomic) IBOutlet UILabel *label3;
-@property (weak, nonatomic) IBOutlet UILabel *label0;
-@property (weak, nonatomic) IBOutlet UISwitch *enableSwitchOutlet;
+@property (nonatomic, strong) NSArray               *exerciseCategory;
+@property (nonatomic, strong) NSMutableArray        *exerciseCategoryCopy;
+@property (weak, nonatomic) IBOutlet UILabel        *label1;
+@property (weak, nonatomic) IBOutlet UILabel        *label2;
+@property (weak, nonatomic) IBOutlet UILabel        *label3;
+@property (weak, nonatomic) IBOutlet UILabel        *label0;
+@property (weak, nonatomic) IBOutlet UISwitch       *enableSwitchOutlet;
+@property (weak, nonatomic) IBOutlet UIScrollView   *scrollView;
+@property (nonatomic, weak) UIView                  *textField;
+@property NSInteger                                 categoryCode;
 - (IBAction)enableSwitchAction:(id)sender;
 - (IBAction)eventNameInput:(id)sender;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 BOOL eventSelectedFromLAvailableList;
+BOOL keyboardPresent;
+UIEdgeInsets oldContentInset;
+UIEdgeInsets oldIndicatorInset;
 
 @implementation SetupExrciseInfoViewController
 
@@ -68,6 +72,7 @@ BOOL eventSelectedFromLAvailableList;
     attributes = @{NSForegroundColorAttributeName: [UIColor grayColor]};
     [[self saveButton] setTitleTextAttributes: attributes forState:UIControlStateDisabled];
 
+    self.exerciseName.delegate = self;
     self.default1.delegate = self;
     self.default2.delegate = self;
     self.default3.delegate = self;
@@ -87,6 +92,9 @@ BOOL eventSelectedFromLAvailableList;
         [[self enableSwitchOutlet] setEnabled:NO];
 
     }
+    [self setContentInsetToZero];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -132,19 +140,54 @@ BOOL eventSelectedFromLAvailableList;
 {
     [textField resignFirstResponder];
     [self verifyParametersReceived];
+    self.textField = nil;
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
-    CGPoint scrollPoint = CGPointMake(0, 50);
-    [self.scrollView setContentOffset:scrollPoint animated:YES];
+    self.textField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    CGPoint scrollPoint = CGPointMake(0, -64);
 
-    [self.scrollView setContentOffset:scrollPoint animated:YES];
+}
+
+- (void)setContentInsetToZero
+{
+    UIEdgeInsets contentInset = UIEdgeInsetsMake(0.0, 0.0, 0.0, 0.0);
+    oldContentInset = contentInset;
+    oldIndicatorInset = contentInset;
+}
+- (void)keyboardShow:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    if (keyboardPresent == NO) {
+        oldIndicatorInset =self.scrollView.scrollIndicatorInsets;
+        oldContentInset = self.scrollView.contentInset;
+        keyboardPresent = YES;
+    }
+
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    
+    NSLog(@" Ypoint: %f; x point %f",self.textField.frame.origin.y + self.textField.frame.size.height, self.textField.frame.origin.x );
+    
+    if (aRect.size.height < (self.textField.frame.origin.y + self.textField.frame.size.height + 80.0)) {
+        CGFloat diff = self.textField.frame.origin.y - (aRect.size.height + self.textField.frame.size.height) + 10.0;
+        UIEdgeInsets constentInsets = UIEdgeInsetsMake(0.0, 0.0, diff, 0.0);
+        self.scrollView.contentInset = constentInsets;
+        self.scrollView.scrollIndicatorInsets = constentInsets;
+    }
+}
+
+- (void)keyboardHide:(NSNotification *) notification
+{
+    self.scrollView.contentInset = oldContentInset;
+    self.scrollView.scrollIndicatorInsets = oldIndicatorInset;
+    [self setContentInsetToZero];
+    keyboardPresent = NO;
 }
 
 - (BOOL) verifyParametersReceived

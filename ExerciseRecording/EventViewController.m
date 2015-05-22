@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *addExerciseButton;
 @property (weak, nonatomic) IBOutlet UIButton *reviewExerciseButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editExercise;
 @end
 
 @implementation EventViewController
@@ -27,7 +28,7 @@
     //  only turn the buttons if event data exists
     [self.addExerciseButton setEnabled:NO];
     [self.reviewExerciseButton setEnabled:NO];
-    [self.editButtonItem setEnabled:NO];
+    [self.editExercise setEnabled:NO];
     
     // enable the review button only if events have been recorded
     NSInteger count = [self.coreDataHelper numberOfEntities:aerobicEventsFileName];
@@ -51,7 +52,7 @@
     if (count > 0)
     {
         [self.addExerciseButton setEnabled:YES];
-        [self.editButtonItem setEnabled:NO];
+        [self.editExercise setEnabled:YES];
     }
     
 }
