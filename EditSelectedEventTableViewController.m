@@ -330,10 +330,11 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
     switch (self.selectEditEvent.eventCategory) {
         case kWeights:
             {
-                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsFileName
+                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:[[self selectEditEvent] eventName] groupBy:nil];
+                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                                groupBy:nil];
             }
             self.weightLiftingEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
             break;
@@ -344,10 +345,11 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
         case kEliptical:
         case kBicycling:
             {
-                [self.coreDataHelper fetchItemsMatching:aerobicEventsFileName
+                [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:[[self selectEditEvent] eventName] groupBy:nil];
+                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                                groupBy:nil];
             }
             self.aerobicEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
             break;

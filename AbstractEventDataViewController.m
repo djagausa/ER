@@ -247,10 +247,12 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     switch ([self selectedEvent].eventCategory) {
         case kWeights:
             {
-                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsFileName
+                [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:[[self selectedEvent] eventName] groupBy:nil];
+//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
+                                          withPredicate:nil
+                                                groupBy:nil];
             }
             break;
             
@@ -260,10 +262,12 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
         case kEliptical:
         case kBicycling:
             {
-                [self.coreDataHelper fetchItemsMatching:aerobicEventsFileName
+                [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:[[self selectedEvent] eventName] groupBy:nil];
+                                          withPredicate:nil
+//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
+                                                groupBy:nil];
             }
             break;
             

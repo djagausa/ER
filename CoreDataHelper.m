@@ -16,7 +16,7 @@
 @implementation CoreDataHelper
 
 #pragma mark - Core Data
-- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy
+- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
@@ -37,8 +37,9 @@
     fetchRequest.sortDescriptors = descriptors;
     
     // setup Predicate
-    if ([predicate length] > 0) {
-        NSPredicate *filter = [NSPredicate predicateWithFormat:@"defaultEvent.eventName like[cd] %@", predicate];
+    if ([predicate count] > 0) {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K like[cd] %@",predicate[@"propertyName"], predicate[@"value"]];
+//        NSPredicate *filter = [NSPredicate predicateWithFormat:@"defaultEvent.eventName like[cd] %@", predicate];
         [fetchRequest setPredicate:filter];
     }
     
@@ -81,20 +82,23 @@
     return defaultData;
 }
 
-- (NSArray*)fetchEventDefaultDataFor:(NSString *)entityName forEvent:(NSString *)eventName
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequst setEntity:entity];
-        
-    NSPredicate *filter = [NSPredicate predicateWithFormat:@"eventName == %@", eventName];
-    [fetchRequst setPredicate:filter];
+    
+    if ([predicate count] > 0) {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K == %@", predicate[@"propertyName"], predicate[@"value"]];
+        [fetchRequst setPredicate:filter];
+    }
     
     NSError *error;
     NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
     
     return defaultData;
 }
+
 #pragma mark - Info
 - (NSInteger)numberOfSections
 {

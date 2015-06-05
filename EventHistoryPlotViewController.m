@@ -501,7 +501,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                     NSString *datePrev = [self dateToFormatMMddyyy:weightEventPrev.date];
                     if ([datePrev isEqualToString:date]) {
                         setCount += 1;
-                        date = [NSString stringWithFormat:@"%ld",setCount];
+                        date = [NSString stringWithFormat:@"%ld",(long)setCount];
                     } else {
                         setCount = 1;
                     }

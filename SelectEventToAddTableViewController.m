@@ -32,6 +32,7 @@
 @end
 
 static NSString *cellIdentification = @"SelectEventToAddCell";
+static NSString *scheduleCellId = @"scheduleCell";
 
 @implementation SelectEventToAddTableViewController
 
@@ -148,13 +149,18 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.categoryDictionary.count;
+    return self.categoryDictionary.count+1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger count;
     
     switch (section) {
+        case ScheduleCategory:
+        {
+            count = 1;
+            break;
+        }
         case WeightCategory:
         {
             count = self.weightExerciseEventsCopy.count;
@@ -175,16 +181,24 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
+    UITableViewCell *cell;
     switch (indexPath.section) {
+        case ScheduleCategory:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:scheduleCellId forIndexPath:indexPath];
+            cell.textLabel.text = @"Setup Schedule";
+            break;
+        }
         case WeightCategory:
         {
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
             cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEventsCopy[indexPath.row][@"Name"]];
             break;
         }
         
         case AerobicCategory:
         {
+            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
             cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEventsCopy[indexPath.row][@"Name"]];
         }
             
@@ -199,6 +213,11 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
     NSString *sectionTitle;
     
     switch (section) {
+        case ScheduleCategory:
+        {
+            sectionTitle = @"Schedule Event";
+            break;
+        }
         case WeightCategory:
         {
             sectionTitle = @"Weight Event";
@@ -224,14 +243,12 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
         {
             self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
             self.selectedEvent.eventName = self.aerobicExerciseEventsCopy[indexPath.row][@"Name"];
-//            [self.aerobicExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
         case WeightCategory:
         {
             self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
             self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
-//            [self.weightExerciseEventsCopy removeObjectAtIndex:indexPath.row];
             break;
         }
             
@@ -243,12 +260,18 @@ static NSString *cellIdentification = @"SelectEventToAddCell";
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
-    setupExerciseViewController.setupDelegate = self;
-    setupExerciseViewController.delegate = (id <AbstractEventDataDelegate> )self;
-    setupExerciseViewController.editMode = NO;
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"scheduleSetupSegue"])
+    {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    } else {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
+        setupExerciseViewController.setupDelegate = self;
+        setupExerciseViewController.delegate = (id <AbstractEventDataDelegate> )self;
+        setupExerciseViewController.editMode = NO;
+    }
 }
 
 

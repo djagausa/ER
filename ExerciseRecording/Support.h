@@ -9,6 +9,8 @@
 #ifndef ExerciseRecording_Support_h
 #define ExerciseRecording_Support_h
 
+#define debug
+
 typedef NS_ENUM(NSInteger, ExerciseCategory) {
     kWeights = 0,
     kWalking,
@@ -26,14 +28,16 @@ typedef NS_ENUM(NSInteger, WeightCells) {
 };
 
 typedef NS_ENUM(NSInteger, EventCateogory) {
+    ScheduleCategory,
     AerobicCategory,
     WeightCategory
 };
 
-static NSString *aerobicEventsFileName = @"AerobicEvent";
-static NSString *weightLiftingEventsFileName = @"WeightLiftingEvent";
-static NSString *aerobicDefaultEventsFileName = @"DefaultAerobic";
-static NSString *weightLiftingDefaultEventsFileName = @"DefaultWeightLifting";
-
+static NSString *aerobicEventsEntityName = @"AerobicEvent";
+static NSString *weightLiftingEventsEntityName = @"WeightLiftingEvent";
+static NSString *aerobicDefaultEventsEntityName = @"DefaultAerobic";
+static NSString *weightLiftingDefaultEventsEntityName = @"DefaultWeightLifting";
+static NSString *scheduleEntityName = @"Schedule";
+static NSString *scheduledEventEntityName = @"ScheduledEvent";
 
 #endif

@@ -2,32 +2,38 @@
 //  DefaultAerobic.h
 //  ExerciseRecording
 //
-//  Created by Douglas Alexander on 3/24/15.
+//  Created by Douglas Alexander on 6/2/15.
 //  Copyright (c) 2015 Douglas Alexander. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AerobicEvent;
+@class AerobicEvent, ScheduledEvent;
 
 @interface DefaultAerobic : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * cadence;
+@property (nonatomic, retain) NSNumber * category;
 @property (nonatomic, retain) NSNumber * desiredHR;
 @property (nonatomic, retain) NSNumber * distance;
+@property (nonatomic, retain) NSNumber * enabled;
 @property (nonatomic, retain) NSString * eventName;
 @property (nonatomic, retain) NSNumber * totalTime;
-@property (nonatomic, retain) NSNumber * category;
-@property (nonatomic, retain) NSNumber * enabled;
-@property (nonatomic, retain) NSSet *areobicEvents;
+@property (nonatomic, retain) NSSet *aerobicEvent;
+@property (nonatomic, retain) NSSet *scheduledEvent;
 @end
 
 @interface DefaultAerobic (CoreDataGeneratedAccessors)
 
-- (void)addAreobicEventsObject:(AerobicEvent *)value;
-- (void)removeAreobicEventsObject:(AerobicEvent *)value;
-- (void)addAreobicEvents:(NSSet *)values;
-- (void)removeAreobicEvents:(NSSet *)values;
+- (void)addAerobicEventObject:(AerobicEvent *)value;
+- (void)removeAerobicEventObject:(AerobicEvent *)value;
+- (void)addAerobicEvent:(NSSet *)values;
+- (void)removeAerobicEvent:(NSSet *)values;
+
+- (void)addScheduledEventObject:(ScheduledEvent *)value;
+- (void)removeScheduledEventObject:(ScheduledEvent *)value;
+- (void)addScheduledEvent:(NSSet *)values;
+- (void)removeScheduledEvent:(NSSet *)values;
 
 @end

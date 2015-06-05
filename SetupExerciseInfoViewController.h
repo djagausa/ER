@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *default2;
 @property (weak, nonatomic) IBOutlet UITextField *default3;
 @property (nonatomic, assign) BOOL editMode;
-@property (nonatomic, strong) id<SetupExrciseInfoViewControllerDelegate> setupDelegate;
+@property (nonatomic, weak) id<SetupExrciseInfoViewControllerDelegate> setupDelegate;
 
 - (instancetype)init;
 - (IBAction)saveData:(id)sender;

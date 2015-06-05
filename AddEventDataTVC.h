@@ -19,6 +19,6 @@
 
 @interface AddEventDataTVC : AbstractEventDataTableViewController <AbstractEventDataDelegate, AddEventDataViewControllerDelegate>
 
-@property (nonatomic, strong) id<AddEventDataTVCDelegate> exerciseDataAddedDelegate;
+@property (nonatomic, weak) id<AddEventDataTVCDelegate> exerciseDataAddedDelegate;
 
 @end

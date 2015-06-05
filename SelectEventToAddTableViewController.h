@@ -21,6 +21,6 @@
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) SetupExrciseInfoViewController *setupExerciseInfo;
-@property (nonatomic, strong) id<SelectEventToAddTableViewControllerDelegate> eventAddedDelegate;
+@property (nonatomic, weak) id<SelectEventToAddTableViewControllerDelegate> eventAddedDelegate;
 
 @end

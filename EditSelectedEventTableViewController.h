@@ -19,6 +19,6 @@
 @interface EditSelectedEventTableViewController : UITableViewController <AbstractEventDataDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) id <EditSelectedEventTableViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <EditSelectedEventTableViewControllerDelegate> delegate;
 
 @end

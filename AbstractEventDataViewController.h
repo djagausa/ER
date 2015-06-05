@@ -26,7 +26,7 @@
 @property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;
 @property (nonatomic, strong) DefaultAerobic            *defaultAerobic;
 @property (nonatomic, strong) CoreDataHelper            *coreDataHelper;
-@property (nonatomic, strong) id<AbstractEventDataDelegate> delegate;
+@property (nonatomic, weak) id<AbstractEventDataDelegate> delegate;
 @property (nonatomic, strong) SelectedEvent              *selectedEvent;
 
 -(void)fetchEvents;

@@ -31,10 +31,10 @@
     [self.editExercise setEnabled:NO];
     
     // enable the review button only if events have been recorded
-    NSInteger count = [self.coreDataHelper numberOfEntities:aerobicEventsFileName];
+    NSInteger count = [self.coreDataHelper numberOfEntities:aerobicEventsEntityName];
     
     if (count == 0) {
-        count = [self.coreDataHelper numberOfEntities:weightLiftingEventsFileName];
+        count = [self.coreDataHelper numberOfEntities:weightLiftingEventsEntityName];
     }
     
     if (count > 0)
@@ -43,10 +43,10 @@
     }
 
     // enable the add button only if events to add have been setup
-    count = [self.coreDataHelper numberOfEntities:aerobicDefaultEventsFileName];
+    count = [self.coreDataHelper numberOfEntities:aerobicDefaultEventsEntityName];
     
     if (count == 0) {
-        count = [self.coreDataHelper numberOfEntities:weightLiftingDefaultEventsFileName];
+        count = [self.coreDataHelper numberOfEntities:weightLiftingDefaultEventsEntityName];
     }
     
     if (count > 0)

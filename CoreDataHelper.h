@@ -21,11 +21,12 @@
 //- (void)setupCoreData;
 
 - (void)fetchData;
-- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSString *)predicate groupBy:(NSString *)groupBy;
+- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy;
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
-- (NSArray*)fetchEventDefaultDataFor:(NSString *)entityName forEvent:(NSString *)eventName;
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate;
+
 - (BOOL)clearData;
 - (BOOL)deleteObject:(NSManagedObject *)object;
 
