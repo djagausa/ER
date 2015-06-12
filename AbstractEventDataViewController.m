@@ -19,7 +19,6 @@
 @property (nonatomic, assign) NSInteger                     numberOfItems;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 
-
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
@@ -32,8 +31,10 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     [super viewDidLoad];
     
     self.selectedEvent = [[SelectedEvent alloc] init];
-    self.selectedEvent = [self.delegate selectedEventDataIs];
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectedEventDataIs)]) {
+         self.selectedEvent = [self.delegate selectedEventDataIs];
+    }
+   
     self.coreDataHelper = [[CoreDataHelper alloc] init];
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.coreDataHelper.defaultSortAttribute = @"date";
@@ -226,6 +227,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     
     return count;
 }
+
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 22.0f;
@@ -235,6 +237,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 {
     return 0.01f;
 }
+
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return [[UIView alloc] initWithFrame:CGRectZero];

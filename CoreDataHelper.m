@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "CoreDataHelper.h"
-#import "WeightLiftingEvent.h"
-#import "DefaultWeightLifting.h"
 
 #define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
 
@@ -97,6 +95,34 @@
     NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
     
     return defaultData;
+}
+
+- (ScheduledEvent *)fetchScheduledEvent:(NSArray *)scheduledEvents week:(NSInteger)week day:(NSInteger)day
+{
+    // if events exists
+    if ([scheduledEvents count] > 0) {
+        Schedule *schedule;
+        schedule = [scheduledEvents firstObject];
+        NSSet *scheduledEvents = schedule.scheduledEvents;
+        NSLog(@"Count: %ld", scheduledEvents.count);
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"day" ascending:YES];
+        NSArray *sortedSchedule = [scheduledEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+        
+        // lookk for an event for the selected cell
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week + 1, day + 1];
+        
+        NSArray *events = [sortedSchedule filteredArrayUsingPredicate:predicate];
+        if ([events count] > 0){
+            // only one entry per day
+            ScheduledEvent *dayEvent = [events firstObject];
+#ifdef debug
+            NSLog(@"Week: %@; Day: %@; Color: %@; Aerobic Event Count: %ld; Weight Event Count: %ld", dayEvent.week, dayEvent.day, dayEvent.cellColor, dayEvent.aerobicEvent.count, dayEvent.weightEvent.count );
+#endif
+            return dayEvent;
+        }
+    }
+    return nil;
 }
 
 #pragma mark - Info

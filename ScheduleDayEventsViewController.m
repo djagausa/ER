@@ -35,6 +35,7 @@
 @property (nonatomic, assign) NSInteger             selectedEventTableHeigth;
 @property (nonatomic, strong) NSMutableArray        *selectedDays;
 - (IBAction)saveAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *navSaveButton;
 @end
 
 const CGFloat kTableSectionHeaderHeight = 26.0;
@@ -49,12 +50,24 @@ const CGFloat kTableCellHeight = 28.0;
     self.selectedAerobicEvents = [[NSMutableArray alloc] init];
     self.selectedDays = [[NSMutableArray alloc]init];
     
+     // get the info about what is being scehuled
     self.scheduledEventInfo = [self.scheduleEventDelegate dayToBeScheduled];
-    
+  
     self.navigationItem.title = [NSString stringWithFormat:@"Setup day %ld of week %ld.", self.scheduledEventInfo.day, self.scheduledEventInfo.week];
     self.selectedEventTableHeigth = 0;
+    
+    // the tag is used to id which segments have been selected when selecting multiple segments; initial state just selected day hghlighted
     [self tagSegemntControlSubViewsAndInitializeSelectedDays];
+    
+    // initialize the day that a schedule is being created for
     [self.selectedDays replaceObjectAtIndex:self.scheduledEventInfo.day-1 withObject:@(1)];
+
+    // get the avaialble event and handle edit mode
+    [self fetchScheduledEvents];
+    
+    // register section header
+    [[self selectedEventsTable] registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"sectionHeader"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,6 +101,11 @@ const CGFloat kTableCellHeight = 28.0;
     NSInteger selectedIndex;
     selectedIndex = [sender selectedSegmentIndex];
     
+    [self handleSegmentState:selectedIndex];
+}
+
+- (void)handleSegmentState:(NSInteger)selectedIndex
+{
     NSNumber *selectedDayState;
     NSNumber *newState;
     selectedDayState = [self.selectedDays objectAtIndex:selectedIndex];
@@ -98,7 +116,6 @@ const CGFloat kTableCellHeight = 28.0;
     }
     
     [self.selectedDays replaceObjectAtIndex:selectedIndex withObject:newState];
-    
     [self highLiteSelectedRepeatDay:selectedIndex];
 }
 
@@ -114,7 +131,6 @@ const CGFloat kTableCellHeight = 28.0;
     }
     [[UISegmentedControl appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blueColor]} forState:UIControlStateSelected];
     [self.repeatDayOutlet setEnabled:NO forSegmentAtIndex:self.scheduledEventInfo.day-1];
-
 }
 
 - (void)highLiteSelectedRepeatDay:(NSInteger)selectedDay
@@ -204,6 +220,12 @@ const CGFloat kTableCellHeight = 28.0;
         }
     }
     return count;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *sectionView = [[self selectedEventsTable] dequeueReusableHeaderFooterViewWithIdentifier:@"sectionHeader"];
+    return sectionView;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -430,9 +452,8 @@ const CGFloat kTableCellHeight = 28.0;
 }
 #pragma mark - Fetched results controller
 
-- (void) fetchEvents
+- (void) fetchScheduledEvents
 {
-    
     self.weightLiftingObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
     self.aerobicObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
     
@@ -448,6 +469,54 @@ const CGFloat kTableCellHeight = 28.0;
      NSLog(@"Event Name: %@",defaultA.eventName);
      }
 #endif
+    // if this is an edit session then get the existing schedule data
+    if (self.scheduledEventInfo.isEditMode) {
+        
+         // get the scheduled events for this schedule
+        NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName}];
+        
+        // get the for the selected day
+        ScheduledEvent *daysEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week-1 day:self.scheduledEventInfo.day-1];
+        
+        // if events are scheduled for this day then update selected days and event tables with existing info
+        if (daysEvent) {
+
+            // get scheduled weight events
+            NSSet *scheduledWeightEvents = daysEvent.weightEvent;
+            
+            // get scheduled aerobic events
+            NSSet *scheduledAerobicEvents = daysEvent.aerobicEvent;
+            
+            // add scheduled events to selected tables
+            self.selectedAerobicEvents = [[scheduledAerobicEvents allObjects]mutableCopy];
+            self.selectedWeightEvents = [[scheduledWeightEvents allObjects]mutableCopy];
+            
+            // remove scheduled events from available events table
+            for (WeightLiftingEvent *weigthEvent in scheduledWeightEvents) {
+                [self.weightLiftingDefaultObjects removeObject:weigthEvent];
+            }
+            for (AerobicEvent *aerobicEvent in scheduledAerobicEvents) {
+                [self.aerobicDefaultObjects removeObject:aerobicEvent];
+            }
+            
+            // remove existing events from stored data
+            [daysEvent removeAerobicEvent:scheduledAerobicEvents];
+            [daysEvent removeAerobicEvent:scheduledWeightEvents];
+            
+            // setup repeated days
+            self.selectedDays = [NSMutableArray arrayWithArray: daysEvent.repeatedDays];
+            for (int i = 0; i <= 6; ++i) {
+                [self highLiteSelectedRepeatDay:i];
+            }
+            
+            // reload tables
+            [self updateTables];
+                
+        }
+        
+        // change navigation save button text to "update"
+        self.navSaveButton.title = @"Update";
+    }
 }
 
 - (void)setupScheduledEvent:(ScheduledEvent *)scheduledEvent forSchedule:(Schedule *)schedule forDay:(NSInteger)day
@@ -485,9 +554,9 @@ const CGFloat kTableCellHeight = 28.0;
         schedule = [schedules firstObject];
     } else {
         schedule = (Schedule *)[self.coreDataHelper newObject:@"Schedule"];
-        schedule.numberOfWeeks = @(self.scheduledEventInfo.numberOfWeeks);
         schedule.scheduleName = self.scheduledEventInfo.scheduleName;
     }
+    schedule.numberOfWeeks = @(self.scheduledEventInfo.numberOfWeeks);
     return schedule;
 }
 

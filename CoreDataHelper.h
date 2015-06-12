@@ -8,6 +8,10 @@
 
 @import CoreData;
 
+#import "WeightLiftingEvent.h"
+#import "DefaultWeightLifting.h"
+#import "ScheduledEvent.h"
+#import "Schedule.h"
 
 @interface CoreDataHelper : NSObject
 @property (nonatomic) NSString *defaultSortAttribute;
@@ -26,6 +30,7 @@
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;
 - (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate;
+- (ScheduledEvent *)fetchScheduledEvent:(NSArray *)scheduledEvents week:(NSInteger)week day:(NSInteger)day;
 
 - (BOOL)clearData;
 - (BOOL)deleteObject:(NSManagedObject *)object;

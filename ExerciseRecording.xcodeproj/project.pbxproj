@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */; };
 		2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */; };
 		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
 		2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */; };
 		2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */; };
+		2DAF3B331B278A6D001DA3DE /* WorkoutScheduledEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B321B278A6D001DA3DE /* WorkoutScheduledEventViewController.m */; };
+		2DAF3B361B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B351B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m */; };
+		2DAF3B391B28EB00001DA3DE /* ScheduleStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B381B28EB00001DA3DE /* ScheduleStatus.m */; };
+		2DAF3B3C1B2AD724001DA3DE /* AbstractScheduleEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */; };
 		2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */; };
 		2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */; };
 		2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */; };
@@ -78,6 +83,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
+		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
 		2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataTVC.h; sourceTree = "<group>"; };
 		2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataTVC.m; sourceTree = "<group>"; };
@@ -90,6 +97,14 @@
 		2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeightLiftingEvent.h; sourceTree = "<group>"; };
 		2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeightLiftingEvent.m; sourceTree = "<group>"; };
 		2DA849421AFAD28A0003AB4F /* ExerciseRecording 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 6.xcdatamodel"; sourceTree = "<group>"; };
+		2DAF3B311B278A6D001DA3DE /* WorkoutScheduledEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutScheduledEventViewController.h; sourceTree = "<group>"; };
+		2DAF3B321B278A6D001DA3DE /* WorkoutScheduledEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutScheduledEventViewController.m; sourceTree = "<group>"; };
+		2DAF3B341B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewScheduledWorkoutTableViewController.h; sourceTree = "<group>"; };
+		2DAF3B351B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewScheduledWorkoutTableViewController.m; sourceTree = "<group>"; };
+		2DAF3B371B28EB00001DA3DE /* ScheduleStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleStatus.h; sourceTree = "<group>"; };
+		2DAF3B381B28EB00001DA3DE /* ScheduleStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleStatus.m; sourceTree = "<group>"; };
+		2DAF3B3A1B2AD724001DA3DE /* AbstractScheduleEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractScheduleEventViewController.h; sourceTree = "<group>"; };
+		2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractScheduleEventViewController.m; sourceTree = "<group>"; };
 		2DB6F41D1AE9075600FCE207 /* EditEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEventTableViewController.h; sourceTree = "<group>"; };
 		2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventTableViewController.m; sourceTree = "<group>"; };
 		2DB6F4201AE9C3B000FCE207 /* EditSelectedEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSelectedEventTableViewController.h; sourceTree = "<group>"; };
@@ -247,6 +262,8 @@
 				2DBCE8431AAB98EB00303DE1 /* AppDelegate.m */,
 				2DF9C0CB1B15215A002A497E /* ScheduledEventInfo.h */,
 				2DF9C0CC1B15215A002A497E /* ScheduledEventInfo.m */,
+				2DAF3B371B28EB00001DA3DE /* ScheduleStatus.h */,
+				2DAF3B381B28EB00001DA3DE /* ScheduleStatus.m */,
 				2DB93FEF1AF151160062AB0D /* SelectedEvent.h */,
 				2DB93FF01AF151160062AB0D /* SelectedEvent.m */,
 				2DFD821F1AE085C800BD9D86 /* Support.h */,
@@ -313,6 +330,8 @@
 			children = (
 				2DB6F42C1AEAADCA00FCE207 /* AbstractEventDataViewController.h */,
 				2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */,
+				2DAF3B3A1B2AD724001DA3DE /* AbstractScheduleEventViewController.h */,
+				2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */,
 				2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */,
 				2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */,
 				2DF9C0B01B134873002A497E /* CreateSheduleViewController.h */,
@@ -329,6 +348,10 @@
 				2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */,
 				2DF9C0BC1B1475F2002A497E /* ScheduleDayEventsViewController.h */,
 				2DF9C0BD1B1475F2002A497E /* ScheduleDayEventsViewController.m */,
+				2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */,
+				2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */,
+				2DAF3B311B278A6D001DA3DE /* WorkoutScheduledEventViewController.h */,
+				2DAF3B321B278A6D001DA3DE /* WorkoutScheduledEventViewController.m */,
 			);
 			name = ControllerFiles;
 			sourceTree = "<group>";
@@ -346,6 +369,8 @@
 				2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */,
 				2DB93FEB1AF116140062AB0D /* HistoryEventSelectTableViewController.h */,
 				2DB93FEC1AF116140062AB0D /* HistoryEventSelectTableViewController.m */,
+				2DAF3B341B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.h */,
+				2DAF3B351B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m */,
 				2DFD82151ADF37DD00BD9D86 /* SelectEventToAddTableViewController.h */,
 				2DFD82161ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m */,
 				2DFD82191ADF398F00BD9D86 /* TableCells */,
@@ -508,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */,
 				2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */,
 				2DF9C0BB1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m in Sources */,
 				2DF9C0DF1B1DAE65002A497E /* DefaultAerobic.m in Sources */,
@@ -517,7 +543,9 @@
 				2DB6F4311AEBDD1000FCE207 /* EditEventTableViewCell.m in Sources */,
 				2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */,
 				2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */,
+				2DAF3B391B28EB00001DA3DE /* ScheduleStatus.m in Sources */,
 				2DB6F43D1AEE50C700FCE207 /* EditEventViewController.m in Sources */,
+				2DAF3B3C1B2AD724001DA3DE /* AbstractScheduleEventViewController.m in Sources */,
 				2DB93FFA1AF383E40062AB0D /* EventHistoryViewController.m in Sources */,
 				2DB93FF11AF151160062AB0D /* SelectedEvent.m in Sources */,
 				2DB93FF41AF23AC20062AB0D /* EventHistoryPlotViewController.m in Sources */,
@@ -535,9 +563,11 @@
 				2DBCE84A1AAB98EB00303DE1 /* EventViewController.m in Sources */,
 				2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */,
 				2DB93FED1AF116140062AB0D /* HistoryEventSelectTableViewController.m in Sources */,
+				2DAF3B361B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m in Sources */,
 				2DF9C0D91B166EA2002A497E /* ScheduleDaySectionHeaderCell.m in Sources */,
 				2DBCE8411AAB98EB00303DE1 /* main.m in Sources */,
 				2DF9C0CD1B15215A002A497E /* ScheduledEventInfo.m in Sources */,
+				2DAF3B331B278A6D001DA3DE /* WorkoutScheduledEventViewController.m in Sources */,
 				2DFD82171ADF37DD00BD9D86 /* SelectEventToAddTableViewController.m in Sources */,
 				2DF9C0E21B1DAE66002A497E /* DefaultWeightLifting.m in Sources */,
 				2DF9C0E51B1E482A002A497E /* ScheduledEvent.m in Sources */,

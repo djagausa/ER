@@ -25,6 +25,8 @@
 @property (nonatomic, strong) ScheduledEvent *scheduledEvent;
 @property (nonatomic, assign) NSInteger coloredCellCount;
 @property (nonatomic, strong) NSArray *scheduledEvents;
+@property (nonatomic, strong) NSNumber *numberOfWeeks;
+
 @end
 
 static NSString *_dayCellIdentification = @"dayCell";
@@ -54,15 +56,15 @@ static NSArray *_cellColors;
     }
     self.daysConfiguredTheSame = [[NSMutableArray alloc] initWithCapacity:7];
     _cellColors = [[NSArray alloc] initWithObjects:
+                   [UIColor whiteColor],
                    [UIColor redColor],
                    [UIColor greenColor],
                    [UIColor blueColor],
                    [UIColor lightGrayColor],
                    [UIColor orangeColor],
                    [UIColor purpleColor],
-                   [UIColor cyanColor],
-                   [UIColor whiteColor], nil];
-    self.coloredCellCount = 7;       // selecting white color = no configuration for the cell
+                   [UIColor cyanColor],nil];
+    self.coloredCellCount = 0;       // selecting white color = no configuration for the cell
 }
 
 - (IBAction)scheduleNameInput:(id)sender
@@ -86,6 +88,10 @@ static NSArray *_cellColors;
     if (buttonIndex == 0) {
         [self.scheduleCollectionView setUserInteractionEnabled:YES];
         [self.scheduledEventInfo setEditMode:YES];
+        NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:@"Schedule" withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduleNameOutlet.text}];
+        Schedule *schedule = [scheduledEvents firstObject];
+        self.numberOfWeeks = schedule.numberOfWeeks;
+
         [self.scheduleCollectionView reloadData];
         return;
     }
@@ -105,7 +111,7 @@ static NSArray *_cellColors;
 {
     self.coloredCellCount++;
     if (self.coloredCellCount >= 7) {
-        self.coloredCellCount = 0;
+        self.coloredCellCount = 1;
     }
     self.scheduledEventInfo.colorIndex = self.coloredCellCount;
     return self.scheduledEventInfo;
@@ -130,7 +136,17 @@ static NSArray *_cellColors;
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return [self.numberOfWeeksOutlet.text integerValue];
+    NSInteger numberOfSection = 0;
+    
+    if (self.scheduledEventInfo.isEditMode == YES) {
+        numberOfSection =  [self.numberOfWeeks integerValue];
+    }
+    
+    // handle teh situation where user inscreases the number weeks in edit mode
+    if ([self.numberOfWeeksOutlet.text integerValue] > numberOfSection) {
+        numberOfSection = [self.numberOfWeeksOutlet.text integerValue];
+    }
+    return numberOfSection;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -164,43 +180,24 @@ static NSArray *_cellColors;
 {
     // default values
     NSInteger totalEvents = 0;
-    NSInteger colorIndex = 7;
+    NSInteger colorIndex = 0;
     
-    // if events exists
-    if ([self.scheduledEvents count] > 0) {
-        Schedule *schedule;
-        schedule = [self.scheduledEvents firstObject];
-        NSSet *scheduledEvents = schedule.scheduledEvents;
-        NSLog(@"Count: %ld", scheduledEvents.count);
-        
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"day" ascending:YES];
-        NSArray *sortedSchedule = [scheduledEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
-        
-        // lookk for an event for the selected cell
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week + 1, day + 1];
+    ScheduledEvent *dayEvent = [self.coreDataHelper fetchScheduledEvent:self.scheduledEvents week:week day:day];
     
-        NSArray *events = [sortedSchedule filteredArrayUsingPredicate:predicate];
-        if ([events count] > 0){
-            // only one entry per day
-            ScheduledEvent *dayEvent = [events firstObject];
-            
-            totalEvents = [dayEvent.totalEvents integerValue];
-            colorIndex = [dayEvent.cellColor integerValue];
-            
-            if (colorIndex > self.coloredCellCount) {
-                self.coloredCellCount = colorIndex;
-            }
-            
-#ifdef debug
-            NSLog(@"Week: %@; Day: %@; Color: %@; Aerobic Event Count: %ld; Weight Event Count: %ld", dayEvent.week, dayEvent.day, dayEvent.cellColor, dayEvent.aerobicEvent.count, dayEvent.weightEvent.count );
-#endif
+    // if events exists get cell info
+    if (dayEvent != nil) {
+        totalEvents = [dayEvent.totalEvents integerValue];
+        colorIndex = [dayEvent.cellColor integerValue];
+        
+        if (colorIndex > self.coloredCellCount) {
+            self.coloredCellCount = colorIndex;
         }
     }
-    
+
     cell.dayCellNumberOfEvents.text = [NSString stringWithFormat:@"Events: %ld", totalEvents];
     cell.backgroundColor = [_cellColors objectAtIndex: colorIndex];
-
 }
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
