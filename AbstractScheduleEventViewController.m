@@ -20,8 +20,6 @@
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) NSMutableDictionary           *scheduledlStatus;
 @property (nonatomic, strong) ScheduleStatus                *currentScheduleStatus;
-@property (nonatomic, strong) NSArray                       *weightLiftingDefaultObjects;
-@property (nonatomic, strong) NSArray                       *aerobicDefaultObjects;
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
@@ -38,6 +36,8 @@ static NSString *CellIdentifier = @"EventCell";
     self.coreDataHelper.managedObjectContext = self.managedObjectContext;
     self.coreDataHelper.defaultSortAttribute = @"date";
 
+    self.weightLiftingDefaultObjects = [[NSMutableArray alloc] init];
+    self.aerobicDefaultObjects = [[NSMutableArray alloc] init];
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
@@ -226,8 +226,8 @@ static NSString *CellIdentifier = @"EventCell";
 
 - (void) fetchEvents
 {
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
+    self.weightLiftingDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];
+    self.aerobicDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];
     
 #ifdef debug
     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {

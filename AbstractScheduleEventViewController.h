@@ -20,6 +20,8 @@
 @property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;
 @property (nonatomic, strong) DefaultAerobic            *defaultAerobic;
 @property (nonatomic, strong) SelectedEvent             *selectedEvent;
+@property (nonatomic, strong) NSMutableArray            *weightLiftingDefaultObjects;
+@property (nonatomic, strong) NSMutableArray            *aerobicDefaultObjects;
 
 - (NSNumber *)fetchNumberOfWeeksForSchedule:(NSString *)scheduleName;
 - (void) fetchEvents;

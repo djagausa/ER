@@ -23,6 +23,8 @@ static NSString *cellName = @"ScheduleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
  
+    self.scheduleInfo = [[ScheduledEventInfo alloc]init];
+    
     [self fetchSchedules];
  }
 
@@ -80,6 +82,7 @@ static NSString *cellName = @"ScheduleCell";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     WorkoutScheduledEventViewController *workoutScheduledEventViewController = [segue destinationViewController];
     workoutScheduledEventViewController.workoutScheduleDelegate = self;
+    workoutScheduledEventViewController.managedObjectContext = self.managedObjectContext;
 }
 
 

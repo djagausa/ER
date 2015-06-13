@@ -569,6 +569,7 @@ const CGFloat kTableCellHeight = 28.0;
     Schedule *schedule = [self setupSchedule];
     
     for (int i = 0; i < [self.selectedDays count]; ++i) {
+        // save all the days that are the same
         if ([self.selectedDays[i] isEqualToNumber:@(1)]) {
             ScheduledEvent *scheduledEvent = (ScheduledEvent *)[self.coreDataHelper newObject:@"ScheduledEvent"];
             [self setupScheduledEvent:scheduledEvent forSchedule:schedule forDay:i+1];

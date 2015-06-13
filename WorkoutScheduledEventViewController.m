@@ -9,6 +9,8 @@
 #import "WorkoutScheduledEventViewController.h"
 #import "ScheduledEventInfo.h"
 #import "ScheduleStatus.h"
+#import "ScheduledEvent.h"
+#import "AddEventDataViewController.h"
 
 @interface WorkoutScheduledEventViewController ()
 @property (weak, nonatomic) IBOutlet UILabel        *scheduleInfoLabel;
@@ -23,16 +25,29 @@
     [super viewDidLoad];
     
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
-
+    [self fetchEvents];
+    [self constructInfoLabel];
 }
 
+- (void)constructInfoLabel
+{
+    NSString *labelText = [NSString stringWithFormat:@"Schedule %@: day %ld of week %ld.", self.scheduledEventInfo.scheduleName, self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1];
+    self.scheduleInfoLabel.text = labelText;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark Delegate
+
+- (SelectedEvent *)selectedEventDataIs
+{
+    return self.selectedEvent;
+}
+
 #pragma mark - Core Data
-- (void)fetchScheduledEvents:(NSString *)scheduleName
+- (void)fetchEvents
 {
     Schedule *schedule;
     NSArray *scheduledEvents;
@@ -42,16 +57,47 @@
     if ([scheduledEvents count] > 0) {
         schedule = [scheduledEvents firstObject];
     }
+    
+    ScheduledEvent *dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
+    
+    NSSet *weightEvents = dayEvent.weightEvent;
+    NSSet *aerobicEvents = dayEvent.aerobicEvent;
+ 
+    [self.weightLiftingDefaultObjects removeAllObjects];
+    [self.aerobicDefaultObjects removeAllObjects];
+    
+    for (DefaultAerobic *aerobicEvent in aerobicEvents) {
+#ifdef debug
+        NSLog(@"Aerobic Event Name: %@", aerobicEvent.eventName);
+#endif
+        [self.aerobicDefaultObjects addObject:aerobicEvent];
+    }
+    
+    for (DefaultWeightLifting *weightEvent in weightEvents) {
+#ifdef debug
+        NSLog(@"Weight Event Name: %@", weightEvent.eventName);
+#endif
+        [self.weightLiftingDefaultObjects addObject:weightEvent];
+    }
+
+#ifdef debug
+    for (DefaultAerobic *aerobicEvent in self.aerobicDefaultObjects) {
+        NSLog(@"Aerobic Even Name: %@", aerobicEvent.eventName);
+    }
+    for (DefaultWeightLifting *weightEvent in self.weightLiftingDefaultObjects) {
+        NSLog(@"Weight Even Name: %@", weightEvent.eventName);
+    }
+#endif
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+    addEventDataVC.delegate = self;
 }
-*/
+
 
 @end

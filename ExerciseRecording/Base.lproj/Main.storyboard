@@ -2139,7 +2139,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="10" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="NpC-2d-TTL">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="NpC-2d-TTL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -2260,12 +2260,12 @@
         <scene sceneID="Cek-dn-nZ2">
             <objects>
                 <tableViewController title="New Scheduled Workout" id="dLH-k8-8Ld" customClass="NewScheduledWorkoutTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="OI9-Cz-t5C">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" id="OI9-Cz-t5C">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleCell" textLabel="7Zw-AE-F8w" style="IBUITableViewCellStyleDefault" id="DI9-Dz-PPU" userLabel="WeightEvent Cell">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleCell" textLabel="7Zw-AE-F8w" rowHeight="28" style="IBUITableViewCellStyleDefault" id="DI9-Dz-PPU" userLabel="WeightEvent Cell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DI9-Dz-PPU" id="37l-RO-fVl">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -2311,17 +2311,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule XYZ: day 1 of week: 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-pJ-lYE">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule XYZ: day 1 of week: 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnE-pJ-lYE">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="8ho-ds-Kdq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8ho-ds-Kdq"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="8ho-ds-Kdq"/>
+                                    </mask>
+                                </variation>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="phd-5F-L4i">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="phd-5F-L4i">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="kl2-fW-t0k" style="IBUITableViewCellStyleDefault" id="8yL-bf-ydv">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventCell" textLabel="kl2-fW-t0k" rowHeight="28" style="IBUITableViewCellStyleDefault" id="8yL-bf-ydv">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8yL-bf-ydv" id="XvK-9U-opc">
@@ -2354,9 +2368,13 @@
                             <constraint firstItem="phd-5F-L4i" firstAttribute="leading" secondItem="PnE-pJ-lYE" secondAttribute="leading" id="1Gb-9R-y33"/>
                             <constraint firstItem="phd-5F-L4i" firstAttribute="trailing" secondItem="PnE-pJ-lYE" secondAttribute="trailing" id="7dC-R4-WHF"/>
                             <constraint firstAttribute="bottom" secondItem="phd-5F-L4i" secondAttribute="bottom" constant="20" symbolic="YES" id="F86-kY-tiy"/>
-                            <constraint firstItem="phd-5F-L4i" firstAttribute="top" secondItem="PnE-pJ-lYE" secondAttribute="bottom" constant="20" id="Hmq-q2-v7f"/>
+                            <constraint firstItem="phd-5F-L4i" firstAttribute="top" secondItem="PnE-pJ-lYE" secondAttribute="bottom" constant="20" id="Hmq-q2-v7f">
+                                <variation key="heightClass=regular-widthClass=compact" constant="12"/>
+                            </constraint>
                             <constraint firstItem="PnE-pJ-lYE" firstAttribute="trailing" secondItem="bIX-0L-SGA" secondAttribute="trailingMargin" id="ltl-HX-7iT"/>
-                            <constraint firstItem="PnE-pJ-lYE" firstAttribute="top" secondItem="LRU-oQ-yeF" secondAttribute="bottom" constant="8" symbolic="YES" id="qqk-La-ffq"/>
+                            <constraint firstItem="PnE-pJ-lYE" firstAttribute="top" secondItem="LRU-oQ-yeF" secondAttribute="bottom" constant="8" symbolic="YES" id="qqk-La-ffq">
+                                <variation key="heightClass=regular-widthClass=compact" constant="14"/>
+                            </constraint>
                             <constraint firstItem="PnE-pJ-lYE" firstAttribute="leading" secondItem="bIX-0L-SGA" secondAttribute="leadingMargin" id="zip-xh-myz"/>
                         </constraints>
                         <variation key="default">
@@ -4042,7 +4060,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="zcK-bl-baJ"/>
         <segue reference="Wri-AE-L0n"/>
-        <segue reference="thL-DP-0tK"/>
+        <segue reference="hhk-20-Oeh"/>
         <segue reference="bst-Nl-5N9"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -14,12 +14,12 @@
 
 @interface AbstractEventDataTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSArray               *weightLiftingDefaultObjects;
-@property (nonatomic, strong) NSArray               *aerobicDefaultObjects;
-@property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
-@property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
-@property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
+@property (nonatomic, strong) NSManagedObjectContext    *managedObjectContext;
+@property (nonatomic, strong) NSArray                   *weightLiftingDefaultObjects;
+@property (nonatomic, strong) NSArray                   *aerobicDefaultObjects;
+@property (nonatomic, strong) DefaultWeightLifting      *defaultWeightLifting;
+@property (nonatomic, strong) DefaultAerobic            *defaultAerobic;
+@property (nonatomic, strong) CoreDataHelper            *coreDataHelper;
 
 - (NSNumber *)convertTimeToNumber:(NSString *)timeString;
 @end
