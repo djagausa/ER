@@ -11,6 +11,7 @@
 #import "WeightLiftingEvent.h"
 #import "EventTableViewCell.h"
 #import "Support.h"
+#import "utilities.h"
 
 @interface AddEventDataViewController () <UITextViewDelegate>
 
@@ -191,27 +192,15 @@ BOOL setCountInitialized;
 
 -(NSDate *)setupDate
 {
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    [dateFormatter setCalendar:calendar];
-    
-    NSDate *date = [NSDate date];
-    
-    NSDateComponents *dateComponents = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
-    
-    date = [calendar dateFromComponents:dateComponents];
-
-    return date;
+    return [Utilities dateWithoutTime:[NSDate date]];
 }
+
 - (void)setupNewWeightLiftingEvent:(WeightLiftingEvent *)weightLiftingEvent
 {
     weightLiftingEvent.date = [self setupDate];
     weightLiftingEvent.setNumber = self.setCount;
     weightLiftingEvent.repCount = @([self.in2Label.text integerValue]);
+    weightLiftingEvent.performed = @(1);
     if ([self.note.text isEqualToString:notePlaceHolder]) {
         weightLiftingEvent.notes = @"";
     } else {
@@ -231,6 +220,7 @@ BOOL setCountInitialized;
     }
     aerobicEvent.defaultEvent = self.defaultAerobic;
     aerobicEvent.category = @(self.selectedEvent.eventCategory);
+    aerobicEvent.performed = @(1);
 
     switch (self.selectedEvent.eventCategory) {
         case kBicycling:
@@ -426,7 +416,7 @@ BOOL setCountInitialized;
     }
     [self setupNoteInputTextField];
     [self refresh];
-    [self.addEventDataDelegate exerciseDataAdded];
+    [self.addEventDataDelegate exerciseDataAdded:self.selectedEvent];
 }
 
 - (IBAction)in1Input:(id)sender {
@@ -437,6 +427,41 @@ BOOL setCountInitialized;
 
 - (IBAction)in3Input:(id)sender {
 }
+
+#pragma mark - Core Data
+
+- (void)fetchEvents
+{
+    switch ([self selectedEvent].eventCategory) {
+        case kWeights:
+        {
+            [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
+                                            groupBy:nil];
+        }
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+        {
+            [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
+                                            groupBy:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 /*
 #pragma mark - Navigation

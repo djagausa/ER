@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSNumber * enabled;
 @property (nonatomic, retain) NSString * eventName;
 @property (nonatomic, retain) NSNumber * totalTime;
+@property (nonatomic, retain) NSNumber * performed;
 @property (nonatomic, retain) NSSet *aerobicEvent;
 @property (nonatomic, retain) NSSet *scheduledEvent;
 @end

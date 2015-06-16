@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * eventName;
 @property (nonatomic, retain) NSNumber * numOfReps;
 @property (nonatomic, retain) NSNumber * weight;
+@property (nonatomic, retain) NSNumber * performed;
 @property (nonatomic, retain) NSSet *liftingEvents;
 @property (nonatomic, retain) NSSet *scheduledEvent;
 @end

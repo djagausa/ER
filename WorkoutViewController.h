@@ -10,8 +10,9 @@
 #import "AbstractEventDataViewController.h"
 #import "AddEventDataViewController.h"
 #import "AbstractScheduleEventViewController.h"
+#import "WorkoutScheduledEventViewController.h"
 
 
-@interface WorkoutViewController : AbstractScheduleEventViewController <AbstractEventDataDelegate>
+@interface WorkoutViewController : AbstractScheduleEventViewController <AbstractEventDataDelegate, WorkoutScheduledEventViewControllerDelegate>
 
 @end

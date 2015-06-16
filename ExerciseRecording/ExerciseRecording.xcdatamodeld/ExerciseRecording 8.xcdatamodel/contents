@@ -10,6 +10,7 @@
         <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="section" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <relationship name="defaultEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DefaultAerobic" inverseName="aerobicEvent" inverseEntity="DefaultAerobic" syncable="YES"/>
@@ -21,6 +22,7 @@
         <attribute name="distance" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="totalTime" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <relationship name="aerobicEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AerobicEvent" inverseName="defaultEvent" inverseEntity="AerobicEvent" syncable="YES"/>
         <relationship name="scheduledEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledEvent" inverseName="aerobicEvent" inverseEntity="ScheduledEvent" syncable="YES"/>
@@ -30,6 +32,7 @@
         <attribute name="enabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numOfReps" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0.0" syncable="YES"/>
         <relationship name="liftingEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="WeightLiftingEvent" inverseName="defaultEvent" inverseEntity="WeightLiftingEvent" syncable="YES"/>
         <relationship name="scheduledEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledEvent" inverseName="weightEvent" inverseEntity="ScheduledEvent" syncable="YES"/>
@@ -53,6 +56,7 @@
     <entity name="WeightLiftingEvent" representedClassName="WeightLiftingEvent" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="repCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
         <attribute name="setNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -60,11 +64,11 @@
         <relationship name="defaultEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DefaultWeightLifting" inverseName="liftingEvents" inverseEntity="DefaultWeightLifting" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="223"/>
-        <element name="DefaultAerobic" positionX="-461" positionY="17" width="128" height="178"/>
-        <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="148"/>
-        <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="148"/>
-        <element name="ScheduledEvent" positionX="124" positionY="-90" width="128" height="178"/>
+        <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="240"/>
+        <element name="DefaultAerobic" positionX="-461" positionY="17" width="128" height="195"/>
+        <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="165"/>
         <element name="Schedule" positionX="133" positionY="-234" width="128" height="88"/>
+        <element name="ScheduledEvent" positionX="124" positionY="-90" width="128" height="178"/>
+        <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="165"/>
     </elements>
 </model>

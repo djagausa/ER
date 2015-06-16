@@ -14,7 +14,7 @@
 
 @protocol AddEventDataViewControllerDelegate <NSObject>
 @optional
-- (void)exerciseDataAdded;
+- (void)exerciseDataAdded:(SelectedEvent *)eventAdded;
 @end
 
 @interface AddEventDataViewController : AbstractEventDataViewController

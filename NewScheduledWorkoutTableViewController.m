@@ -9,10 +9,13 @@
 #import "NewScheduledWorkoutTableViewController.h"
 #import "Schedule.h"
 #import "ScheduledEventInfo.h"
+#import "ScheduleStatusFileHelper.h"
+#import "ScheduleStatus.h"
 
 @interface NewScheduledWorkoutTableViewController ()
-@property (nonatomic, strong) NSArray               *schedules;
-@property (nonatomic, strong) ScheduledEventInfo    *scheduleInfo;
+@property (nonatomic, strong) NSArray                   *schedules;
+@property (nonatomic, strong) ScheduledEventInfo        *scheduleInfo;
+@property (nonatomic, strong) ScheduleStatusFileHelper  *schduleFileHelper;
 @end
 
 static NSString *scheduleEntity = @"Schedule";
@@ -23,7 +26,8 @@ static NSString *cellName = @"ScheduleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    self.scheduleInfo = [[ScheduledEventInfo alloc]init];
+    self.scheduleInfo = [[ScheduledEventInfo alloc] init];
+    self.schduleFileHelper =[[ScheduleStatusFileHelper alloc] init];
     
     [self fetchSchedules];
  }
@@ -58,6 +62,8 @@ static NSString *cellName = @"ScheduleCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.scheduleInfo.scheduleName = [[self.schedules objectAtIndex:indexPath.row] scheduleName];
+    
+    [self saveNewScheduleInfo];
 }
 
 #pragma mark - delegates
@@ -75,6 +81,19 @@ static NSString *cellName = @"ScheduleCell";
     self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntity withPredicate:nil];
 }
 
+- (void)saveNewScheduleInfo
+{
+    // save schedule info: name; today's date; day=0; week=0
+    ScheduleStatus *scheduleStatus = [[ScheduleStatus alloc] init];
+    
+    scheduleStatus.scheduleName = self.scheduleInfo.scheduleName;
+    scheduleStatus.day = @(0);
+    scheduleStatus.week = @(0);
+    scheduleStatus.lastUpdateDate = [NSDate date];
+    scheduleStatus.active = @(1);                   // TRUE = active
+    
+    [self.schduleFileHelper writeScheduleStatusFile:scheduleStatus];
+}
 
 #pragma mark - Navigation
 

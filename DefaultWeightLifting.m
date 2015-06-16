@@ -20,5 +20,6 @@
 @dynamic weight;
 @dynamic liftingEvents;
 @dynamic scheduledEvent;
+@dynamic performed;
 
 @end

@@ -10,13 +10,17 @@
 #import "ScheduledEventInfo.h"
 #import "ScheduleStatus.h"
 #import "ScheduledEvent.h"
-#import "AddEventDataViewController.h"
+#import "Utilities.h"
 
 @interface WorkoutScheduledEventViewController ()
 @property (weak, nonatomic) IBOutlet UILabel        *scheduleInfoLabel;
 @property (nonatomic, strong) ScheduledEventInfo    *scheduledEventInfo;
 @property (nonatomic, strong) NSArray               *weightLiftingEvents;
 @property (nonatomic, strong) NSArray               *aerobicEvents;
+@property (weak, nonatomic) IBOutlet UITableView    *tableView;
+@property (nonatomic, strong) NSSet                 *weightScheduledEvents;
+@property (nonatomic, strong) NSSet                 *aerobicScheduledEvents;
+@property (nonatomic, strong) ScheduledEvent        *dayEvent;
 @end
 
 @implementation WorkoutScheduledEventViewController
@@ -26,6 +30,7 @@
     
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
     [self fetchEvents];
+    [self fetchTodaysCompleteEvents];
     [self constructInfoLabel];
 }
 
@@ -39,11 +44,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark Delegate
-
-- (SelectedEvent *)selectedEventDataIs
+- (void)exerciseDataAdded:(SelectedEvent *)eventAdded
 {
-    return self.selectedEvent;
+    // change the color of the table view cell
+    [self.tableView reloadData];
 }
 
 #pragma mark - Core Data
@@ -58,25 +62,19 @@
         schedule = [scheduledEvents firstObject];
     }
     
-    ScheduledEvent *dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
+    self.dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
     
-    NSSet *weightEvents = dayEvent.weightEvent;
-    NSSet *aerobicEvents = dayEvent.aerobicEvent;
+    self.weightScheduledEvents = self.dayEvent.weightEvent;
+    self.aerobicScheduledEvents = self.dayEvent.aerobicEvent;
  
     [self.weightLiftingDefaultObjects removeAllObjects];
     [self.aerobicDefaultObjects removeAllObjects];
     
-    for (DefaultAerobic *aerobicEvent in aerobicEvents) {
-#ifdef debug
-        NSLog(@"Aerobic Event Name: %@", aerobicEvent.eventName);
-#endif
+    for (DefaultAerobic *aerobicEvent in self.aerobicScheduledEvents) {
         [self.aerobicDefaultObjects addObject:aerobicEvent];
     }
     
-    for (DefaultWeightLifting *weightEvent in weightEvents) {
-#ifdef debug
-        NSLog(@"Weight Event Name: %@", weightEvent.eventName);
-#endif
+    for (DefaultWeightLifting *weightEvent in self.weightScheduledEvents) {
         [self.weightLiftingDefaultObjects addObject:weightEvent];
     }
 
@@ -90,14 +88,23 @@
 #endif
 }
 
-#pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)fetchTodaysCompleteEvents
 {
-    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    AddEventDataViewController *addEventDataVC = [segue destinationViewController];
-    addEventDataVC.delegate = self;
+    //     fetch any saved events that may have occurred
+    
+    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]}] mutableCopy];
+    
+    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]}] mutableCopy];
 }
+//#pragma mark - Navigation
+//
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+//    AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+//    addEventDataVC.delegate = self;
+//}
 
 
 @end

@@ -31,6 +31,7 @@
 @dynamic note;
 @dynamic primitiveSectionIdentifier;
 @dynamic primitiveDate;
+@dynamic performed;
 
 - (NSString *)sectionIdentifier
 {

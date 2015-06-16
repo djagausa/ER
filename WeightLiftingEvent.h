@@ -17,6 +17,7 @@
 @property (nonatomic, retain) NSNumber * weight;
 @property (nonatomic, retain) NSNumber * setNumber;
 @property (nonatomic, retain) NSNumber * repCount;
+@property (nonatomic, retain) NSNumber * performed;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * sectionIdentifier;
 @property (nonatomic, retain) DefaultWeightLifting *defaultEvent;

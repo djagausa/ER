@@ -517,7 +517,7 @@ UIEdgeInsets oldIndicatorInset;
                 newDefaultAerobic.eventName = self.exerciseName.text;
                 newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
                 newDefaultAerobic.enabled = @(1);           // default is enabled on
-                newDefaultAerobic.totalTime = [NSNumber numberWithInteger:[self.default1.text integerValue]];
+                newDefaultAerobic.totalTime = [self convertTimeToNumber: self.default1.text];
                 newDefaultAerobic.desiredHR = [NSNumber numberWithInteger:[self.default2.text integerValue]];
                 newDefaultAerobic.cadence = [NSNumber numberWithInteger:[self.default3.text integerValue]];
                 break;

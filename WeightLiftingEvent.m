@@ -27,6 +27,7 @@
 @dynamic defaultEvent;
 @dynamic primitiveSectionIdentifier;
 @dynamic primitiveDate;
+@dynamic performed;
 
 #pragma mark - Transient properties
 

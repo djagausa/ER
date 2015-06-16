@@ -40,4 +40,12 @@ static NSString *weightLiftingDefaultEventsEntityName = @"DefaultWeightLifting";
 static NSString *scheduleEntityName = @"Schedule";
 static NSString *scheduledEventEntityName = @"ScheduledEvent";
 
+
+static NSString *scheduleStatusFileName = @"ScheduledStatus.out";
+static NSString *scheduleNameKey =  @"scheduledNameKey";
+static NSString *dayKey = @"dayKey";
+static NSString *weekKey = @"weekKey";
+static NSString *lastUpdateDateKey = @"lastUpdateDateKey";
+static NSString *activeKey = @"activeKey";
+
 #endif

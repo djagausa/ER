@@ -11,7 +11,8 @@
 #import "Schedule.h"
 #import "DefaultAerobic.h"
 #import "DefaultWeightLifting.h"
-
+#import "AddEventDataViewController.h"
+#import "Utilities.h"
 
 @interface AbstractScheduleEventViewController ()
 
@@ -38,6 +39,10 @@ static NSString *CellIdentifier = @"EventCell";
 
     self.weightLiftingDefaultObjects = [[NSMutableArray alloc] init];
     self.aerobicDefaultObjects = [[NSMutableArray alloc] init];
+    self.completedAerobicEvents = [[NSMutableArray alloc] init];
+    self.completedWeightEvents = [[NSMutableArray alloc] init];
+    
+    [self fetchTodaysCompleteEvents];
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
@@ -54,6 +59,14 @@ static NSString *CellIdentifier = @"EventCell";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark Delegate
+
+- (SelectedEvent *)selectedEventDataIs
+{
+    return self.selectedEvent;
+}
+
 
 #pragma mark - Table View
 
@@ -110,12 +123,18 @@ static NSString *CellIdentifier = @"EventCell";
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                if ([self eventHasBeenPerfomed:event.eventName eventCategory:AerobicCategory]) {
+                    cell.backgroundColor = [UIColor greenColor];
+                }
             }
             else
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
+                    cell.backgroundColor = [UIColor greenColor];
+                }
             }
             break;
             
@@ -124,6 +143,9 @@ static NSString *CellIdentifier = @"EventCell";
             cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
             cell.textLabel.text = event.eventName;
+            if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
+                cell.backgroundColor = [UIColor greenColor];
+            }
         }
             break;
             
@@ -208,6 +230,29 @@ static NSString *CellIdentifier = @"EventCell";
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+- (BOOL)eventHasBeenPerfomed:(NSString *)eventName eventCategory:(EventCateogory)eventCategory
+{
+    switch (eventCategory) {
+        case AerobicCategory:
+            for (AerobicEvent *aerobicEvent in self.completedAerobicEvents) {
+                if ([aerobicEvent.defaultEvent.eventName isEqualToString:eventName]) {
+                    return YES;
+                }
+            }
+            break;
+        case WeightCategory:
+            for (WeightLiftingEvent *weightEvent in self.completedWeightEvents) {
+                if ([weightEvent.defaultEvent.eventName isEqualToString:eventName]) {
+                    return YES;
+                }
+            }
+            break;
+        default:
+            break;
+    }
+    return NO;
+}
+
 #pragma mark - Core Data
 - (NSNumber *)fetchNumberOfWeeksForSchedule:(NSString *)scheduleName
 {
@@ -240,14 +285,23 @@ static NSString *CellIdentifier = @"EventCell";
 #endif
 }
 
-/*
+
+- (void)fetchTodaysCompleteEvents
+{
+    // implement in class
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"scheduledEvent"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+        addEventDataVC.delegate = self;
+        addEventDataVC.addEventDataDelegate = self;
+    }
 }
-*/
+
 
 @end

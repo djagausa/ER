@@ -17,6 +17,8 @@
 		2DAF3B361B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B351B278BC7001DA3DE /* NewScheduledWorkoutTableViewController.m */; };
 		2DAF3B391B28EB00001DA3DE /* ScheduleStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B381B28EB00001DA3DE /* ScheduleStatus.m */; };
 		2DAF3B3C1B2AD724001DA3DE /* AbstractScheduleEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */; };
+		2DAF3B3F1B2D702C001DA3DE /* ScheduleStatusFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B3E1B2D702C001DA3DE /* ScheduleStatusFileHelper.m */; };
+		2DAF3B421B2E199B001DA3DE /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B411B2E199B001DA3DE /* Utilities.m */; };
 		2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */; };
 		2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */; };
 		2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */; };
@@ -105,6 +107,10 @@
 		2DAF3B381B28EB00001DA3DE /* ScheduleStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleStatus.m; sourceTree = "<group>"; };
 		2DAF3B3A1B2AD724001DA3DE /* AbstractScheduleEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractScheduleEventViewController.h; sourceTree = "<group>"; };
 		2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractScheduleEventViewController.m; sourceTree = "<group>"; };
+		2DAF3B3D1B2D702C001DA3DE /* ScheduleStatusFileHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleStatusFileHelper.h; sourceTree = "<group>"; };
+		2DAF3B3E1B2D702C001DA3DE /* ScheduleStatusFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleStatusFileHelper.m; sourceTree = "<group>"; };
+		2DAF3B401B2E199B001DA3DE /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		2DAF3B411B2E199B001DA3DE /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		2DB6F41D1AE9075600FCE207 /* EditEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEventTableViewController.h; sourceTree = "<group>"; };
 		2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventTableViewController.m; sourceTree = "<group>"; };
 		2DB6F4201AE9C3B000FCE207 /* EditSelectedEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSelectedEventTableViewController.h; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 				2DB93FEF1AF151160062AB0D /* SelectedEvent.h */,
 				2DB93FF01AF151160062AB0D /* SelectedEvent.m */,
 				2DFD821F1AE085C800BD9D86 /* Support.h */,
+				2DAF3B401B2E199B001DA3DE /* Utilities.h */,
+				2DAF3B411B2E199B001DA3DE /* Utilities.m */,
 				2DF9C0A31B0B400F002A497E /* Fabric.framework */,
 				2DF9C0A41B0B400F002A497E /* Crashlytics.framework */,
 			);
@@ -321,6 +329,8 @@
 				2DF9C0E41B1E482A002A497E /* ScheduledEvent.m */,
 				2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */,
 				2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */,
+				2DAF3B3D1B2D702C001DA3DE /* ScheduleStatusFileHelper.h */,
+				2DAF3B3E1B2D702C001DA3DE /* ScheduleStatusFileHelper.m */,
 			);
 			name = DataFiles;
 			sourceTree = "<group>";
@@ -551,7 +561,9 @@
 				2DB93FF41AF23AC20062AB0D /* EventHistoryPlotViewController.m in Sources */,
 				2DBCE8471AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld in Sources */,
 				2DF9C0BE1B1475F2002A497E /* ScheduleDayEventsViewController.m in Sources */,
+				2DAF3B421B2E199B001DA3DE /* Utilities.m in Sources */,
 				2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */,
+				2DAF3B3F1B2D702C001DA3DE /* ScheduleStatusFileHelper.m in Sources */,
 				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
 				2DF9C0D31B152B1A002A497E /* Schedule.m in Sources */,
 				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,

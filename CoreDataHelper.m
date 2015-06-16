@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "CoreDataHelper.h"
 
-#define DOCUMENTS_FOLDER [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"]
-
 @implementation CoreDataHelper
 
 #pragma mark - Core Data
@@ -37,7 +35,6 @@
     // setup Predicate
     if ([predicate count] > 0) {
         NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K like[cd] %@",predicate[@"propertyName"], predicate[@"value"]];
-//        NSPredicate *filter = [NSPredicate predicateWithFormat:@"defaultEvent.eventName like[cd] %@", predicate];
         [fetchRequest setPredicate:filter];
     }
     

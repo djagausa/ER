@@ -22,5 +22,6 @@
 @dynamic totalTime;
 @dynamic aerobicEvent;
 @dynamic scheduledEvent;
+@dynamic performed;
 
 @end

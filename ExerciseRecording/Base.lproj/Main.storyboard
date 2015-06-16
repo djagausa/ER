@@ -103,7 +103,7 @@
                                     <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="disabled">
+                                <state key="disabled" title="No Events Setup">
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected">
@@ -768,9 +768,6 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="134" y="7" width="52" height="21"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -2178,7 +2175,7 @@
                                 </state>
                                 <state key="disabled" title="No Active Schedule"/>
                                 <connections>
-                                    <segue destination="iXC-0C-DXS" kind="show" id="hhk-20-Oeh"/>
+                                    <segue destination="iXC-0C-DXS" kind="show" identifier="continueExistingSchedule" id="hhk-20-Oeh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1TA-lY-whJ">
@@ -2260,10 +2257,10 @@
         <scene sceneID="Cek-dn-nZ2">
             <objects>
                 <tableViewController title="New Scheduled Workout" id="dLH-k8-8Ld" customClass="NewScheduledWorkoutTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" id="OI9-Cz-t5C">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" id="OI9-Cz-t5C">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleCell" textLabel="7Zw-AE-F8w" rowHeight="28" style="IBUITableViewCellStyleDefault" id="DI9-Dz-PPU" userLabel="WeightEvent Cell">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -2413,6 +2410,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="scheduleInfoLabel" destination="PnE-pJ-lYE" id="dnn-rU-BIO"/>
+                        <outlet property="tableView" destination="phd-5F-L4i" id="cHt-lP-OtS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boD-aG-FTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4060,7 +4058,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="zcK-bl-baJ"/>
         <segue reference="Wri-AE-L0n"/>
+        <segue reference="NPx-1E-jZI"/>
         <segue reference="hhk-20-Oeh"/>
-        <segue reference="bst-Nl-5N9"/>
     </inferredMetricsTieBreakers>
 </document>

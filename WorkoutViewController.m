@@ -11,33 +11,32 @@
 #import "Schedule.h"
 #import "DefaultAerobic.h"
 #import "DefaultWeightLifting.h"
+#import "ScheduleStatusFileHelper.h"
+#import "utilities.h"
+#import "ScheduledEventInfo.h"
 
 @interface WorkoutViewController ()
-@property (nonatomic, strong) NSMutableDictionary   *scheduledlStatus;
-@property (weak, nonatomic) IBOutlet UIButton       *currentScheduleButton;
-@property (nonatomic, strong) ScheduleStatus        *currentScheduleStatus;
-@property (weak, nonatomic) IBOutlet UITableView    *eventTable;
+@property (nonatomic, strong) NSMutableDictionary       *scheduledlStatus;
+@property (weak, nonatomic) IBOutlet UIButton           *currentScheduleButton;
+@property (nonatomic, strong) ScheduleStatus            *currentScheduleStatus;
+@property (weak, nonatomic) IBOutlet UITableView        *eventTable;
+@property (nonatomic, strong) ScheduleStatusFileHelper  *scheduleFileHelper;
+@property (nonatomic, strong) Utilities                 *utilities;
+@property (nonatomic, strong) ScheduledEventInfo        *scheduledEventInfo;
 @end
-
-static NSString *scheduleStatusFileName = @"SechuedlStatus.out:";
-static NSString *scheduleNameKey =  @"scheduledNameKey";
-static NSString *dayKey = @"dayKey";
-static NSString *weekKey = @"weekKey";
-static NSString *lastUpdateDateKey = @"lastUpdateDateKey";
-static NSString *activeKey = @"activeKey";
 
 @implementation WorkoutViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.scheduledlStatus = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", scheduleNameKey, @(0), dayKey, @(0),weekKey, @"", lastUpdateDateKey, @(0), activeKey, nil ];
+    self.scheduleFileHelper = [[ScheduleStatusFileHelper alloc] init];
     self.currentScheduleStatus = [[ScheduleStatus alloc] init];
+    self.scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     
-    // get the available workout events
     [self fetchEvents];
     
-    // Do any additional setup after loading the view.
+    [self initializeCurrentScheduleButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,16 +44,28 @@ static NSString *activeKey = @"activeKey";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - delegates
+- (ScheduledEventInfo *)scheduleInfoIs
+{
+    // default day and week as this is a new schedule
+    self.scheduledEventInfo.scheduleName = self.currentScheduleStatus.scheduleName;
+    self.scheduledEventInfo.day = [self.currentScheduleStatus.day integerValue];
+    self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
+    return self.scheduledEventInfo;
+}
+
+// determine if there is a active schedule running
 - (void)initializeCurrentScheduleButton
 {
-    BOOL scheduleStatusFileExists = [self readScheduleStatusFile];
-    BOOL scheduleBumpResults;   // NO = schedule finushed;  YES = schedule bumped
+    self.scheduledlStatus = [self.scheduleFileHelper readScheduleStatusFile];
     
     // if status file exists
-    if (scheduleStatusFileExists) {
+    if (self.scheduledlStatus  != nil) {
     
         // if schedule is active then get schedule data
-        if ([[self.scheduledlStatus objectForKeyedSubscript:activeKey] integerValue] == YES) {
+        if ([[self.scheduledlStatus objectForKeyedSubscript:activeKey] boolValue] == YES) {
+            BOOL scheduleBumpResults;   // NO = schedule finished;  YES = schedule bumped
+
             self.currentScheduleStatus.scheduleName = [self.scheduledlStatus objectForKeyedSubscript:scheduleNameKey];
             self.currentScheduleStatus.day = [self.scheduledlStatus objectForKeyedSubscript:dayKey];
             self.currentScheduleStatus.week = [self.scheduledlStatus objectForKeyedSubscript:weekKey];
@@ -62,7 +73,7 @@ static NSString *activeKey = @"activeKey";
             self.currentScheduleStatus.active = [[self.scheduledlStatus objectForKeyedSubscript:activeKey]integerValue];
             
             NSComparisonResult compareResults;
-            compareResults = [self.currentScheduleStatus.lastUpdateDate compare:[NSDate date]];
+            compareResults = [[Utilities dateWithoutTime:self.currentScheduleStatus.lastUpdateDate] compare: [Utilities dateWithoutTime:[NSDate date]]];
             // NSOrderedAscending = bump schedule
             // NSOderedDescending = shouldn't happen (the last update date should never be beyound today)
             // NSOderedSame = use today's schedule
@@ -82,14 +93,14 @@ static NSString *activeKey = @"activeKey";
             if (scheduleBumpResults == YES) {
                 // setup the button title to the current schedule info and enable
                 
-                labelText = [NSString stringWithFormat:@"Continue: %@; day: %@ of wek: %@", self.currentScheduleStatus.scheduleName, self.currentScheduleStatus.day, self.currentScheduleStatus.week];
-                self.currentScheduleButton.titleLabel.text = labelText;
+                labelText = [NSString stringWithFormat:@"Continue %@ day %ld of week %ld", self.currentScheduleStatus.scheduleName, [self.currentScheduleStatus.day integerValue] +1, [self.currentScheduleStatus.week integerValue] +1];
+                [self.currentScheduleButton setTitle:labelText forState:UIControlStateNormal];
                 self.currentScheduleButton.enabled = YES;
             } else {
                 // set the button title to schedule finsihed and disable
                 
                 labelText = [NSString stringWithFormat:@"Schedue Finished"];
-                self.currentScheduleButton.titleLabel.text = labelText;
+                [self.currentScheduleButton setTitle:labelText forState:UIControlStateDisabled];
                 self.currentScheduleButton.enabled = NO;
             }
         }
@@ -122,6 +133,10 @@ static NSString *activeKey = @"activeKey";
     // setup current schedule data with updated values
     self.currentScheduleStatus.day = day;
     self.currentScheduleStatus.week = week;
+    self.currentScheduleStatus.lastUpdateDate = [NSDate date];
+    
+    // save updated schedule info
+    [self.scheduleFileHelper writeScheduleStatusFile:self.currentScheduleStatus];
     
     // the schedule has been succesfully bumped
     results = YES;
@@ -134,58 +149,6 @@ static NSString *activeKey = @"activeKey";
     return self.selectedEvent;
 }
 
-#pragma mark - Schedule status
-
-// get scheduled status file if it exists
-- (BOOL)readScheduleStatusFile
-{
-    BOOL fileExists = NO;   // setup return value no file present
-    NSString *scheduleStatusFile;     // path to schedule status file
-    
-    // get path to documents dirsctory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    
-    if ([paths count] > 0) {
-        // Path to schedlue status
-        scheduleStatusFile = [[paths objectAtIndex:0] stringByAppendingPathComponent:scheduleStatusFileName];
-        
-        // if schedule status file exists
-        if ([[NSFileManager defaultManager] fileExistsAtPath:scheduleStatusFile]) {
-        
-            fileExists = YES;
-            
-            // read the scheduled status file
-            self.scheduledlStatus = [NSMutableDictionary dictionaryWithContentsOfFile:scheduleStatusFile];
-            return fileExists;
-        }
-    }
-    
-    return fileExists;
-}
-
-// get scheduled status file if it exists
-- (void)writeScheduleStatusFile
-{
-    NSString *filePath;     // path to schedule status file
-    
-    [self.scheduledlStatus setObject:self.currentScheduleStatus.scheduleName forKey:scheduleNameKey];
-    [self.scheduledlStatus setObject:self.currentScheduleStatus.week forKey:weekKey];
-    [self.scheduledlStatus setObject:self.currentScheduleStatus.day forKey:dayKey];
-    [self.scheduledlStatus setObject:self.currentScheduleStatus.lastUpdateDate forKey:lastUpdateDateKey];
-    [self.scheduledlStatus setObject:@(self.currentScheduleStatus.active) forKey:activeKey];
-
-    // get path to documents dirsctory
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-    
-    if ([paths count] > 0) {
-        // Path to schedlue status
-        filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:scheduleStatusFileName];
-        
-        // write the scheduled status file
-        [self.scheduledlStatus writeToFile:filePath atomically:YES];
-    }
-}
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -196,6 +159,11 @@ static NSString *activeKey = @"activeKey";
         addEventDataVC.delegate = self;
     } else if ([segue.identifier isEqualToString:@"startNewSchedule"]){
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+    } else if ([segue.identifier isEqualToString:@"continueExistingSchedule"]){
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        WorkoutScheduledEventViewController *workoutScheduledEventViewController = [segue destinationViewController];
+        workoutScheduledEventViewController.workoutScheduleDelegate = self;
+        workoutScheduledEventViewController.managedObjectContext = self.managedObjectContext;
     }
 }
 

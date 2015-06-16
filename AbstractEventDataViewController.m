@@ -92,7 +92,6 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     return formattedDate;
 }
 
-
 - (NSNumber *)convertTimeToNumber:(NSString *)timeString{
     
     NSArray* tokens = [timeString componentsSeparatedByString:@":"];
@@ -102,6 +101,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     }
     return @(lengthInMinutes);
 }
+
 #pragma mark - Table view methods
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -146,7 +146,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 {
     // had to define a specific cell because I didn't like the way auto layout performed
     // during the first pass of the layout the cell height was wrong and then was corrected during the second pass
-    // this resulted in table collapsing
+    // this resulted in the table collapsing
     
     switch ([self selectedEvent].eventCategory) {
         case kWeights:
@@ -253,8 +253,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                 [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                           withPredicate:nil
+//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                                 groupBy:nil];
             }
             break;
@@ -268,8 +268,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                 [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:nil
 //                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
+                                          withPredicate:nil
                                                 groupBy:nil];
             }
             break;
