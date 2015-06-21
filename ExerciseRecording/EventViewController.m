@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addExerciseButton;
 @property (weak, nonatomic) IBOutlet UIButton *reviewExerciseButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editExercise;
+
+- (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification;
+
 @end
 
 @implementation EventViewController
@@ -55,7 +58,11 @@
         [self.editExercise setEnabled:YES];
     }
     
+    // register for events added notifications
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -71,7 +78,7 @@
     [self configureTheButtons];
 }
 
-- (void)exerciseDataAddedNotification
+- (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification
 {
     [self configureTheButtons];
 }
@@ -85,11 +92,6 @@
         SelectEventToAddTableViewController *addController = [segue destinationViewController];
         addController.eventAddedDelegate = self;
     }
-    if ([segue.identifier isEqualToString:@"AddEventData"]) {
-        AddEventDataTVC *addController = [segue destinationViewController];
-        addController.exerciseDataAddedDelegate = self;
-    }
-
 }
 
 

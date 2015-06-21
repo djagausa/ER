@@ -12,14 +12,19 @@
 #import "Support.h"
 
 @interface HistoryEventSelectTableViewController ()
-@property (nonatomic, strong) SelectedEvent *selectedEvent;
+@property (nonatomic, strong) SelectedEvent     *selectedEvent;
+@property (nonatomic, strong) NSArray    *savedWeightEvents;
+@property (nonatomic, strong) NSArray    *savedAerobicEvents;
 @end
 
 @implementation HistoryEventSelectTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectedEvent = [[SelectedEvent alloc] init];
+    _selectedEvent = [[SelectedEvent alloc] init];
+    _savedAerobicEvents = [[NSArray alloc] init];
+    _savedWeightEvents = [[NSArray alloc] init];
+    [self fetchEvents];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,30 +42,125 @@
 }
 
 #pragma mark - Table View
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    NSInteger count = 0;
+    
+    if (self.savedWeightEvents.count > 0)
+    {
+        count++;
+    }
+    
+    if (self.savedAerobicEvents.count > 0)
+    {
+        count++;
+    }
+    return count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    NSInteger count = 0;
+    
+    switch (section) {
+        case 0:
+            if (self.savedAerobicEvents.count > 0) {
+                count = self.savedAerobicEvents.count;
+            }
+            else
+            {
+                count = self.savedWeightEvents.count;
+                
+            }
+            break;
+            
+        case 1:
+            count = self.savedWeightEvents.count;
+            break;
+            
+        default:
+            break;
+    }
+    return count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle;
+    
+    switch (section) {
+        case 0:
+            if (self.savedAerobicEvents.count > 0) {
+                headerTitle = @"Aerobic Events";
+            }
+            else
+            {
+                headerTitle = @"Weight Lifting Events";
+            }
+            break;
+            
+        case 1:
+            headerTitle = @"Weight Lifting Events";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return headerTitle;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+    
+    switch (indexPath.section) {
+        case 0:
+            if (self.savedAerobicEvents.count > 0)
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
+                cell.textLabel.text = [[self.savedAerobicEvents objectAtIndex:indexPath.row] objectForKey:@"eventName"];
+            }
+            else
+            {
+                cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
+                cell.textLabel.text = [[self.savedWeightEvents objectAtIndex:indexPath.row]objectForKey:@"eventName"];
+            }
+            break;
+            
+        case 1:
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
+            cell.textLabel.text = [[self.savedWeightEvents objectAtIndex:indexPath.row]objectForKey:@"eventName"];
+        }
+            break;
+            
+        default:
+            break;
+    }
+    return cell;
+}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case AerobicCategory:
-            if (self.aerobicDefaultObjects.count > 0)
+        case 0:
+            if (self.savedAerobicEvents.count > 0)
             {
-                self.defaultAerobic = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
-                self.selectedEvent.eventName = self.defaultAerobic.eventName;
-                self.selectedEvent.eventCategory = [self.defaultAerobic.category integerValue];
+                self.selectedEvent.eventName = [[self.savedAerobicEvents objectAtIndex:indexPath.row] objectForKey:@"eventName"];
+                self.selectedEvent.eventCategory = [[[self.savedAerobicEvents objectAtIndex:indexPath.row] objectForKey:@"category"] integerValue];
             }
             else
             {
-                self.defaultWeightLifting = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
-                self.selectedEvent.eventName = self.defaultWeightLifting.eventName;
-                self.selectedEvent.eventCategory = [self.defaultWeightLifting.category integerValue];
+                self.selectedEvent.eventName = [[self.savedWeightEvents objectAtIndex:indexPath.row]objectForKey:@"eventName"];
+                self.selectedEvent.eventCategory = [[[self.savedWeightEvents objectAtIndex:indexPath.row] objectForKey:@"category"] integerValue];
             }
             break;
             
-        case WeightCategory:
+        case 1:
         {
-            self.defaultWeightLifting = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
-            self.selectedEvent.eventName = self.defaultWeightLifting.eventName;
-            self.selectedEvent.eventCategory = [self.defaultWeightLifting.category integerValue];
+            self.selectedEvent.eventName = [[self.savedWeightEvents objectAtIndex:indexPath.row]objectForKey:@"eventName"];
+            self.selectedEvent.eventCategory = [[[self.savedWeightEvents objectAtIndex:indexPath.row] objectForKey:@"category"] integerValue];
         }
             break;
             
@@ -71,19 +171,19 @@
 
 - (void) fetchEvents
 {
+    // fetch the saved events - they are the events with a history
+    self.savedWeightEvents = [self.coreDataHelper fetchSaveEvents:weightLiftingEventsEntityName fetchPropertyName:@"eventName" fetchPropertyCategory:@"category"];
+    self.savedAerobicEvents = [self.coreDataHelper fetchSaveEvents:aerobicEventsEntityName fetchPropertyName:@"eventName" fetchPropertyCategory:@"category"];
     
-    self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:NO];
-    self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:NO];
+#ifdef DEBUG
+    for (NSDictionary *event in self.savedWeightEvents) {
+        NSLog(@"Saved weight event: %@", [event objectForKey:@"eventName"]);
+    }
     
-    
-    //     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
-    //     NSLog(@"Event Name: %@",defaultWL.eventName);
-    //     }
-    //
-    //     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
-    //     NSLog(@"Event Name: %@",defaultA.eventName);
-    //     }
-    
+    for (NSDictionary *event in self.savedAerobicEvents) {
+        NSLog(@"Saved aerobic event: %@", [event objectForKey:@"eventName"]);
+    }
+#endif
 }
 
 #pragma mark - Navigation

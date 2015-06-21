@@ -47,7 +47,15 @@
 - (void)exerciseDataAdded:(SelectedEvent *)eventAdded
 {
     // change the color of the table view cell
+    [self fetchEvents];
     [self.tableView reloadData];
+}
+
+#pragma  mark - Deleagate
+- (ScheduledEventInfo *)scheduledEventIs
+{
+    self.scheduledEventInfo.scheduleEditMode = kScheduleReview;
+    return self.scheduledEventInfo;
 }
 
 #pragma mark - Core Data
@@ -97,14 +105,19 @@
     
     self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]}] mutableCopy];
 }
-//#pragma mark - Navigation
-//
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-//    AddEventDataViewController *addEventDataVC = [segue destinationViewController];
-//    addEventDataVC.delegate = self;
-//}
+#pragma mark - Navigation
 
-
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"scheduleReview"]){
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        CreateSheduleViewController *createScheduleViewController = [segue destinationViewController];
+        createScheduleViewController.createScheduleDelegate = self;
+    } else if ([segue.identifier isEqualToString:@"scheduledEvent"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+        addEventDataVC.delegate = self;
+        addEventDataVC.addEventDataDelegate = self;
+    }
+}
 @end

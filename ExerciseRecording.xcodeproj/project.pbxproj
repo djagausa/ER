@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */; };
-		2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */; };
 		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
 		2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */; };
@@ -88,8 +87,6 @@
 		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
 		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
-		2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataTVC.h; sourceTree = "<group>"; };
-		2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataTVC.m; sourceTree = "<group>"; };
 		2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataViewController.h; sourceTree = "<group>"; };
 		2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataViewController.m; sourceTree = "<group>"; };
 		2D7D7C601AC4D9A80069E888 /* AerobicEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AerobicEvent.h; sourceTree = "<group>"; };
@@ -371,8 +368,6 @@
 			children = (
 				2DB93FE81AF0FE400062AB0D /* AbstractEventDataTableViewController.h */,
 				2DB93FE91AF0FE400062AB0D /* AbstractEventDataTableViewController.m */,
-				2D7D7C121ABECF510069E888 /* AddEventDataTVC.h */,
-				2D7D7C131ABECF510069E888 /* AddEventDataTVC.m */,
 				2DB6F41D1AE9075600FCE207 /* EditEventTableViewController.h */,
 				2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */,
 				2DB6F4201AE9C3B000FCE207 /* EditSelectedEventTableViewController.h */,
@@ -564,7 +559,6 @@
 				2DAF3B421B2E199B001DA3DE /* Utilities.m in Sources */,
 				2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */,
 				2DAF3B3F1B2D702C001DA3DE /* ScheduleStatusFileHelper.m in Sources */,
-				2D7D7C141ABECF510069E888 /* AddEventDataTVC.m in Sources */,
 				2DF9C0D31B152B1A002A497E /* Schedule.m in Sources */,
 				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,
 				2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */,

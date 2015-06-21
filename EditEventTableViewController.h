@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "EditSelectedEventTableViewController.h"
+#import "CreateSheduleViewController.h"
 
-@interface EditEventTableViewController : UITableViewController <EditSelectedEventTableViewControllerDelegate>
+@interface EditEventTableViewController : UITableViewController <EditSelectedEventTableViewControllerDelegate, CreateSheduleViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 

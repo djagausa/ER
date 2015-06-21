@@ -12,6 +12,7 @@
 #import "DefaultAerobic.h"
 #import "Support.h"
 #import "SelectedEvent.h"
+#import "Schedule.h"
 
 @interface EditEventTableViewController ()
 
@@ -23,6 +24,8 @@
 @property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
 @property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
 @property (nonatomic, strong) SelectedEvent         *selectedEvent;
+@property (nonatomic, strong) NSArray               *schedules;
+@property (nonatomic, strong) ScheduledEventInfo    *scheduledEventInfo;
 
 @end
 
@@ -30,7 +33,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.selectedEvent = [[SelectedEvent alloc]init];
+    _selectedEvent = [[SelectedEvent alloc]init];
+    _schedules = [[NSArray alloc] init];
+    _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -38,8 +43,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
     
     [self fetchEvents];
 }
@@ -64,10 +69,17 @@
     return self.selectedEvent;
 }
 
+#pragma  mark - Deleagate
+- (ScheduledEventInfo *)scheduledEventIs
+{
+    self.scheduledEventInfo.scheduleEditMode = kScheduleEdit;
+    return self.scheduledEventInfo;
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger count = 0;
+    NSInteger count = 1;
     
     if (self.weightLiftingDefaultObjectsCopy.count > 0)
     {
@@ -85,7 +97,10 @@
     NSInteger count = 0;
     
     switch (section) {
-        case AerobicCategory:
+        case 0:     // calendar section
+            count = [self.schedules count];
+            break;
+        case 1:
             if (self.aerobicDefaultObjectsCopy.count > 0) {
                 count = self.aerobicDefaultObjectsCopy.count;
             }
@@ -96,7 +111,7 @@
             }
             break;
             
-        case WeightCategory:
+        case 2:
             count = self.weightLiftingDefaultObjectsCopy.count;
             break;
             
@@ -112,8 +127,15 @@
     
     NSNumber *eventEnable;
     
+
     switch (indexPath.section) {
-        case AerobicCategory:
+        case 0:     // scheduled section
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCell" forIndexPath:indexPath];
+            cell.textLabel.text = [[self.schedules objectAtIndex:indexPath.row] scheduleName];
+            eventEnable = @(1);
+            break;
+            
+        case 1:
             if (self.aerobicDefaultObjects.count > 0)
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
@@ -130,7 +152,7 @@
             }
             break;
             
-        case WeightCategory:
+        case 2:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"EditEventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
@@ -157,7 +179,10 @@
     NSString *headerTitle;
     
     switch (section) {
-        case AerobicCategory:
+        case 0:     // schedule section
+            headerTitle = @"Schedules";
+            break;
+        case 1:
             if (self.aerobicDefaultObjects.count > 0) {
                 headerTitle = @"Aerobic Events";
             }
@@ -167,7 +192,7 @@
             }
             break;
             
-        case WeightCategory:
+        case 2:
             headerTitle = @"Weight Lifting Events";
             break;
             
@@ -188,7 +213,14 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case AerobicCategory:
+        case 0:         // schedule section
+        {
+            Schedule *selectedSchedule = [self.schedules objectAtIndex:indexPath.row];
+            self.scheduledEventInfo.scheduleName = selectedSchedule.scheduleName;
+            self.scheduledEventInfo.numberOfWeeks = [selectedSchedule.numberOfWeeks integerValue];
+        }
+            break;
+        case 1:
             if (self.aerobicDefaultObjects.count > 0)
             {
                 DefaultAerobic *event = [self.aerobicDefaultObjectsCopy objectAtIndex:indexPath.row];
@@ -203,7 +235,7 @@
             }
             break;
             
-        case WeightCategory:
+        case 2:
         {
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjectsCopy objectAtIndex:indexPath.row];
             self.selectedEvent.eventName = event.eventName;
@@ -221,7 +253,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         switch (indexPath.section) {
-            case AerobicCategory:
+            case 0:     // calendar section
+                break;
+            case 1:
                 if (self.aerobicDefaultObjects.count > 0)
                 {
                     [self.coreDataHelper deleteObject:self.aerobicDefaultObjectsCopy[indexPath.row]];
@@ -234,7 +268,7 @@
                 }
                 break;
                 
-            case WeightCategory:
+            case 2:
             {
                 [self.coreDataHelper deleteObject:self.weightLiftingDefaultObjectsCopy[indexPath.row]];
                 [self.weightLiftingDefaultObjectsCopy removeObjectAtIndex:indexPath.row];
@@ -249,14 +283,28 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 30.0f;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    EditSelectedEventTableViewController *editSelectedTableViewController = [segue destinationViewController];
-    editSelectedTableViewController.delegate = self;
+    if ([segue.identifier isEqualToString:@"EditEventData"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        EditSelectedEventTableViewController *editSelectedTableViewController = [segue destinationViewController];
+        editSelectedTableViewController.delegate = self;
+    } else if ([segue.identifier isEqualToString:@"EditSchedule"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        CreateSheduleViewController *createScheduleViewController = [segue destinationViewController];
+        createScheduleViewController.createScheduleDelegate = self;
+    }
 }
 
 #pragma  mark - CoreData
@@ -267,6 +315,8 @@
     self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:NO];
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
+    
+    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil];
 }
 
 @end

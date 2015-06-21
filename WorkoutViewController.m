@@ -23,6 +23,7 @@
 @property (nonatomic, strong) ScheduleStatusFileHelper  *scheduleFileHelper;
 @property (nonatomic, strong) Utilities                 *utilities;
 @property (nonatomic, strong) ScheduledEventInfo        *scheduledEventInfo;
+- (IBAction)startNewScheduleAction:(id)sender;
 @end
 
 @implementation WorkoutViewController
@@ -44,6 +45,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)startNewScheduleAction:(id)sender {
+    // if a schedule is already running then provide alert indicating that it will terminate
+    if (self.currentScheduleStatus.active == YES) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"The current schedule \"%@\" will be terminated", self.currentScheduleStatus.scheduleName]
+                                                       message:@"Would you like to continue?"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Yes"
+                                             otherButtonTitles:@"No", nil];
+        [alert show];
+    } else {
+        [self performSegueWithIdentifier:@"startNewSchedule" sender:self];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self performSegueWithIdentifier:@"startNewSchedule" sender:self];
+    }
+}
+
 #pragma mark - delegates
 - (ScheduledEventInfo *)scheduleInfoIs
 {
@@ -54,6 +76,12 @@
     return self.scheduledEventInfo;
 }
 
+- (SelectedEvent *)selectedEventDataIs
+{
+    return self.selectedEvent;
+}
+
+#pragma mark - Initialize buttons
 // determine if there is a active schedule running
 - (void)initializeCurrentScheduleButton
 {
@@ -143,13 +171,16 @@
 
     return results;
 }
-#pragma mark - Delegates
-- (SelectedEvent *)selectedEventDataIs
-{
-    return self.selectedEvent;
-}
 
 #pragma mark - Navigation
+
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:@"startNewSchedule"]) {
+        return NO;
+    }
+    return YES;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

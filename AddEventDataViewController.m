@@ -197,6 +197,8 @@ BOOL setCountInitialized;
 
 - (void)setupNewWeightLiftingEvent:(WeightLiftingEvent *)weightLiftingEvent
 {
+    weightLiftingEvent.eventName = self.defaultWeightLifting.eventName;
+    weightLiftingEvent.category = @(self.selectedEvent.eventCategory);
     weightLiftingEvent.date = [self setupDate];
     weightLiftingEvent.setNumber = self.setCount;
     weightLiftingEvent.repCount = @([self.in2Label.text integerValue]);
@@ -212,6 +214,7 @@ BOOL setCountInitialized;
 
 - (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent
 {
+    aerobicEvent.eventName = self.defaultAerobic.eventName;
     aerobicEvent.date = [self setupDate];
     if ([self.note.text isEqualToString:notePlaceHolder]) {
         aerobicEvent.note = @"";
@@ -246,6 +249,7 @@ BOOL setCountInitialized;
 
 - (void)saveAction
 {
+    NSDictionary *eventInfo = [[NSDictionary alloc] init];
     // Surround the "add" functionality with undo grouping
     NSUndoManager *manager = self.coreDataHelper.managedObjectContext.undoManager;
     [manager beginUndoGrouping];
@@ -254,6 +258,7 @@ BOOL setCountInitialized;
             {
                 WeightLiftingEvent *weightLiftingEvent = (WeightLiftingEvent *)[self.coreDataHelper newObject:@"WeightLiftingEvent"];
                 [self setupNewWeightLiftingEvent:weightLiftingEvent];
+                eventInfo = @{weightLiftingEvent.eventName : @"eventName"};
             }
             break;
             
@@ -261,12 +266,18 @@ BOOL setCountInitialized;
             {
                 AerobicEvent *aerobicEvent = (AerobicEvent *)[self.coreDataHelper newObject:@"AerobicEvent"];
                 [self setupNewAerobicEvent:aerobicEvent];
+                eventInfo = @{aerobicEvent.eventName : @"eventName"};
             }
             break;
     }
     [manager endUndoGrouping];
     [manager setActionName:@"Add"];
     [self.coreDataHelper save];
+    
+    // post a notofocation that an event has been saved
+    NSNotification *notification = [NSNotification notificationWithName:eventAddedNotificationName object:self userInfo:eventInfo];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
 }
 
 - (void)setupNoteInputTextField

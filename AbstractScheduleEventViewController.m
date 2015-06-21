@@ -31,16 +31,15 @@ static NSString *CellIdentifier = @"EventCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectedEvent = [[SelectedEvent alloc]init];
+    _selectedEvent = [[SelectedEvent alloc]init];
     
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    self.coreDataHelper.defaultSortAttribute = @"date";
+    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
 
-    self.weightLiftingDefaultObjects = [[NSMutableArray alloc] init];
-    self.aerobicDefaultObjects = [[NSMutableArray alloc] init];
-    self.completedAerobicEvents = [[NSMutableArray alloc] init];
-    self.completedWeightEvents = [[NSMutableArray alloc] init];
+    _weightLiftingDefaultObjects = [[NSMutableArray alloc] init];
+    _aerobicDefaultObjects = [[NSMutableArray alloc] init];
+    _completedAerobicEvents = [[NSMutableArray alloc] init];
+    _completedWeightEvents = [[NSMutableArray alloc] init];
     
     [self fetchTodaysCompleteEvents];
 }
@@ -291,17 +290,13 @@ static NSString *CellIdentifier = @"EventCell";
     // implement in class
 }
 
+/*
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"scheduledEvent"]) {
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        AddEventDataViewController *addEventDataVC = [segue destinationViewController];
-        addEventDataVC.delegate = self;
-        addEventDataVC.addEventDataDelegate = self;
-    }
-}
 
+}
+*/
 
 @end

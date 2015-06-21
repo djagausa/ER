@@ -6,9 +6,9 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="heartRate" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="section" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -54,7 +54,9 @@
         <relationship name="weightEvent" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DefaultWeightLifting" inverseName="scheduledEvent" inverseEntity="DefaultWeightLifting" syncable="YES"/>
     </entity>
     <entity name="WeightLiftingEvent" representedClassName="WeightLiftingEvent" syncable="YES">
+        <attribute name="category" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="performed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="repCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -69,6 +71,6 @@
         <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="165"/>
         <element name="Schedule" positionX="133" positionY="-234" width="128" height="88"/>
         <element name="ScheduledEvent" positionX="124" positionY="-90" width="128" height="178"/>
-        <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="165"/>
+        <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="195"/>
     </elements>
 </model>

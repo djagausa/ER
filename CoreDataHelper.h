@@ -23,7 +23,6 @@
 @property (nonatomic, readonly) NSInteger numberOfEntities;
 
 //- (void)setupCoreData;
-
 - (void)fetchData;
 - (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy;
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
@@ -37,6 +36,8 @@
 
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
 - (NSInteger)numberOfEntities:(NSString *)entityName;
+- (NSArray *)fetchSaveEvents:(NSString *)entityName fetchPropertyName:(NSString *)fetchPropertyName fetchPropertyCategory:(NSString *)fetchPropertyCategory;
+
 
 @end
 

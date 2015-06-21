@@ -33,6 +33,12 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
     WeightCategory
 };
 
+typedef NS_ENUM(NSInteger, ScheduleDiplayMode) {
+    kScheduleEdit = 1,
+    kScheduleReview,
+    kNoScheduleEdit
+};
+
 static NSString *aerobicEventsEntityName = @"AerobicEvent";
 static NSString *weightLiftingEventsEntityName = @"WeightLiftingEvent";
 static NSString *aerobicDefaultEventsEntityName = @"DefaultAerobic";
@@ -47,5 +53,7 @@ static NSString *dayKey = @"dayKey";
 static NSString *weekKey = @"weekKey";
 static NSString *lastUpdateDateKey = @"lastUpdateDateKey";
 static NSString *activeKey = @"activeKey";
+
+static NSString *eventAddedNotificationName = @"ExerciseEventAdded";
 
 #endif

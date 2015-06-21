@@ -172,8 +172,10 @@ UIEdgeInsets oldIndicatorInset;
 
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    
-    NSLog(@" Ypoint: %f; x point %f",self.textField.frame.origin.y + self.textField.frame.size.height, self.textField.frame.origin.x );
+
+#ifdef DEBUG
+    NSLog(@" Y point: %f; x point %f",self.textField.frame.origin.y + self.textField.frame.size.height, self.textField.frame.origin.x );
+#endif
     
     if (aRect.size.height < (self.textField.frame.origin.y + self.textField.frame.size.height + 80.0)) {
         CGFloat diff = self.textField.frame.origin.y - (aRect.size.height + self.textField.frame.size.height) + 10.0;

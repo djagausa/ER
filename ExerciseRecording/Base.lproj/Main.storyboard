@@ -768,6 +768,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="134" y="7" width="52" height="21"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -870,7 +873,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Setup Schedule" id="dkn-YY-7St">
                         <barButtonItem key="backBarButtonItem" title=" " id="RLM-RB-AjZ"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Vsc-BI-mFa"/>
                     </navigationItem>
                     <connections>
                         <outlet property="numberOfWeeksOutlet" destination="2uT-tL-hZz" id="u7i-Ug-x2M"/>
@@ -1290,12 +1292,12 @@
         <scene sceneID="oZe-qn-sFt">
             <objects>
                 <tableViewController id="VVK-ut-0xp" customClass="EditEventTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rq3-gE-guy">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="22" sectionFooterHeight="1" id="Rq3-gE-guy">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EditEventCell" textLabel="UZa-zQ-iKB" style="IBUITableViewCellStyleDefault" id="9ya-VM-bZG">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EditEventCell" textLabel="UZa-zQ-iKB" rowHeight="28" style="IBUITableViewCellStyleDefault" id="9ya-VM-bZG">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ya-VM-bZG" id="zfF-Hu-cx1">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1312,7 +1314,28 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="FcW-bx-r8c" kind="show" identifier="EditeEventData" id="UvL-Tk-pcj"/>
+                                    <segue destination="FcW-bx-r8c" kind="show" identifier="EditEventData" id="UvL-Tk-pcj"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ScheduleCell" textLabel="XWS-A8-yHa" rowHeight="28" style="IBUITableViewCellStyleDefault" id="F5d-et-Wms">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F5d-et-Wms" id="sKI-t3-QMa">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XWS-A8-yHa">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="esC-RZ-nT0" kind="show" identifier="EditSchedule" id="N1L-oY-gbF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2185,6 +2208,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="startNewScheduleAction:" destination="7ry-y7-vJs" eventType="touchUpInside" id="ljf-dL-PQa"/>
                                     <segue destination="dLH-k8-8Ld" kind="show" identifier="startNewSchedule" id="Xr8-TF-OFa"/>
                                 </connections>
                             </button>
@@ -2251,7 +2275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8E-nt-A6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3556.5" y="919.5"/>
+            <point key="canvasLocation" x="-3565.5" y="801"/>
         </scene>
         <!--New Scheduled Workout-->
         <scene sceneID="Cek-dn-nZ2">
@@ -2405,9 +2429,16 @@
                             </mask>
                         </variation>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="6iA-Nu-GSd"/>
                     <navigationItem key="navigationItem" title="Continue Schedule" id="9xR-eo-fXZ">
                         <barButtonItem key="backBarButtonItem" title=" " id="B20-PX-VRg"/>
+                        <barButtonItem key="rightBarButtonItem" title="Review" id="bPl-eV-nUo">
+                            <connections>
+                                <segue destination="esC-RZ-nT0" kind="show" identifier="scheduleReview" id="cis-pU-7M6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="scheduleInfoLabel" destination="PnE-pJ-lYE" id="dnn-rU-BIO"/>
                         <outlet property="tableView" destination="phd-5F-L4i" id="cHt-lP-OtS"/>
@@ -2426,7 +2457,7 @@
                         <viewControllerLayoutGuide type="bottom" id="3KK-oL-B0j"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qoc-8W-twF" customClass="UIScrollView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="day-Q2-lqJ">
@@ -2595,7 +2626,8 @@
                                                             <exclude reference="TK7-dB-zaU"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="120" y="1" width="70" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="EWe-pp-rg7"/>
                                                             <include reference="TK7-dB-zaU"/>
@@ -2607,6 +2639,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="20" y="22" width="252" height="16"/>
+                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="110" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3f-vp-XPz">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
@@ -2627,7 +2662,8 @@
                                                             <exclude reference="nsB-oY-HVq"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="223" y="1" width="45" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="QhQ-6e-ilM"/>
                                                             <include reference="nsB-oY-HVq"/>
@@ -3421,7 +3457,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V69-JJ-Zgj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1737" y="919.5"/>
+            <point key="canvasLocation" x="-1728" y="801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0oO-He-Bt6">
@@ -3448,10 +3484,10 @@
         <scene sceneID="j5S-SP-3JT">
             <objects>
                 <tableViewController title="History Event Select" id="CvB-Xa-yDQ" customClass="HistoryEventSelectTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="z2d-Gd-JEt">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="z2d-Gd-JEt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventCell" textLabel="4XL-Nb-sxn" style="IBUITableViewCellStyleDefault" id="URw-Cf-HVF">
                                 <autoresizingMask key="autoresizingMask"/>
@@ -4056,9 +4092,10 @@
         <image name="gear-purple-1" width="600" height="570"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="N1L-oY-gbF"/>
         <segue reference="zcK-bl-baJ"/>
         <segue reference="Wri-AE-L0n"/>
-        <segue reference="NPx-1E-jZI"/>
         <segue reference="hhk-20-Oeh"/>
+        <segue reference="bst-Nl-5N9"/>
     </inferredMetricsTieBreakers>
 </document>

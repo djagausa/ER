@@ -19,7 +19,9 @@
 @implementation WeightLiftingEvent
 
 @dynamic date;
+@dynamic eventName;
 @dynamic weight;
+@dynamic category;
 @dynamic setNumber;
 @dynamic repCount;
 @dynamic notes;

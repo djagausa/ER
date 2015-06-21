@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AbstractScheduleEventViewController.h"
 #import "ScheduledEventInfo.h"
+#import "CreateSheduleViewController.h"
 
 @protocol WorkoutScheduledEventViewControllerDelegate <NSObject>
 
@@ -16,7 +17,7 @@
 
 @end
 
-@interface WorkoutScheduledEventViewController : AbstractScheduleEventViewController
+@interface WorkoutScheduledEventViewController : AbstractScheduleEventViewController <CreateSheduleViewControllerDelegate>
 
 @property (nonatomic, weak) id<WorkoutScheduledEventViewControllerDelegate> workoutScheduleDelegate;
 

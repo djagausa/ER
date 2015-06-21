@@ -149,7 +149,17 @@
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    return 28.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
     return 22.0f;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0.01f;
 }
 
 #pragma mark - Fetched results controller
@@ -160,15 +170,15 @@
     self.weightLiftingDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
     self.aerobicDefaultObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
     
-
-//     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
-//     NSLog(@"Event Name: %@",defaultWL.eventName);
-//     }
-//     
-//     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
-//     NSLog(@"Event Name: %@",defaultA.eventName);
-//     }
-
+#ifdef DEBUG
+     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
+     NSLog(@"Weight Event Name: %@",defaultWL.eventName);
+     }
+     
+     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
+     NSLog(@"Aerobic Event Name: %@",defaultA.eventName);
+     }
+#endif
 }
 
 @end

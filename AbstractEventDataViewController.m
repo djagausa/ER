@@ -30,14 +30,13 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectedEvent = [[SelectedEvent alloc] init];
+    _selectedEvent = [[SelectedEvent alloc] init];
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectedEventDataIs)]) {
-         self.selectedEvent = [self.delegate selectedEventDataIs];
+         _selectedEvent = [self.delegate selectedEventDataIs];
     }
    
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    self.coreDataHelper.defaultSortAttribute = @"date";
+    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
 
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     gestureRecognizer.cancelsTouchesInView = NO;
@@ -254,7 +253,6 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:nil
-//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                                 groupBy:nil];
             }
             break;
@@ -268,7 +266,6 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                 [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-//                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                           withPredicate:nil
                                                 groupBy:nil];
             }

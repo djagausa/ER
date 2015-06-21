@@ -18,7 +18,7 @@
 
 @implementation AerobicEvent
 
-@dynamic name;
+@dynamic eventName;
 @dynamic date;
 @dynamic duration;
 @dynamic distance;

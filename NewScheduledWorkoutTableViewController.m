@@ -18,7 +18,7 @@
 @property (nonatomic, strong) ScheduleStatusFileHelper  *schduleFileHelper;
 @end
 
-static NSString *scheduleEntity = @"Schedule";
+
 static NSString *cellName = @"ScheduleCell";
 
 @implementation NewScheduledWorkoutTableViewController
@@ -26,8 +26,8 @@ static NSString *cellName = @"ScheduleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    self.scheduleInfo = [[ScheduledEventInfo alloc] init];
-    self.schduleFileHelper =[[ScheduleStatusFileHelper alloc] init];
+    _scheduleInfo = [[ScheduledEventInfo alloc] init];
+    _schduleFileHelper =[[ScheduleStatusFileHelper alloc] init];
     
     [self fetchSchedules];
  }
@@ -49,6 +49,12 @@ static NSString *cellName = @"ScheduleCell";
     return self.schedules.count;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString *headerTitle = @"Configured Schedules";
+    
+    return headerTitle;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
@@ -78,7 +84,7 @@ static NSString *cellName = @"ScheduleCell";
 #pragma mark - Core Data
 - (void)fetchSchedules
 {
-    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntity withPredicate:nil];
+    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil];
 }
 
 - (void)saveNewScheduleInfo

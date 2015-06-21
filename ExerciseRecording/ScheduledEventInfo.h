@@ -16,7 +16,7 @@
 @property (nonatomic, assign) NSInteger day;
 @property (nonatomic, assign) NSInteger numberOfWeeks;
 @property (nonatomic, assign) NSInteger colorIndex;
-@property (assign, getter=isEditMode) BOOL editMode;
+@property (nonatomic, assign) NSInteger scheduleEditMode;
 
 - (instancetype) init;
 

@@ -67,7 +67,14 @@ const CGFloat kTableCellHeight = 28.0;
     
     // register section header
     [[self selectedEventsTable] registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"sectionHeader"];
-
+    
+    // disable controls if the edit mode is review
+    if (self.scheduledEventInfo.scheduleEditMode == kScheduleReview) {
+        self.repeatDayOutlet.enabled = NO;
+        self.selectedEventsTable.allowsSelection = NO;
+        self.availableEventsTable.allowsSelection = NO;
+        self.navSaveButton.enabled = NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -454,30 +461,19 @@ const CGFloat kTableCellHeight = 28.0;
 
 - (void) fetchScheduledEvents
 {
-    self.weightLiftingObjects = [self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
-    self.aerobicObjects = [self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES];
-    
-    self.weightLiftingDefaultObjects = [self.weightLiftingObjects mutableCopy];
-    self.aerobicDefaultObjects = [self.aerobicObjects mutableCopy];
+    self.weightLiftingDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];
+    self.aerobicDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:aerobicDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];
 
-#ifdef debug
-     for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
-     NSLog(@"Event Name: %@",defaultWL.eventName);
-     }
-
-     for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
-     NSLog(@"Event Name: %@",defaultA.eventName);
-     }
-#endif
     // if this is an edit session then get the existing schedule data
-    if (self.scheduledEventInfo.isEditMode) {
+    if (self.scheduledEventInfo.scheduleEditMode == kScheduleEdit || self.scheduledEventInfo.scheduleEditMode == kScheduleReview) {
         
          // get the scheduled events for this schedule
-        NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName}];
-        
-        // get the for the selected day
+        NSArray *scheduledEvents = [[NSArray alloc] init];
+        scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName}];
+
+        // get the events for the selected day
         ScheduledEvent *daysEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week-1 day:self.scheduledEventInfo.day-1];
-        
+
         // if events are scheduled for this day then update selected days and event tables with existing info
         if (daysEvent) {
 
@@ -486,6 +482,15 @@ const CGFloat kTableCellHeight = 28.0;
             
             // get scheduled aerobic events
             NSSet *scheduledAerobicEvents = daysEvent.aerobicEvent;
+            
+#ifdef DEBUG
+            for (WeightLiftingEvent *event in scheduledWeightEvents) {
+                NSLog(@"Sekect weight set Event Name: %@",event);
+            }
+            for (AerobicEvent *event in scheduledAerobicEvents) {
+                NSLog(@"Select aerobic set Event Name: %@",event);
+            }
+#endif
             
             // add scheduled events to selected tables
             self.selectedAerobicEvents = [[scheduledAerobicEvents allObjects]mutableCopy];
@@ -498,10 +503,6 @@ const CGFloat kTableCellHeight = 28.0;
             for (AerobicEvent *aerobicEvent in scheduledAerobicEvents) {
                 [self.aerobicDefaultObjects removeObject:aerobicEvent];
             }
-            
-            // remove existing events from stored data
-            [daysEvent removeAerobicEvent:scheduledAerobicEvents];
-            [daysEvent removeAerobicEvent:scheduledWeightEvents];
             
             // setup repeated days
             self.selectedDays = [NSMutableArray arrayWithArray: daysEvent.repeatedDays];
@@ -517,6 +518,24 @@ const CGFloat kTableCellHeight = 28.0;
         // change navigation save button text to "update"
         self.navSaveButton.title = @"Update";
     }
+#ifdef DUBUG
+    for (DefaultWeightLifting *defaultWL in self.weightLiftingDefaultObjects) {
+        NSLog(@"Default weight Event Name: %@",defaultWL.eventName);
+    }
+    
+    for (DefaultAerobic *defaultA in self.aerobicDefaultObjects) {
+        NSLog(@"Default aerobic Event Name: %@",defaultA.eventName);
+    }
+    
+    for (AerobicEvent *event in self.selectedAerobicEvents) {
+        NSLog(@"Select aerobic Event Name: %@",event);
+    }
+    for (WeightLiftingEvent *event in self.selectedWeightEvents) {
+        NSLog(@"Select wight Event Name: %@",event);
+    }
+#endif
+    
+
 }
 
 - (void)setupScheduledEvent:(ScheduledEvent *)scheduledEvent forSchedule:(Schedule *)schedule forDay:(NSInteger)day
@@ -537,7 +556,7 @@ const CGFloat kTableCellHeight = 28.0;
     }
     [schedule addScheduledEventsObject:scheduledEvent];
     
-#ifdef debug
+#ifdef DEBUG
     NSLog(@"11111..........scheduleEvent id: %@", scheduledEvent.objectID);
     NSLog(@"11111..........aerobic set: %ld", scheduledEvent.aerobicEvent.count);
     NSLog(@"11111..........weight event: %ld", scheduledEvent.weightEvent.count);
@@ -573,7 +592,7 @@ const CGFloat kTableCellHeight = 28.0;
         if ([self.selectedDays[i] isEqualToNumber:@(1)]) {
             ScheduledEvent *scheduledEvent = (ScheduledEvent *)[self.coreDataHelper newObject:@"ScheduledEvent"];
             [self setupScheduledEvent:scheduledEvent forSchedule:schedule forDay:i+1];
-#ifdef debug
+#ifdef DEBUG
             NSLog(@"22222...........scheduleEvent id: %@", scheduledEvent.objectID);
             NSLog(@"22222...........aerobic set: %ld", scheduledEvent.aerobicEvent.count);
             NSLog(@"22222...........weight event: %ld", scheduledEvent.weightEvent.count);

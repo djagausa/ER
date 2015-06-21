@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "AbstractEventDataViewController.h"
 #import "SelectEventToAddTableViewController.h"
-#import "AddEventDataTVC.h"
 
-@interface EventViewController : AbstractEventDataViewController <SelectEventToAddTableViewControllerDelegate, AddEventDataTVCDelegate>
+@interface EventViewController : AbstractEventDataViewController <SelectEventToAddTableViewControllerDelegate>
+
 
 @end
 

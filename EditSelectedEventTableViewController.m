@@ -42,10 +42,6 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
 
     self.selectedEvent =[[SelectedEvent alloc]init];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-//     Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.title = self.selectEditEvent.eventName;
     
@@ -333,7 +329,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                 [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectEditEvent] eventName]}
                                                 groupBy:nil];
             }
             self.weightLiftingEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
@@ -348,7 +344,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                 [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
                                            forAttribute:nil
                                               sortingBy:@"date"
-                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                          withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectEditEvent] eventName]}
                                                 groupBy:nil];
             }
             self.aerobicEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];

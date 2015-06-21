@@ -80,6 +80,7 @@
 - (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
+    fetchRequst.fetchLimit = 1;
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequst setEntity:entity];
     
@@ -100,11 +101,11 @@
     if ([scheduledEvents count] > 0) {
         Schedule *schedule;
         schedule = [scheduledEvents firstObject];
-        NSSet *scheduledEvents = schedule.scheduledEvents;
-        NSLog(@"Count: %ld", scheduledEvents.count);
+        NSSet *scheduledDayEvents = schedule.scheduledEvents;
+        NSLog(@"Count: %ld", scheduledDayEvents.count);
         
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"day" ascending:YES];
-        NSArray *sortedSchedule = [scheduledEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+        NSArray *sortedSchedule = [scheduledDayEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
         // lookk for an event for the selected cell
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week + 1, day + 1];
@@ -113,13 +114,32 @@
         if ([events count] > 0){
             // only one entry per day
             ScheduledEvent *dayEvent = [events firstObject];
-#ifdef debug
+#ifdef DEBUG
             NSLog(@"Week: %@; Day: %@; Color: %@; Aerobic Event Count: %ld; Weight Event Count: %ld", dayEvent.week, dayEvent.day, dayEvent.cellColor, dayEvent.aerobicEvent.count, dayEvent.weightEvent.count );
 #endif
             return dayEvent;
         }
     }
     return nil;
+}
+
+- (NSArray *)fetchSaveEvents:(NSString *)entityName fetchPropertyName:(NSString *)fetchPropertyName fetchPropertyCategory:(NSString *)fetchPropertyCategory
+{
+    NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
+    [fetchRequst setEntity:entity];
+    
+    [fetchRequst setResultType:NSDictionaryResultType];
+    [fetchRequst setReturnsDistinctResults:YES];
+    [fetchRequst setPropertiesToFetch:@[fetchPropertyName, fetchPropertyCategory]];
+    
+    NSSortDescriptor *sortByProperty = [[NSSortDescriptor alloc] initWithKey:fetchPropertyName ascending:YES];
+    [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sortByProperty]];
+
+    NSError *error;
+    NSArray *objects = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
+    
+    return objects;
 }
 
 #pragma mark - Info
