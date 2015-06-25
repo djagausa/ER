@@ -16,22 +16,23 @@
 
 - (IBAction)scheduleNameInput:(id)sender;
 - (IBAction)numberOfWeeksInput:(id)sender;
-@property (weak, nonatomic) IBOutlet UITextField *numberOfWeeksOutlet;
-@property (weak, nonatomic) IBOutlet UITextField *scheduleNameOutlet;
-@property (weak, nonatomic) IBOutlet UICollectionView *scheduleCollectionView;
-@property (nonatomic, strong) ScheduledEventInfo *createScheduledEventInfo;
-@property (nonatomic, strong) NSMutableArray *numberOfEventsPerDay;
-@property (nonatomic, strong) NSMutableArray *daysConfiguredTheSame;
-@property (nonatomic, strong) ScheduledEvent *scheduledEvent;
-@property (nonatomic, assign) NSInteger coloredCellCount;
-@property (nonatomic, strong) NSArray *scheduledEvents;
-@property (nonatomic, strong) NSNumber *numberOfWeeks;
+@property (weak, nonatomic) IBOutlet UITextField        *numberOfWeeksOutlet;
+@property (weak, nonatomic) IBOutlet UITextField        *scheduleNameOutlet;
+@property (weak, nonatomic) IBOutlet UICollectionView   *scheduleCollectionView;
+@property (nonatomic, strong) ScheduledEventInfo        *createScheduledEventInfo;
+@property (nonatomic, strong) NSMutableArray            *numberOfEventsPerDay;
+@property (nonatomic, strong) NSMutableArray            *daysConfiguredTheSame;
+@property (nonatomic, strong) ScheduledEvent            *scheduledEvent;
+@property (nonatomic, strong) NSArray                   *scheduledEvents;
+@property (nonatomic, strong) NSNumber                  *numberOfWeeks;
+@property (nonatomic, strong) NSMutableArray            *colorStatus;               // array used to indicate if a color is being used 0 = unused; 1 = used; -1 = reserved
+@property (nonatomic, strong) NSMutableArray            *cellColor;                 // array that holds the cell (days) configured color
 
 @end
 
 static NSString *_dayCellIdentification = @"dayCell";
 static NSString *_headerCellIdentification = @"ScheduleHearderCell";
-static NSArray *_cellColors;
+static NSArray *_cellAvailableColors;
 
 @implementation CreateSheduleViewController
 
@@ -60,7 +61,7 @@ static NSArray *_cellColors;
         [self.numberOfEventsPerDay setObject:@(0) atIndexedSubscript:i];
     }
     self.daysConfiguredTheSame = [[NSMutableArray alloc] initWithCapacity:7];
-    _cellColors = [[NSArray alloc] initWithObjects:
+    _cellAvailableColors = [[NSArray alloc] initWithObjects:
                    [UIColor whiteColor],
                    [UIColor redColor],
                    [UIColor greenColor],
@@ -69,7 +70,16 @@ static NSArray *_cellColors;
                    [UIColor orangeColor],
                    [UIColor purpleColor],
                    [UIColor cyanColor],nil];
-    self.coloredCellCount = 0;       // selecting white color = no configuration for the cell
+    _colorStatus = [[NSMutableArray alloc] initWithCapacity:8];             // 0 = unused; 1 = used; -1 = reserved
+    for (int i = 0; i < 8; ++i) {
+        [_colorStatus addObject:@(0)];                                      //  set to unused
+    }
+    [_colorStatus setObject:@(-1) atIndexedSubscript:0];                    // the first cell color status is reserved (-1) for white
+    
+    _cellColor = [[NSMutableArray alloc] initWithCapacity:7];
+    for (int i = 0; i < 7; ++i) {
+        [_cellColor addObject:@(0)];                                        // zero = white
+    }
     
     if (self.createScheduledEventInfo.scheduleEditMode == kScheduleReview) {
         // disable the schedule input name text field and populate with existing schedule name
@@ -112,7 +122,7 @@ static NSArray *_cellColors;
         [self loadExistingSchedueInfo:self.scheduleNameOutlet.text];
         return;
     }
-    [self.createScheduledEventInfo setScheduleEditMode:kNoScheduleEdit];
+    [self.createScheduledEventInfo setScheduleEditMode:kScheduleNoEdit];
 }
 
 - (void)loadExistingSchedueInfo:(NSString *)scheduleName
@@ -130,16 +140,54 @@ static NSArray *_cellColors;
     [self.scheduleCollectionView reloadData];
 }
 
+- (NSInteger)obtainColorIndex
+{
+    NSInteger colorIndex;
+
+    colorIndex = [self.colorStatus indexOfObject:[NSNumber numberWithInt:0]];
+    
+    if (colorIndex != NSNotFound) {
+        [self setColorStatusUsed:colorIndex];
+        return colorIndex;
+    }
+    return NSNotFound;
+}
+
+- (void)setColorStatusFree:(NSInteger)coloreIndex
+{
+    [self.colorStatus setObject:@(0) atIndexedSubscript:coloreIndex];
+}
+
+- (void)setColorStatusUsed:(NSInteger)colorIndex
+{
+    [self.colorStatus setObject:@(1) atIndexedSubscript:colorIndex];
+}
+
+- (void)setCellColor:(NSInteger)cell cellColor:(NSInteger)cellColor
+{
+    [self.cellColor setObject:@(cellColor) atIndexedSubscript:cell];
+}
+
+- (NSInteger)getCellColor:(NSInteger)cell
+{
+    return [[self.cellColor objectAtIndex:cell] integerValue];
+}
 
 #pragma mark - ScheduleDayEventDelegate
 
 - (ScheduledEventInfo *)dayToBeScheduled
 {
-    self.coloredCellCount++;
-    if (self.coloredCellCount >= 7) {
-        self.coloredCellCount = 1;
+    NSInteger color;
+    
+    // if the cell color = 0 (white) then is needs a new color else us existing color
+    if ([[self.cellColor objectAtIndex:self.createScheduledEventInfo.day] isEqualToNumber:@(0)]) {
+        color = [self obtainColorIndex];
+        [self setCellColor:self.createScheduledEventInfo.day cellColor:color];
+    } else {
+        color = [self getCellColor:self.createScheduledEventInfo.day];
     }
-    self.createScheduledEventInfo.colorIndex = self.coloredCellCount;
+    
+    self.createScheduledEventInfo.colorIndex = color;
 
     return self.createScheduledEventInfo;
 }
@@ -149,7 +197,7 @@ static NSArray *_cellColors;
 {
     [self fetchScheduledEvents:self.createScheduledEventInfo.scheduleName];
 
-    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:self.createScheduledEventInfo.week-1]];
+    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:self.createScheduledEventInfo.week]];
 }
 
 #pragma mark - Collection View
@@ -199,8 +247,11 @@ static NSArray *_cellColors;
 {
     self.createScheduledEventInfo.scheduleName = self.scheduleNameOutlet.text;
     self.createScheduledEventInfo.numberOfWeeks = [self.numberOfWeeksOutlet.text integerValue];
-    self.createScheduledEventInfo.week = indexPath.section + 1;
-    self.createScheduledEventInfo.day = indexPath.row + 1;
+    self.createScheduledEventInfo.week = indexPath.section;
+    self.createScheduledEventInfo.day = indexPath.row;
+    if (self.createScheduledEventInfo.scheduleEditMode <= 0) {
+        self.createScheduledEventInfo.scheduleEditMode = kScheduleEdit;
+    }
 }
 
 - (void)configureCell:(DayCollectionViewCell *)cell day:(NSInteger)day week:(NSInteger)week
@@ -215,14 +266,16 @@ static NSArray *_cellColors;
     if (dayEvent != nil) {
         totalEvents = [dayEvent.totalEvents integerValue];
         colorIndex = [dayEvent.cellColor integerValue];
-        
-        if (colorIndex > self.coloredCellCount) {
-            self.coloredCellCount = colorIndex;
-        }
-    }
 
+        // set this color to used
+        [self setColorStatusUsed:colorIndex];
+    }
+    
+    // configure the cell color
+    [self setCellColor:day cellColor:colorIndex];
+    
     cell.dayCellNumberOfEvents.text = [NSString stringWithFormat:@"Events: %ld", totalEvents];
-    cell.backgroundColor = [_cellColors objectAtIndex: colorIndex];
+    cell.backgroundColor = [_cellAvailableColors objectAtIndex: colorIndex];
 }
 
 #pragma mark - Navigation

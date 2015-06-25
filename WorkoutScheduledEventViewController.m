@@ -32,6 +32,10 @@
     [self fetchEvents];
     [self fetchTodaysCompleteEvents];
     [self constructInfoLabel];
+    
+    // register for events added notifications
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
 }
 
 - (void)constructInfoLabel
@@ -44,10 +48,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)exerciseDataAdded:(SelectedEvent *)eventAdded
+- (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification
 {
     // change the color of the table view cell
-    [self fetchEvents];
+    [self fetchTodaysCompleteEvents];
     [self.tableView reloadData];
 }
 
@@ -117,7 +121,6 @@
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         AddEventDataViewController *addEventDataVC = [segue destinationViewController];
         addEventDataVC.delegate = self;
-        addEventDataVC.addEventDataDelegate = self;
     }
 }
 @end

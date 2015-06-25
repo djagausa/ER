@@ -11,13 +11,14 @@
 #import "SetupExerciseInfoViewController.h"
 #import "AbstractEventDataTableViewController.h"
 #import "SelectedEvent.h"
+#import "CreateSheduleViewController.h"
 
 
 @protocol SelectEventToAddTableViewControllerDelegate <NSObject>
 - (void)eventAdded;
 @end
 
-@interface SelectEventToAddTableViewController : UITableViewController <AbstractEventDataDelegate, SetupExrciseInfoViewControllerDelegate>
+@interface SelectEventToAddTableViewController : UITableViewController <AbstractEventDataDelegate, SetupExrciseInfoViewControllerDelegate, CreateSheduleViewControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) SetupExrciseInfoViewController *setupExerciseInfo;

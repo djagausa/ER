@@ -80,7 +80,6 @@
 - (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
-    fetchRequst.fetchLimit = 1;
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequst setEntity:entity];
     
@@ -108,7 +107,7 @@
         NSArray *sortedSchedule = [scheduledDayEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
         // lookk for an event for the selected cell
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week + 1, day + 1];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week, day];
         
         NSArray *events = [sortedSchedule filteredArrayUsingPredicate:predicate];
         if ([events count] > 0){

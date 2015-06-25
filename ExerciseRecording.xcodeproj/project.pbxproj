@@ -67,13 +67,6 @@
 			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
 			remoteInfo = "CorePlot-CocoaTouch";
 		};
-		2DB93FE51AF024AB0062AB0D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2DB93FDD1AF0248C0062AB0D /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
 		2DBCE8581AAB98EC00303DE1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2DBCE8331AAB98EB00303DE1 /* Project object */;
@@ -417,7 +410,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2DB93FE61AF024AB0062AB0D /* PBXTargetDependency */,
 			);
 			name = ExerciseRecording;
 			productName = ExerciseRecording;
@@ -591,11 +583,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2DB93FE61AF024AB0062AB0D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CorePlot-CocoaTouch";
-			targetProxy = 2DB93FE51AF024AB0062AB0D /* PBXContainerItemProxy */;
-		};
 		2DBCE8591AAB98EC00303DE1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2DBCE83A1AAB98EB00303DE1 /* ExerciseRecording */;
@@ -715,7 +702,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../core-plot-master/**",
+					"$(SRCROOT)/../core-plot-master-4/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -738,7 +725,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../core-plot-master/**",
+					"$(SRCROOT)/../core-plot-master-4/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -216,7 +216,7 @@ static NSString *CellIdentifier = @"EventCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 22.0f;
+    return SECTION_HEADER_HEIGHT;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

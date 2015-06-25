@@ -12,6 +12,7 @@
 #import "DefaultAerobic.h"
 #import "Support.h"
 #import "SelectEventToAddTableViewController.h"
+#import "Utilities.h"
 
 @interface SetupExrciseInfoViewController ()
 
@@ -197,7 +198,9 @@ UIEdgeInsets oldIndicatorInset;
 {
     BOOL verifiedOK = NO;
     
-    if (self.exerciseName.text.length > 0 && self.categoryCode < self.exerciseCategoryCopy.count)
+    [[self saveButton] setEnabled:NO];
+
+    if (([self.exerciseName.text length] > 0) && (self.categoryCode < self.exerciseCategoryCopy.count))
     {
         [[self saveButton] setEnabled:YES];
         verifiedOK = YES;
@@ -309,7 +312,7 @@ UIEdgeInsets oldIndicatorInset;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30.0f;
+    return SECTION_HEADER_HEIGHT;
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -473,7 +476,7 @@ UIEdgeInsets oldIndicatorInset;
                                 break;
                             case kBicycling:
                                 { 
-                                    self.selectedEvent.defaultAerobicData.totalTime = [self convertTimeToNumber: self.default1.text];
+                                    self.selectedEvent.defaultAerobicData.totalTime = [Utilities convertTimeToNumber: self.default1.text];
                                     self.selectedEvent.defaultAerobicData.desiredHR = [NSNumber numberWithInt: [self.default2.text intValue]];
                                     self.selectedEvent.defaultAerobicData.cadence =[NSNumber numberWithInt: [self.default3.text intValue]];
                                 }
@@ -519,7 +522,7 @@ UIEdgeInsets oldIndicatorInset;
                 newDefaultAerobic.eventName = self.exerciseName.text;
                 newDefaultAerobic.category = [NSDecimalNumber decimalNumberWithDecimal:[[NSNumber numberWithInteger:self.categoryCode] decimalValue ]];
                 newDefaultAerobic.enabled = @(1);           // default is enabled on
-                newDefaultAerobic.totalTime = [self convertTimeToNumber: self.default1.text];
+                newDefaultAerobic.totalTime = [Utilities convertTimeToNumber: self.default1.text];
                 newDefaultAerobic.desiredHR = [NSNumber numberWithInteger:[self.default2.text integerValue]];
                 newDefaultAerobic.cadence = [NSNumber numberWithInteger:[self.default3.text integerValue]];
                 break;

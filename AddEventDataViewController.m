@@ -136,7 +136,7 @@ BOOL setCountInitialized;
 
 - (void)setupInitialValues
 {
-    self.dateLabel.text = [self dateToFormatMMddyyy:[NSDate date]];
+    self.dateLabel.text = [Utilities dateToFormatMMddyyy:[NSDate date]];
 
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
@@ -228,7 +228,7 @@ BOOL setCountInitialized;
     switch (self.selectedEvent.eventCategory) {
         case kBicycling:
             {
-                aerobicEvent.duration = [self convertTimeToNumber: self.in1Label.text];
+                aerobicEvent.duration = [Utilities convertTimeToNumber: self.in1Label.text];
                 aerobicEvent.heartRate = @([self.in2Label.text integerValue]);
                 aerobicEvent.cadenace = @([self.in3Label.text integerValue]);
             }
@@ -236,7 +236,7 @@ BOOL setCountInitialized;
         case kRunning:
         case kWalking:
         {
-            aerobicEvent.duration = [self convertTimeToNumber: self.in1Label.text];
+            aerobicEvent.duration = [Utilities convertTimeToNumber: self.in1Label.text];
             aerobicEvent.heartRate = @([self.in2Label.text integerValue]);
             aerobicEvent.distance = @([self.in3Label.text integerValue]);
         }
@@ -403,6 +403,11 @@ BOOL setCountInitialized;
             break;
     }
     return nil;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22.0f;
 }
 
 - (IBAction)noteSwitchChanged:(id)sender
