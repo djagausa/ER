@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
     
     [self fetchEvents];
 }
@@ -27,16 +27,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
-    
-    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
-    NSInteger lengthInMinutes = 0;
-    for (int i = 0 ; i != tokens.count ; i++) {
-        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
-    }
-    return @(lengthInMinutes);
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
@@ -154,7 +144,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 22.0f;
+    return SECTION_HEADER_HEIGHT;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

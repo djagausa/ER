@@ -8,6 +8,7 @@
 
 #import "EventHistoryPlotViewController.h"
 #import "Support.h"
+#import "Utilities.h"
 
 
 @interface EventHistoryPlotViewController()
@@ -475,16 +476,6 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     return [self.period integerValue];
 }
 
-- (NSString *)dateToFormatMMddyyy:(NSDate *)date
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSString *convertedDate = [dateFormatter stringFromDate:date];
-    NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
-    
-    return formattedDate;
-}
-
 - (NSString *)plotDate:(NSUInteger)plotPoint
 {
     NSString *date;
@@ -493,12 +484,12 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
         case kWeights:
             {
                 WeightLiftingEvent *weightEvent = self.weightLiftingEvents[plotPoint];
-                date = [self dateToFormatMMddyyy:weightEvent.date];
+                date = [Utilities dateToFormatMMddyyy:weightEvent.date];
 
                 // only send back the first date in a set
                 if (plotPoint > 0) {
                     WeightLiftingEvent *weightEventPrev = self.weightLiftingEvents[plotPoint-1];
-                    NSString *datePrev = [self dateToFormatMMddyyy:weightEventPrev.date];
+                    NSString *datePrev = [Utilities dateToFormatMMddyyy:weightEventPrev.date];
                     if ([datePrev isEqualToString:date]) {
                         setCount += 1;
                         date = [NSString stringWithFormat:@"%ld",(long)setCount];
@@ -514,7 +505,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
         default:
         {
             AerobicEvent *aerobicEvent = self.aerobicEvents[plotPoint];
-            date = [self dateToFormatMMddyyy:aerobicEvent.date];
+            date = [Utilities dateToFormatMMddyyy:aerobicEvent.date];
         }
             break;
     }

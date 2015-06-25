@@ -79,28 +79,6 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     [self.view endEditing:YES];
 }
 
-#pragma mark - Init
-
-- (NSString *)dateToFormatMMddyyy:(NSDate *)date
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
-    NSString *convertedDate = [dateFormatter stringFromDate:date];
-    NSString *formattedDate = [[NSString alloc] initWithFormat:@"Date: %@", convertedDate];
-    
-    return formattedDate;
-}
-
-- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
-    
-    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
-    NSInteger lengthInMinutes = 0;
-    for (int i = 0 ; i != tokens.count ; i++) {
-        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
-    }
-    return @(lengthInMinutes);
-}
-
 #pragma mark - Table view methods
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -229,7 +207,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 22.0f;
+    return SECTION_HEADER_HEIGHT;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

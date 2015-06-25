@@ -9,7 +9,7 @@
 #ifndef ExerciseRecording_Support_h
 #define ExerciseRecording_Support_h
 
-#define debug
+static const float SECTION_HEADER_HEIGHT = 30.0;
 
 typedef NS_ENUM(NSInteger, ExerciseCategory) {
     kWeights = 0,
@@ -36,7 +36,7 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
 typedef NS_ENUM(NSInteger, ScheduleDiplayMode) {
     kScheduleEdit = 1,
     kScheduleReview,
-    kNoScheduleEdit
+    kScheduleNoEdit
 };
 
 static NSString *aerobicEventsEntityName = @"AerobicEvent";

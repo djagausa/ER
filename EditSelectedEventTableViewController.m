@@ -37,16 +37,16 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.selectEditEvent = [[SelectedEvent alloc]init];
-    self.selectEditEvent = [self.delegate selectEventDataIs];
+    _selectEditEvent = [[SelectedEvent alloc]init];
+    _selectEditEvent = [self.delegate selectEventDataIs];
 
-    self.selectedEvent =[[SelectedEvent alloc]init];
+    _selectedEvent =[[SelectedEvent alloc]init];
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     self.navigationItem.title = self.selectEditEvent.eventName;
     
-    self.coreDataHelper = [[CoreDataHelper alloc] init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
+    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
 
     [self fetchEvents];
 }

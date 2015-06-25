@@ -31,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.scheduleFileHelper = [[ScheduleStatusFileHelper alloc] init];
-    self.currentScheduleStatus = [[ScheduleStatus alloc] init];
-    self.scheduledEventInfo = [[ScheduledEventInfo alloc] init];
+    _scheduleFileHelper = [[ScheduleStatusFileHelper alloc] init];
+    _currentScheduleStatus = [[ScheduleStatus alloc] init];
+    _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     
     [self fetchEvents];
     

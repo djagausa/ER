@@ -7,6 +7,7 @@
 //
 
 #import "EditEventViewController.h"
+#import "Utilities.h"
 
 @interface EditEventViewController ()
 
@@ -159,16 +160,6 @@
 - (IBAction)lineThreeInput:(id)sender {
 }
 
-- (NSNumber *)convertTimeToNumber:(NSString *)timeString{
-    
-    NSArray* tokens = [timeString componentsSeparatedByString:@":"];
-    NSInteger lengthInMinutes = 0;
-    for (int i = 0 ; i != tokens.count ; i++) {
-        lengthInMinutes = 60*lengthInMinutes + [[tokens objectAtIndex:i] integerValue];
-    }
-    return @(lengthInMinutes);
-}
-
 - (IBAction)updateButton:(id)sender {
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
@@ -191,14 +182,14 @@
                 case kRunning:
                 case kWalking:
                     {
-                        self.selectedEvent.aerobicEvent.duration = [self convertTimeToNumber: self.lineOneInputText.text];
+                        self.selectedEvent.aerobicEvent.duration = [Utilities convertTimeToNumber: self.lineOneInputText.text];
                         self.selectedEvent.aerobicEvent.heartRate = [NSNumber numberWithInt: [self.lineTwoInputText.text intValue]];
                         self.selectedEvent.aerobicEvent.distance =[NSNumber numberWithInt: [self.lineThreeInputText.text intValue]];
                     }
                     break;
                 case kBicycling:
                     {
-                        self.selectedEvent.aerobicEvent.duration = [self convertTimeToNumber: self.lineOneInputText.text];
+                        self.selectedEvent.aerobicEvent.duration = [Utilities convertTimeToNumber: self.lineOneInputText.text];
                         self.selectedEvent.aerobicEvent.heartRate = [NSNumber numberWithInt: [self.lineTwoInputText.text intValue]];
                         self.selectedEvent.aerobicEvent.cadenace =[NSNumber numberWithInt: [self.lineThreeInputText.text intValue]];
                     }

@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>6B6D8A7F-43B0-4533-84BF-135912ECAF85</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>ExerciseRecording</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</key>
 		<string>https://github.com/djagausa/ER.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ExerciseRecording.xcodeproj/project.xcworkspace</string>
+	<string>ExerciseRecording.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F9BA575ECE9595C2DEAD134C90516213A5B4B0F8</key>

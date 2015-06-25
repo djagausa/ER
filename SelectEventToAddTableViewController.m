@@ -13,6 +13,7 @@
 #import "Support.h"
 #import "DefaultWeightLifting.h"
 #import "DefaultAerobic.h"
+#import "ScheduledEventInfo.h"
 
 @interface SelectEventToAddTableViewController ()
 
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) NSDictionary          *categoryDictionary;
 @property (nonatomic, strong) SelectedEvent         *selectedEvent;
 @property (nonatomic, strong) CoreDataHelper        *coreDataHelper;
+@property (nonatomic, strong) ScheduledEventInfo    *scheduledEventInfo;
 
 - (IBAction)newButtonSelected:(id)sender;
 
@@ -39,9 +41,10 @@ static NSString *scheduleCellId = @"scheduleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.coreDataHelper = [[CoreDataHelper alloc]init];
-    self.coreDataHelper.managedObjectContext = self.managedObjectContext;
-    self.selectedEvent = [[SelectedEvent alloc]init];
+    _coreDataHelper = [[CoreDataHelper alloc]init];
+    _coreDataHelper.managedObjectContext = self.managedObjectContext;
+    _selectedEvent = [[SelectedEvent alloc]init];
+    _scheduledEventInfo = [[ScheduledEventInfo alloc]init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -107,6 +110,11 @@ static NSString *scheduleCellId = @"scheduleCell";
 - (SelectedEvent *)selectedEventDataIs
 {
     return self.selectedEvent;
+}
+
+- (ScheduledEventInfo *)scheduledEventIs
+{
+    return self.scheduledEventInfo;
 }
 
 - (void)selectedEventSaved:(NSString *)eventName exerciseCategory:(ExerciseCategory)exerciseCategory
@@ -239,6 +247,11 @@ static NSString *scheduleCellId = @"scheduleCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
+        case ScheduleCategory:
+        {
+            self.scheduledEventInfo.scheduleEditMode = 0;
+            break;
+        }
         case AerobicCategory:
         {
             self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
@@ -265,6 +278,8 @@ static NSString *scheduleCellId = @"scheduleCell";
     if ([segue.identifier isEqualToString:@"scheduleSetupSegue"])
     {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        CreateSheduleViewController *createScheduleViweCintroller = [segue destinationViewController];
+        createScheduleViweCintroller.createScheduleDelegate = self;
     } else {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         SetupExrciseInfoViewController *setupExerciseViewController = [segue destinationViewController];
