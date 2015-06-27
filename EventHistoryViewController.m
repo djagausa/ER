@@ -84,6 +84,44 @@
     }
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 22.0f;
+}
+
+#pragma  mark - CoreData
+
+- (void) fetchEvents
+{
+    switch (self.selectedEvent.eventCategory) {
+        case kWeights:
+        {
+            [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                            groupBy:nil];
+        }
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+        {
+            [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                            groupBy:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

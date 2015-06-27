@@ -84,14 +84,14 @@ UIEdgeInsets oldIndicatorInset;
         [[self label0] setHidden:NO];
         [[self enableSwitchOutlet] setHidden:NO];
         [[self enableSwitchOutlet] setEnabled:YES];
-        
+        self.navigationItem.title = @"Edit Event Default Parameters";
     } else {
         [[self saveButton] setTitle:@"Save" ];
         [[self saveButton] setEnabled:NO];
         [[self label0] setHidden:YES];
         [[self enableSwitchOutlet] setHidden:YES];
         [[self enableSwitchOutlet] setEnabled:NO];
-
+        self.navigationItem.title = @"Enter Event Default Parameters";
     }
     [self setContentInsetToZero];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -237,7 +237,6 @@ UIEdgeInsets oldIndicatorInset;
                             break;
                         }
                     }
-                    [[self saveButton] setEnabled:YES];
                     break;
             }
         }
@@ -549,7 +548,10 @@ UIEdgeInsets oldIndicatorInset;
     {  // if in edit mode no need to check for deleting an event from the pre-populated event list
         [self.delegate selectedEventSaved:self.exerciseName.text exerciseCategory:self.categoryCode];
     }
-    [ self resetDataEntry];
+//    [ self resetDataEntry];
+    
+    // return tot he previous view controller
+    [self.navigationController popViewControllerAnimated:YES];
 }
 /*
 #pragma mark - Navigation

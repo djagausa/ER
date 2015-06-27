@@ -65,14 +65,14 @@
 #pragma mark - Core Data
 - (void)fetchEvents
 {
-    Schedule *schedule;
+//    Schedule *schedule;
     NSArray *scheduledEvents;
     
     scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName}];
 
-    if ([scheduledEvents count] > 0) {
-        schedule = [scheduledEvents firstObject];
-    }
+//    if ([scheduledEvents count] > 0) {
+//        schedule = [scheduledEvents firstObject];
+//    }
     
     self.dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
     

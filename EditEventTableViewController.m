@@ -253,7 +253,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         switch (indexPath.section) {
-            case 0:     // calendar section
+            case 0:     // schedule section
                 break;
             case 1:
                 if (self.aerobicDefaultObjects.count > 0)

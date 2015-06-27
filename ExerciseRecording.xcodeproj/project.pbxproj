@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */; };
+		2D4578951B3EA57400585C11 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4578921B3EA55C00585C11 /* libCorePlot-CocoaTouch.a */; };
 		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
 		2D7D7C641AC69CA60069E888 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C631AC69CA60069E888 /* CoreDataHelper.m */; };
@@ -25,7 +26,6 @@
 		2DB6F43D1AEE50C700FCE207 /* EditEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F43C1AEE50C700FCE207 /* EditEventViewController.m */; };
 		2DB6F4421AEFA01100FCE207 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB6F4411AEFA01100FCE207 /* QuartzCore.framework */; };
 		2DB6F45A1AEFD35000FCE207 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB6F4591AEFD35000FCE207 /* Accelerate.framework */; };
-		2DB93FE71AF024B60062AB0D /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DB93FE41AF0248C0062AB0D /* libCorePlot-CocoaTouch.a */; };
 		2DB93FEA1AF0FE400062AB0D /* AbstractEventDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FE91AF0FE400062AB0D /* AbstractEventDataTableViewController.m */; };
 		2DB93FED1AF116140062AB0D /* HistoryEventSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FEC1AF116140062AB0D /* HistoryEventSelectTableViewController.m */; };
 		2DB93FF11AF151160062AB0D /* SelectedEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB93FF01AF151160062AB0D /* SelectedEvent.m */; };
@@ -60,11 +60,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2DB93FE31AF0248C0062AB0D /* PBXContainerItemProxy */ = {
+		2D4578911B3EA55C00585C11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2DB93FDD1AF0248C0062AB0D /* CorePlot-CocoaTouch.xcodeproj */;
+			containerPortal = 2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		2D4578931B3EA56900585C11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
 			remoteInfo = "CorePlot-CocoaTouch";
 		};
 		2DBCE8581AAB98EC00303DE1 /* PBXContainerItemProxy */ = {
@@ -80,6 +87,7 @@
 		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
 		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
+		2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot-master/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataViewController.h; sourceTree = "<group>"; };
 		2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataViewController.m; sourceTree = "<group>"; };
 		2D7D7C601AC4D9A80069E888 /* AerobicEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AerobicEvent.h; sourceTree = "<group>"; };
@@ -113,7 +121,6 @@
 		2DB6F43C1AEE50C700FCE207 /* EditEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventViewController.m; sourceTree = "<group>"; };
 		2DB6F4411AEFA01100FCE207 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2DB6F4591AEFD35000FCE207 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		2DB93FDD1AF0248C0062AB0D /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot-master/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		2DB93FE81AF0FE400062AB0D /* AbstractEventDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractEventDataTableViewController.h; sourceTree = "<group>"; };
 		2DB93FE91AF0FE400062AB0D /* AbstractEventDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractEventDataTableViewController.m; sourceTree = "<group>"; };
 		2DB93FEB1AF116140062AB0D /* HistoryEventSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryEventSelectTableViewController.h; sourceTree = "<group>"; };
@@ -183,10 +190,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DB93FE71AF024B60062AB0D /* libCorePlot-CocoaTouch.a in Frameworks */,
 				2DF9C0A61B0B400F002A497E /* Crashlytics.framework in Frameworks */,
 				2DB6F45A1AEFD35000FCE207 /* Accelerate.framework in Frameworks */,
 				2DB6F4421AEFA01100FCE207 /* QuartzCore.framework in Frameworks */,
+				2D4578951B3EA57400585C11 /* libCorePlot-CocoaTouch.a in Frameworks */,
 				2DF9C0A51B0B400F002A497E /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,6 +208,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D45788C1B3EA55C00585C11 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D4578921B3EA55C00585C11 /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D7D7C051ABDC13D0069E888 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,17 +226,9 @@
 		2DB6F4431AEFCC7F00FCE207 /* CorePlot */ = {
 			isa = PBXGroup;
 			children = (
-				2DB93FDD1AF0248C0062AB0D /* CorePlot-CocoaTouch.xcodeproj */,
+				2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */,
 			);
 			name = CorePlot;
-			sourceTree = "<group>";
-		};
-		2DB93FDE1AF0248C0062AB0D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2DB93FE41AF0248C0062AB0D /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2DBCE8321AAB98EB00303DE1 = {
@@ -410,6 +417,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2D4578941B3EA56900585C11 /* PBXTargetDependency */,
 			);
 			name = ExerciseRecording;
 			productName = ExerciseRecording;
@@ -465,8 +473,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2DB93FDE1AF0248C0062AB0D /* Products */;
-					ProjectRef = 2DB93FDD1AF0248C0062AB0D /* CorePlot-CocoaTouch.xcodeproj */;
+					ProductGroup = 2D45788C1B3EA55C00585C11 /* Products */;
+					ProjectRef = 2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -478,11 +486,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2DB93FE41AF0248C0062AB0D /* libCorePlot-CocoaTouch.a */ = {
+		2D4578921B3EA55C00585C11 /* libCorePlot-CocoaTouch.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = 2DB93FE31AF0248C0062AB0D /* PBXContainerItemProxy */;
+			remoteRef = 2D4578911B3EA55C00585C11 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -583,6 +591,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2D4578941B3EA56900585C11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = 2D4578931B3EA56900585C11 /* PBXContainerItemProxy */;
+		};
 		2DBCE8591AAB98EC00303DE1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2DBCE83A1AAB98EB00303DE1 /* ExerciseRecording */;
@@ -702,7 +715,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../core-plot-master-4/**",
+					"$(SRCROOT)/../core-plot-master/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -725,7 +738,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../core-plot-master-4/**",
+					"$(SRCROOT)/../core-plot-master/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

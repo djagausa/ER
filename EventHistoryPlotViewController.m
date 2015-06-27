@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [UIViewController attemptRotationToDeviceOrientation];
 }
 
@@ -591,6 +592,40 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
             break;
     }
     return [NSDecimalNumber zero];
+}
+
+#pragma  mark - CoreData
+
+- (void) fetchEvents
+{
+    switch (self.selectedEvent.eventCategory) {
+        case kWeights:
+        {
+            [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                            groupBy:nil];
+        }
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+        {
+            [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
+                                            groupBy:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /*

@@ -161,7 +161,7 @@ static NSString *scheduleCellId = @"scheduleCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger count;
+    NSInteger count = 0;
     
     switch (section) {
         case ScheduleCategory:

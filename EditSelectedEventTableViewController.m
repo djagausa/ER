@@ -51,11 +51,6 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
     [self fetchEvents];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -66,7 +61,6 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
 {
     [super viewDidAppear:animated];
     [self.editSelectedEventTable reloadData];
-
 }
 
 - (NSUInteger)supportedInterfaceOrientations{
@@ -106,7 +100,6 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
             }
             break;
     }
-
    return count;
 }
 
@@ -139,7 +132,6 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
         default:
             break;
     }
-    
     return headerTitle;
 }
 
@@ -244,9 +236,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
             }
             break;
     }
-
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -656,6 +656,9 @@ const CGFloat kTableCellHeight = 28.0;
     [manager setActionName:@"Add"];
     [self.coreDataHelper save];
     [self.scheduleEventDelegate daysConfigured:self.scheduledEventInfo.week];
+    
+    // return to the previous view
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
