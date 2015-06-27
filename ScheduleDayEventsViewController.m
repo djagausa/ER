@@ -612,6 +612,7 @@ const CGFloat kTableCellHeight = 28.0;
         schedule.scheduleName = self.scheduledEventInfo.scheduleName;
     }
     schedule.numberOfWeeks = @(self.scheduledEventInfo.numberOfWeeks);
+    schedule.repeatCount = @(self.scheduledEventInfo.repeatCount);
     return schedule;
 }
 

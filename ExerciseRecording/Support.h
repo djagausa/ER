@@ -53,6 +53,7 @@ static NSString *dayKey = @"dayKey";
 static NSString *weekKey = @"weekKey";
 static NSString *lastUpdateDateKey = @"lastUpdateDateKey";
 static NSString *activeKey = @"activeKey";
+static NSString *repeatCountKey = @"repeatKey";
 
 static NSString *eventAddedNotificationName = @"ExerciseEventAdded";
 

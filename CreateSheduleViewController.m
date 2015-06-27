@@ -14,10 +14,12 @@
 
 @interface CreateSheduleViewController ()
 
+- (IBAction)repeatCountInput:(id)sender;
 - (IBAction)scheduleNameInput:(id)sender;
 - (IBAction)numberOfWeeksInput:(id)sender;
 @property (weak, nonatomic) IBOutlet UITextField        *numberOfWeeksOutlet;
 @property (weak, nonatomic) IBOutlet UITextField        *scheduleNameOutlet;
+@property (weak, nonatomic) IBOutlet UITextField        *repeatCountOutlet;
 @property (weak, nonatomic) IBOutlet UICollectionView   *scheduleCollectionView;
 @property (nonatomic, strong) ScheduledEventInfo        *createScheduledEventInfo;
 @property (nonatomic, strong) NSMutableArray            *numberOfEventsPerDay;
@@ -85,6 +87,7 @@ static NSArray *_cellAvailableColors;
         // disable the schedule input name text field and populate with existing schedule name
         self.scheduleNameOutlet.enabled = NO;
         self.numberOfWeeksOutlet.enabled = NO;
+        self.repeatCountOutlet.enabled = NO;
         [self configureScreenElements];
     } else if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
         [self configureScreenElements];
@@ -94,10 +97,15 @@ static NSArray *_cellAvailableColors;
 - (void)configureScreenElements
 {
     self.scheduleNameOutlet.text = self.createScheduledEventInfo.scheduleName;
+    self.numberOfWeeksOutlet.text = [NSString stringWithFormat:@"%ld",self.createScheduledEventInfo.numberOfWeeks];
     [self.scheduleCollectionView setUserInteractionEnabled:YES];
     [self fetchScheduledEvents:self.createScheduledEventInfo.scheduleName];
     [self loadExistingSchedueInfo:self.createScheduledEventInfo.scheduleName];
 }
+
+- (IBAction)repeatCountInput:(id)sender {
+}
+
 - (IBAction)scheduleNameInput:(id)sender
 {
     if ([self.scheduleNameOutlet.text length] > 0) {
@@ -247,6 +255,7 @@ static NSArray *_cellAvailableColors;
 {
     self.createScheduledEventInfo.scheduleName = self.scheduleNameOutlet.text;
     self.createScheduledEventInfo.numberOfWeeks = [self.numberOfWeeksOutlet.text integerValue];
+    self.createScheduledEventInfo.repeatCount = [self.repeatCountOutlet.text integerValue];
     self.createScheduledEventInfo.week = indexPath.section;
     self.createScheduledEventInfo.day = indexPath.row;
     if (self.createScheduledEventInfo.scheduleEditMode <= 0) {

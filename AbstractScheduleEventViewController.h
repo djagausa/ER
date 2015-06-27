@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSMutableArray             *completedAerobicEvents;            // used to keep track of todays completed events
 
 - (NSNumber *)fetchNumberOfWeeksForSchedule:(NSString *)scheduleName;
+- (NSNumber *)fetchRepeatCountForSchedule:(NSString *)scheduleName;
 - (void) fetchEvents;
 
 @end

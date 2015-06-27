@@ -640,49 +640,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNi-lt-eoh">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of weeks:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhi-lO-khy">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kGA-Bd-c6b">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="scheduleNameInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="53A-HW-EGO"/>
-                                    <outlet property="delegate" destination="esC-RZ-nT0" id="a7X-uQ-bX9"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2uT-tL-hZz">
-                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="yuo-iW-bFJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="yuo-iW-bFJ"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="yuo-iW-bFJ"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="numberOfWeeksInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="BDv-ap-oHz"/>
-                                    <outlet property="delegate" destination="esC-RZ-nT0" id="d6b-6k-vci"/>
-                                </connections>
-                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pCH-RD-ZsE">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
@@ -809,69 +766,169 @@
                                     <outlet property="delegate" destination="esC-RZ-nT0" id="GCO-VE-qha"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNi-lt-eoh">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of weeks:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhi-lO-khy">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repeat:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TkX-mL-6FH">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kGA-Bd-c6b">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="scheduleNameInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="53A-HW-EGO"/>
+                                    <outlet property="delegate" destination="esC-RZ-nT0" id="a7X-uQ-bX9"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2uT-tL-hZz">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="yuo-iW-bFJ">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="47"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="yuo-iW-bFJ"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="yuo-iW-bFJ"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="numberOfWeeksInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="BDv-ap-oHz"/>
+                                    <outlet property="delegate" destination="esC-RZ-nT0" id="d6b-6k-vci"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eKc-CK-ocH">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="QOK-hE-ez3">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="42"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="QOK-hE-ez3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="QOK-hE-ez3"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="numberOfWeeksInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="DNj-tm-P65"/>
+                                    <action selector="repeatCountInput:" destination="esC-RZ-nT0" eventType="editingDidEnd" id="SIo-4o-e7Z"/>
+                                    <outlet property="delegate" destination="esC-RZ-nT0" id="Rvh-vv-P6R"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pCH-RD-ZsE" firstAttribute="leading" secondItem="Qhi-lO-khy" secondAttribute="leading" id="3cz-i0-A4q"/>
+                            <constraint firstItem="TkX-mL-6FH" firstAttribute="baseline" secondItem="2uT-tL-hZz" secondAttribute="baseline" id="4dw-CR-SUs"/>
                             <constraint firstItem="pCH-RD-ZsE" firstAttribute="leading" secondItem="PVf-qr-NDg" secondAttribute="leadingMargin" id="BMo-Wq-XQp"/>
-                            <constraint firstItem="kGA-Bd-c6b" firstAttribute="top" secondItem="m0q-L5-wg3" secondAttribute="bottom" constant="12" id="Bac-1g-eMe"/>
+                            <constraint firstItem="kGA-Bd-c6b" firstAttribute="top" secondItem="m0q-L5-wg3" secondAttribute="bottom" constant="12" id="Bac-1g-eMe">
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                            </constraint>
                             <constraint firstItem="kGA-Bd-c6b" firstAttribute="leading" secondItem="2uT-tL-hZz" secondAttribute="leading" id="Cpb-Ud-7mj"/>
                             <constraint firstItem="kGA-Bd-c6b" firstAttribute="leading" secondItem="eNi-lt-eoh" secondAttribute="trailing" constant="8" symbolic="YES" id="HK4-ZI-ffI"/>
+                            <constraint firstItem="eKc-CK-ocH" firstAttribute="leading" secondItem="TkX-mL-6FH" secondAttribute="trailing" constant="8" symbolic="YES" id="KMH-x0-Kg2"/>
+                            <constraint firstItem="eKc-CK-ocH" firstAttribute="trailing" secondItem="kGA-Bd-c6b" secondAttribute="trailing" id="Urv-BF-n2u"/>
                             <constraint firstItem="kGA-Bd-c6b" firstAttribute="trailing" secondItem="pCH-RD-ZsE" secondAttribute="trailing" id="WcM-Qk-KoY"/>
                             <constraint firstAttribute="bottom" secondItem="pCH-RD-ZsE" secondAttribute="bottom" constant="20" symbolic="YES" id="YHU-xR-P9e"/>
-                            <constraint firstItem="pCH-RD-ZsE" firstAttribute="top" secondItem="Qhi-lO-khy" secondAttribute="bottom" constant="23" id="Yye-68-QhI"/>
-                            <constraint firstItem="eNi-lt-eoh" firstAttribute="bottom" secondItem="kGA-Bd-c6b" secondAttribute="bottom" id="jSx-jl-Yxl"/>
+                            <constraint firstItem="pCH-RD-ZsE" firstAttribute="top" secondItem="Qhi-lO-khy" secondAttribute="bottom" constant="23" id="Yye-68-QhI">
+                                <variation key="heightClass=regular-widthClass=compact" constant="24"/>
+                            </constraint>
+                            <constraint firstItem="eNi-lt-eoh" firstAttribute="bottom" secondItem="kGA-Bd-c6b" secondAttribute="bottom" id="jSx-jl-Yxl">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-5"/>
+                            </constraint>
                             <constraint firstItem="2uT-tL-hZz" firstAttribute="top" secondItem="kGA-Bd-c6b" secondAttribute="bottom" constant="8" symbolic="YES" id="kSG-xR-vWa"/>
                             <constraint firstItem="2uT-tL-hZz" firstAttribute="leading" secondItem="Qhi-lO-khy" secondAttribute="trailing" constant="8" symbolic="YES" id="t2P-ah-Xo3"/>
+                            <constraint firstItem="eKc-CK-ocH" firstAttribute="centerY" secondItem="Qhi-lO-khy" secondAttribute="centerY" id="uBZ-2n-TwE"/>
                             <constraint firstItem="kGA-Bd-c6b" firstAttribute="trailing" secondItem="PVf-qr-NDg" secondAttribute="trailingMargin" id="wNB-te-ax0"/>
-                            <constraint firstItem="2uT-tL-hZz" firstAttribute="bottom" secondItem="Qhi-lO-khy" secondAttribute="bottom" id="ysf-N8-eMJ"/>
+                            <constraint firstItem="2uT-tL-hZz" firstAttribute="bottom" secondItem="Qhi-lO-khy" secondAttribute="bottom" id="ysf-N8-eMJ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="pCH-RD-ZsE"/>
                                 <exclude reference="eNi-lt-eoh"/>
                                 <exclude reference="Qhi-lO-khy"/>
+                                <exclude reference="TkX-mL-6FH"/>
                                 <exclude reference="kGA-Bd-c6b"/>
                                 <exclude reference="2uT-tL-hZz"/>
-                                <exclude reference="pCH-RD-ZsE"/>
+                                <exclude reference="eKc-CK-ocH"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="kSG-xR-vWa"/>
-                                <exclude reference="t2P-ah-Xo3"/>
-                                <exclude reference="ysf-N8-eMJ"/>
                                 <exclude reference="jSx-jl-Yxl"/>
+                                <exclude reference="3cz-i0-A4q"/>
+                                <exclude reference="BMo-Wq-XQp"/>
+                                <exclude reference="YHU-xR-P9e"/>
+                                <exclude reference="Yye-68-QhI"/>
                                 <exclude reference="Bac-1g-eMe"/>
                                 <exclude reference="Cpb-Ud-7mj"/>
                                 <exclude reference="HK4-ZI-ffI"/>
                                 <exclude reference="WcM-Qk-KoY"/>
                                 <exclude reference="wNB-te-ax0"/>
-                                <exclude reference="3cz-i0-A4q"/>
-                                <exclude reference="BMo-Wq-XQp"/>
-                                <exclude reference="YHU-xR-P9e"/>
-                                <exclude reference="Yye-68-QhI"/>
+                                <exclude reference="kSG-xR-vWa"/>
+                                <exclude reference="t2P-ah-Xo3"/>
+                                <exclude reference="ysf-N8-eMJ"/>
+                                <exclude reference="4dw-CR-SUs"/>
+                                <exclude reference="KMH-x0-Kg2"/>
+                                <exclude reference="Urv-BF-n2u"/>
+                                <exclude reference="uBZ-2n-TwE"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
+                                <include reference="pCH-RD-ZsE"/>
                                 <include reference="eNi-lt-eoh"/>
                                 <include reference="Qhi-lO-khy"/>
+                                <include reference="TkX-mL-6FH"/>
                                 <include reference="kGA-Bd-c6b"/>
                                 <include reference="2uT-tL-hZz"/>
-                                <include reference="pCH-RD-ZsE"/>
+                                <include reference="eKc-CK-ocH"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="kSG-xR-vWa"/>
-                                <include reference="t2P-ah-Xo3"/>
-                                <include reference="ysf-N8-eMJ"/>
                                 <include reference="jSx-jl-Yxl"/>
+                                <include reference="3cz-i0-A4q"/>
+                                <include reference="BMo-Wq-XQp"/>
+                                <include reference="YHU-xR-P9e"/>
+                                <include reference="Yye-68-QhI"/>
                                 <include reference="Bac-1g-eMe"/>
                                 <include reference="Cpb-Ud-7mj"/>
                                 <include reference="HK4-ZI-ffI"/>
                                 <include reference="WcM-Qk-KoY"/>
                                 <include reference="wNB-te-ax0"/>
-                                <include reference="3cz-i0-A4q"/>
-                                <include reference="BMo-Wq-XQp"/>
-                                <include reference="YHU-xR-P9e"/>
-                                <include reference="Yye-68-QhI"/>
+                                <include reference="kSG-xR-vWa"/>
+                                <include reference="t2P-ah-Xo3"/>
+                                <include reference="ysf-N8-eMJ"/>
+                                <include reference="4dw-CR-SUs"/>
+                                <include reference="KMH-x0-Kg2"/>
+                                <include reference="Urv-BF-n2u"/>
+                                <include reference="uBZ-2n-TwE"/>
                             </mask>
                         </variation>
                     </view>
@@ -880,6 +937,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="numberOfWeeksOutlet" destination="2uT-tL-hZz" id="u7i-Ug-x2M"/>
+                        <outlet property="repeatCountOutlet" destination="eKc-CK-ocH" id="N25-zA-XEV"/>
                         <outlet property="scheduleCollectionView" destination="pCH-RD-ZsE" id="que-Wt-kp0"/>
                         <outlet property="scheduleNameOutlet" destination="kGA-Bd-c6b" id="7f5-Op-Q3J"/>
                     </connections>

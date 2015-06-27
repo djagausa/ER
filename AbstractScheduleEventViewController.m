@@ -268,6 +268,21 @@ static NSString *CellIdentifier = @"EventCell";
     return weeks;
 }
 
+- (NSNumber *)fetchRepeatCountForSchedule:(NSString *)scheduleName
+{
+    NSNumber *repeatCount = @(0);
+    Schedule *schedule;
+    
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName}];
+    
+    if ([schedules count] > 0) {
+        schedule = [schedules firstObject];
+        return schedule.repeatCount;
+    }
+    
+    return repeatCount;
+}
+
 - (void) fetchEvents
 {
     self.weightLiftingDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];

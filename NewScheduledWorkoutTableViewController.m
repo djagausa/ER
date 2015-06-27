@@ -97,6 +97,7 @@ static NSString *cellName = @"ScheduleCell";
     scheduleStatus.week = @(0);
     scheduleStatus.lastUpdateDate = [NSDate date];
     scheduleStatus.active = @(1);                   // TRUE = active
+    scheduleStatus.repeat = @(self.scheduleInfo.repeatCount);
     
     [self.schduleFileHelper writeScheduleStatusFile:scheduleStatus];
 }

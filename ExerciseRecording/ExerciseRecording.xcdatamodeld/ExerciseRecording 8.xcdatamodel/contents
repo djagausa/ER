@@ -39,6 +39,7 @@
     </entity>
     <entity name="Schedule" representedClassName="Schedule" syncable="YES">
         <attribute name="numberOfWeeks" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="repeatCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="scheduleName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="scheduledEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduledEvent" inverseName="schedule" inverseEntity="ScheduledEvent" syncable="YES"/>
     </entity>
@@ -69,7 +70,7 @@
         <element name="AerobicEvent" positionX="-245" positionY="9" width="128" height="240"/>
         <element name="DefaultAerobic" positionX="-461" positionY="17" width="128" height="195"/>
         <element name="DefaultWeightLifting" positionX="-459" positionY="-198" width="126" height="165"/>
-        <element name="Schedule" positionX="133" positionY="-234" width="128" height="88"/>
+        <element name="Schedule" positionX="133" positionY="-234" width="128" height="105"/>
         <element name="ScheduledEvent" positionX="124" positionY="-90" width="128" height="178"/>
         <element name="WeightLiftingEvent" positionX="-234" positionY="-187" width="128" height="195"/>
     </elements>

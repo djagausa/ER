@@ -14,6 +14,7 @@
 
 @dynamic scheduleName;
 @dynamic numberOfWeeks;
+@dynamic repeatCount;
 @dynamic scheduledEvents;
 
 @end

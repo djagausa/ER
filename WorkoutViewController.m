@@ -110,7 +110,8 @@
             if (compareResults == NSOrderedAscending) {
                 // bunp the schedule by one day
                 NSNumber *weeks = [self fetchNumberOfWeeksForSchedule:self.currentScheduleStatus.scheduleName];
-                scheduleBumpResults = [self bumpScheduleByNumber:1 numberOfWeeks:[weeks integerValue]];
+                NSNumber *repeatCount = [self fetchRepeatCountForSchedule:self.currentScheduleStatus.scheduleName];
+                scheduleBumpResults = [self bumpScheduleByNumber:1 numberOfWeeks:[weeks integerValue] repeatCount:[repeatCount integerValue]];
             } else {
                 // use the schedule as is
                 scheduleBumpResults = YES;
@@ -135,11 +136,12 @@
     }
 }
 
-- (BOOL)bumpScheduleByNumber:(NSInteger )bumpNumber numberOfWeeks:(NSInteger )numberOfWeeks
+- (BOOL)bumpScheduleByNumber:(NSInteger )bumpNumber numberOfWeeks:(NSInteger )numberOfWeeks repeatCount:(NSInteger )repeatCount
 {
     BOOL results;       // NO = schedule finsihed;  YES = scheduled bumped
     NSNumber *day = self.currentScheduleStatus.day;
     NSNumber *week = self.currentScheduleStatus.week;
+    NSNumber *repeat = self.currentScheduleStatus.repeat;
     
     // bump the day
     day = @([day integerValue] + bumpNumber);
@@ -153,9 +155,15 @@
         
         // if week exceeds number of scheduled weeks then schedule completed
         if ([week integerValue] > numberOfWeeks) {
-            // workout finished
-            results = NO;
-            return results;
+            
+            week = @(0);
+            
+            // check repeat situation
+            if ([repeat integerValue] > repeatCount) {
+                // workout finished
+                results = NO;
+                return results;
+            }
         }
     }
     // setup current schedule data with updated values

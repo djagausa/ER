@@ -22,7 +22,7 @@
     self = [super init];
     
     if (self) {
-        self.scheduledStatus = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", scheduleNameKey, @(0), dayKey, @(0),weekKey, @"", lastUpdateDateKey, @(0), activeKey, nil ];
+        self.scheduledStatus = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", scheduleNameKey, @(0), dayKey, @(0),weekKey, @"", lastUpdateDateKey, @(0), activeKey, @(0), repeatCountKey, nil ];
     }
     
     return self;
@@ -62,7 +62,8 @@
     [self.scheduledStatus setObject:currentScheduleStatus.day forKey:dayKey];
     [self.scheduledStatus setObject:currentScheduleStatus.lastUpdateDate forKey:lastUpdateDateKey];
     [self.scheduledStatus setObject:@(currentScheduleStatus.active) forKey:activeKey];
-    
+    [self.scheduledStatus setObject:currentScheduleStatus.repeat forKey:repeatCountKey];
+ 
     // get path to documents dirsctory
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     

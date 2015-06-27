@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *scheduleName;
 @property (nonatomic, strong) NSNumber *day;
 @property (nonatomic, strong) NSNumber *week;
+@property (nonatomic, strong) NSNumber *repeat;
 @property (nonatomic, strong) NSDate *lastUpdateDate;
 @property (assign, getter=isActive) BOOL active;
 
