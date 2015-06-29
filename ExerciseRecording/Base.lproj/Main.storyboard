@@ -202,7 +202,7 @@
         <scene sceneID="rE1-Bk-ppk">
             <objects>
                 <tableViewController id="bTu-QF-v3d" customClass="SelectEventToAddTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="WGe-Vz-QXt">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="28" sectionFooterHeight="1" id="WGe-Vz-QXt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -882,16 +882,6 @@
                                 <exclude reference="eKc-CK-ocH"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="jSx-jl-Yxl"/>
-                                <exclude reference="3cz-i0-A4q"/>
-                                <exclude reference="BMo-Wq-XQp"/>
-                                <exclude reference="YHU-xR-P9e"/>
-                                <exclude reference="Yye-68-QhI"/>
-                                <exclude reference="Bac-1g-eMe"/>
-                                <exclude reference="Cpb-Ud-7mj"/>
-                                <exclude reference="HK4-ZI-ffI"/>
-                                <exclude reference="WcM-Qk-KoY"/>
-                                <exclude reference="wNB-te-ax0"/>
                                 <exclude reference="kSG-xR-vWa"/>
                                 <exclude reference="t2P-ah-Xo3"/>
                                 <exclude reference="ysf-N8-eMJ"/>
@@ -899,6 +889,16 @@
                                 <exclude reference="KMH-x0-Kg2"/>
                                 <exclude reference="Urv-BF-n2u"/>
                                 <exclude reference="uBZ-2n-TwE"/>
+                                <exclude reference="jSx-jl-Yxl"/>
+                                <exclude reference="Bac-1g-eMe"/>
+                                <exclude reference="Cpb-Ud-7mj"/>
+                                <exclude reference="HK4-ZI-ffI"/>
+                                <exclude reference="WcM-Qk-KoY"/>
+                                <exclude reference="wNB-te-ax0"/>
+                                <exclude reference="3cz-i0-A4q"/>
+                                <exclude reference="BMo-Wq-XQp"/>
+                                <exclude reference="YHU-xR-P9e"/>
+                                <exclude reference="Yye-68-QhI"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -912,16 +912,6 @@
                                 <include reference="eKc-CK-ocH"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="jSx-jl-Yxl"/>
-                                <include reference="3cz-i0-A4q"/>
-                                <include reference="BMo-Wq-XQp"/>
-                                <include reference="YHU-xR-P9e"/>
-                                <include reference="Yye-68-QhI"/>
-                                <include reference="Bac-1g-eMe"/>
-                                <include reference="Cpb-Ud-7mj"/>
-                                <include reference="HK4-ZI-ffI"/>
-                                <include reference="WcM-Qk-KoY"/>
-                                <include reference="wNB-te-ax0"/>
                                 <include reference="kSG-xR-vWa"/>
                                 <include reference="t2P-ah-Xo3"/>
                                 <include reference="ysf-N8-eMJ"/>
@@ -929,6 +919,16 @@
                                 <include reference="KMH-x0-Kg2"/>
                                 <include reference="Urv-BF-n2u"/>
                                 <include reference="uBZ-2n-TwE"/>
+                                <include reference="jSx-jl-Yxl"/>
+                                <include reference="Bac-1g-eMe"/>
+                                <include reference="Cpb-Ud-7mj"/>
+                                <include reference="HK4-ZI-ffI"/>
+                                <include reference="WcM-Qk-KoY"/>
+                                <include reference="wNB-te-ax0"/>
+                                <include reference="3cz-i0-A4q"/>
+                                <include reference="BMo-Wq-XQp"/>
+                                <include reference="YHU-xR-P9e"/>
+                                <include reference="Yye-68-QhI"/>
                             </mask>
                         </variation>
                     </view>
@@ -3566,7 +3566,7 @@
         <scene sceneID="j5S-SP-3JT">
             <objects>
                 <tableViewController title="History Event Select" id="CvB-Xa-yDQ" customClass="HistoryEventSelectTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="z2d-Gd-JEt">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="30" sectionFooterHeight="1" id="z2d-Gd-JEt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -3735,7 +3735,7 @@
                                                 <constraint firstItem="RmI-eW-0Nb" firstAttribute="leading" secondItem="69x-53-7ex" secondAttribute="leading" constant="20" symbolic="YES" id="3Yd-yK-JL3"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="WJm-R2-LQi" secondAttribute="bottom" constant="-8" id="9KY-LC-gOo"/>
                                                 <constraint firstAttribute="trailing" secondItem="wjD-0h-mek" secondAttribute="trailing" constant="20" symbolic="YES" id="Ikk-Z0-6eW">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="58"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="49"/>
                                                 </constraint>
                                                 <constraint firstItem="wjD-0h-mek" firstAttribute="centerY" secondItem="3TQ-lg-rym" secondAttribute="centerY" id="Npw-xk-0Ob"/>
                                                 <constraint firstItem="WJm-R2-LQi" firstAttribute="top" secondItem="RmI-eW-0Nb" secondAttribute="bottom" id="Qn6-YA-U3e"/>
@@ -4173,10 +4173,10 @@
         <image name="gear-purple-1" width="600" height="570"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zcK-bl-baJ"/>
-        <segue reference="Wri-AE-L0n"/>
+        <segue reference="pJx-eO-6GN"/>
+        <segue reference="dPM-vZ-fsf"/>
         <segue reference="hhk-20-Oeh"/>
         <segue reference="bst-Nl-5N9"/>
-        <segue reference="pJx-eO-6GN"/>
+        <segue reference="zcK-bl-baJ"/>
     </inferredMetricsTieBreakers>
 </document>

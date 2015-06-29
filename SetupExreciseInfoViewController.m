@@ -105,7 +105,7 @@ UIEdgeInsets oldIndicatorInset;
     self.selectedEvent = [self.delegate selectedEventDataIs];
     
     if (self.editMode == YES) {
-        NSArray *event = [[NSArray alloc]init];
+        NSArray *event;
         switch (self.selectedEvent.eventCategory) {
             case kWeights:
                 event = [self.coreDataHelper fetchDataFor:@"DefaultWeightLifting"  withPredicate:@{@"propertyName" : @"eventName", @"value" : self.selectedEvent.eventName}];
@@ -208,7 +208,7 @@ UIEdgeInsets oldIndicatorInset;
          // ensure that the event being ceated does not already exist.
         if (eventSelectedFromLAvailableList == NO  && self.editMode == NO)
         {
-            NSArray *event = [[NSArray alloc]init];
+            NSArray *event;
             [self fetchEvents];
             switch (self.categoryCode) {
                 case kWeights:

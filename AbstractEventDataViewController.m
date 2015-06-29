@@ -51,8 +51,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     
     [super viewDidAppear:animated];
 }
-
-- (NSUInteger)supportedInterfaceOrientations{
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
     return UIInterfaceOrientationMaskPortrait;
 }
 

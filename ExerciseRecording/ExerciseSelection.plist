@@ -6,6 +6,12 @@
 	<array>
 		<dict>
 			<key>Name</key>
+			<string>Ab Crunch B</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
 			<string>Lower Back Extension</string>
 			<key>Category</key>
 			<integer>0</integer>
@@ -18,7 +24,199 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Ab Crunch</string>
+			<string>Ab Crunch A</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Ab Crunch C</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Ab Coaster</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Hip Adduction In</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Hip Adduction Out</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Glute</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Dual Pulley Pulldown</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Dual Pulley Row</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Triceps Pull Down</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Adjustable Pulley</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Low Row</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Lat Pull Down</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Seated Leg Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Leg Extension</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Seated Leg Curl</string>
+			<key>Category</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Chest Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Chest Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Calf Extension</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Pectorial Fly</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Rear Deltoid</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Row Rear Deltoid</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Pull Down</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Back Extension</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Shoulder Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Biceps Curl</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Triceps Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Linear Leg Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>Assisted Dip / Chin</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>MTS Chest Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>MTS Incline Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>MTS Shoulder Press</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>MTS Row</string>
+			<key>Category</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>Name</key>
+			<string>MTS Front Pulldown</string>
 			<key>Category</key>
 			<integer>0</integer>
 		</dict>

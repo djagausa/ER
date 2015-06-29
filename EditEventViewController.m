@@ -49,7 +49,6 @@
     [dateFormatter setDateFormat:formatTemplate];
 
     self.lineFourLabel.text = @"Note:";
-    self.noteInput.text = self.selectedEvent.aerobicEvent.note;
     [self.lineFourLabel setHidden:NO];
     [self.noteInput setHidden:NO];
     [self.noteInput setEditable:YES];
@@ -64,6 +63,7 @@
                 [self setupLine:self.lineOneLabel labelText:@"Set:" inputLine:self.lineOneInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.setNumber]];
                 [self setupLine:self.lineTwoLabel labelText:@"Reps:" inputLine:self.lineTwoInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.repCount]];
                 [self setupLine:self.lineThreeLabel labelText:@"Weight:" inputLine:self.lineThreeInputText originalValue:[NSString stringWithFormat:@"%@", self.selectedEvent.weightLiftingEvent.weight]];
+                self.noteInput.text = self.selectedEvent.weightLiftingEvent.notes;
             }
             break;
             
@@ -73,7 +73,8 @@
             NSString *convertedDate = [dateFormatter stringFromDate:self.selectedEvent.aerobicEvent.date];
             
             [self setupLine:self.eventDateLabel labelText:@"Date:" inputLine:self.eventDateInputText originalValue:convertedDate];
-        
+            self.noteInput.text = self.selectedEvent.aerobicEvent.note;
+
             switch (exerciseCatergory) {
                 case kRunning:
                 case kWalking:

@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     [self getEventsForSPecificRange];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskLandscape;
 }
@@ -320,7 +320,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
     [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
     plotSpace.xRange = xRange;
-    CPTMutablePlotRange *yRange = [plotSpace.yRange mutableCopy];
+    CPTMutablePlotRange *yRange;
     yRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue] -6) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] +5)];
     [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.4f)];
     plotSpace.yRange = yRange;

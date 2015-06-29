@@ -249,7 +249,7 @@ BOOL setCountInitialized;
 
 - (void)saveAction
 {
-    NSDictionary *eventInfo = [[NSDictionary alloc] init];
+    NSDictionary *eventInfo;
     // Surround the "add" functionality with undo grouping
     NSUndoManager *manager = self.coreDataHelper.managedObjectContext.undoManager;
     [manager beginUndoGrouping];

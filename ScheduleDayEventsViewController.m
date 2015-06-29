@@ -98,7 +98,7 @@ const CGFloat kTableCellHeight = 28.0;
     [self highLiteSelectedRepeatDay:self.scheduledEventInfo.day];
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
@@ -565,7 +565,7 @@ const CGFloat kTableCellHeight = 28.0;
 - (ScheduledEvent *) getscheduledEventForToday:(NSInteger)week day:(NSInteger)day
 {
     // get the scheduled events for this schedule
-    NSArray *scheduledEvents = [[NSArray alloc] init];
+    NSArray *scheduledEvents;
     scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName}];
     
     // get the events for the selected day

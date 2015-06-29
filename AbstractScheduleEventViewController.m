@@ -44,7 +44,7 @@ static NSString *CellIdentifier = @"EventCell";
     [self fetchTodaysCompleteEvents];
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
 

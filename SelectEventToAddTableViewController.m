@@ -58,12 +58,15 @@ static NSString *scheduleCellId = @"scheduleCell";
     [self.tableView reloadData];
 }
 
-- (NSUInteger)supportedInterfaceOrientations{
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskPortrait;
 }
 
 -(void)fetchPredefinedEvents
 {
+    NSMutableArray *weightEvents;
+    NSMutableArray *aerobicEvents;
+    
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"ExerciseSelection" ofType:@"plist"];
     self.categoryDictionary = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
     
@@ -73,33 +76,42 @@ static NSString *scheduleCellId = @"scheduleCell";
     self.weightExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultWeightLifting" withSortKey:@"eventName" ascending:YES usePredicate:YES];
     self.aerobicExerciseExistingEvents = [self.coreDataHelper fetchDefaultDataFor:@"DefaultAerobic" withSortKey:@"eventName" ascending:YES usePredicate:YES];
   
-    self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
-    self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];
+    weightEvents = [NSMutableArray arrayWithArray:self.weightExerciseEvents];
+    aerobicEvents = [NSMutableArray arrayWithArray:self.aerobicExerciseEvents];
     
     // eliminate events that have already been added
     for (DefaultWeightLifting *defaultWL in self.weightExerciseExistingEvents) {
-        for (int i = 0; i < self.weightExerciseEventsCopy.count; ++i) {
-            if ([defaultWL.eventName isEqualToString: self.weightExerciseEventsCopy [i][@"Name"]])
+        for (int i = 0; i < weightEvents.count; ++i) {
+            if ([defaultWL.eventName isEqualToString: weightEvents [i][@"Name"]])
             {
-                [self.weightExerciseEventsCopy removeObjectAtIndex:i];
+                [weightEvents removeObjectAtIndex:i];
                 break;
             }
         }
     }
     
     for (DefaultAerobic *defaultA in self.aerobicExerciseExistingEvents) {
-        for (int i = 0; i< self.aerobicExerciseEventsCopy.count; ++i) {
-            if ([defaultA.eventName isEqualToString: self.aerobicExerciseEventsCopy[i][@"Name"]])
+        for (int i = 0; i< aerobicEvents.count; ++i) {
+            if ([defaultA.eventName isEqualToString: aerobicEvents[i][@"Name"]])
             {
-                [self.aerobicExerciseEventsCopy removeObjectAtIndex:i];
+                [aerobicEvents removeObjectAtIndex:i];
                 break;
             }
         }
     }
+    NSArray *sortedWeight = [weightEvents sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *name1 = [(NSDictionary *)obj1 objectForKey:@"Name"];
+        NSString *name2 = [(NSDictionary *)obj2 objectForKey:@"Name"];
+        return [name1 compare:name2];
+    }];
+    self.weightExerciseEventsCopy = [NSMutableArray arrayWithArray:sortedWeight];
     
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"Name" ascending:YES];
-    [self.weightExerciseEventsCopy sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
-    [self.aerobicExerciseEventsCopy sortedArrayUsingDescriptors: [NSArray arrayWithObjects:descriptor,nil]];
+    NSArray *sortedAerobic = [aerobicEvents sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *name1 = [(NSDictionary *)obj1 objectForKey:@"Name"];
+        NSString *name2 = [(NSDictionary *)obj2 objectForKey:@"Name"];
+        return [name1 compare:name2];
+    }];
+    self.aerobicExerciseEventsCopy = [NSMutableArray arrayWithArray:sortedAerobic];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,27 +169,37 @@ static NSString *scheduleCellId = @"scheduleCell";
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.categoryDictionary.count+1;
+    if ([self.aerobicExerciseEventsCopy count] > 0) {
+         return self.categoryDictionary.count+1;
+    } else {
+        return self.categoryDictionary.count;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger count = 0;
     
     switch (section) {
-        case ScheduleCategory:
+        case 0:
         {
             count = 1;
             break;
         }
-        case WeightCategory:
+        case 1:
         {
-            count = self.weightExerciseEventsCopy.count;
+            if ([self.aerobicExerciseEventsCopy count] > 0) {
+                count = self.aerobicExerciseEventsCopy.count;
+            } else {
+                count = self.weightExerciseEventsCopy.count;
+            }
             break;
         }
             
-        case AerobicCategory:
+        case 2:
         {
-            count = self.aerobicExerciseEventsCopy.count;
+            if ([self.weightExerciseEventsCopy count] > 0) {
+                count = self.weightExerciseEventsCopy.count;
+            }
             break;
         }
             
@@ -191,23 +213,30 @@ static NSString *scheduleCellId = @"scheduleCell";
     
     UITableViewCell *cell;
     switch (indexPath.section) {
-        case ScheduleCategory:
+        case 0:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:scheduleCellId forIndexPath:indexPath];
             cell.textLabel.text = @"Setup Schedule";
             break;
         }
-        case WeightCategory:
+        case 1:
         {
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEventsCopy[indexPath.row][@"Name"]];
+
+            if ([self.aerobicExerciseEventsCopy count] > 0) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEventsCopy[indexPath.row][@"Name"]];
+            } else {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEventsCopy[indexPath.row][@"Name"]];
+            }
             break;
         }
         
-        case AerobicCategory:
+        case 2:
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
-            cell.textLabel.text = [NSString stringWithFormat:@"%@", self.aerobicExerciseEventsCopy[indexPath.row][@"Name"]];
+            if ([self.weightExerciseEventsCopy count] > 0) {
+                cell = [tableView dequeueReusableCellWithIdentifier:cellIdentification forIndexPath:indexPath];
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", self.weightExerciseEventsCopy[indexPath.row][@"Name"]];
+            }
         }
             
         default:
@@ -221,20 +250,26 @@ static NSString *scheduleCellId = @"scheduleCell";
     NSString *sectionTitle;
     
     switch (section) {
-        case ScheduleCategory:
+        case 0:
         {
             sectionTitle = @"Schedule Event";
             break;
         }
-        case WeightCategory:
+        case 1:
         {
-            sectionTitle = @"Weight Event";
+            if ([self.aerobicExerciseEventsCopy count] > 0) {
+                sectionTitle = @"Aerobic Event";
+            } else {
+                sectionTitle = @"Weight Event";
+            }
             break;
         }
             
-        case AerobicCategory:
+        case 2:
         {
-            sectionTitle = @"Aerobic Event";
+            if ([self.weightExerciseEventsCopy count] > 0) {
+                sectionTitle = @"Weight Event";
+            }
             break;
         }
             
@@ -247,27 +282,39 @@ static NSString *scheduleCellId = @"scheduleCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
-        case ScheduleCategory:
+        case 0:
         {
             self.scheduledEventInfo.scheduleEditMode = 0;
             break;
         }
-        case AerobicCategory:
+        case 1:
         {
-            self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
-            self.selectedEvent.eventName = self.aerobicExerciseEventsCopy[indexPath.row][@"Name"];
+            if ([self.aerobicExerciseEventsCopy count] > 0) {
+                self.selectedEvent.eventCategory = [self.aerobicExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
+                self.selectedEvent.eventName = self.aerobicExerciseEventsCopy[indexPath.row][@"Name"];
+            } else {
+                self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
+                self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
+            }
             break;
         }
-        case WeightCategory:
+        case 2:
         {
-            self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
-            self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
+            if ([self.weightExerciseEventsCopy count] > 0) {
+                self.selectedEvent.eventCategory = [self.weightExerciseEventsCopy[indexPath.row][@"Category"] integerValue];
+                self.selectedEvent.eventName = self.weightExerciseEventsCopy[indexPath.row][@"Name"];
+            }
             break;
         }
             
         default:
             break;
     }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return SECTION_HEADER_HEIGHT;
 }
 
 #pragma mark - Navigation
