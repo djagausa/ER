@@ -994,7 +994,7 @@
                                     <action selector="repeatDayAction:" destination="ra4-KR-JOv" eventType="valueChanged" id="1rL-Qr-8f3"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="tJF-3Q-xsU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="30" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="tJF-3Q-xsU">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1039,7 +1039,7 @@
                                     <outlet property="delegate" destination="ra4-KR-JOv" id="P1i-x6-zkU"/>
                                 </connections>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="flF-kJ-bN9">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="28" sectionHeaderHeight="30" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="flF-kJ-bN9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1229,6 +1229,7 @@
                         <outlet property="availableEventsTable" destination="tJF-3Q-xsU" id="Sc9-mE-Eex"/>
                         <outlet property="navSaveButton" destination="FwC-cJ-77p" id="vvS-U9-iCb"/>
                         <outlet property="repeatDayOutlet" destination="whm-Vi-M5B" id="yJI-T3-Jh9"/>
+                        <outlet property="selectFromLabelTitle" destination="c4c-YS-k9n" id="X9x-Rl-bbx"/>
                         <outlet property="selectedEventsTable" destination="flF-kJ-bN9" id="Ijv-Rl-6QX"/>
                         <outlet property="selectedTableHeight" destination="NUF-yp-vaJ" id="R8H-4X-vRL"/>
                     </connections>
@@ -2227,7 +2228,7 @@
         <!--workout-->
         <scene sceneID="5iW-Qx-lzM">
             <objects>
-                <viewController title="workout" automaticallyAdjustsScrollViewInsets="NO" id="7ry-y7-vJs" customClass="WorkoutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutViewController" title="workout" automaticallyAdjustsScrollViewInsets="NO" id="7ry-y7-vJs" customClass="WorkoutViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="m3O-de-e2X"/>
                         <viewControllerLayoutGuide type="bottom" id="cz4-qN-1pk"/>
@@ -2272,9 +2273,7 @@
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Meo-ng-oHb">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
-                                <state key="normal" title="Continue current schedule">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="Continue current schedule"/>
                                 <state key="disabled" title="No Active Schedule"/>
                                 <connections>
                                     <segue destination="iXC-0C-DXS" kind="show" identifier="continueExistingSchedule" id="hhk-20-Oeh"/>
@@ -2291,37 +2290,89 @@
                                     <segue destination="dLH-k8-8Ld" kind="show" identifier="startNewSchedule" id="Xr8-TF-OFa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8X-3d-5V7">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="177" id="Lnl-nx-ht3"/>
+                                </constraints>
+                                <state key="normal" title="Skip day:">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Lnl-nx-ht3"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Lnl-nx-ht3"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="skipDayAction:" destination="7ry-y7-vJs" eventType="touchUpInside" id="Sb2-Uo-jZV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-F6-mNq">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.83137261870000001" green="0.92549026010000002" blue="0.95686280729999995" alpha="1" colorSpace="deviceRGB"/>
+                                <state key="normal" title="Stop Schedule">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startNewScheduleAction:" destination="7ry-y7-vJs" eventType="touchUpInside" id="EeH-kX-h0g"/>
+                                    <action selector="stopScheduleAction:" destination="7ry-y7-vJs" eventType="touchUpInside" id="K0J-YP-dyO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Meo-ng-oHb" firstAttribute="leading" secondItem="1TA-lY-whJ" secondAttribute="leading" id="3a2-yD-HG5"/>
                             <constraint firstItem="1TA-lY-whJ" firstAttribute="leading" secondItem="ye3-jb-NVe" secondAttribute="leadingMargin" id="4Ij-7x-PkY"/>
+                            <constraint firstItem="L8X-3d-5V7" firstAttribute="leading" secondItem="Meo-ng-oHb" secondAttribute="leading" id="5PR-CU-qQk"/>
+                            <constraint firstItem="W4n-F6-mNq" firstAttribute="leading" secondItem="L8X-3d-5V7" secondAttribute="trailing" constant="13" id="6er-5W-vCA"/>
                             <constraint firstItem="1TA-lY-whJ" firstAttribute="trailing" secondItem="NpC-2d-TTL" secondAttribute="trailing" id="9R4-vN-0v4"/>
-                            <constraint firstItem="1TA-lY-whJ" firstAttribute="top" secondItem="Meo-ng-oHb" secondAttribute="bottom" constant="12" id="AWx-pT-D9U"/>
-                            <constraint firstItem="NpC-2d-TTL" firstAttribute="top" secondItem="1TA-lY-whJ" secondAttribute="bottom" constant="25" id="IKe-KK-RZA"/>
+                            <constraint firstItem="1TA-lY-whJ" firstAttribute="top" secondItem="Meo-ng-oHb" secondAttribute="bottom" constant="12" id="AWx-pT-D9U">
+                                <variation key="heightClass=regular-widthClass=compact" constant="48"/>
+                            </constraint>
+                            <constraint firstItem="NpC-2d-TTL" firstAttribute="top" secondItem="1TA-lY-whJ" secondAttribute="bottom" constant="25" id="IKe-KK-RZA">
+                                <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="W4n-F6-mNq" firstAttribute="trailing" secondItem="Meo-ng-oHb" secondAttribute="trailing" id="NYn-qR-EXl"/>
                             <constraint firstItem="1TA-lY-whJ" firstAttribute="trailing" secondItem="Meo-ng-oHb" secondAttribute="trailing" id="OFf-ip-1HR"/>
                             <constraint firstItem="NpC-2d-TTL" firstAttribute="leading" secondItem="1TA-lY-whJ" secondAttribute="leading" id="QAG-bj-eYl"/>
-                            <constraint firstItem="Meo-ng-oHb" firstAttribute="top" secondItem="m3O-de-e2X" secondAttribute="bottom" constant="12" id="Xn6-9j-Fad"/>
+                            <constraint firstItem="Meo-ng-oHb" firstAttribute="top" secondItem="m3O-de-e2X" secondAttribute="bottom" constant="12" id="Xn6-9j-Fad">
+                                <variation key="heightClass=regular-widthClass=compact" constant="10"/>
+                            </constraint>
+                            <constraint firstItem="W4n-F6-mNq" firstAttribute="baseline" secondItem="L8X-3d-5V7" secondAttribute="baseline" id="czH-E8-K1r"/>
                             <constraint firstItem="1TA-lY-whJ" firstAttribute="trailing" secondItem="ye3-jb-NVe" secondAttribute="trailingMargin" id="jNe-XM-WyG"/>
                             <constraint firstAttribute="bottom" secondItem="NpC-2d-TTL" secondAttribute="bottom" constant="20" symbolic="YES" id="vH9-Cs-t0E"/>
+                            <constraint firstItem="L8X-3d-5V7" firstAttribute="top" secondItem="Meo-ng-oHb" secondAttribute="bottom" constant="8" symbolic="YES" id="xM0-K6-yb0"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="NpC-2d-TTL"/>
                                 <exclude reference="Meo-ng-oHb"/>
                                 <exclude reference="1TA-lY-whJ"/>
+                                <exclude reference="L8X-3d-5V7"/>
+                                <exclude reference="W4n-F6-mNq"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="3a2-yD-HG5"/>
+                                <exclude reference="Xn6-9j-Fad"/>
+                                <exclude reference="5PR-CU-qQk"/>
+                                <exclude reference="xM0-K6-yb0"/>
                                 <exclude reference="4Ij-7x-PkY"/>
                                 <exclude reference="9R4-vN-0v4"/>
                                 <exclude reference="AWx-pT-D9U"/>
                                 <exclude reference="OFf-ip-1HR"/>
                                 <exclude reference="jNe-XM-WyG"/>
-                                <exclude reference="3a2-yD-HG5"/>
-                                <exclude reference="Xn6-9j-Fad"/>
                                 <exclude reference="IKe-KK-RZA"/>
                                 <exclude reference="QAG-bj-eYl"/>
                                 <exclude reference="vH9-Cs-t0E"/>
+                                <exclude reference="6er-5W-vCA"/>
+                                <exclude reference="NYn-qR-EXl"/>
+                                <exclude reference="czH-E8-K1r"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2329,18 +2380,25 @@
                                 <include reference="NpC-2d-TTL"/>
                                 <include reference="Meo-ng-oHb"/>
                                 <include reference="1TA-lY-whJ"/>
+                                <include reference="L8X-3d-5V7"/>
+                                <include reference="W4n-F6-mNq"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="3a2-yD-HG5"/>
+                                <include reference="Xn6-9j-Fad"/>
+                                <include reference="5PR-CU-qQk"/>
+                                <include reference="xM0-K6-yb0"/>
                                 <include reference="4Ij-7x-PkY"/>
                                 <include reference="9R4-vN-0v4"/>
                                 <include reference="AWx-pT-D9U"/>
                                 <include reference="OFf-ip-1HR"/>
                                 <include reference="jNe-XM-WyG"/>
-                                <include reference="3a2-yD-HG5"/>
-                                <include reference="Xn6-9j-Fad"/>
                                 <include reference="IKe-KK-RZA"/>
                                 <include reference="QAG-bj-eYl"/>
                                 <include reference="vH9-Cs-t0E"/>
+                                <include reference="6er-5W-vCA"/>
+                                <include reference="NYn-qR-EXl"/>
+                                <include reference="czH-E8-K1r"/>
                             </mask>
                         </variation>
                     </view>
@@ -2350,6 +2408,9 @@
                     <connections>
                         <outlet property="currentScheduleButton" destination="Meo-ng-oHb" id="lAx-X7-Hxs"/>
                         <outlet property="eventTable" destination="NpC-2d-TTL" id="GLC-Vz-F6i"/>
+                        <outlet property="skipDayButton" destination="L8X-3d-5V7" id="Ytl-lq-5Y7"/>
+                        <outlet property="startNewScheduleButton" destination="1TA-lY-whJ" id="mcG-ZD-5gz"/>
+                        <outlet property="stopScheduleButton" destination="W4n-F6-mNq" id="Zlr-7Z-F0b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z8E-nt-A6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2526,9 +2587,11 @@
                     <connections>
                         <outlet property="scheduleInfoLabel" destination="PnE-pJ-lYE" id="dnn-rU-BIO"/>
                         <outlet property="tableView" destination="phd-5F-L4i" id="cHt-lP-OtS"/>
+                        <segue destination="l8y-lT-iJH" kind="unwind" unwindAction="unwindToWorkViewController:" id="tzz-oW-dTy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="boD-aG-FTA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="l8y-lT-iJH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2595" y="1343.25"/>
         </scene>
@@ -4173,10 +4236,10 @@
         <image name="gear-purple-1" width="600" height="570"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pJx-eO-6GN"/>
-        <segue reference="dPM-vZ-fsf"/>
         <segue reference="hhk-20-Oeh"/>
+        <segue reference="cis-pU-7M6"/>
         <segue reference="bst-Nl-5N9"/>
         <segue reference="zcK-bl-baJ"/>
+        <segue reference="dPM-vZ-fsf"/>
     </inferredMetricsTieBreakers>
 </document>

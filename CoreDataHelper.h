@@ -28,7 +28,7 @@
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;
-- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate;
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey;
 - (ScheduledEvent *)fetchScheduledEvent:(NSArray *)scheduledEvents week:(NSInteger)week day:(NSInteger)day;
 
 - (BOOL)clearData;

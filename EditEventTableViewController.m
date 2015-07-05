@@ -203,13 +203,7 @@
     return headerTitle;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -280,6 +274,7 @@
         }
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self fetchEvents];
     }
 }
 
@@ -316,7 +311,7 @@
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
     
-    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil];
+    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil];
 }
 
 @end

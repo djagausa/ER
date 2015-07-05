@@ -77,7 +77,7 @@
     return defaultData;
 }
 
-- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
@@ -88,6 +88,11 @@
         [fetchRequst setPredicate:filter];
     }
     
+    if (sortKey != nil) {
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES];
+        [fetchRequst setSortDescriptors:[NSArray arrayWithObject:sort]];
+    }
+
     NSError *error;
     NSArray *defaultData = [self.managedObjectContext executeFetchRequest:fetchRequst error:&error];
     

@@ -258,6 +258,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
         }
         // Delete the row from the data source
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self fetchEvents];
     }
 }
 

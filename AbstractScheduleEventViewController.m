@@ -258,7 +258,7 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *weeks = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName}];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];
@@ -273,7 +273,7 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *repeatCount = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName}];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];

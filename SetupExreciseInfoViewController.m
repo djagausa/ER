@@ -108,13 +108,13 @@ UIEdgeInsets oldIndicatorInset;
         NSArray *event;
         switch (self.selectedEvent.eventCategory) {
             case kWeights:
-                event = [self.coreDataHelper fetchDataFor:@"DefaultWeightLifting"  withPredicate:@{@"propertyName" : @"eventName", @"value" : self.selectedEvent.eventName}];
+                event = [self.coreDataHelper fetchDataFor:@"DefaultWeightLifting"  withPredicate:@{@"propertyName" : @"eventName", @"value" : self.selectedEvent.eventName} sortKey:nil];
                 self.selectedEvent.defaultWeightLiftingData = [event objectAtIndex:0];
                 [self.enableSwitchOutlet setOn:(BOOL)[self.selectedEvent.defaultWeightLiftingData.enabled integerValue]];
                 break;
                 
             default:
-                event = [self.coreDataHelper fetchDataFor:@"DefaultAerobic" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.selectedEvent.eventName}];
+                event = [self.coreDataHelper fetchDataFor:@"DefaultAerobic" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.selectedEvent.eventName} sortKey:nil];
                 self.selectedEvent.defaultAerobicData = [event objectAtIndex:0];
                 [self.enableSwitchOutlet setOn:(BOOL)[self.selectedEvent.defaultAerobicData.enabled integerValue]];
                 break;
@@ -212,7 +212,7 @@ UIEdgeInsets oldIndicatorInset;
             [self fetchEvents];
             switch (self.categoryCode) {
                 case kWeights:
-                    event = [self.coreDataHelper fetchDataFor:@"DefaultWeightLifting" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.exerciseName.text}];
+                    event = [self.coreDataHelper fetchDataFor:@"DefaultWeightLifting" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.exerciseName.text} sortKey:nil];
                     for (DefaultWeightLifting *weightEvent in event)
                     {
                         if ([weightEvent.eventName isEqualToString:self.exerciseName.text])
@@ -226,7 +226,7 @@ UIEdgeInsets oldIndicatorInset;
                     break;
                     
                 default:
-                    event = [self.coreDataHelper fetchDataFor:@"DefaultAerobic" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.exerciseName.text}];
+                    event = [self.coreDataHelper fetchDataFor:@"DefaultAerobic" withPredicate:@{@"propertyName" : @"eventName", @"value" : self.exerciseName.text} sortKey:nil];
                     for (DefaultAerobic *aerobicEvent in event)
                     {
                         if ([aerobicEvent.eventName isEqualToString:self.exerciseName.text])

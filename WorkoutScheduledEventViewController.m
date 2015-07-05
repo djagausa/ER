@@ -7,6 +7,7 @@
 //
 
 #import "WorkoutScheduledEventViewController.h"
+#import "WorkoutViewController.h"
 #import "ScheduledEventInfo.h"
 #import "ScheduleStatus.h"
 #import "ScheduledEvent.h"
@@ -68,11 +69,7 @@
 //    Schedule *schedule;
     NSArray *scheduledEvents;
     
-    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName}];
-
-//    if ([scheduledEvents count] > 0) {
-//        schedule = [scheduledEvents firstObject];
-//    }
+    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil];
     
     self.dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
     
@@ -90,6 +87,11 @@
         [self.weightLiftingDefaultObjects addObject:weightEvent];
     }
 
+    NSSortDescriptor *sortD = [NSSortDescriptor sortDescriptorWithKey:@"eventName" ascending:YES];
+    
+    [self.weightLiftingDefaultObjects sortUsingDescriptors:[NSArray arrayWithObject:sortD]];
+    [self.aerobicDefaultObjects sortUsingDescriptors:[NSArray arrayWithObject:sortD]];
+    
 #ifdef debug
     for (DefaultAerobic *aerobicEvent in self.aerobicDefaultObjects) {
         NSLog(@"Aerobic Even Name: %@", aerobicEvent.eventName);
@@ -105,9 +107,9 @@
 {
     //     fetch any saved events that may have occurred
     
-    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]}] mutableCopy];
+    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]} sortKey:@"eventName"] mutableCopy];
     
-    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]}] mutableCopy];
+    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]} sortKey:@"eventName"] mutableCopy];
 }
 #pragma mark - Navigation
 

@@ -84,7 +84,7 @@ static NSString *cellName = @"ScheduleCell";
 #pragma mark - Core Data
 - (void)fetchSchedules
 {
-    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil];
+    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil];
 }
 
 - (void)saveNewScheduleInfo

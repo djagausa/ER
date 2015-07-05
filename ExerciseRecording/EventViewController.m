@@ -23,7 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self configureTheButtons];
+    // register for events added notifications
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
 }
 
 - (void)configureTheButtons
@@ -58,9 +62,11 @@
         [self.editExercise setEnabled:YES];
     }
     
-    // register for events added notifications
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
+    if ((self.addExerciseButton.enabled == YES) && (self.reviewExerciseButton.enabled == YES)) {
+        // un-register for events added notifications
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc removeObserver:self name:eventAddedNotificationName object:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

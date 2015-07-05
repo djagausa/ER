@@ -1,4 +1,4 @@
-  //
+//
 //  ScheduleDayEventsViewController.m
 //  ExerciseRecording
 //
@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *selectedEventsTable;
 @property (weak, nonatomic) IBOutlet UITableView *availableEventsTable;
+@property (weak, nonatomic) IBOutlet UILabel *selectFromLabelTitle;
 
 @property (nonatomic, strong) NSArray               *weightLiftingObjects;
 @property (nonatomic, strong) NSArray               *aerobicObjects;
@@ -82,6 +83,8 @@ const CGFloat kTableCellHeight = 28.0;
         self.repeatDayOutlet.enabled = NO;
         self.selectedEventsTable.allowsSelection = NO;
         self.availableEventsTable.allowsSelection = NO;
+        self.availableEventsTable.hidden = YES;
+        self.selectFromLabelTitle.hidden = YES;
         self.navSaveButton.enabled = NO;
     }
     [self findAndHighLiteDaysThatHaveAlreadyBeenSelected];
@@ -444,12 +447,12 @@ const CGFloat kTableCellHeight = 28.0;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return SECTION_HEADER_HEIGHT;
+    return 30.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    return 0.1f;
+    return 1.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -566,7 +569,7 @@ const CGFloat kTableCellHeight = 28.0;
 {
     // get the scheduled events for this schedule
     NSArray *scheduledEvents;
-    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName}];
+    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName} sortKey:nil];
     
     // get the events for the selected day
     ScheduledEvent *daysEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:week day:day];
@@ -603,7 +606,7 @@ const CGFloat kTableCellHeight = 28.0;
 {
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName}];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil];
 
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];
