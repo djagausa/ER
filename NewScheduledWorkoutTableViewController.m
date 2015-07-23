@@ -100,6 +100,8 @@ static NSString *cellName = @"ScheduleCell";
     scheduleStatus.repeat = @(self.scheduleInfo.repeatCount);
     
     [self.schduleFileHelper writeScheduleStatusFile:scheduleStatus];
+    
+    [self.scheduleWorkoutInfoDelegate newScheduleInfoIs:self.scheduleInfo];
 }
 
 #pragma mark - Navigation

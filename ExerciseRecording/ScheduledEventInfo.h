@@ -16,6 +16,7 @@
 @property (nonatomic, assign) NSInteger day;
 @property (nonatomic, assign) NSInteger numberOfWeeks;
 @property (nonatomic, assign) NSInteger repeatCount;
+@property (nonatomic, assign) NSInteger operationalMode;
 @property (nonatomic, assign) NSInteger colorIndex;
 @property (nonatomic, assign) NSInteger scheduleEditMode;
 

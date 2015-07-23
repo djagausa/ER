@@ -29,6 +29,7 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
 static NSString *notePlaceHolder = @"Enter a note for this set:";
 
 BOOL setCountInitialized;
+BOOL newEventDataAdded;         // used to set color on cell for newly added data
 
 @implementation AddEventDataViewController
 
@@ -117,7 +118,7 @@ BOOL setCountInitialized;
 #pragma mark - Init
 - (void)initializeSetCount:(WeightLiftingEvent *)weightLiftingEvent
 {
-    if (!setCountInitialized) {
+    if (setCountInitialized == NO) {
         NSCalendar *calendar = [NSCalendar currentCalendar];
         
         NSDateComponents *todayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:[NSDate date]];
@@ -250,6 +251,8 @@ BOOL setCountInitialized;
 - (void)saveAction
 {
     NSDictionary *eventInfo;
+    
+    newEventDataAdded = YES;
     // Surround the "add" functionality with undo grouping
     NSUndoManager *manager = self.coreDataHelper.managedObjectContext.undoManager;
     [manager beginUndoGrouping];
@@ -335,6 +338,9 @@ BOOL setCountInitialized;
                     cell.note.hidden = NO;
                     cell.note.text = weightEvent.notes;
                     tableView.rowHeight = 40.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 } else {
                     EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
@@ -342,6 +348,9 @@ BOOL setCountInitialized;
                     cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
                     cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
                     self.eventTable.rowHeight = 22.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 }
             }
@@ -351,6 +360,7 @@ BOOL setCountInitialized;
             {
                 AerobicEvent *aerobicEvent = [self.coreDataHelper.fetchedResultsController objectAtIndexPath:indexPath];
                 NSInteger duration = [aerobicEvent.duration integerValue];
+                
 
                 if ([self.noteSwitch isOn] && [aerobicEvent.note length] > 0) {
                     EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -360,6 +370,9 @@ BOOL setCountInitialized;
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
                     tableView.rowHeight = 40.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 } else {
                     EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
@@ -367,6 +380,9 @@ BOOL setCountInitialized;
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                     self.eventTable.rowHeight = 22.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 }
             }
@@ -386,6 +402,9 @@ BOOL setCountInitialized;
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
                     tableView.rowHeight = 40.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 } else {
                     EventTableViewCell *cell = [self.eventTable dequeueReusableCellWithIdentifier:CellIdentifierNoNote];
@@ -393,6 +412,9 @@ BOOL setCountInitialized;
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
                     self.eventTable.rowHeight = 22.0f;
+                    if ([indexPath section] == 0 && newEventDataAdded == YES) {
+                        cell.backgroundColor =[UIColor greenColor];
+                    }
                     return cell;
                 }
             }
@@ -426,6 +448,56 @@ BOOL setCountInitialized;
 
 - (IBAction)addData:(id)sender
 {
+    BOOL inOneEmpty = YES;
+    BOOL inTwoEmpty = YES;
+    BOOL inThreeEmpty = YES;
+
+    if ([self.in1Label.text length] > 0) {
+        inOneEmpty = NO;
+    }
+    
+    if ([self.in2Label.text length] > 0) {
+        inTwoEmpty = NO;
+    }
+    if ([self.in3Label.text length] > 0) {
+        inThreeEmpty = NO;
+    }
+    
+    if (inOneEmpty || inTwoEmpty || inThreeEmpty) {
+        NSString *alertTitle;
+        if (inOneEmpty == YES) {
+            alertTitle = [self appendNameToTitle:alertTitle name:self.label1.text];
+        }
+        if (inTwoEmpty == YES) {
+            alertTitle = [self appendNameToTitle:alertTitle name:self.label2.text];
+        }
+        if (inThreeEmpty == YES) {
+            alertTitle = [self appendNameToTitle:alertTitle name:self.label3.text];
+        }
+        
+        alertTitle = [alertTitle stringByAppendingString:@" - empty value(s)"];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:alertTitle
+                                                       message:@"Would you like to continue this save?"
+                                                      delegate:self
+                                             cancelButtonTitle:@"Yes"
+                                             otherButtonTitles:@"No", nil];
+        [alert show];
+    } else {
+        [self saveData];
+    }
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        [self saveData];
+    }
+}
+
+- (void) saveData
+{
     [self saveAction];
     if (self.selectedEvent.eventCategory == kWeights) {
         [self updateSetCount];
@@ -433,6 +505,18 @@ BOOL setCountInitialized;
     [self setupNoteInputTextField];
     [self refresh];
     [self.addEventDataDelegate exerciseDataAdded:self.selectedEvent];
+}
+
+- (NSString *)appendNameToTitle:(NSString *)title name:(NSString *)name
+{
+    if ([title length] > 0) {
+        title = [title stringByAppendingString:@", "];
+        title = [title stringByAppendingString:name];
+    } else {
+        title = name;
+    }
+    
+    return title;
 }
 
 - (IBAction)in1Input:(id)sender {

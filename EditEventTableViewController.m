@@ -13,6 +13,7 @@
 #import "Support.h"
 #import "SelectedEvent.h"
 #import "Schedule.h"
+#import "ScheduleStatusFileHelper.h"
 
 @interface EditEventTableViewController ()
 
@@ -24,9 +25,9 @@
 @property (nonatomic, strong) DefaultWeightLifting  *defaultWeightLifting;
 @property (nonatomic, strong) DefaultAerobic        *defaultAerobic;
 @property (nonatomic, strong) SelectedEvent         *selectedEvent;
-@property (nonatomic, strong) NSArray               *schedules;
+@property (nonatomic, strong) NSMutableArray        *schedules;
 @property (nonatomic, strong) ScheduledEventInfo    *scheduledEventInfo;
-
+@property (nonatomic, strong) ScheduleStatusFileHelper *statusFileHelper;
 @end
 
 @implementation EditEventTableViewController 
@@ -34,8 +35,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _selectedEvent = [[SelectedEvent alloc]init];
-    _schedules = [[NSArray alloc] init];
+    _schedules = [[NSMutableArray alloc] init];
     _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
+    _statusFileHelper = [[ScheduleStatusFileHelper alloc] init];
     
     // Uncomment the following line to preserve selection between presentations.
     self.clearsSelectionOnViewWillAppear = NO;
@@ -248,6 +250,10 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         switch (indexPath.section) {
             case 0:     // schedule section
+                [self.statusFileHelper clearScheduleStatusFileForSchedule:[self.schedules[indexPath.row] scheduleName]];
+                [self.coreDataHelper deleteObject:self.schedules[indexPath.row]];
+
+                [self.schedules removeObjectAtIndex:indexPath.row];
                 break;
             case 1:
                 if (self.aerobicDefaultObjects.count > 0)
@@ -311,7 +317,7 @@
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
     
-    self.schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil];
+    self.schedules = [[self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil] mutableCopy];
 }
 
 @end

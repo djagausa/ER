@@ -29,12 +29,16 @@
 @property (nonatomic, strong) NSNumber                  *numberOfWeeks;
 @property (nonatomic, strong) NSMutableArray            *colorStatus;               // array used to indicate if a color is being used 0 = unused; 1 = used; -1 = reserved
 @property (nonatomic, strong) NSMutableArray            *cellColor;                 // array that holds the cell (days) configured color
+- (IBAction)scheduleOperationModeAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *scheduleOperationModeOutlet;
 
 @end
 
 static NSString *_dayCellIdentification = @"dayCell";
 static NSString *_headerCellIdentification = @"ScheduleHearderCell";
 static NSArray *_cellAvailableColors;
+
+BOOL enableUpdate;
 
 @implementation CreateSheduleViewController
 
@@ -88,6 +92,7 @@ static NSArray *_cellAvailableColors;
         self.scheduleNameOutlet.enabled = NO;
         self.numberOfWeeksOutlet.enabled = NO;
         self.repeatCountOutlet.enabled = NO;
+        self.scheduleOperationModeOutlet.enabled = NO;
         [self configureScreenElements];
     } else if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
         [self configureScreenElements];
@@ -98,12 +103,17 @@ static NSArray *_cellAvailableColors;
 {
     self.scheduleNameOutlet.text = self.createScheduledEventInfo.scheduleName;
     self.numberOfWeeksOutlet.text = [NSString stringWithFormat:@"%ld",self.createScheduledEventInfo.numberOfWeeks];
+    self.repeatCountOutlet.text = [NSString stringWithFormat:@"%ld",self.createScheduledEventInfo.repeatCount];
     [self.scheduleCollectionView setUserInteractionEnabled:YES];
     [self fetchScheduledEvents:self.createScheduledEventInfo.scheduleName];
-    [self loadExistingSchedueInfo:self.createScheduledEventInfo.scheduleName];
+    [self setupScheduleScreenParameters:self.createScheduledEventInfo.scheduleName];
 }
 
 - (IBAction)repeatCountInput:(id)sender {
+    if ([self.repeatCountOutlet.text integerValue] != self.createScheduledEventInfo.numberOfWeeks) {
+        enableUpdate = YES;
+        [self enableUpdateButton];
+    }
 }
 
 - (IBAction)scheduleNameInput:(id)sender
@@ -122,25 +132,46 @@ static NSArray *_cellAvailableColors;
     }
 }
 
+- (IBAction)scheduleOperationModeAction:(id)sender
+{
+    
+}
+
+- (void)enableUpdateButton
+{
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Update"
+                                                                    style:UIBarButtonItemStylePlain target:self action:@selector(updateButtonPressed)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 0) {
         [self.createScheduledEventInfo setScheduleEditMode:kScheduleEdit];
         [self.scheduleCollectionView setUserInteractionEnabled:YES];
-        [self loadExistingSchedueInfo:self.scheduleNameOutlet.text];
+        [self setupScheduleScreenParameters:self.scheduleNameOutlet.text];
         return;
     }
     [self.createScheduledEventInfo setScheduleEditMode:kScheduleNoEdit];
 }
 
-- (void)loadExistingSchedueInfo:(NSString *)scheduleName
+- (void)setupScheduleScreenParameters:(NSString *)scheduleName
+{
+    Schedule *schedule = [self loadExistingSchedueInfo:scheduleName];
+    self.numberOfWeeks = schedule.numberOfWeeks;
+    self.numberOfWeeksOutlet.text = [NSString stringWithFormat: @"%@", self.numberOfWeeks];
+    self.repeatCountOutlet.text = [NSString stringWithFormat: @"%@", schedule.repeatCount];
+    self.scheduleOperationModeOutlet.selectedSegmentIndex = [schedule.operationalMode integerValue];
+
+    [self.scheduleCollectionView reloadData];
+}
+
+- (Schedule *)loadExistingSchedueInfo:(NSString *)scheduleName
 {
     NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:@"Schedule" withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
     Schedule *schedule = [scheduledEvents firstObject];
-    self.numberOfWeeks = schedule.numberOfWeeks;
-    self.numberOfWeeksOutlet.text = [NSString stringWithFormat: @"%@", self.numberOfWeeks];
-
-    [self.scheduleCollectionView reloadData];
+    
+    return schedule;
 }
 
 - (IBAction)numberOfWeeksInput:(id)sender
@@ -255,9 +286,9 @@ static NSArray *_cellAvailableColors;
 {
     self.createScheduledEventInfo.scheduleName = self.scheduleNameOutlet.text;
     self.createScheduledEventInfo.numberOfWeeks = [self.numberOfWeeksOutlet.text integerValue];
-    self.createScheduledEventInfo.repeatCount = [self.repeatCountOutlet.text integerValue];
     self.createScheduledEventInfo.week = indexPath.section;
     self.createScheduledEventInfo.day = indexPath.row;
+    self.createScheduledEventInfo.operationalMode = [self.scheduleOperationModeOutlet selectedSegmentIndex];
     if (self.createScheduledEventInfo.scheduleEditMode <= 0) {
         self.createScheduledEventInfo.scheduleEditMode = kScheduleEdit;
     }
@@ -297,6 +328,18 @@ static NSArray *_cellAvailableColors;
     scheduleEventViewController.scheduleEventDelegate = self;
 }
 
+- (void)updateButtonPressed
+{
+    Schedule *schedule = [self loadExistingSchedueInfo:self.createScheduledEventInfo.scheduleName];
+    
+    schedule.scheduleName = self.scheduleNameOutlet.text;
+    schedule.numberOfWeeks = @([self.numberOfWeeksOutlet.text integerValue]);
+    schedule.repeatCount = @([self.repeatCountOutlet.text integerValue]);
+    schedule.operationalMode = @(self.scheduleOperationModeOutlet.selectedSegmentIndex);
+    
+    [self.coreDataHelper save];
+}
+
 #pragma  mark - Core Data
 
 -(BOOL) seeIfAlreadyExists:(NSString *)scheduleName
@@ -316,4 +359,5 @@ static NSArray *_cellAvailableColors;
 {
     self.scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
 }
+
 @end

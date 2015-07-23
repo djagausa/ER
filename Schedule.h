@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSString * scheduleName;
 @property (nonatomic, retain) NSNumber * numberOfWeeks;
 @property (nonatomic, retain) NSNumber * repeatCount;
+@property (nonatomic, retain) NSNumber * operationalMode;
 @property (nonatomic, retain) NSSet *scheduledEvents;
 @end
 

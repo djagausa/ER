@@ -22,7 +22,7 @@
     self = [super init];
     
     if (self) {
-        self.scheduledStatus = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", scheduleNameKey, @(0), dayKey, @(0),weekKey, @"", lastUpdateDateKey, @(0), activeKey, @(0), repeatCountKey, nil ];
+        _scheduledStatus = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"", scheduleNameKey, @(0), dayKey, @(0),weekKey, @"", lastUpdateDateKey, @(0), activeKey, @(0), repeatCountKey, nil ];
     }
     
     return self;
@@ -77,6 +77,29 @@
         }
     }
 }
+
+// clear schedule satus file
+- (void)clearScheduleStatusFileForSchedule:(NSString *)scheduleName
+{
+    NSMutableDictionary *statusFileData = [self readScheduleStatusFile];
+    
+    if (statusFileData != nil) {
+        NSString *statusFileScheduleName;
+        statusFileScheduleName = [statusFileData objectForKey:scheduleNameKey];
+        if ([statusFileScheduleName isEqualToString:scheduleName]) {
+            ScheduleStatus *scheduleStatus = [[ScheduleStatus alloc]init];
+            
+            scheduleStatus.scheduleName = @"";
+            scheduleStatus.week = @(0);
+            scheduleStatus.day = @(0);
+            scheduleStatus.lastUpdateDate = [NSDate date];
+            scheduleStatus.active = NO;
+            scheduleStatus.repeat = @(0);
+            
+            [self writeScheduleStatusFile:scheduleStatus];
+        }
+    }
+ }
 
 
 @end

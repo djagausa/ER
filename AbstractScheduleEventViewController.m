@@ -283,6 +283,22 @@ static NSString *CellIdentifier = @"EventCell";
     return repeatCount;
 }
 
+- (NSNumber *)fetchOpertionalModeCountForSchedule:(NSString *)scheduleName
+{
+    NSNumber *opertionalMode = @(0);
+    Schedule *schedule;
+    
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"opertionalMode", @"value" : scheduleName} sortKey:nil];
+    
+    if ([schedules count] > 0) {
+        schedule = [schedules firstObject];
+        return schedule.operationalMode;
+    }
+    
+    return opertionalMode;
+}
+
+
 - (void) fetchEvents
 {
     self.weightLiftingDefaultObjects = [[self.coreDataHelper fetchDefaultDataFor:weightLiftingDefaultEventsEntityName withSortKey:@"eventName" ascending:YES usePredicate:YES] mutableCopy];

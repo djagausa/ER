@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, EventCateogory) {
 typedef NS_ENUM(NSInteger, ScheduleDiplayMode) {
     kScheduleEdit = 1,
     kScheduleReview,
+    kScheduleNew,
     kScheduleNoEdit
 };
 
@@ -54,7 +55,11 @@ static NSString *weekKey = @"weekKey";
 static NSString *lastUpdateDateKey = @"lastUpdateDateKey";
 static NSString *activeKey = @"activeKey";
 static NSString *repeatCountKey = @"repeatKey";
+static NSString *operationMode = @"operationMode";
 
 static NSString *eventAddedNotificationName = @"ExerciseEventAdded";
+
+static NSString *motivationalAuthorKey = @"MotivationalAuthorKey";
+static NSString *motivationalQuoteKey = @"MotivationalQuoteKey";
 
 #endif

@@ -10,7 +10,7 @@
 
 @implementation ScheduleStatus
 
-- (instancetype)initWithScheduleName:(NSString *)scheduleName day:(NSNumber *)day week:(NSNumber *)week lastUpdateDate:(NSDate *)lastUpdateDate active:(BOOL)active;
+- (instancetype)initWithScheduleName:(NSString *)scheduleName day:(NSNumber *)day week:(NSNumber *)week lastUpdateDate:(NSDate *)lastUpdateDate active:(BOOL)active ;
 {
     self = [super init];
     

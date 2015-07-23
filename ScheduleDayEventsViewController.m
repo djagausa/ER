@@ -33,7 +33,8 @@
 @property (nonatomic, strong) NSMutableArray        *selectedAerobicEvents;
 
 @property (nonatomic, strong) ScheduledEventInfo    *scheduledEventInfo;
-@property (nonatomic, assign) NSInteger             selectedEventTableHeigth;
+@property (nonatomic, assign) NSInteger             selectedEventTableHeight;
+@property (nonatomic, assign) NSInteger             selectedEventTableHeightMax;
 @property (nonatomic, strong) NSMutableArray        *selectedDays;
 @property (nonatomic, strong) NSMutableArray        *orignalSelectedDays;
 @property (nonatomic, strong) NSMutableArray        *allReadySelectedDays;
@@ -43,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *navSaveButton;
 @end
 
-const CGFloat kTableCellHeight = 28.0;
+const CGFloat kTableCellHeight = 40.0;
 
 @implementation ScheduleDayEventsViewController
 
@@ -63,8 +64,20 @@ const CGFloat kTableCellHeight = 28.0;
      // get the info about what is being scehuled
     self.scheduledEventInfo = [self.scheduleEventDelegate dayToBeScheduled];
   
+    self.selectedEventTableHeightMax = 280;
+    // disable controls if the edit mode is review
+    if (self.scheduledEventInfo.scheduleEditMode == kScheduleReview) {
+        self.repeatDayOutlet.enabled = NO;
+        self.selectedEventsTable.allowsSelection = NO;
+        self.availableEventsTable.allowsSelection = NO;
+        self.availableEventsTable.hidden = YES;
+        self.selectFromLabelTitle.hidden = YES;
+        self.navSaveButton.enabled = NO;
+        self.selectedEventTableHeightMax = 480;
+    }
+    
     self.navigationItem.title = [NSString stringWithFormat:@"Setup day %ld of week %ld.", self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1];
-    self.selectedEventTableHeigth = 0;
+    self.selectedEventTableHeight = 0;
     
     // the tag is used to id which segments have been selected when selecting multiple segments; initial state just selected day hghlighted
     [self tagSegemntControlSubViewsAndInitializeSelectedDays];
@@ -78,15 +91,6 @@ const CGFloat kTableCellHeight = 28.0;
     // register section header
     [[self selectedEventsTable] registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"sectionHeader"];
     
-    // disable controls if the edit mode is review
-    if (self.scheduledEventInfo.scheduleEditMode == kScheduleReview) {
-        self.repeatDayOutlet.enabled = NO;
-        self.selectedEventsTable.allowsSelection = NO;
-        self.availableEventsTable.allowsSelection = NO;
-        self.availableEventsTable.hidden = YES;
-        self.selectFromLabelTitle.hidden = YES;
-        self.navSaveButton.enabled = NO;
-    }
     [self findAndHighLiteDaysThatHaveAlreadyBeenSelected];
 }
 
@@ -463,22 +467,22 @@ const CGFloat kTableCellHeight = 28.0;
 - (void)updateSelectedTableHeight
 {
     if ([self.selectedAerobicEvents count] > 0) {
-        self.selectedEventTableHeigth = SECTION_HEADER_HEIGHT;
+        self.selectedEventTableHeight = SECTION_HEADER_HEIGHT;
     }
     if ([self.selectedWeightEvents count] > 0) {
-        self.selectedEventTableHeigth += SECTION_HEADER_HEIGHT;
+        self.selectedEventTableHeight += SECTION_HEADER_HEIGHT;
     }
     for (int i = 0; i < [self.selectedAerobicEvents count]; ++i) {
-        self.selectedEventTableHeigth += kTableCellHeight;
+        self.selectedEventTableHeight += kTableCellHeight;
     }
     
     for (int i = 0; i < [self.selectedWeightEvents count]; ++i) {
-        self.selectedEventTableHeigth += kTableCellHeight;
+        self.selectedEventTableHeight += kTableCellHeight;
     }
-    if (self.selectedEventTableHeigth > 280) {
-        self.selectedEventTableHeigth = 280;
+    if (self.selectedEventTableHeight > self.selectedEventTableHeightMax) {
+        self.selectedEventTableHeight = self.selectedEventTableHeightMax;
     }
-    self.selectedTableHeight.constant = self.selectedEventTableHeigth;
+    self.selectedTableHeight.constant = self.selectedEventTableHeight;
     [self.selectedEventsTable needsUpdateConstraints];
 }
 
@@ -620,7 +624,6 @@ const CGFloat kTableCellHeight = 28.0;
 }
 
 - (IBAction)saveAction:(id)sender {
-//    ScheduledEvent *scheduledEvent = [[ScheduledEvent alloc] init];
 
     // disable the navigation save button - user feed back
     [self.navSaveButton setEnabled:NO];

@@ -10,6 +10,7 @@
 #import "AbstractEventDataViewController.h"
 #import "SelectEventToAddTableViewController.h"
 
+
 @interface EventViewController : AbstractEventDataViewController <SelectEventToAddTableViewControllerDelegate>
 
 

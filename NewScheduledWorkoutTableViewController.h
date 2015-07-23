@@ -10,6 +10,14 @@
 #import "AbstractEventDataTableViewController.h"
 #import "WorkoutScheduledEventViewController.h"
 
+@protocol NewScheduledWorkoutTableViewControllerDelegate <NSObject>
+
+- (void)newScheduleInfoIs:(ScheduledEventInfo *)newScheduleInfoIs;
+
+@end
+
 @interface NewScheduledWorkoutTableViewController : AbstractEventDataTableViewController <WorkoutScheduledEventViewControllerDelegate>
+
+@property (nonatomic, weak) id<NewScheduledWorkoutTableViewControllerDelegate> scheduleWorkoutInfoDelegate;
 
 @end

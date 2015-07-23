@@ -250,6 +250,7 @@ UIEdgeInsets oldIndicatorInset;
     [alert show];
     
 }
+
 - (IBAction)enableSwitchAction:(id)sender {
 }
 
@@ -458,12 +459,14 @@ UIEdgeInsets oldIndicatorInset;
         switch (self.selectedEvent.eventCategory)
         {
             case kWeights:
+                self.selectedEvent.defaultWeightLiftingData.eventName = self.exerciseName.text;
                 self.selectedEvent.defaultWeightLiftingData.numOfReps = [NSNumber numberWithInt:[self.default2.text intValue]];
                 self.selectedEvent.defaultWeightLiftingData.weight = [NSNumber numberWithInt:[self.default1.text intValue]];
                 self.selectedEvent.defaultWeightLiftingData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
                 break;
                 
             default:
+                self.selectedEvent.aerobicEvent.eventName = self.exerciseName.text;
                 self.selectedEvent.defaultAerobicData.enabled = [NSNumber numberWithBool: self.enableSwitchOutlet.isOn];
                  switch (self.selectedEvent.eventCategory)
                     {
@@ -548,9 +551,6 @@ UIEdgeInsets oldIndicatorInset;
     {  // if in edit mode no need to check for deleting an event from the pre-populated event list
         [self.delegate selectedEventSaved:self.exerciseName.text exerciseCategory:self.categoryCode];
     }
-//    [ self resetDataEntry];
-    
-    // return tot he previous view controller
     [self.navigationController popViewControllerAnimated:YES];
 }
 /*

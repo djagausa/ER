@@ -16,5 +16,6 @@
 @dynamic numberOfWeeks;
 @dynamic repeatCount;
 @dynamic scheduledEvents;
+@dynamic operationalMode;
 
 @end

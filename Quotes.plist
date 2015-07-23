@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Quotes</key>
+	<array>
+		<dict>
+			<key>Author</key>
+			<string> Vince Lombardi</string>
+			<key>Quote</key>
+			<string>It&apos;s not whether you get knocked down; it&apos;s whether you get up.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ernie Banks</string>
+			<key>Quote</key>
+			<string>The only way to prove that you’re a good sport is to lose.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Frank L. Gaines</string>
+			<key>Quote</key>
+			<string>Only he who can see the invisible can do the impossible.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Bill Shoemaker</string>
+			<key>Quote</key>
+			<string>When you’re riding, only the race in which you’re riding is important.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Jackie Joyner-Kersee</string>
+			<key>Quote</key>
+			<string>Age is no barrier. It’s a limitation you put on your mind.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Bruce Jenner</string>
+			<key>Quote</key>
+			<string>I always felt that my greatest asset was not my physical ability, it was my mental ability.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mary Lou Retton</string>
+			<key>Quote</key>
+			<string>A trophy carries dust. Memories last forever.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Pat Tyson</string>
+			<key>Quote</key>
+			<string>“Number one is just to gain a passion for running. To love the morning, to love the trail, to love the pace on the track. And if some kid gets really good at it, that’s cool too.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ross Perot</string>
+			<key>Quote</key>
+			<string>Most people give up just when they’re about to achieve success. They quit on the one yard line. They give up at the last minute of the game one foot from a winning touchdown.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Larry Brown</string>
+			<key>Quote</key>
+			<string>You have to do something in your life that is honorable and not cowardly if you are to live in peace with yourself.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Derek Jeter</string>
+			<key>Quote</key>
+			<string>There may be people that have more talent than you, but theres no excuse for anyone to work harder than you do.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ted Williams</string>
+			<key>Quote</key>
+			<string>Baseball is the only field of endeavor where a man can succeed three times out of ten and be considered a good performer.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Knute Rockne</string>
+			<key>Quote</key>
+			<string>One man practicing sportsmanship is far better than 50 preaching it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ken Doherty</string>
+			<key>Quote</key>
+			<string>The five S’s of sports training are: stamina, speed, strength, skill, and spirit; but the greatest of these is spirit.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Emil Zatopek</string>
+			<key>Quote</key>
+			<string>An athlete cannot run with money in his pockets. He must run with hope in his heart and dreams in his head.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mia Hamm</string>
+			<key>Quote</key>
+			<string>Somewhere behind the athlete you’ve become and the hours of practice and the coaches who have pushed you is a little girl who fell in love with the game and never looked back… play for her.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Terry Bradshaw</string>
+			<key>Quote</key>
+			<string>When you’ve got something to prove, there’s nothing greater than a challenge.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Doug Williams</string>
+			<key>Quote</key>
+			<string>Never give up, never give in, and when the upper hand is ours, may we have the ability to handle the win with the dignity that we absorbed the loss.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Paul “Bear” Bryant</string>
+			<key>Quote</key>
+			<string>It’s not the will to win that matters—everyone has that. It’s the will to prepare to win that matters.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Marv Levy</string>
+			<key>Quote</key>
+			<string>Persistence can change failure into extraordinary achievement.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Tom Landry</string>
+			<key>Quote</key>
+			<string>I’ve learned that something constructive comes from every defeat.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Laird Hamilton</string>
+			<key>Quote</key>
+			<string>Make sure your worst enemy doesn’t live between your own two ears.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Bo Jackson</string>
+			<key>Quote</key>
+			<string>Set your goals high, and don’t stop till you get there.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Sandy Koufax</string>
+			<key>Quote</key>
+			<string>I became a good pitcher when I stopped trying to make them miss the ball and started trying to make them hit it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ben Hogan</string>
+			<key>Quote</key>
+			<string>People ask me what I do in winter when there’s no baseball. I’ll tell you what I do. I stare out the window and wait for spring.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>William James</string>
+			<key>Quote</key>
+			<string>Most people never run far enough on their first wind to find out they’ve got a second.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mike Singletary</string>
+			<key>Quote</key>
+			<string>Do you know what my favorite part of the game is? The opportunity to play.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>M.H. Alderson</string>
+			<key>Quote</key>
+			<string>If at first you don’t succeed, you are running about average.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Liane Cardes</string>
+			<key>Quote</key>
+			<string>Continuous effort — not strength or intelligence — is the key to unlocking our potential.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Vin Scully</string>
+			<key>Quote</key>
+			<string>Good is not good when better is expected.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Tommy Lasorda</string>
+			<key>Quote</key>
+			<string>The difference between the impossible and the possible lies in a person’s determination.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Billie Jean King</string>
+			<key>Quote</key>
+			<string>Champions keep playing until they get it right.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Herb Brooks</string>
+			<key>Quote</key>
+			<string>You were born to be a player. You were meant to be here. This moment is yours.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Don Zimmer</string>
+			<key>Quote</key>
+			<string>What you lack in talent can be made up with desire, hustle, and giving 110 percent all the time.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mark Spitz</string>
+			<key>Quote</key>
+			<string>If you fail to prepare, you’re prepared to fail.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Lou Holtz</string>
+			<key>Quote</key>
+			<string>How you respond to the challenge in the second half will determine what you become after the game, whether you are a winner or a loser.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Matt Biondi</string>
+			<key>Quote</key>
+			<string>Persistence can change failure into extraordinary achievement.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>George F. Will</string>
+			<key>Quote</key>
+			<string>Sports serve society by providing vivid examples of excellence.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Steve Young</string>
+			<key>Quote</key>
+			<string>The principle is competing against yourself. It’s about self-improvement, about being better than you were the day before.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>John Madden</string>
+			<key>Quote</key>
+			<string>The road to Easy Street goes through the sewer.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Arthur Ashe</string>
+			<key>Quote</key>
+			<string>You are never really playing an opponent. You are playing yourself, your own highest standards, and when you reach your limits, that is real joy.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Andre Agassi</string>
+			<key>Quote</key>
+			<string>What makes something special is not just what you have to gain, but what you feel there is to lose.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Pele</string>
+			<key>Quote</key>
+			<string>The more difficult the victory, the greater the happiness in winning.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Kareem Abdul-Jabbar</string>
+			<key>Quote</key>
+			<string>One man can be a crucial ingredient on a team, but one man cannot make a team. </string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>George Halas</string>
+			<key>Quote</key>
+			<string>Nobody who ever gave his best regretted it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Cal Ripken Jr.</string>
+			<key>Quote</key>
+			<string>Stubbornness usually is considered a negative; but I think that trait has been a positive for me.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Chris Evert</string>
+			<key>Quote</key>
+			<string>You’ve got to take the initiative and play your game. In a decisive set, confidence is the difference.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Paul Brown</string>
+			<key>Quote</key>
+			<string>When you win, say nothing, when you lose, say less.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Eddie Reese</string>
+			<key>Quote</key>
+			<string>The hardest skill to acquire in this sport is the one where you compete all out, give it all you have, and you are still getting beat no matter what you do. When you have the killer instinct to fight through that, it is very special.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Arnold Schwarzenegger</string>
+			<key>Quote</key>
+			<string>The mind is the limit. As long as the mind can envision the fact that you can do something, you can do it, as long as you really believe 100 percent.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Joe Frazier</string>
+			<key>Quote</key>
+			<string>When I go out there, I have no pity on my brother. I am out there to win.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mickey Mantle</string>
+			<key>Quote</key>
+			<string>During my 18 years I came to bat almost 10,000 times. I struck out about 1,700 times and walked maybe 1,800 times. You figure a ballplayer will average about 500 at bats a season. That means I played seven years without ever hitting the ball.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Peyton Manning</string>
+			<key>Quote</key>
+			<string>I never left the field saying I could have done more to get ready and that gives me piece of mind.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Eddie Robinson</string>
+			<key>Quote</key>
+			<string>Leadership, like coaching, is fighting for the hearts and souls of men and getting them to believe in you.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>J. Askenberg</string>
+			<key>Quote</key>
+			<string>You win some, you lose some, and some get rained out, but you gotta suit up for them all.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Arnold Palmer</string>
+			<key>Quote</key>
+			<string>Always make a total effort, even when the odds are against you.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Brett Favre</string>
+			<key>Quote</key>
+			<string>Most talented players don’t always succeed. Some don’t even make the team. It’s more what’s inside.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Michael Jordan</string>
+			<key>Quote</key>
+			<string>You have to expect things of yourself before you can do them.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Picabo Street</string>
+			<key>Quote</key>
+			<string>To uncover your true potential you must first find your own limits and then you have to have the courage to blow past them.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Lou Brock</string>
+			<key>Quote</key>
+			<string>Show me a guy who’s afraid to look bad, and I’ll show you a guy you can beat every time.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Homer Rice</string>
+			<key>Quote</key>
+			<string>You can motivate by fear, and you can motivate by reward. But both those methods are only temporary. The only lasting thing is self motivation.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Gordie Howe</string>
+			<key>Quote</key>
+			<string>You find that you have peace of mind and can enjoy yourself, get more sleep, and rest when you know that it was a one hundred percent effort that you gave–win or lose.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Hank Aaron</string>
+			<key>Quote</key>
+			<string>My motto was always to keep swinging. Whether I was in a slump or feeling badly or having trouble off the field, the only thing to do was keep swinging.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Tom Landry</string>
+			<key>Quote</key>
+			<string>I didn’t believe in team motivation. I believe in getting a team prepared so it knows it will have the necessary confidence when it steps on the field and be prepared to play a good game.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Herschel Walker</string>
+			<key>Quote</key>
+			<string>If you train hard, you’ll not only be hard, you’ll be hard to beat.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Bobby Knight</string>
+			<key>Quote</key>
+			<string>Your biggest opponent isn’t the other guy. It’s human nature.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ronnie Lott</string>
+			<key>Quote</key>
+			<string>If you can believe it, the mind can achieve it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Lou Holtz</string>
+			<key>Quote</key>
+			<string>Without self-discipline, success is impossible, period.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Carl Lewis</string>
+			<key>Quote</key>
+			<string>If you don’t have confidence, you’ll always find a way not to win.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Michael Jordan</string>
+			<key>Quote</key>
+			<string>Obstacles don’t have to stop you. If you run into a wall, don’t turn around and give up. Figure out how to climb it, go through it, or work around it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>John Wooden</string>
+			<key>Quote</key>
+			<string>Make each day your masterpiece.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Pat Riley</string>
+			<key>Quote</key>
+			<string>Excellence is the gradual result of always striving to do better.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Cameron Trammell</string>
+			<key>Quote</key>
+			<string>Win If You Can, Lose If You Must, But NEVER QUIT!</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mike Singletary</string>
+			<key>Quote</key>
+			<string>Do you know what my favorite part of the game is? The opportunity to play.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mario Andretti</string>
+			<key>Quote</key>
+			<string>If you have everything under control, you’re not moving fast enough.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Ted Williams</string>
+			<key>Quote</key>
+			<string>Just keep going. Everybody gets better if they keep at it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Dean Smith</string>
+			<key>Quote</key>
+			<string>What do do with a mistake: recognize it, admit it, learn from it, forget it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Larry Bird</string>
+			<key>Quote</key>
+			<string>Push yourself again and again. Don’t give an inch until the final buzzer sounds.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Michael Phelps</string>
+			<key>Quote</key>
+			<string>You can’t put a limit on anything. The more you dream, the farther you get.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>John Wooden</string>
+			<key>Quote</key>
+			<string>Do not let what you can not do interfere with what you can do.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Lance Armstrong</string>
+			<key>Quote</key>
+			<string>Pain is temporary. It may last a minute, or an hour, or a day, or a year, but eventually it will subside and something else will take its place. If I quit, however, it lasts forever.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Phil Jackson</string>
+			<key>Quote</key>
+			<string>Wisdom is always an overmatch for strength.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Joe Paterno</string>
+			<key>Quote</key>
+			<string>The will to win is important, but the will to prepare is vital.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>William A. Ward</string>
+			<key>Quote</key>
+			<string>Adversity cause some men to break; others to break records.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Satchel Paige</string>
+			<key>Quote</key>
+			<string>Never let your head hang down. Never give up and sit down and grieve. Find another way</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Venus Williams</string>
+			<key>Quote</key>
+			<string>Some people say I have attitude – maybe I do…but I think you have to. You have to believe in yourself when no one else does – that makes you a winner right there.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Babe Ruth</string>
+			<key>Quote</key>
+			<string>Never let the fear of striking out get in your way.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Evander Holyfield</string>
+			<key>Quote</key>
+			<string>It is not the size of a man but the size of his heart that matters.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Muhammad Ali</string>
+			<key>Quote</key>
+			<string>I hated every minute of training, but I said, ‘Don’t quit. Suffer now and live the rest of your life as a champion.’</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Pat Riley</string>
+			<key>Quote</key>
+			<string>There are only two options regarding commitment. You’re either IN or you’re OUT. There is no such thing as life in-between.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Jack Dempsey</string>
+			<key>Quote</key>
+			<string>A champion is someone who gets up when he can’t.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Yogi Berra</string>
+			<key>Quote</key>
+			<string>It ain’t over till it’s over.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Jim Valvano</string>
+			<key>Quote</key>
+			<string>Never give up! Failure and rejection are only the first step to succeeding.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Wayne Gretzky</string>
+			<key>Quote</key>
+			<string>You miss 100 percent of the shots you don’t take.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Wayne Gretzky</string>
+			<key>Quote</key>
+			<string>The highest compliment that you can pay me is to say that I work hard every day, that I never dog it.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Dan Gable</string>
+			<key>Quote</key>
+			<string>Gold medals aren’t really made of gold. They’re made of sweat, determination, and a hard-to-find alloy called guts.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Michael Jordan</string>
+			<key>Quote</key>
+			<string>I’ve missed more than 9,000 shots in my career. I’ve lost almost 300 games. 26 times, I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life. And that is why I succeed.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mike Ditka</string>
+			<key>Quote</key>
+			<string>You’re never a loser until you quit trying.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Unknown</string>
+			<key>Quote</key>
+			<string>Remember that guy that gave up? Neither does no one else.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Dale Carnegie</string>
+			<key>Quote</key>
+			<string>Most of the important things in the world have been accomplished by people who have kept on trying when there seemed to be no hope at all.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Winston Churchill</string>
+			<key>Quote</key>
+			<string>When you are going through hell, keep on going. Never never never give up.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Unknown</string>
+			<key>Quote</key>
+			<string>A winner is someone who gets up one more time than he is knocked down.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Babe Ruth</string>
+			<key>Quote</key>
+			<string>You just can’t beat the person who won’t give up.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Samuel Beckett</string>
+			<key>Quote</key>
+			<string>Ever tried. Ever failed. No matter. Try Again. Fail again. Fail better.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Unknown</string>
+			<key>Quote</key>
+			<string>Never give up on what you really want to do. The person with big dreams is more powerful than one with all the facts.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Vince Lombardi</string>
+			<key>Quote</key>
+			<string>Winners never quit, and quitters never win.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Confucius</string>
+			<key>Quote</key>
+			<string>It does not matter how slowly you go so long as you do not stop.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Confucius</string>
+			<key>Quote</key>
+			<string>Our greatest glory is not in never falling but in rising every time we fall.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Thomas Edison</string>
+			<key>Quote</key>
+			<string>Many of life’s failures are people who did not realize how close they were to success when they gave up.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>George Eliot</string>
+			<key>Quote</key>
+			<string>It is never too late to be what you might have been.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Zig Ziglar</string>
+			<key>Quote</key>
+			<string>Sometimes adversity is what you need to face in order to become successful.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Sugar Ray Robinson</string>
+			<key>Quote</key>
+			<string>To be a champ, you have to believe in yourself when nobody else will.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Unknown</string>
+			<key>Quote</key>
+			<string>It is not wanting to win that makes you a winner; it is refusing to fail.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Unkown</string>
+			<key>Quote</key>
+			<string>The day you give up on your dreams is the day you give up on yourself.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Japanese Proverb</string>
+			<key>Quote</key>
+			<string>Fall seven times, stand up eight.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Franklin D. Roosevelt</string>
+			<key>Quote</key>
+			<string>When you get to the end of your rope, tie a knot and hang on.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>Mary Anne Radmacher</string>
+			<key>Quote</key>
+			<string>Courage doesn’t always roar, sometimes it’s the quiet voice at the end of the day whispering ... I will try again tomorrow.</string>
+		</dict>
+		<dict>
+			<key>Author</key>
+			<string>William Feather</string>
+			<key>Quote</key>
+			<string>Success seems to be largely a matter of hanging on after others have let go.</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -11,7 +11,9 @@
 
 @interface ScheduleStatusFileHelper : NSObject
 
+- (instancetype)init;
 - (NSMutableDictionary *)readScheduleStatusFile;
 - (void)writeScheduleStatusFile:(ScheduleStatus *)currentScheduleStatus;
+- (void)clearScheduleStatusFileForSchedule:(NSString *)scheduleName;
 
 @end

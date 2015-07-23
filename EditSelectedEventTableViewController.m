@@ -169,7 +169,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                             tableView.rowHeight = 44.0f;
                         } else {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
-                            tableView.rowHeight = 22.0f;
+                            tableView.rowHeight = 36.0f;
 
                         }
                         NSString *convertedDate = [dateFormatter stringFromDate:weightEvent.date];
@@ -192,7 +192,7 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                             tableView.rowHeight = 44.0f;
                         } else {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
-                            tableView.rowHeight = 22.0f;
+                            tableView.rowHeight = 36.0f;
                         }
                         NSString *convertedDate = [dateFormatter stringFromDate:aerobicEvent.date];
                         NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];

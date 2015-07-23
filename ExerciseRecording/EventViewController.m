@@ -8,12 +8,18 @@
 
 #import "EventViewController.h"
 #import "Support.h"
+//#import "MotivationalQuoteInfo.h"
+#import "MotivationalQuoteHelper.h"
 
 @interface EventViewController ()
 
-@property (weak, nonatomic) IBOutlet UIButton *addExerciseButton;
-@property (weak, nonatomic) IBOutlet UIButton *reviewExerciseButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editExercise;
+@property (weak, nonatomic) IBOutlet UIButton           *addExerciseButton;
+@property (weak, nonatomic) IBOutlet UIButton           *reviewExerciseButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem    *editExercise;
+@property (weak, nonatomic) IBOutlet UITextView         *motivationalTextOutlet;
+
+@property (copy, nonatomic) NSString *motivationalStatement;
+@property (strong, nonatomic) MotivationalQuoteHelper   *motivationalHelper;
 
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification;
 
@@ -25,9 +31,36 @@
     [super viewDidLoad];
 
     [self configureTheButtons];
+    
     // register for events added notifications
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
+    
+    self.motivationalHelper = [[MotivationalQuoteHelper alloc] init];
+    
+    [self.motivationalTextOutlet.layer setBorderColor:[[UIColor blueColor] CGColor] ];
+    [self.motivationalTextOutlet.layer setBorderWidth:2.0];
+    self.motivationalTextOutlet.layer.cornerRadius = 5;
+    self.motivationalTextOutlet.clipsToBounds = YES;
+    
+    // register for app did become which is used to eset the motivational quote
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appBecameActive)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // provide a modivational statement
+    [self addMotivationalQuote];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)configureTheButtons
@@ -67,6 +100,22 @@
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc removeObserver:self name:eventAddedNotificationName object:nil];
     }
+}
+
+- (void)appBecameActive
+{
+    [self addMotivationalQuote];
+}
+
+- (void)addMotivationalQuote
+{
+    MotivationalQuoteInfo *motivationalQuoteInfo;
+    NSInteger space;
+
+    motivationalQuoteInfo = [self.motivationalHelper provideMotivationQuoteInfo];
+    space = 75 - motivationalQuoteInfo.author.length;
+    NSString * quoteString = [NSString stringWithFormat:@"%@\n\n%*s - %@", motivationalQuoteInfo.motivtionalQuote, (int)space, " ", motivationalQuoteInfo.author];
+    self.motivationalTextOutlet.text = quoteString;
 }
 
 - (void)didReceiveMemoryWarning {
