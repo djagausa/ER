@@ -14,6 +14,8 @@
 #import "DefaultAerobic.h"
 #import "AbstractEventDataViewController.h"
 #import "AddEventDataViewController.h"
+#import "ScheduleStatus.h"
+
 
 @interface AbstractScheduleEventViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, AbstractEventDataDelegate,AddEventDataViewControllerDelegate>
 
@@ -25,10 +27,15 @@
 @property (nonatomic, strong) NSMutableArray            *weightLiftingDefaultObjects;
 @property (nonatomic, strong) NSMutableArray            *aerobicDefaultObjects;
 @property (nonatomic, strong) NSMutableArray            *completedWeightEvents;             // used to keep track of todays completed events
-@property (nonatomic, strong) NSMutableArray             *completedAerobicEvents;            // used to keep track of todays completed events
+@property (nonatomic, strong) NSMutableArray            *completedAerobicEvents;            // used to keep track of todays completed events
+@property (nonatomic, strong) ScheduleStatus            *currentScheduleStatus;
 
 - (NSNumber *)fetchNumberOfWeeksForSchedule:(NSString *)scheduleName;
 - (NSNumber *)fetchRepeatCountForSchedule:(NSString *)scheduleName;
+- (NSNumber *)fetchOpertionalModeCountForSchedule:(NSString *)scheduleName;
+- (BOOL)bumpScheduleByNumber:(NSInteger )bumpNumber numberOfWeeks:(NSInteger )numberOfWeeks repeatCount:(NSInteger )repeatCount;
+- (BOOL)readCurentScheduleInfoFromStatusFile;
+
 - (void) fetchEvents;
 
 @end

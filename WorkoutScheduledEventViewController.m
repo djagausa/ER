@@ -22,7 +22,16 @@
 @property (nonatomic, strong) NSSet                 *weightScheduledEvents;
 @property (nonatomic, strong) NSSet                 *aerobicScheduledEvents;
 @property (nonatomic, strong) ScheduledEvent        *dayEvent;
+@property (weak, nonatomic) IBOutlet UIButton       *skipDayOutlet;
+- (IBAction)skipDayAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton       *dayFinishedOutlet;
+- (IBAction)dayFinishedAction:(id)sender;
 @end
+
+typedef NS_ENUM(NSInteger, ScheduleActivity) {
+    kSkipDay=1,
+    kDayFinished,
+};
 
 @implementation WorkoutScheduledEventViewController
 
@@ -33,6 +42,8 @@
     [self fetchEvents];
     [self fetchTodaysCompleteEvents];
     [self constructInfoLabel];
+    [self formatButton:self.skipDayOutlet];
+    [self formatButton:self.dayFinishedOutlet];
     
     // register for events added notifications
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -41,6 +52,7 @@
 
 - (void)constructInfoLabel
 {
+    self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
     NSString *labelText = [NSString stringWithFormat:@"Schedule %@: day %ld of week %ld.", self.scheduledEventInfo.scheduleName, self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1];
     self.scheduleInfoLabel.text = labelText;
 }
@@ -56,11 +68,72 @@
     [self.tableView reloadData];
 }
 
+- (void)formatButton:(UIButton *)button
+{
+    button.layer.cornerRadius = 9.0f;
+    button.layer.borderColor = [UIColor blueColor].CGColor;
+    button.layer.borderWidth = 1.0f;
+}
+
 #pragma  mark - Deleagate
 - (ScheduledEventInfo *)scheduledEventIs
 {
     self.scheduledEventInfo.scheduleEditMode = kScheduleReview;
     return self.scheduledEventInfo;
+}
+
+- (IBAction)skipDayAction:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"Skip day %ld?", self.scheduledEventInfo.day+1 ]
+                                                   message:@""
+                                                  delegate:self
+                                         cancelButtonTitle:@"Yes"
+                                         otherButtonTitles:@"No", nil];
+    alert.tag = kSkipDay;
+    [alert show];
+}
+
+- (IBAction)dayFinishedAction:(id)sender
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"Finished with day %ld?", self.scheduledEventInfo.day+1 ]
+                                                   message:@""
+                                                  delegate:self
+                                         cancelButtonTitle:@"Yes"
+                                         otherButtonTitles:@"No", nil];
+    alert.tag = kDayFinished;
+    [alert show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+
+        case kSkipDay:
+            if (buttonIndex == 0) {
+                [self bumpDay];
+            }
+            break;
+        case kDayFinished:
+            if (buttonIndex == 0) {
+                [self bumpDay];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)bumpDay
+{    
+    // bunp the schedule by one day
+    NSNumber *weeks = [self fetchNumberOfWeeksForSchedule:self.scheduledEventInfo.scheduleName];
+    NSNumber *repeatCount = [self fetchRepeatCountForSchedule:self.scheduledEventInfo.scheduleName];
+    [self bumpScheduleByNumber:1 numberOfWeeks:[weeks integerValue] repeatCount:[repeatCount integerValue]];
+    self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
+    [self fetchEvents];
+    [self fetchTodaysCompleteEvents];
+    [self constructInfoLabel];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Core Data
@@ -125,4 +198,5 @@
         addEventDataVC.delegate = self;
     }
 }
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "AbstractScheduleEventViewController.h"
-#import "ScheduleStatus.h"
+#import "ScheduleStatusFileHelper.h"
 #import "Schedule.h"
 #import "DefaultAerobic.h"
 #import "DefaultWeightLifting.h"
@@ -20,7 +20,8 @@
 @property (nonatomic, assign) NSInteger                     numberOfItems;
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) NSMutableDictionary           *scheduledlStatus;
-@property (nonatomic, strong) ScheduleStatus                *currentScheduleStatus;
+@property (nonatomic, strong) ScheduleStatusFileHelper      *scheduleFileHelper;
+
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
@@ -32,10 +33,10 @@ static NSString *CellIdentifier = @"EventCell";
     [super viewDidLoad];
     
     _selectedEvent = [[SelectedEvent alloc]init];
-    
-    _coreDataHelper = [[CoreDataHelper alloc] init];
+    _scheduleFileHelper = [[ScheduleStatusFileHelper alloc]init];
+    _coreDataHelper = [[CoreDataHelper alloc]init];
     _coreDataHelper.managedObjectContext = self.managedObjectContext;
-
+    _currentScheduleStatus = [[ScheduleStatus alloc] init];
     _weightLiftingDefaultObjects = [[NSMutableArray alloc] init];
     _aerobicDefaultObjects = [[NSMutableArray alloc] init];
     _completedAerobicEvents = [[NSMutableArray alloc] init];
@@ -252,6 +253,74 @@ static NSString *CellIdentifier = @"EventCell";
     return NO;
 }
 
+- (BOOL)bumpScheduleByNumber:(NSInteger )bumpNumber numberOfWeeks:(NSInteger )numberOfWeeks repeatCount:(NSInteger )repeatCount
+{
+    BOOL results = YES;       // NO = schedule finsihed;  YES = scheduled bumped
+    
+    [self readCurentScheduleInfoFromStatusFile];
+    NSNumber *day = self.currentScheduleStatus.day;
+    NSNumber *week = self.currentScheduleStatus.week;
+    NSNumber *repeat = self.currentScheduleStatus.repeat;
+    
+    // bump the day
+    day = @([day integerValue] + bumpNumber);
+    
+    // if day exceeds a week then select the next week
+    if ([day integerValue] > 6) {
+        day = @(0);
+        
+        // bump the week
+        week = @([week integerValue] + 1);
+        
+        // if week exceeds number of scheduled weeks then schedule completed
+        if ([week integerValue] >= numberOfWeeks) {
+            
+            // bump the repeat counter
+            repeat = @([repeat integerValue] + 1);
+            // check repeat situation
+            if ([repeat integerValue] >= repeatCount) {
+                self.currentScheduleStatus.active = NO;
+                // workout finished
+                results = NO;
+            }
+        }
+    }
+    // setup current schedule data with updated values
+    self.currentScheduleStatus.day = day;
+    self.currentScheduleStatus.week = week;
+    self.currentScheduleStatus.lastUpdateDate = [NSDate date];
+    self.currentScheduleStatus.repeat = repeat;
+    
+    // save updated schedule info
+    [self.scheduleFileHelper writeScheduleStatusFile:self.currentScheduleStatus];
+    
+    return results;
+}
+
+- (BOOL)readCurentScheduleInfoFromStatusFile
+{
+    BOOL fileRead = NO;         // NO = no file;    YES = file read
+    self.scheduledlStatus = [self.scheduleFileHelper readScheduleStatusFile];
+    
+    // if status file exists
+    if (self.scheduledlStatus  != nil) {
+        
+        // if schedule is active then get schedule data
+        if ([[self.scheduledlStatus objectForKeyedSubscript:activeKey] boolValue] == YES) {
+            
+            self.currentScheduleStatus.scheduleName = [self.scheduledlStatus objectForKeyedSubscript:scheduleNameKey];
+            self.currentScheduleStatus.day = [self.scheduledlStatus objectForKeyedSubscript:dayKey];
+            self.currentScheduleStatus.week = [self.scheduledlStatus objectForKeyedSubscript:weekKey];
+            self.currentScheduleStatus.lastUpdateDate = [self.scheduledlStatus objectForKeyedSubscript:lastUpdateDateKey];
+            self.currentScheduleStatus.active = [[self.scheduledlStatus objectForKeyedSubscript:activeKey]integerValue];
+            self.currentScheduleStatus.repeat = [self.scheduledlStatus objectForKeyedSubscript:repeatCountKey];
+            fileRead = YES;
+        }
+    }
+    
+    return fileRead;
+}
+
 #pragma mark - Core Data
 - (NSNumber *)fetchNumberOfWeeksForSchedule:(NSString *)scheduleName
 {
@@ -288,7 +357,7 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *opertionalMode = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"opertionalMode", @"value" : scheduleName} sortKey:nil];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];

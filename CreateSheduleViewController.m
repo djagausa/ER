@@ -38,8 +38,6 @@ static NSString *_dayCellIdentification = @"dayCell";
 static NSString *_headerCellIdentification = @"ScheduleHearderCell";
 static NSArray *_cellAvailableColors;
 
-BOOL enableUpdate;
-
 @implementation CreateSheduleViewController
 
 - (void)viewDidLoad {
@@ -86,7 +84,12 @@ BOOL enableUpdate;
     for (int i = 0; i < 7; ++i) {
         [_cellColor addObject:@(0)];                                        // zero = white
     }
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
     if (self.createScheduledEventInfo.scheduleEditMode == kScheduleReview) {
         // disable the schedule input name text field and populate with existing schedule name
         self.scheduleNameOutlet.enabled = NO;
@@ -111,7 +114,6 @@ BOOL enableUpdate;
 
 - (IBAction)repeatCountInput:(id)sender {
     if ([self.repeatCountOutlet.text integerValue] != self.createScheduledEventInfo.numberOfWeeks) {
-        enableUpdate = YES;
         [self enableUpdateButton];
     }
 }
@@ -134,7 +136,7 @@ BOOL enableUpdate;
 
 - (IBAction)scheduleOperationModeAction:(id)sender
 {
-    
+    [self enableUpdateButton];
 }
 
 - (void)enableUpdateButton
@@ -142,6 +144,7 @@ BOOL enableUpdate;
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Update"
                                                                     style:UIBarButtonItemStylePlain target:self action:@selector(updateButtonPressed)];
     self.navigationItem.rightBarButtonItem = rightButton;
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
