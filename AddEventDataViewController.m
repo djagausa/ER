@@ -351,6 +351,11 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
+                    if ([weightEvent.notes length] > 0) {
+                        cell.noteSymbol.hidden = NO;
+                    } else {
+                        cell.noteSymbol.hidden = YES;
+                    }
                     return cell;
                 }
             }
@@ -383,6 +388,11 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
+                    if ([aerobicEvent.note length] > 0) {
+                        cell.noteSymbol.hidden = NO;
+                    } else {
+                        cell.noteSymbol.hidden = YES;
+                    }
                     return cell;
                 }
             }
@@ -414,6 +424,11 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     self.eventTable.rowHeight = 22.0f;
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
+                    }
+                    if ([aerobicEvent.note length] > 0) {
+                        cell.noteSymbol.hidden = NO;
+                    } else {
+                        cell.noteSymbol.hidden = YES;
                     }
                     return cell;
                 }

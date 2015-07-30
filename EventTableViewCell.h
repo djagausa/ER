@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *label2;
 @property (weak, nonatomic) IBOutlet UILabel *label3;
 @property (weak, nonatomic) IBOutlet UILabel *note;
+@property (weak, nonatomic) IBOutlet UILabel *noteSymbol;
 
 @end
