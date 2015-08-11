@@ -573,7 +573,7 @@ const CGFloat kTableCellHeight = 40.0;
 {
     // get the scheduled events for this schedule
     NSArray *scheduledEvents;
-    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName} sortKey:nil];
+    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo. scheduleName} sortKey:nil scheduleInfo:nil];
     
     // get the events for the selected day
     ScheduledEvent *daysEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:week day:day];
@@ -610,7 +610,7 @@ const CGFloat kTableCellHeight = 40.0;
 {
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil scheduleInfo:nil];
 
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];

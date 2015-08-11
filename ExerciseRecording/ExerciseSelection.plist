@@ -120,18 +120,6 @@
 		</dict>
 		<dict>
 			<key>Name</key>
-			<string>Chest Press</string>
-			<key>Category</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
-			<string>Calf Extension</string>
-			<key>Category</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>Name</key>
 			<string>Pectorial Fly</string>
 			<key>Category</key>
 			<integer>0</integer>

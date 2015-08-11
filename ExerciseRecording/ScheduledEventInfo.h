@@ -19,6 +19,7 @@
 @property (nonatomic, assign) NSInteger operationalMode;
 @property (nonatomic, assign) NSInteger colorIndex;
 @property (nonatomic, assign) NSInteger scheduleEditMode;
+@property (nonatomic, strong) NSDate    *lastUpdateDate;
 
 - (instancetype) init;
 

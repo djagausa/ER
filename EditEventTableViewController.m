@@ -317,7 +317,7 @@
     self.weightLiftingDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.weightLiftingDefaultObjects];
     self.aerobicDefaultObjectsCopy = [NSMutableArray arrayWithArray:self.aerobicDefaultObjects];
     
-    self.schedules = [[self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil] mutableCopy];
+    self.schedules = [[self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:nil sortKey:nil scheduleInfo:nil] mutableCopy];
 }
 
 @end

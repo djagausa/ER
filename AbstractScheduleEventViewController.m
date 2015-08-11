@@ -12,6 +12,7 @@
 #import "DefaultAerobic.h"
 #import "DefaultWeightLifting.h"
 #import "AddEventDataViewController.h"
+#import "ScheduledEventInfo.h"
 #import "Utilities.h"
 
 @interface AbstractScheduleEventViewController ()
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) NSFetchedResultsController    *fetchedResultsController;
 @property (nonatomic, strong) NSMutableDictionary           *scheduledlStatus;
 @property (nonatomic, strong) ScheduleStatusFileHelper      *scheduleFileHelper;
+@property (nonatomic, strong) ScheduledEventInfo            *scheduledEventInfo;
 
 @end
 
@@ -41,6 +43,7 @@ static NSString *CellIdentifier = @"EventCell";
     _aerobicDefaultObjects = [[NSMutableArray alloc] init];
     _completedAerobicEvents = [[NSMutableArray alloc] init];
     _completedWeightEvents = [[NSMutableArray alloc] init];
+    _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     
     [self fetchTodaysCompleteEvents];
 }
@@ -67,7 +70,17 @@ static NSString *CellIdentifier = @"EventCell";
     return self.selectedEvent;
 }
 
-
+- (ScheduledEventInfo *)scheduleInfoIs
+{
+    [self readCurentScheduleInfoFromStatusFile];
+    // default day and week as this is a new schedule
+    self.scheduledEventInfo.scheduleName = self.currentScheduleStatus.scheduleName;
+    self.scheduledEventInfo.day = [self.currentScheduleStatus.day integerValue];
+    self.scheduledEventInfo.scheduleEditMode = kScheduleNew;
+    self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
+    self.scheduledEventInfo.lastUpdateDate = self.currentScheduleStatus.lastUpdateDate;
+    return self.scheduledEventInfo;
+}
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -123,6 +136,7 @@ static NSString *CellIdentifier = @"EventCell";
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                cell.backgroundColor = [UIColor whiteColor];
                 if ([self eventHasBeenPerfomed:event.eventName eventCategory:AerobicCategory]) {
                     cell.backgroundColor = [UIColor greenColor];
                 }
@@ -132,6 +146,7 @@ static NSString *CellIdentifier = @"EventCell";
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
                 cell.textLabel.text = event.eventName;
+                cell.backgroundColor = [UIColor whiteColor];
                 if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
                     cell.backgroundColor = [UIColor greenColor];
                 }
@@ -288,7 +303,7 @@ static NSString *CellIdentifier = @"EventCell";
     // setup current schedule data with updated values
     self.currentScheduleStatus.day = day;
     self.currentScheduleStatus.week = week;
-    self.currentScheduleStatus.lastUpdateDate = [NSDate date];
+    
     self.currentScheduleStatus.repeat = repeat;
     
     // save updated schedule info
@@ -317,7 +332,6 @@ static NSString *CellIdentifier = @"EventCell";
             fileRead = YES;
         }
     }
-    
     return fileRead;
 }
 
@@ -327,13 +341,12 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *weeks = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];
         return schedule.numberOfWeeks;
     }
-    
     return weeks;
 }
 
@@ -342,13 +355,12 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *repeatCount = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];
         return schedule.repeatCount;
     }
-    
     return repeatCount;
 }
 
@@ -357,13 +369,12 @@ static NSString *CellIdentifier = @"EventCell";
     NSNumber *opertionalMode = @(0);
     Schedule *schedule;
     
-    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
+    NSArray *schedules = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
     
     if ([schedules count] > 0) {
         schedule = [schedules firstObject];
         return schedule.operationalMode;
     }
-    
     return opertionalMode;
 }
 

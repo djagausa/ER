@@ -12,6 +12,7 @@
 #import "DefaultWeightLifting.h"
 #import "ScheduledEvent.h"
 #import "Schedule.h"
+#import "ScheduledEventInfo.h"
 
 @interface CoreDataHelper : NSObject
 @property (nonatomic) NSString *defaultSortAttribute;
@@ -28,7 +29,7 @@
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;
-- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey;
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey scheduleInfo:(ScheduledEventInfo *)scheduleInfo;
 - (ScheduledEvent *)fetchScheduledEvent:(NSArray *)scheduledEvents week:(NSInteger)week day:(NSInteger)day;
 
 - (BOOL)clearData;

@@ -21,6 +21,7 @@
 @property (nonatomic, strong) NSLayoutConstraint            *keyboardConstrtaints;
 @property (nonatomic, strong) IBOutlet UIScrollView         *scrollView;
 @property (nonatomic, strong) UITextField                   *selectedTextField;
+@property (nonatomic, strong) ScheduledEventInfo            *scheduledEventInfo;
 
 @end
 
@@ -35,6 +36,8 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _scheduledEventInfo = [self.addEventDataDelegate scheduleInfoIs];
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     self.defaultAerobic = self.selectedEvent.defaultAerobicData;
@@ -211,6 +214,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     }
     weightLiftingEvent.weight= @([self.in3Label.text integerValue]);
     weightLiftingEvent.defaultEvent = self.defaultWeightLifting;
+    weightLiftingEvent.schedule = self.scheduledEventInfo.scheduleName;
+    weightLiftingEvent.day = @(self.scheduledEventInfo.day);
+    weightLiftingEvent.week = @(self.scheduledEventInfo.week);
 }
 
 - (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent
@@ -225,6 +231,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     aerobicEvent.defaultEvent = self.defaultAerobic;
     aerobicEvent.category = @(self.selectedEvent.eventCategory);
     aerobicEvent.performed = @(1);
+    aerobicEvent.schedule = self.scheduledEventInfo.scheduleName;
+    aerobicEvent.day = @(self.scheduledEventInfo.day);
+    aerobicEvent.week = @(self.scheduledEventInfo.week);
 
     switch (self.selectedEvent.eventCategory) {
         case kBicycling:
@@ -280,7 +289,6 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     // post a notofocation that an event has been saved
     NSNotification *notification = [NSNotification notificationWithName:eventAddedNotificationName object:self userInfo:eventInfo];
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
 }
 
 - (void)setupNoteInputTextField
@@ -519,7 +527,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     }
     [self setupNoteInputTextField];
     [self refresh];
-    [self.addEventDataDelegate exerciseDataAdded:self.selectedEvent];
+    if (self.addEventDataDelegate && [self.addEventDataDelegate respondsToSelector:@selector(exerciseDataAdded:)]) {
+        [self.addEventDataDelegate exerciseDataAdded:self.selectedEvent];
+    }
 }
 
 - (NSString *)appendNameToTitle:(NSString *)title name:(NSString *)name

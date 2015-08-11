@@ -77,14 +77,25 @@
     return defaultData;
 }
 
-- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey
+- (NSArray*)fetchDataFor:(NSString *)entityName  withPredicate:(NSDictionary *)predicate sortKey:(NSString *)sortKey scheduleInfo:(ScheduledEventInfo *)scheduleInfo
 {
     NSFetchRequest *fetchRequst = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequst setEntity:entity];
+    NSMutableArray *predicateFilter = [[NSMutableArray alloc] init];
+    
+    if (scheduleInfo != nil) {
+        NSPredicate *scheduleFilter = [NSPredicate predicateWithFormat:@"(schedule == %@) && (week == %ld) && (day == %ld)", scheduleInfo.scheduleName, scheduleInfo.week, scheduleInfo.day];
+        [predicateFilter addObject:scheduleFilter];
+    }
     
     if ([predicate count] > 0) {
-        NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K == %@", predicate[@"propertyName"], predicate[@"value"]];
+        NSPredicate *propertyFilter = [NSPredicate predicateWithFormat:@"%K == %@", predicate[@"propertyName"], predicate[@"value"]];
+        [predicateFilter addObject:propertyFilter];
+    }
+    
+    if ([predicateFilter count] > 0) {
+        NSPredicate *filter = [NSCompoundPredicate andPredicateWithSubpredicates:predicateFilter];
         [fetchRequst setPredicate:filter];
     }
     
@@ -111,7 +122,7 @@
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"day" ascending:YES];
         NSArray *sortedSchedule = [scheduledDayEvents sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
-        // lookk for an event for the selected cell
+        // look for an event for the selected cell
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(week == %ld) && (day == %ld)", week, day];
         
         NSArray *events = [sortedSchedule filteredArrayUsingPredicate:predicate];

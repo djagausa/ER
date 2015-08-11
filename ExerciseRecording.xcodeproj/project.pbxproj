@@ -87,6 +87,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D0A07E81B75E72400F20112 /* ExerciseRecording 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 10.xcdatamodel"; sourceTree = "<group>"; };
 		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
 		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
@@ -837,6 +838,7 @@
 		2DBCE8451AAB98EB00303DE1 /* ExerciseRecording.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				2D0A07E81B75E72400F20112 /* ExerciseRecording 10.xcdatamodel */,
 				2DE2BA221B5E42A30043E887 /* ExerciseRecording 9.xcdatamodel */,
 				2DF9C0AD1B1333FD002A497E /* ExerciseRecording 8.xcdatamodel */,
 				2DB940061AFA07320062AB0D /* ExerciseRecording 3.xcdatamodel */,
@@ -847,7 +849,7 @@
 				2DB93FFE1AF83F860062AB0D /* ExerciseRecording 2.xcdatamodel */,
 				2DBCE8461AAB98EB00303DE1 /* ExerciseRecording.xcdatamodel */,
 			);
-			currentVersion = 2DE2BA221B5E42A30043E887 /* ExerciseRecording 9.xcdatamodel */;
+			currentVersion = 2D0A07E81B75E72400F20112 /* ExerciseRecording 10.xcdatamodel */;
 			name = ExerciseRecording.xcdatamodeld;
 			path = ExerciseRecording/ExerciseRecording.xcdatamodeld;
 			sourceTree = "<group>";

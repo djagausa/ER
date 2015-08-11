@@ -171,7 +171,7 @@ static NSArray *_cellAvailableColors;
 
 - (Schedule *)loadExistingSchedueInfo:(NSString *)scheduleName
 {
-    NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:@"Schedule" withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
+    NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:@"Schedule" withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
     Schedule *schedule = [scheduledEvents firstObject];
     
     return schedule;
@@ -360,7 +360,7 @@ static NSArray *_cellAvailableColors;
 
 - (void)fetchScheduledEvents:(NSString *)scheduleName
 {
-    self.scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil];
+    self.scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
 }
 
 @end

@@ -15,7 +15,10 @@
 
 @property (nonatomic, retain) NSString * eventName;
 @property (nonatomic, retain) NSString * note;
-@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSString * schedule;
+@property (nonatomic, retain) NSDate   * date;
+@property (nonatomic, retain) NSNumber * day;
+@property (nonatomic, retain) NSNumber * week;
 @property (nonatomic, retain) NSNumber * duration;
 @property (nonatomic, retain) NSNumber * distance;
 @property (nonatomic, retain) NSNumber * heartRate;

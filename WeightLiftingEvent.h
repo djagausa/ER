@@ -13,8 +13,11 @@
 
 @interface WeightLiftingEvent : NSManagedObject
 
-@property (nonatomic, retain) NSDate * date;
+@property (nonatomic, retain) NSDate   * date;
 @property (nonatomic, retain) NSString * eventName;
+@property (nonatomic, retain) NSString * schedule;
+@property (nonatomic, retain) NSNumber * day;
+@property (nonatomic, retain) NSNumber * week;
 @property (nonatomic, retain) NSNumber * weight;
 @property (nonatomic, retain) NSNumber * category;
 @property (nonatomic, retain) NSNumber * setNumber;

@@ -82,6 +82,14 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     return self.scheduledEventInfo;
 }
 
+- (void)exerciseDataAdded:(SelectedEvent *)eventAdded
+{
+    // change the color of the table view cell
+    [self fetchTodaysCompleteEvents];
+    [self.tableView reloadData];
+}
+
+#pragma  mark - Local Routines
 - (IBAction)skipDayAction:(id)sender
 {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"Skip day %ld?", self.scheduledEventInfo.day+1 ]
@@ -142,7 +150,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 //    Schedule *schedule;
     NSArray *scheduledEvents;
     
-    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil];
+    scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil scheduleInfo:nil];
     
     self.dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
     
@@ -175,15 +183,16 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 #endif
 }
 
-
 - (void)fetchTodaysCompleteEvents
 {
     //     fetch any saved events that may have occurred
+    NSDate *date = [NSDate date];
     
-    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]} sortKey:@"eventName"] mutableCopy];
+    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:self.scheduledEventInfo] mutableCopy];
     
-    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:[NSDate date]]} sortKey:@"eventName"] mutableCopy];
+    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:self.scheduledEventInfo] mutableCopy];
 }
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -195,6 +204,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     } else if ([segue.identifier isEqualToString:@"scheduledEvent"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+        addEventDataVC.addEventDataDelegate = self;
         addEventDataVC.delegate = self;
     }
 }

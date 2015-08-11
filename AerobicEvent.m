@@ -32,6 +32,9 @@
 @dynamic primitiveSectionIdentifier;
 @dynamic primitiveDate;
 @dynamic performed;
+@dynamic schedule;
+@dynamic day;
+@dynamic week;
 
 - (NSString *)sectionIdentifier
 {

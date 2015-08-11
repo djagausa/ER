@@ -11,8 +11,10 @@
 #import <CoreData/CoreData.h>
 #import "DefaultWeightLifting.h"
 #import "WeightLiftingEvent.h"
+#import "ScheduledEventInfo.h"
 
 @protocol AddEventDataViewControllerDelegate <NSObject>
+- (ScheduledEventInfo *)scheduleInfoIs;
 @optional
 - (void)exerciseDataAdded:(SelectedEvent *)eventAdded;
 @end

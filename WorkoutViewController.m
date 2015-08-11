@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     kManualSchedule,
 };
 
+BOOL manualSingleEvent;
+
 @implementation WorkoutViewController
 
 - (void)viewDidLoad {
@@ -60,7 +62,10 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     [super viewWillAppear:animated];
     
     BOOL scheduleStatus = [self isScheduleRunning];
-    [self initializeCurrentScheduleButton:scheduleStatus];}
+    [self initializeCurrentScheduleButton:scheduleStatus];
+    manualSingleEvent = NO;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -134,11 +139,15 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 - (ScheduledEventInfo *)scheduleInfoIs
 {
     [self readCurentScheduleInfoFromStatusFile];
-    // default day and week as this is a new schedule
-    self.scheduledEventInfo.scheduleName = self.currentScheduleStatus.scheduleName;
+    if (manualSingleEvent == YES) {
+        self.scheduledEventInfo.scheduleName = @"manual";
+    } else {
+        self.scheduledEventInfo.scheduleName = self.currentScheduleStatus.scheduleName;
+    }
     self.scheduledEventInfo.day = [self.currentScheduleStatus.day integerValue];
     self.scheduledEventInfo.scheduleEditMode = kScheduleNew;
     self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
+    self.scheduledEventInfo.lastUpdateDate = self.currentScheduleStatus.lastUpdateDate;
     return self.scheduledEventInfo;
 }
 
@@ -237,7 +246,9 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     if ([segue.identifier isEqualToString:@"addSingleEventData"]) {
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         AddEventDataViewController *addEventDataVC = [segue destinationViewController];
+        addEventDataVC.addEventDataDelegate = self;
         addEventDataVC.delegate = self;
+        manualSingleEvent = YES;
     } else if ([segue.identifier isEqualToString:@"startNewSchedule"]){
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         NewScheduledWorkoutTableViewController *newWorkoutSchedule = [segue destinationViewController];
