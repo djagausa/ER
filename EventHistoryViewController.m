@@ -100,7 +100,8 @@
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:nil];
         }
             break;
             
@@ -114,7 +115,8 @@
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:nil];
         }
             break;
             

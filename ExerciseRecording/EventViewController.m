@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton           *reviewExerciseButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem    *editExercise;
 @property (weak, nonatomic) IBOutlet UITextView         *motivationalTextOutlet;
-
+@property  (nonatomic, strong) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (copy, nonatomic) NSString *motivationalStatement;
 @property (strong, nonatomic) MotivationalQuoteHelper   *motivationalHelper;
 
@@ -43,7 +43,7 @@
     self.motivationalTextOutlet.layer.cornerRadius = 5;
     self.motivationalTextOutlet.clipsToBounds = YES;
     
-    // register for app did become which is used to eset the motivational quote
+    // register for app did become which is used to set the motivational quote
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(appBecameActive)
                                                  name:UIApplicationDidBecomeActiveNotification
@@ -61,6 +61,16 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return [self view];
+}
+
+-(IBAction)displayGestureForTapRecognizer:(UITapGestureRecognizer *)recognizer
+{
+    [self addMotivationalQuote];
 }
 
 - (void)configureTheButtons

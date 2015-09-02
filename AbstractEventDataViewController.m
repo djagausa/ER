@@ -67,6 +67,15 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     // Dispose of any resources that can be recreated.
 }
 
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return [self view];
+}
+
+-(IBAction)displayGestureForTapRecognizer:(UITapGestureRecognizer *)recognizer
+{
+
+}
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -231,7 +240,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:nil
-                                                groupBy:nil];
+                                                groupBy:nil
+                                           scheduleInfo:nil];
             }
             break;
             
@@ -245,7 +255,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:nil
-                                                groupBy:nil];
+                                                groupBy:nil
+                                           scheduleInfo:nil];
             }
             break;
             

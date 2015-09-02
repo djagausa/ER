@@ -18,7 +18,6 @@
 @property (nonatomic, strong) ScheduleStatusFileHelper  *schduleFileHelper;
 @end
 
-
 static NSString *cellName = @"ScheduleCell";
 
 @implementation NewScheduledWorkoutTableViewController
@@ -30,7 +29,7 @@ static NSString *cellName = @"ScheduleCell";
     _schduleFileHelper =[[ScheduleStatusFileHelper alloc] init];
     
     [self fetchSchedules];
- }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

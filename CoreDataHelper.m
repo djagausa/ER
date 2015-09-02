@@ -12,11 +12,13 @@
 @implementation CoreDataHelper
 
 #pragma mark - Core Data
-- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy
+- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy scheduleInfo:(ScheduledEventInfo *)scheduleInfo
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.managedObjectContext];
-        
+    NSMutableArray *predicateFilter = [[NSMutableArray alloc] init];
+    
+
     // set Attributes
     if ([attribute length] > 0) {
         NSAttributeDescription *searchAttribute = [entity.attributesByName objectForKey:attribute];
@@ -33,11 +35,20 @@
     fetchRequest.sortDescriptors = descriptors;
     
     // setup Predicate
-    if ([predicate count] > 0) {
-        NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K like[cd] %@",predicate[@"propertyName"], predicate[@"value"]];
-        [fetchRequest setPredicate:filter];
+    if (scheduleInfo != nil) {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"(schedule == %@) && (week == %ld) && (day == %ld)", scheduleInfo.scheduleName, scheduleInfo.week, scheduleInfo.day];
+        [predicateFilter addObject:filter];
     }
     
+    if ([predicate count] > 0) {
+        NSPredicate *filter = [NSPredicate predicateWithFormat:@"%K like[cd] %@",predicate[@"propertyName"], predicate[@"value"]];
+        [predicateFilter addObject:filter];
+    }
+    
+    if ([predicateFilter count] > 0) {
+        NSPredicate *filter = [NSCompoundPredicate andPredicateWithSubpredicates:predicateFilter];
+        [fetchRequest setPredicate:filter];
+    }
     // setup Group BY
     if ([groupBy length] > 0) {
         NSAttributeDescription *grouping = [entity.attributesByName objectForKey:groupBy];
@@ -54,7 +65,7 @@
 
 - (void)fetchData
 {
-    [self fetchItemsMatching:nil forAttribute:nil sortingBy:nil withPredicate:nil groupBy:nil];
+    [self fetchItemsMatching:nil forAttribute:nil sortingBy:nil withPredicate:nil groupBy:nil scheduleInfo:nil];
 }
 
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate

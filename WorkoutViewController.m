@@ -64,6 +64,7 @@ BOOL manualSingleEvent;
     BOOL scheduleStatus = [self isScheduleRunning];
     [self initializeCurrentScheduleButton:scheduleStatus];
     manualSingleEvent = NO;
+    [[self eventTable] reloadData];
 }
 
 
@@ -171,6 +172,11 @@ BOOL manualSingleEvent;
     if ([self readCurentScheduleInfoFromStatusFile] == YES) {
         [self initializeCurrentScheduleButton:YES];
     }
+}
+
+- (void)exerciseDataAdded:(SelectedEvent *)eventAdded
+{
+    [[self manualCompletedEvents] addObject:eventAdded.eventName];
 }
 
 #pragma mark - Handle Schedule

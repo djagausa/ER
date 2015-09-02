@@ -23,7 +23,6 @@
 @property (nonatomic, strong) NSMutableDictionary           *scheduledlStatus;
 @property (nonatomic, strong) ScheduleStatusFileHelper      *scheduleFileHelper;
 @property (nonatomic, strong) ScheduledEventInfo            *scheduledEventInfo;
-
 @end
 
 static NSString *SectionHeaderCellIdentifier = @"SectionHeader";
@@ -44,6 +43,7 @@ static NSString *CellIdentifier = @"EventCell";
     _completedAerobicEvents = [[NSMutableArray alloc] init];
     _completedWeightEvents = [[NSMutableArray alloc] init];
     _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
+    _manualCompletedEvents = [[NSMutableSet alloc] init];
     
     [self fetchTodaysCompleteEvents];
 }
@@ -158,6 +158,7 @@ static NSString *CellIdentifier = @"EventCell";
             cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
             cell.textLabel.text = event.eventName;
+            cell.backgroundColor = [UIColor whiteColor];
             if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
                 cell.backgroundColor = [UIColor greenColor];
             }
@@ -254,10 +255,20 @@ static NSString *CellIdentifier = @"EventCell";
                     return YES;
                 }
             }
+            for (NSString *event in [self manualCompletedEvents]) {
+                if ([event isEqualToString:eventName]) {
+                    return YES;
+                }
+            }
             break;
         case WeightCategory:
             for (WeightLiftingEvent *weightEvent in self.completedWeightEvents) {
                 if ([weightEvent.defaultEvent.eventName isEqualToString:eventName]) {
+                    return YES;
+                }
+            }
+            for (NSString *event in [self manualCompletedEvents]) {
+                if ([event isEqualToString:eventName]) {
                     return YES;
                 }
             }
@@ -305,6 +316,7 @@ static NSString *CellIdentifier = @"EventCell";
     self.currentScheduleStatus.week = week;
     
     self.currentScheduleStatus.repeat = repeat;
+    self.currentScheduleStatus.lastUpdateDate = [NSDate date];
     
     // save updated schedule info
     [self.scheduleFileHelper writeScheduleStatusFile:self.currentScheduleStatus];

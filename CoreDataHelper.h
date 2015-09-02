@@ -25,7 +25,7 @@
 
 //- (void)setupCoreData;
 - (void)fetchData;
-- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy;
+- (void)fetchItemsMatching:(NSString *)entityName forAttribute:(NSString *)attribute sortingBy:(NSString *)sortAttribute withPredicate:(NSDictionary *)predicate groupBy:(NSString *)groupBy scheduleInfo:(ScheduledEventInfo *)scheduleInfo;
 - (NSArray*)fetchDefaultDataFor:(NSString *)entityName withSortKey:(NSString *)sortKey ascending:(BOOL)ascending usePredicate:(BOOL)usePredicate;
 - (BOOL)save;
 - (NSManagedObject *)newObject:(NSString *)entityName;

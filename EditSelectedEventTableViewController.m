@@ -321,7 +321,8 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectEditEvent] eventName]}
-                                                groupBy:nil];
+                                                groupBy:nil
+                                           scheduleInfo:nil];
             }
             self.weightLiftingEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
             break;
@@ -336,7 +337,8 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                                            forAttribute:nil
                                               sortingBy:@"date"
                                           withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectEditEvent] eventName]}
-                                                groupBy:nil];
+                                                groupBy:nil
+                                           scheduleInfo:nil];
             }
             self.aerobicEventCopy = [NSMutableArray arrayWithArray: self.coreDataHelper.fetchedResultsController.fetchedObjects];
             break;

@@ -39,6 +39,10 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     
     _scheduledEventInfo = [self.addEventDataDelegate scheduleInfoIs];
     
+    if ([self.scheduledEventInfo.scheduleName isEqualToString:@"manual"]) {
+        _scheduledEventInfo = nil;
+    }
+    
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     self.defaultAerobic = self.selectedEvent.defaultAerobicData;
     
@@ -53,6 +57,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     self.note.delegate = self;
     self.note.text = notePlaceHolder;
     [self.noteSwitch setOn:NO];
+    newEventDataAdded = NO;
     
     self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
     
@@ -66,11 +71,6 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     
     [super viewDidAppear:animated];
     [self.eventTable reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc
@@ -564,7 +564,8 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:self.scheduledEventInfo];
         }
             break;
             
@@ -578,7 +579,8 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:self.scheduledEventInfo];
         }
             break;
             

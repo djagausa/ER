@@ -605,7 +605,8 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:nil];
         }
             break;
             
@@ -619,7 +620,8 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                                        forAttribute:nil
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName]}
-                                            groupBy:nil];
+                                            groupBy:nil
+                                       scheduleInfo:nil];
         }
             break;
             
