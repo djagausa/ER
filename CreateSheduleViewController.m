@@ -50,6 +50,17 @@ static NSArray *_cellAvailableColors;
     }
     
     [self initializeData];
+    
+    if (self.createScheduledEventInfo.scheduleEditMode == kScheduleReview) {
+        // disable the schedule input name text field and populate with existing schedule name
+        self.scheduleNameOutlet.enabled = NO;
+        self.numberOfWeeksOutlet.enabled = NO;
+        self.repeatCountOutlet.enabled = NO;
+        self.scheduleOperationModeOutlet.enabled = NO;
+        [self configureScreenElements];
+    } else if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
+        [self configureScreenElements];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,22 +94,6 @@ static NSArray *_cellAvailableColors;
     _cellColor = [[NSMutableArray alloc] initWithCapacity:7];
     for (int i = 0; i < 7; ++i) {
         [_cellColor addObject:@(0)];                                        // zero = white
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    if (self.createScheduledEventInfo.scheduleEditMode == kScheduleReview) {
-        // disable the schedule input name text field and populate with existing schedule name
-        self.scheduleNameOutlet.enabled = NO;
-        self.numberOfWeeksOutlet.enabled = NO;
-        self.repeatCountOutlet.enabled = NO;
-        self.scheduleOperationModeOutlet.enabled = NO;
-        [self configureScreenElements];
-    } else if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
-        [self configureScreenElements];
     }
 }
 
@@ -141,8 +136,14 @@ static NSArray *_cellAvailableColors;
 
 - (void)enableUpdateButton
 {
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Update"
+    UIBarButtonItem *rightButton;
+    if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
+        rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Update"
                                                                     style:UIBarButtonItemStylePlain target:self action:@selector(updateButtonPressed)];
+    } else {
+        rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Save"
+                                                       style:UIBarButtonItemStylePlain target:self action:@selector(updateButtonPressed)];
+    }
     self.navigationItem.rightBarButtonItem = rightButton;
     self.navigationItem.rightBarButtonItem.enabled = YES;
 }
@@ -180,6 +181,9 @@ static NSArray *_cellAvailableColors;
 - (IBAction)numberOfWeeksInput:(id)sender
 {
     [self.scheduleCollectionView reloadData];
+    if ([self.numberOfWeeksOutlet.text integerValue] > 0) {
+        [self enableUpdateButton];
+    }
 }
 
 - (NSInteger)obtainColorIndex

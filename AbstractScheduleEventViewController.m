@@ -79,6 +79,8 @@ static NSString *CellIdentifier = @"EventCell";
     self.scheduledEventInfo.scheduleEditMode = kScheduleNew;
     self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
     self.scheduledEventInfo.lastUpdateDate = self.currentScheduleStatus.lastUpdateDate;
+    self.scheduledEventInfo.operationalMode = [[self fetchOpertionalModeCountForSchedule:self.currentScheduleStatus.scheduleName] integerValue];
+    self.scheduledEventInfo.repeatCount = [self.currentScheduleStatus.repeat integerValue];
     return self.scheduledEventInfo;
 }
 #pragma mark - Table View
@@ -300,6 +302,8 @@ static NSString *CellIdentifier = @"EventCell";
         
         // if week exceeds number of scheduled weeks then schedule completed
         if ([week integerValue] >= numberOfWeeks) {
+            // reset the week back to zero
+            week = @(0);
             
             // bump the repeat counter
             repeat = @([repeat integerValue] + 1);
@@ -320,6 +324,10 @@ static NSString *CellIdentifier = @"EventCell";
     
     // save updated schedule info
     [self.scheduleFileHelper writeScheduleStatusFile:self.currentScheduleStatus];
+
+#ifdef DEBUG
+    NSLog(@"Day: %@; Week: %@; Repeat: %@; Date: %@", day, week, repeat, [NSDate date]);
+#endif
     
     return results;
 }

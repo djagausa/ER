@@ -149,6 +149,7 @@ BOOL manualSingleEvent;
     self.scheduledEventInfo.scheduleEditMode = kScheduleNew;
     self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
     self.scheduledEventInfo.lastUpdateDate = self.currentScheduleStatus.lastUpdateDate;
+    self.scheduledEventInfo.repeatCount = [self.currentScheduleStatus.repeat integerValue];
     return self.scheduledEventInfo;
 }
 
@@ -163,6 +164,7 @@ BOOL manualSingleEvent;
     self.scheduledEventInfo.scheduleName = self.currentScheduleStatus.scheduleName;
     self.scheduledEventInfo.day = [self.currentScheduleStatus.day integerValue];
     self.scheduledEventInfo.week = [self.currentScheduleStatus.week integerValue];
+    self.scheduledEventInfo.repeatCount = [self.currentScheduleStatus.repeat integerValue];
     return self.scheduledEventInfo;
 }
 
@@ -198,7 +200,7 @@ BOOL manualSingleEvent;
             
             // if last update day is earlier then today then bump the schedule by one day and using auto schedule.
             NSNumber *operatingMode = [self fetchOpertionalModeCountForSchedule:self.currentScheduleStatus.scheduleName];
-            if (compareResults == NSOrderedAscending && [operatingMode isEqualToNumber:@(0)]) {
+            if (compareResults == NSOrderedAscending && (operatingMode == kScheduleModeAuto)) {
                 // bunp the schedule by one day
                 NSNumber *weeks = [self fetchNumberOfWeeksForSchedule:self.currentScheduleStatus.scheduleName];
                 NSNumber *repeatCount = [self fetchRepeatCountForSchedule:self.currentScheduleStatus.scheduleName];
@@ -220,8 +222,7 @@ BOOL manualSingleEvent;
     // if schedule is not done then setup the current schedule button with info and enable
     if (scheduleStatus == YES) {
         // setup the button title to the current schedule info and enable
-        
-        labelText = [NSString stringWithFormat:@"Continue %@ day %ld of week %ld", self.currentScheduleStatus.scheduleName, [self.currentScheduleStatus.day integerValue] +1, [self.currentScheduleStatus.week integerValue] +1];
+        labelText = [NSString stringWithFormat:@"Continue: %@; day %ld of week %ld", self.currentScheduleStatus.scheduleName, [self.currentScheduleStatus.day integerValue] +1, [self.currentScheduleStatus.week integerValue]+1];
         [self.currentScheduleButton setTitle:labelText forState:UIControlStateNormal];
         self.currentScheduleButton.enabled = YES;
         self.stopScheduleButton.enabled = YES;

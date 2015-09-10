@@ -9,7 +9,7 @@
 #import "WorkoutScheduledEventViewController.h"
 #import "WorkoutViewController.h"
 #import "ScheduledEventInfo.h"
-#import "ScheduleStatus.h"
+#import "ScheduleStatusFileHelper.h"
 #import "ScheduledEvent.h"
 #import "Utilities.h"
 
@@ -24,6 +24,7 @@
 @property (nonatomic, strong) ScheduledEvent        *dayEvent;
 @property (weak, nonatomic) IBOutlet UIButton       *skipDayOutlet;
 - (IBAction)skipDayAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel        *paramatersLabel;
 @property (weak, nonatomic) IBOutlet UIButton       *dayFinishedOutlet;
 - (IBAction)dayFinishedAction:(id)sender;
 @end
@@ -52,10 +53,22 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 
 - (void)constructInfoLabel
 {
+    NSString *labelText;
+    
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
-    NSString *labelText = [NSString stringWithFormat:@"Schedule %@: day %ld of week %ld.", self.scheduledEventInfo.scheduleName, self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1];
+    
+    NSNumber *repeatCount = [self fetchRepeatCountForSchedule:self.scheduledEventInfo.scheduleName];
+    if (repeatCount == 0) {
+        labelText = [NSString stringWithFormat:@"Day %ld;   Week %ld of %ld.", self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1, self.scheduledEventInfo.numberOfWeeks+1];
+    }else {
+        labelText = [NSString stringWithFormat:@"Day %ld;   Week %ld of %ld;   Repeat: %ld of %@", self.scheduledEventInfo.day+1, self.scheduledEventInfo.week+1, self.scheduledEventInfo.numberOfWeeks+1, self.scheduledEventInfo.repeatCount+1, repeatCount];
+    }
+    [self.paramatersLabel setText:labelText];
+    
+    labelText = [NSString stringWithFormat:@"Schedule: %@.", self.scheduledEventInfo.scheduleName];
     self.scheduleInfoLabel.text = labelText;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -153,7 +166,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     scheduledEvents = [self.coreDataHelper fetchDataFor:scheduleEntityName withPredicate:@{@"propertyName" : @"scheduleName", @"value" : self.scheduledEventInfo.scheduleName} sortKey:nil scheduleInfo:nil];
     
     self.dayEvent = [self.coreDataHelper fetchScheduledEvent:scheduledEvents week:self.scheduledEventInfo.week day:self.scheduledEventInfo.day];
-    
+        
     self.weightScheduledEvents = self.dayEvent.weightEvent;
     self.aerobicScheduledEvents = self.dayEvent.aerobicEvent;
  

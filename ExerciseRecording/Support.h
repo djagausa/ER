@@ -40,6 +40,11 @@ typedef NS_ENUM(NSInteger, ScheduleDiplayMode) {
     kScheduleNoEdit
 };
 
+typedef NS_ENUM(NSInteger, ScheduleOpertaingMode) {
+    kScheduleModeAuto = 0,
+    kScheduleModeManual,
+};
+
 static NSString *aerobicEventsEntityName = @"AerobicEvent";
 static NSString *weightLiftingEventsEntityName = @"WeightLiftingEvent";
 static NSString *aerobicDefaultEventsEntityName = @"DefaultAerobic";

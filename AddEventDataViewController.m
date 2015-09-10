@@ -39,9 +39,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     
     _scheduledEventInfo = [self.addEventDataDelegate scheduleInfoIs];
     
-    if ([self.scheduledEventInfo.scheduleName isEqualToString:@"manual"]) {
-        _scheduledEventInfo = nil;
-    }
+//    if (self.scheduledEventInfo.operationalMode == kScheduleModeManual) {
+//        _scheduledEventInfo = nil;
+//    }
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     self.defaultAerobic = self.selectedEvent.defaultAerobicData;
