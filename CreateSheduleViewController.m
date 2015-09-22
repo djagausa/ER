@@ -274,6 +274,11 @@ static NSArray *_cellAvailableColors;
 {
     DayCollectionViewCell * cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:_dayCellIdentification forIndexPath:indexPath];
     
+    // 
+    // set contentView frame and autoresizingMask
+    cell.contentView.frame = cell.bounds;
+    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+
     cell.dayCellDayLabel.text = [NSString stringWithFormat:@"Day: %ld", indexPath.row +1];
     [self configureCell:cell day:indexPath.row week:indexPath.section];
     return cell;

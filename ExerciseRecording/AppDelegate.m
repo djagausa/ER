@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "EventViewController.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -26,7 +24,6 @@
     NSAssert([controller isKindOfClass:[EventViewController class]], @"Should have an item view controller");
     
     [controller setManagedObjectContext:self.managedObjectContext];
-    [Fabric with:@[CrashlyticsKit]];
 
     return YES;
 }

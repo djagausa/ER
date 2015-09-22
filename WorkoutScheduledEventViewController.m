@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
     [self fetchEvents];
-    [self fetchTodaysCompleteEvents];
+    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
     [self constructInfoLabel];
     [self formatButton:self.skipDayOutlet];
     [self formatButton:self.dayFinishedOutlet];
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification
 {
     // change the color of the table view cell
-    [self fetchTodaysCompleteEvents];
+    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
     [self.tableView reloadData];
 }
 
@@ -98,7 +98,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 - (void)exerciseDataAdded:(SelectedEvent *)eventAdded
 {
     // change the color of the table view cell
-    [self fetchTodaysCompleteEvents];
+    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
     [self.tableView reloadData];
 }
 
@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     [self bumpScheduleByNumber:1 numberOfWeeks:[weeks integerValue] repeatCount:[repeatCount integerValue]];
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
     [self fetchEvents];
-    [self fetchTodaysCompleteEvents];
+    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
     [self constructInfoLabel];
     [self.tableView reloadData];
 }
@@ -196,10 +196,15 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 #endif
 }
 
-- (void)fetchTodaysCompleteEvents
+- (void)fetchTodaysCompleteEventsForDate:(NSDate *)fetchDate
 {
+    NSDate *date;
+    if (fetchDate ==nil) {
+        date = [NSDate date];
+    } else {
+        date = fetchDate;
+    }
     //     fetch any saved events that may have occurred
-    NSDate *date = [NSDate date];
     
     self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:self.scheduledEventInfo] mutableCopy];
     

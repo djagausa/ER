@@ -46,8 +46,6 @@
 		2DBCE85E1AAB98EC00303DE1 /* ExerciseRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */; };
 		2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */; };
 		2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */; };
-		2DF9C0A51B0B400F002A497E /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF9C0A31B0B400F002A497E /* Fabric.framework */; };
-		2DF9C0A61B0B400F002A497E /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF9C0A41B0B400F002A497E /* Crashlytics.framework */; };
 		2DF9C0B21B134873002A497E /* CreateSheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0B11B134873002A497E /* CreateSheduleViewController.m */; };
 		2DF9C0B51B13B54E002A497E /* DayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0B41B13B54E002A497E /* DayCollectionViewCell.m */; };
 		2DF9C0BB1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0BA1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m */; };
@@ -166,8 +164,6 @@
 		2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupExerciseInfoViewController.h; sourceTree = "<group>"; };
 		2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupExreciseInfoViewController.m; sourceTree = "<group>"; };
 		2DE2BA221B5E42A30043E887 /* ExerciseRecording 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 9.xcdatamodel"; sourceTree = "<group>"; };
-		2DF9C0A31B0B400F002A497E /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		2DF9C0A41B0B400F002A497E /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		2DF9C0AD1B1333FD002A497E /* ExerciseRecording 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 8.xcdatamodel"; sourceTree = "<group>"; };
 		2DF9C0B01B134873002A497E /* CreateSheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSheduleViewController.h; sourceTree = "<group>"; };
 		2DF9C0B11B134873002A497E /* CreateSheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSheduleViewController.m; sourceTree = "<group>"; };
@@ -200,11 +196,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF9C0A61B0B400F002A497E /* Crashlytics.framework in Frameworks */,
 				2DB6F45A1AEFD35000FCE207 /* Accelerate.framework in Frameworks */,
 				2DB6F4421AEFA01100FCE207 /* QuartzCore.framework in Frameworks */,
 				2D4578951B3EA57400585C11 /* libCorePlot-CocoaTouch.a in Frameworks */,
-				2DF9C0A51B0B400F002A497E /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,8 +278,6 @@
 				2DFD821F1AE085C800BD9D86 /* Support.h */,
 				2DAF3B401B2E199B001DA3DE /* Utilities.h */,
 				2DAF3B411B2E199B001DA3DE /* Utilities.m */,
-				2DF9C0A31B0B400F002A497E /* Fabric.framework */,
-				2DF9C0A41B0B400F002A497E /* Crashlytics.framework */,
 			);
 			path = ExerciseRecording;
 			sourceTree = "<group>";
@@ -545,7 +537,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run ffb6f309470bc2a3e6f1856e7e1ae00829eb8337 bfc7e39613c00b4d91ae4ed2088885fd84a84065e9e5d73b80809938f9fc1cdd";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -726,6 +718,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExerciseRecording",
@@ -750,6 +743,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExerciseRecording",

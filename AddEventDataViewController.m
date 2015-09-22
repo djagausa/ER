@@ -1,5 +1,5 @@
 //
-//  AddWeightDataVC.m
+//  AddEventDataVC.m
 //  ExerciseRecording
 //
 //  Created by Douglas Alexander on 3/23/15.
@@ -39,9 +39,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     
     _scheduledEventInfo = [self.addEventDataDelegate scheduleInfoIs];
     
-//    if (self.scheduledEventInfo.operationalMode == kScheduleModeManual) {
-//        _scheduledEventInfo = nil;
-//    }
+    if (self.scheduledEventInfo.operationalMode == kScheduleModeManual) {
+        _scheduledEventInfo = nil;
+    }
     
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     self.defaultAerobic = self.selectedEvent.defaultAerobicData;
@@ -199,7 +199,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     return [Utilities dateWithoutTime:[NSDate date]];
 }
 
-- (void)setupNewWeightLiftingEvent:(WeightLiftingEvent *)weightLiftingEvent
+- (void)setupNewWeightLiftingEvent:(WeightLiftingEvent *)weightLiftingEvent forScheduleEventInfo:(ScheduledEventInfo *)scheduledEventInfo
 {
     weightLiftingEvent.eventName = self.defaultWeightLifting.eventName;
     weightLiftingEvent.category = @(self.selectedEvent.eventCategory);
@@ -214,12 +214,12 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     }
     weightLiftingEvent.weight= @([self.in3Label.text integerValue]);
     weightLiftingEvent.defaultEvent = self.defaultWeightLifting;
-    weightLiftingEvent.schedule = self.scheduledEventInfo.scheduleName;
-    weightLiftingEvent.day = @(self.scheduledEventInfo.day);
-    weightLiftingEvent.week = @(self.scheduledEventInfo.week);
+    weightLiftingEvent.schedule = scheduledEventInfo.scheduleName;
+    weightLiftingEvent.day = @(scheduledEventInfo.day);
+    weightLiftingEvent.week = @(scheduledEventInfo.week);
 }
 
-- (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent
+- (void)setupNewAerobicEvent:(AerobicEvent *)aerobicEvent forScheduleEventInfo:(ScheduledEventInfo *)scheduledEventInfo
 {
     aerobicEvent.eventName = self.defaultAerobic.eventName;
     aerobicEvent.date = [self setupDate];
@@ -231,9 +231,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     aerobicEvent.defaultEvent = self.defaultAerobic;
     aerobicEvent.category = @(self.selectedEvent.eventCategory);
     aerobicEvent.performed = @(1);
-    aerobicEvent.schedule = self.scheduledEventInfo.scheduleName;
-    aerobicEvent.day = @(self.scheduledEventInfo.day);
-    aerobicEvent.week = @(self.scheduledEventInfo.week);
+    aerobicEvent.schedule = scheduledEventInfo.scheduleName;
+    aerobicEvent.day = @(scheduledEventInfo.day);
+    aerobicEvent.week = @(scheduledEventInfo.week);
 
     switch (self.selectedEvent.eventCategory) {
         case kBicycling:
@@ -261,6 +261,8 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
 {
     NSDictionary *eventInfo;
     
+    ScheduledEventInfo *scheduledEventInfo = [self.addEventDataDelegate scheduleInfoIs];
+    
     newEventDataAdded = YES;
     // Surround the "add" functionality with undo grouping
     NSUndoManager *manager = self.coreDataHelper.managedObjectContext.undoManager;
@@ -269,7 +271,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
         case kWeights:
             {
                 WeightLiftingEvent *weightLiftingEvent = (WeightLiftingEvent *)[self.coreDataHelper newObject:@"WeightLiftingEvent"];
-                [self setupNewWeightLiftingEvent:weightLiftingEvent];
+                [self setupNewWeightLiftingEvent:weightLiftingEvent forScheduleEventInfo:scheduledEventInfo];
                 eventInfo = @{weightLiftingEvent.eventName : @"eventName"};
             }
             break;
@@ -277,7 +279,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
         default:
             {
                 AerobicEvent *aerobicEvent = (AerobicEvent *)[self.coreDataHelper newObject:@"AerobicEvent"];
-                [self setupNewAerobicEvent:aerobicEvent];
+                [self setupNewAerobicEvent:aerobicEvent forScheduleEventInfo:scheduledEventInfo];
                 eventInfo = @{aerobicEvent.eventName : @"eventName"};
             }
             break;
@@ -346,6 +348,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.note.hidden = NO;
                     cell.note.text = weightEvent.notes;
                     tableView.rowHeight = 40.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
@@ -356,6 +359,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.label2.text = [NSString stringWithFormat:@"%@", weightEvent.repCount];
                     cell.label3.text = [NSString stringWithFormat:@"%@", weightEvent.weight];
                     self.eventTable.rowHeight = 22.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
@@ -383,6 +387,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
                     tableView.rowHeight = 40.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
@@ -393,6 +398,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.cadenace];
                     self.eventTable.rowHeight = 22.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
@@ -420,6 +426,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.note.hidden = NO;
                     cell.note.text = aerobicEvent.note;
                     tableView.rowHeight = 40.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }
@@ -430,6 +437,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                     cell.label2.text = [NSString stringWithFormat:@"%@", aerobicEvent.heartRate];
                     cell.label3.text = [NSString stringWithFormat:@"%@", aerobicEvent.distance];
                     self.eventTable.rowHeight = 22.0f;
+                    cell.backgroundColor =[UIColor whiteColor];
                     if ([indexPath section] == 0 && newEventDataAdded == YES) {
                         cell.backgroundColor =[UIColor greenColor];
                     }

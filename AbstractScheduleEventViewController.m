@@ -45,7 +45,7 @@ static NSString *CellIdentifier = @"EventCell";
     _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     _manualCompletedEvents = [[NSMutableSet alloc] init];
     
-    [self fetchTodaysCompleteEvents];
+    [self fetchTodaysCompleteEventsForDate:nil];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations{
@@ -415,8 +415,7 @@ static NSString *CellIdentifier = @"EventCell";
 #endif
 }
 
-
-- (void)fetchTodaysCompleteEvents
+- (void)fetchTodaysCompleteEventsForDate:(NSDate *)fetchDate
 {
     // implement in class
 }
