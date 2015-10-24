@@ -44,7 +44,11 @@ static NSString *CellIdentifier = @"EventCell";
     _completedWeightEvents = [[NSMutableArray alloc] init];
     _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     _manualCompletedEvents = [[NSMutableSet alloc] init];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [self fetchTodaysCompleteEventsForDate:nil];
 }
 
@@ -56,11 +60,6 @@ static NSString *CellIdentifier = @"EventCell";
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark Delegate
@@ -417,16 +416,18 @@ static NSString *CellIdentifier = @"EventCell";
 
 - (void)fetchTodaysCompleteEventsForDate:(NSDate *)fetchDate
 {
-    // implement in class
+    NSDate *date;
+    if (fetchDate ==nil) {
+        date = [NSDate date];
+    } else {
+        date = fetchDate;
+    }
+    //     fetch any saved events that may have occurred
+    
+    self.completedWeightEvents = [[self.coreDataHelper fetchDataFor:weightLiftingEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:nil] mutableCopy];
+    
+    self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:nil] mutableCopy];
+
 }
-
-/*
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-
-}
-*/
 
 @end
