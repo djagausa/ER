@@ -110,9 +110,9 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     }
     
     NSInteger numericSection = [[theSection name] integerValue];
-    NSInteger year = numericSection / 1000;
-    NSInteger month = (numericSection - (year * 1000)) /100;
-    NSInteger day = (numericSection - (year * 1000)) - (month * 100);
+    NSInteger year = numericSection / 10000;
+    NSInteger month = (numericSection - (year * 10000)) /100;
+    NSInteger day = (numericSection - (year * 10000)) - (month * 100);
     
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.year = year;
