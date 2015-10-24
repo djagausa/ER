@@ -108,7 +108,7 @@ static NSArray *_cellAvailableColors;
 }
 
 - (IBAction)repeatCountInput:(id)sender {
-    if ([self.repeatCountOutlet.text integerValue] != self.createScheduledEventInfo.numberOfWeeks) {
+    if ([self.repeatCountOutlet.text integerValue] != self.createScheduledEventInfo.repeatCount) {
         [self enableUpdateButton];
     }
 }
@@ -161,7 +161,7 @@ static NSArray *_cellAvailableColors;
 
 - (void)setupScheduleScreenParameters:(NSString *)scheduleName
 {
-    Schedule *schedule = [self loadExistingSchedueInfo:scheduleName];
+    Schedule *schedule = [self loadExistingScheduleInfo:scheduleName];
     self.numberOfWeeks = schedule.numberOfWeeks;
     self.numberOfWeeksOutlet.text = [NSString stringWithFormat: @"%@", self.numberOfWeeks];
     self.repeatCountOutlet.text = [NSString stringWithFormat: @"%@", schedule.repeatCount];
@@ -170,10 +170,14 @@ static NSArray *_cellAvailableColors;
     [self.scheduleCollectionView reloadData];
 }
 
-- (Schedule *)loadExistingSchedueInfo:(NSString *)scheduleName
+- (Schedule *)loadExistingScheduleInfo:(NSString *)scheduleName
 {
     NSArray *scheduledEvents = [self.coreDataHelper fetchDataFor:@"Schedule" withPredicate:@{@"propertyName" : @"scheduleName", @"value" : scheduleName} sortKey:nil scheduleInfo:nil];
     Schedule *schedule = [scheduledEvents firstObject];
+
+    if (schedule == nil) {
+        schedule = (Schedule *)[self.coreDataHelper newObject:@"Schedule"];
+    }
     
     return schedule;
 }
@@ -274,13 +278,16 @@ static NSArray *_cellAvailableColors;
 {
     DayCollectionViewCell * cell = [self.scheduleCollectionView dequeueReusableCellWithReuseIdentifier:_dayCellIdentification forIndexPath:indexPath];
     
-    // 
-    // set contentView frame and autoresizingMask
+    // set contentView frame
     cell.contentView.frame = cell.bounds;
-    cell.contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin |UIViewAutoresizingFlexibleTopMargin |UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
 
     cell.dayCellDayLabel.text = [NSString stringWithFormat:@"Day: %ld", indexPath.row +1];
     [self configureCell:cell day:indexPath.row week:indexPath.section];
+    
+    // the reloadSections call is necessary to ensure that the autolayout constraints are correctly established
+    // (there hav been bugs reported surrounding autolayout and collection view cells.)
+    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+
     return cell;
 }
 
@@ -298,6 +305,7 @@ static NSArray *_cellAvailableColors;
 {
     self.createScheduledEventInfo.scheduleName = self.scheduleNameOutlet.text;
     self.createScheduledEventInfo.numberOfWeeks = [self.numberOfWeeksOutlet.text integerValue];
+    self.createScheduledEventInfo.repeatCount = [self.repeatCountOutlet.text integerValue];
     self.createScheduledEventInfo.week = indexPath.section;
     self.createScheduledEventInfo.day = indexPath.row;
     self.createScheduledEventInfo.operationalMode = [self.scheduleOperationModeOutlet selectedSegmentIndex];
@@ -325,7 +333,6 @@ static NSArray *_cellAvailableColors;
     
     // configure the cell color
     [self setCellColor:day cellColor:colorIndex];
-    
     cell.dayCellNumberOfEvents.text = [NSString stringWithFormat:@"Events: %ld", totalEvents];
     cell.backgroundColor = [_cellAvailableColors objectAtIndex: colorIndex];
 }
@@ -342,7 +349,7 @@ static NSArray *_cellAvailableColors;
 
 - (void)updateButtonPressed
 {
-    Schedule *schedule = [self loadExistingSchedueInfo:self.createScheduledEventInfo.scheduleName];
+    Schedule *schedule = [self loadExistingScheduleInfo:self.scheduleNameOutlet.text];
     
     schedule.scheduleName = self.scheduleNameOutlet.text;
     schedule.numberOfWeeks = @([self.numberOfWeeksOutlet.text integerValue]);

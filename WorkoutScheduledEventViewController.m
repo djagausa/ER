@@ -41,7 +41,11 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     
     self.scheduledEventInfo = [self.workoutScheduleDelegate scheduleInfoIs];
     [self fetchEvents];
-    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
+    if (self.scheduledEventInfo.operationalMode == kScheduleModeManual) {
+        [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
+    } else {
+        [self fetchTodaysCompleteEventsForDate:nil];
+    }
     [self constructInfoLabel];
     [self formatButton:self.skipDayOutlet];
     [self formatButton:self.dayFinishedOutlet];
@@ -77,7 +81,11 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification
 {
     // change the color of the table view cell
-    [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
+    if (self.scheduledEventInfo.operationalMode == kScheduleModeManual) {
+        [self fetchTodaysCompleteEventsForDate:self.scheduledEventInfo.lastUpdateDate];
+    } else {
+        [self fetchTodaysCompleteEventsForDate:nil];
+    }
     [self.tableView reloadData];
 }
 

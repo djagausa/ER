@@ -200,7 +200,7 @@ BOOL manualSingleEvent;
             
             // if last update day is earlier then today then bump the schedule by one day and using auto schedule.
             NSNumber *operatingMode = [self fetchOpertionalModeCountForSchedule:self.currentScheduleStatus.scheduleName];
-            if (compareResults == NSOrderedAscending && (operatingMode == kScheduleModeAuto)) {
+            if (compareResults == NSOrderedAscending && ([operatingMode isEqualToNumber: @(kScheduleModeAuto)])) {
                 // bunp the schedule by one day
                 NSNumber *weeks = [self fetchNumberOfWeeksForSchedule:self.currentScheduleStatus.scheduleName];
                 NSNumber *repeatCount = [self fetchRepeatCountForSchedule:self.currentScheduleStatus.scheduleName];

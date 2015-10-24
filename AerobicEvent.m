@@ -51,7 +51,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *components = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay)  fromDate:[self date]];
         //        NSLog(@"SectionIdentifier date components: %@", components);
-        tmp = [NSString stringWithFormat:@"%ld", ([components year] * 1000) + ([components month] * 100) + [components day]];
+        tmp = [NSString stringWithFormat:@"%ld", ([components year] * 10000) + ([components month] * 100) + [components day]];
         [self setPrimitiveSectionIdentifier:tmp];
     }
     return tmp;

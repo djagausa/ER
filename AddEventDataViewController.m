@@ -22,7 +22,7 @@
 @property (nonatomic, strong) IBOutlet UIScrollView         *scrollView;
 @property (nonatomic, strong) UITextField                   *selectedTextField;
 @property (nonatomic, strong) ScheduledEventInfo            *scheduledEventInfo;
-
+@property (nonatomic, assign, getter=isDefaultWeightSet) BOOL defaultWeightSet;
 @end
 
 static NSString *CellIdentifier = @"EventCell";
@@ -31,6 +31,7 @@ static NSString *notePlaceHolder = @"Enter a note for this set:";
 
 BOOL setCountInitialized;
 BOOL newEventDataAdded;         // used to set color on cell for newly added data
+
 
 @implementation AddEventDataViewController
 
@@ -339,6 +340,10 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                 
                 if (indexPath.section == 0) {
                     [self initializeSetCount:weightEvent];
+                    if (indexPath.row == 0 && (self.isDefaultWeightSet == NO)) {
+                        self.defaultWeightSet = YES;
+                        self.in3Label.text = [NSString stringWithFormat:@"%@",weightEvent.weight];
+                    }
                 }
                 if ([self.noteSwitch isOn] && [weightEvent.notes length] > 0) {
                     EventTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -573,7 +578,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                             groupBy:nil
-                                       scheduleInfo:self.scheduledEventInfo];
+                                       scheduleInfo:nil];
         }
             break;
             
@@ -588,7 +593,7 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
                                           sortingBy:@"date"
                                       withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : [[self selectedEvent] eventName],}
                                             groupBy:nil
-                                       scheduleInfo:self.scheduledEventInfo];
+                                       scheduleInfo:nil];
         }
             break;
             

@@ -214,6 +214,7 @@
             Schedule *selectedSchedule = [self.schedules objectAtIndex:indexPath.row];
             self.scheduledEventInfo.scheduleName = selectedSchedule.scheduleName;
             self.scheduledEventInfo.numberOfWeeks = [selectedSchedule.numberOfWeeks integerValue];
+            self.scheduledEventInfo.repeatCount = [selectedSchedule.repeatCount integerValue];
         }
             break;
         case 1:

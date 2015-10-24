@@ -634,7 +634,7 @@ const CGFloat kTableCellHeight = 40.0;
     
     Schedule *schedule = [self setupSchedule];
     
-    // rmove all prevously saved events
+    // remove all prevously saved events
     for (int i = 0; i < [self.orignalSelectedDays count]; ++i) {
         if ([self.orignalSelectedDays[i] isEqualToNumber:@(1)]) {
             ScheduledEvent *scheduledEvent = [self  getscheduledEventForToday:self.scheduledEventInfo.week day:i];
@@ -667,15 +667,5 @@ const CGFloat kTableCellHeight = 40.0;
     // return to the previous view
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

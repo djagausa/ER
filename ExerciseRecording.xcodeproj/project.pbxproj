@@ -460,6 +460,7 @@
 				TargetAttributes = {
 					2DBCE83A1AAB98EB00303DE1 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = V6969S7D62;
 					};
 					2DBCE8561AAB98EC00303DE1 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -718,6 +719,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -730,6 +732,7 @@
 					"$(SCRROOT)/../unirest-obj-c-master/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -743,6 +746,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -755,6 +759,7 @@
 					"$(SCRROOT)/../unirest-obj-c-master/**",
 				);
 				INFOPLIST_FILE = ExerciseRecording/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

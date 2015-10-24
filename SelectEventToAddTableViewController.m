@@ -157,7 +157,7 @@ static NSString *scheduleCellId = @"scheduleCell";
     self.selectedEvent.eventCategory = -1;
     self.selectedEvent.eventName = @"";
     
-    [self performSegueWithIdentifier: @"SetupEvent" sender:sender];
+    [self performSegueWithIdentifier: @"SetupEventSegue" sender:sender];
 }
 
 - (void)eventDataSetupNotification
