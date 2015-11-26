@@ -14,6 +14,7 @@
 #import "AddEventDataViewController.h"
 #import "ScheduledEventInfo.h"
 #import "Utilities.h"
+#import "WorkoutTableViewCell.h"
 
 @interface AbstractScheduleEventViewController ()
 
@@ -128,7 +129,7 @@ static NSString *CellIdentifier = @"EventCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
+    WorkoutTableViewCell *cell;
     
     switch (indexPath.section) {
         case 0:
@@ -136,7 +137,9 @@ static NSString *CellIdentifier = @"EventCell";
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
-                cell.textLabel.text = event.eventName;
+                cell.eventNameLabel.text = event.eventName;
+                [self fetchEventsForEvent:event.eventName inCategory:kWalking];
+                cell.dateLabel.text = [self returnDateForSection:0];
                 cell.backgroundColor = [UIColor whiteColor];
                 if ([self eventHasBeenPerfomed:event.eventName eventCategory:AerobicCategory]) {
                     cell.backgroundColor = [UIColor greenColor];
@@ -146,7 +149,9 @@ static NSString *CellIdentifier = @"EventCell";
             {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
-                cell.textLabel.text = event.eventName;
+                cell.eventNameLabel.text = event.eventName;
+                [self fetchEventsForEvent:event.eventName inCategory:kWeights];
+                cell.dateLabel.text = [self returnDateForSection:0];
                 cell.backgroundColor = [UIColor whiteColor];
                 if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
                     cell.backgroundColor = [UIColor greenColor];
@@ -158,7 +163,9 @@ static NSString *CellIdentifier = @"EventCell";
         {
             cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
-            cell.textLabel.text = event.eventName;
+            cell.eventNameLabel.text = event.eventName;
+            [self fetchEventsForEvent:event.eventName inCategory:kWeights];
+            cell.dateLabel.text = [self returnDateForSection:0];
             cell.backgroundColor = [UIColor whiteColor];
             if ([self eventHasBeenPerfomed:event.eventName eventCategory:WeightCategory]) {
                 cell.backgroundColor = [UIColor greenColor];
@@ -170,6 +177,21 @@ static NSString *CellIdentifier = @"EventCell";
             break;
     }
     return cell;
+}
+
+- (NSString *)returnDateForSection:(NSInteger)section
+{
+    NSString *titleString = @"";
+    
+    if ([[self.coreDataHelper.fetchedResultsController sections] count] > 0) {
+        id <NSFetchedResultsSectionInfo> theSection = [[self.coreDataHelper.fetchedResultsController sections] objectAtIndex:section];
+        /*
+         Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
+         To display the section title, convert the year, month and day components to a string representation.
+         */
+        titleString = [Utilities returnDateForSection:theSection];
+    }
+    return titleString;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -429,5 +451,40 @@ static NSString *CellIdentifier = @"EventCell";
     self.completedAerobicEvents = [[self.coreDataHelper fetchDataFor:aerobicEventsEntityName withPredicate:@{@"propertyName": @"date", @"value" : [Utilities dateWithoutTime:date]} sortKey:@"eventName" scheduleInfo:nil] mutableCopy];
 
 }
+
+- (void) fetchEventsForEvent:(NSString *)eventName inCategory:(NSInteger)category
+{
+    switch (category) {
+        case kWeights:
+        {
+            [self.coreDataHelper fetchItemsMatching:weightLiftingEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : eventName}
+                                            groupBy:nil
+                                       scheduleInfo:nil];
+        }
+            break;
+            
+        case kWalking:
+        case kRunning:
+        case kStretching:
+        case kEliptical:
+        case kBicycling:
+        {
+            [self.coreDataHelper fetchItemsMatching:aerobicEventsEntityName
+                                       forAttribute:nil
+                                          sortingBy:@"date"
+                                      withPredicate:@{@"propertyName" : @"defaultEvent.eventName", @"value" : eventName}
+                                            groupBy:nil
+                                       scheduleInfo:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 @end

@@ -12,6 +12,7 @@
 #import "EventDataSectionHeaderCell.h"
 #import "EventTableViewCell.h"
 #import "Support.h"
+#import "Utilities.h"
 
 @interface AbstractEventDataViewController ()
 
@@ -98,31 +99,8 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
      Section information derives from an event's sectionIdentifier, which is a string representing the number (year * 1000) + month.
      To display the section title, convert the year, month and day components to a string representation.
      */
-    static NSDateFormatter *formatter = nil;
-    
-    if (!formatter)
-    {
-        formatter = [[NSDateFormatter alloc] init];
-        [formatter setCalendar:[NSCalendar currentCalendar]];
-        
-        NSString *formatTemplate = [NSDateFormatter dateFormatFromTemplate:@"MM/dd/yyyy" options:0 locale:[NSLocale currentLocale]];
-        [formatter setDateFormat:formatTemplate];
-    }
-    
-    NSInteger numericSection = [[theSection name] integerValue];
-    NSInteger year = numericSection / 10000;
-    NSInteger month = (numericSection - (year * 10000)) /100;
-    NSInteger day = (numericSection - (year * 10000)) - (month * 100);
-    
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    dateComponents.year = year;
-    dateComponents.month = month;
-    dateComponents.day = day;
-    
-    NSDate *date = [[NSCalendar currentCalendar] dateFromComponents:dateComponents];
-    
-    NSString *titleString = [formatter stringFromDate:date];
-    
+    NSString *titleString = [Utilities returnDateForSection:theSection];
+
     sectionHeader.date.text = titleString;
     
     return sectionHeader;

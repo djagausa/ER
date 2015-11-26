@@ -29,6 +29,7 @@
 
 - (IBAction)startNewScheduleAction:(id)sender;
 - (IBAction)stopScheduleAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -53,7 +54,8 @@ BOOL manualSingleEvent;
     [self formatButton:self.startNewScheduleButton];
     [self formatButton:self.reviewButton];
     self.startNewScheduleButton.enabled = YES;
-        
+    
+    self.dateLabel.text = [Utilities dateToFormatMMddyyy:[NSDate date]];
     [self fetchEvents];
 }
 
@@ -105,7 +107,7 @@ BOOL manualSingleEvent;
 - (void)stopSchedule
 {
     // save empty schedule status file
-    [self.scheduleFileHelper clearScheduleStatusFileForSchedule:self.scheduledEventInfo.scheduleName];
+    [self.scheduleFileHelper clearScheduleStatusFileForSchedule:self.currentScheduleStatus.scheduleName];
 
     [self initializeCurrentScheduleButton:NO];
 }

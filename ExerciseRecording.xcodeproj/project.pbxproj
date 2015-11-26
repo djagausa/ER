@@ -46,6 +46,7 @@
 		2DBCE85E1AAB98EC00303DE1 /* ExerciseRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE85D1AAB98EC00303DE1 /* ExerciseRecordingTests.m */; };
 		2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DBCE8671AACCBF100303DE1 /* ExerciseCategory.plist */; };
 		2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */; };
+		2DF06F231BFB214100DAD2FC /* WorkoutTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF06F221BFB214100DAD2FC /* WorkoutTableViewCell.m */; };
 		2DF9C0B21B134873002A497E /* CreateSheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0B11B134873002A497E /* CreateSheduleViewController.m */; };
 		2DF9C0B51B13B54E002A497E /* DayCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0B41B13B54E002A497E /* DayCollectionViewCell.m */; };
 		2DF9C0BB1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DF9C0BA1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m */; };
@@ -164,6 +165,8 @@
 		2DBCE8761AACDBED00303DE1 /* SetupExerciseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupExerciseInfoViewController.h; sourceTree = "<group>"; };
 		2DBCE8771AACDBED00303DE1 /* SetupExreciseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetupExreciseInfoViewController.m; sourceTree = "<group>"; };
 		2DE2BA221B5E42A30043E887 /* ExerciseRecording 9.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 9.xcdatamodel"; sourceTree = "<group>"; };
+		2DF06F211BFB214100DAD2FC /* WorkoutTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutTableViewCell.h; sourceTree = "<group>"; };
+		2DF06F221BFB214100DAD2FC /* WorkoutTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutTableViewCell.m; sourceTree = "<group>"; };
 		2DF9C0AD1B1333FD002A497E /* ExerciseRecording 8.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 8.xcdatamodel"; sourceTree = "<group>"; };
 		2DF9C0B01B134873002A497E /* CreateSheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateSheduleViewController.h; sourceTree = "<group>"; };
 		2DF9C0B11B134873002A497E /* CreateSheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateSheduleViewController.m; sourceTree = "<group>"; };
@@ -405,6 +408,8 @@
 				2DF9C0BA1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m */,
 				2DF9C0D71B166EA2002A497E /* ScheduleDaySectionHeaderCell.h */,
 				2DF9C0D81B166EA2002A497E /* ScheduleDaySectionHeaderCell.m */,
+				2DF06F211BFB214100DAD2FC /* WorkoutTableViewCell.h */,
+				2DF06F221BFB214100DAD2FC /* WorkoutTableViewCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -552,6 +557,7 @@
 				2DF9C0BB1B13B931002A497E /* ScheduleHeaderCollectionReusableView.m in Sources */,
 				2DF9C0DF1B1DAE65002A497E /* DefaultAerobic.m in Sources */,
 				2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */,
+				2DF06F231BFB214100DAD2FC /* WorkoutTableViewCell.m in Sources */,
 				2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */,
 				2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */,
 				2DB6F4311AEBDD1000FCE207 /* EditEventTableViewCell.m in Sources */,

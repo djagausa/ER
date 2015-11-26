@@ -13,6 +13,7 @@
 + (NSString *)dateToFormatMMddyyy:(NSDate *)date;
 + (NSNumber *)convertTimeToNumber:(NSString *)timeString;
 + (NSDate *)dateWithoutTime:(NSDate *)fullDate;
++ (NSString *)returnDateForSection:(id)section;
 
 - (instancetype)init;
 

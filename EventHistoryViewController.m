@@ -26,7 +26,7 @@
     self.defaultWeightLifting = self.selectedEvent.defaultWeightLiftingData;
     self.defaultAerobic = self.selectedEvent.defaultAerobicData;
     
-    [self fetchEvents];
+//    [self fetchEvents];
     [self setupLabels];
 }
 
