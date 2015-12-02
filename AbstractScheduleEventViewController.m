@@ -131,11 +131,12 @@ static NSString *CellIdentifier = @"EventCell";
 {
     WorkoutTableViewCell *cell;
     
+    cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
+
     switch (indexPath.section) {
         case 0:
             if (self.aerobicDefaultObjects.count > 0)
             {
-                cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultAerobic *event = [self.aerobicDefaultObjects objectAtIndex:indexPath.row];
                 cell.eventNameLabel.text = event.eventName;
                 [self fetchEventsForEvent:event.eventName inCategory:kWalking];
@@ -147,7 +148,6 @@ static NSString *CellIdentifier = @"EventCell";
             }
             else
             {
-                cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
                 DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
                 cell.eventNameLabel.text = event.eventName;
                 [self fetchEventsForEvent:event.eventName inCategory:kWeights];
@@ -161,7 +161,6 @@ static NSString *CellIdentifier = @"EventCell";
             
         case 1:
         {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"EventCell" forIndexPath:indexPath];
             DefaultWeightLifting *event = [self.weightLiftingDefaultObjects objectAtIndex:indexPath.row];
             cell.eventNameLabel.text = event.eventName;
             [self fetchEventsForEvent:event.eventName inCategory:kWeights];

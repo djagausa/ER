@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */; };
+		2D4451391C09D4B900467315 /* Tutorial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4451381C09D4B900467315 /* Tutorial.xcassets */; };
+		2D44513E1C0A058B00467315 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D44513D1C0A058B00467315 /* TutorialViewController.m */; };
+		2D4451401C0A06A000467315 /* TutorialPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D44513F1C0A06A000467315 /* TutorialPages.plist */; };
+		2D4451431C0C6EEF00467315 /* CALayer+XibConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D4451421C0C6EEF00467315 /* CALayer+XibConfiguration.m */; };
 		2D4578951B3EA57400585C11 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D4578921B3EA55C00585C11 /* libCorePlot-CocoaTouch.a */; };
 		2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */; };
 		2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D7C611AC4D9A80069E888 /* AerobicEvent.m */; };
@@ -90,6 +94,12 @@
 		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
 		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
+		2D4451381C09D4B900467315 /* Tutorial.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Tutorial.xcassets; sourceTree = "<group>"; };
+		2D44513C1C0A058B00467315 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
+		2D44513D1C0A058B00467315 /* TutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialViewController.m; sourceTree = "<group>"; };
+		2D44513F1C0A06A000467315 /* TutorialPages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TutorialPages.plist; sourceTree = "<group>"; };
+		2D4451411C0C6EEF00467315 /* CALayer+XibConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XibConfiguration.h"; sourceTree = "<group>"; };
+		2D4451421C0C6EEF00467315 /* CALayer+XibConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XibConfiguration.m"; sourceTree = "<group>"; };
 		2D45788B1B3EA55C00585C11 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot-master/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		2D7D7C301AC0C5950069E888 /* AddEventDataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddEventDataViewController.h; sourceTree = "<group>"; };
 		2D7D7C311AC0C5950069E888 /* AddEventDataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddEventDataViewController.m; sourceTree = "<group>"; };
@@ -242,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */,
+				2D4451381C09D4B900467315 /* Tutorial.xcassets */,
 				2DBCE83D1AAB98EB00303DE1 /* ExerciseRecording */,
 				2DFD82181ADF38D700BD9D86 /* TableViews */,
 				2DBCE8731AACDB3000303DE1 /* ControllerFiles */,
@@ -292,6 +303,8 @@
 				2DBCE8401AAB98EB00303DE1 /* main.m */,
 				2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */,
 				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
+				2D4451411C0C6EEF00467315 /* CALayer+XibConfiguration.h */,
+				2D4451421C0C6EEF00467315 /* CALayer+XibConfiguration.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -338,6 +351,7 @@
 				2DF9C0E41B1E482A002A497E /* ScheduledEvent.m */,
 				2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */,
 				2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */,
+				2D44513F1C0A06A000467315 /* TutorialPages.plist */,
 			);
 			name = DataFiles;
 			sourceTree = "<group>";
@@ -369,6 +383,8 @@
 				2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */,
 				2DAF3B311B278A6D001DA3DE /* WorkoutScheduledEventViewController.h */,
 				2DAF3B321B278A6D001DA3DE /* WorkoutScheduledEventViewController.m */,
+				2D44513C1C0A058B00467315 /* TutorialViewController.h */,
+				2D44513D1C0A058B00467315 /* TutorialViewController.m */,
 			);
 			name = ControllerFiles;
 			sourceTree = "<group>";
@@ -514,10 +530,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DBCE84D1AAB98EB00303DE1 /* Main.storyboard in Resources */,
+				2D4451401C0A06A000467315 /* TutorialPages.plist in Resources */,
 				2DA73A201B5286E700596C3E /* Quotes.plist in Resources */,
 				2DBCE8521AAB98EB00303DE1 /* LaunchScreen.xib in Resources */,
 				2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */,
 				2DFD82141ADF33C000BD9D86 /* ExerciseSelection.plist in Resources */,
+				2D4451391C09D4B900467315 /* Tutorial.xcassets in Resources */,
 				2DBCE84F1AAB98EB00303DE1 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +577,7 @@
 				2DBCE8441AAB98EB00303DE1 /* AppDelegate.m in Sources */,
 				2DF06F231BFB214100DAD2FC /* WorkoutTableViewCell.m in Sources */,
 				2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */,
+				2D44513E1C0A058B00467315 /* TutorialViewController.m in Sources */,
 				2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */,
 				2DB6F4311AEBDD1000FCE207 /* EditEventTableViewCell.m in Sources */,
 				2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */,
@@ -579,6 +598,7 @@
 				2DF9C0D31B152B1A002A497E /* Schedule.m in Sources */,
 				2D7D7C6B1AC720CB0069E888 /* WeightLiftingEvent.m in Sources */,
 				2DBCE8781AACDBED00303DE1 /* SetupExreciseInfoViewController.m in Sources */,
+				2D4451431C0C6EEF00467315 /* CALayer+XibConfiguration.m in Sources */,
 				2DB93FEA1AF0FE400062AB0D /* AbstractEventDataTableViewController.m in Sources */,
 				2DF9C0B51B13B54E002A497E /* DayCollectionViewCell.m in Sources */,
 				2DF9C0B21B134873002A497E /* CreateSheduleViewController.m in Sources */,
@@ -660,6 +680,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -702,6 +723,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

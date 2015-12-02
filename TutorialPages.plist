@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Pages</key>
+	<array>
+		<string>Setup-page-1</string>
+		<string>Setup-page-2</string>
+		<string>Setup-page-3</string>
+		<string>Setup-page-4</string>
+		<string>Setup-page-5</string>
+		<string>Setup-page-6</string>
+		<string>Setup-page-7</string>
+		<string>Setup-page-8</string>
+		<string>Setup-page-9</string>
+		<string>Edit-data-1</string>
+		<string>Workout-page-1</string>
+		<string>Workout-page-2</string>
+		<string>Workout-page-3</string>
+	</array>
+</dict>
+</plist>

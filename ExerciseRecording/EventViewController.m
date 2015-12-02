@@ -20,10 +20,14 @@
 @property  (nonatomic, strong) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (copy, nonatomic) NSString *motivationalStatement;
 @property (strong, nonatomic) MotivationalQuoteHelper   *motivationalHelper;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *setupExerciseData;
 
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification;
 
 @end
+
+static NSString * const kTutorialAlerTitle = @"Tutorial";
+static NSString * const kTutorialAlertMessage = @"Would you like to view the turorial?";
 
 @implementation EventViewController
 
@@ -42,12 +46,6 @@
     [self.motivationalTextOutlet.layer setBorderWidth:2.0];
     self.motivationalTextOutlet.layer.cornerRadius = 5;
     self.motivationalTextOutlet.clipsToBounds = YES;
-    
-    // register for app did become which is used to set the motivational quote
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(appBecameActive)
-                                                 name:UIApplicationDidBecomeActiveNotification
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,6 +54,12 @@
     
     // provide a modivational statement
     [self addMotivationalQuote];
+
+    // provide tutorial viewing option
+    if ([self isThisTheFirstTimeAppIsRun] == YES) {
+        [self presentTurtorialViewingOption];
+    }
+
 }
 
 - (void)dealloc
@@ -112,9 +116,46 @@
     }
 }
 
-- (void)appBecameActive
+- (void)presentTurtorialViewingOption
 {
-    [self addMotivationalQuote];
+    UIAlertController *alerController = [UIAlertController alertControllerWithTitle:kTutorialAlerTitle message:kTutorialAlertMessage preferredStyle:UIAlertControllerStyleAlert];
+    __weak typeof(self) weakSelf = self;
+    
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                                {
+                                    [weakSelf startTutorial];
+                                }];
+    UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"No action");
+                               }];
+    [alerController addAction:yesAction];
+    [alerController addAction:noAction];
+    
+    [self presentViewController:alerController animated:YES completion:nil];
+
+}
+
+- (BOOL)isThisTheFirstTimeAppIsRun
+{
+    BOOL firstRun = NO;
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        firstRun = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    firstRun = YES;
+
+    return firstRun;
+}
+
+- (void)startTutorial
+{
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"Tutorial"];
+    [[self navigationController] pushViewController:vc animated:YES];
+//    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)addMotivationalQuote
