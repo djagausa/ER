@@ -870,9 +870,6 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="115" y="8" width="51" height="21"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <animations/>
@@ -2990,9 +2987,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="9" width="174" height="21"/>
-                                                    </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTV-pe-Xs8">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -3008,8 +3002,7 @@
                                                             <exclude reference="gxR-pP-1Ex"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="202" y="9" width="77" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="gxR-pP-1Ex"/>
                                                         </mask>
@@ -3623,8 +3616,7 @@
                                                             <exclude reference="dgm-UP-v0R"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="110" y="0.0" width="70" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="dgm-UP-v0R"/>
                                                         </mask>
@@ -3646,8 +3638,7 @@
                                                             <exclude reference="Ke9-fi-MM8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="216" y="0.0" width="45" height="21"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="Ke9-fi-MM8"/>
                                                         </mask>
@@ -3681,9 +3672,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="283" y="0.0" width="25" height="21"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
@@ -5165,8 +5153,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hhk-20-Oeh"/>
-        <segue reference="dPM-vZ-fsf"/>
         <segue reference="zcK-bl-baJ"/>
-        <segue reference="FXZ-dg-PPC"/>
+        <segue reference="dPM-vZ-fsf"/>
+        <segue reference="cis-pU-7M6"/>
     </inferredMetricsTieBreakers>
 </document>
