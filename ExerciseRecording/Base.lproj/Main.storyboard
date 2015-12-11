@@ -870,6 +870,9 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="115" y="8" width="51" height="21"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <animations/>
@@ -3616,7 +3619,8 @@
                                                             <exclude reference="dgm-UP-v0R"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="110" y="0.0" width="70" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="dgm-UP-v0R"/>
                                                         </mask>
@@ -3638,7 +3642,8 @@
                                                             <exclude reference="Ke9-fi-MM8"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="216" y="0.0" width="45" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="Ke9-fi-MM8"/>
                                                         </mask>
@@ -3672,6 +3677,9 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="283" y="0.0" width="25" height="21"/>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <animations/>
