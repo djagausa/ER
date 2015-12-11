@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Question</key>
+		<string>How does the schedule operate?</string>
+		<key>Answer</key>
+		<string>The schedule has 2 modes of operate: manual or automatic. Automatic causes the days to advance with each new day. Manual mode requires that you advance the day.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>How do I setup a schedule?</string>
+		<key>Answer</key>
+		<string>First you need to have setup all the events that you want to include in the exercise schedule. Then using setup section you create a schedule.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What does Schedule Repeat count do?</string>
+		<key>Answer</key>
+		<string>Schedule Repeat count is use to define the number of times the complete schedule will be repeated. For example: setting the number of weeks to 3 and the repeat count to 4 would result in the schedule repeating 4 time for a total of 12 weeks.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Is the data stored on the cloud?</string>
+		<key>Answer</key>
+		<string>No, maybe in a future release.</string>
+	</dict>
+</array>
+</plist>
