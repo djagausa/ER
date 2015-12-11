@@ -4797,20 +4797,20 @@
                                 <exclude reference="CpO-Nq-ZwT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ir7-Xu-HIB"/>
-                                <exclude reference="XVb-wf-ZI1"/>
+                                <exclude reference="5gY-t6-cfD"/>
                                 <exclude reference="3bt-4s-XIP"/>
                                 <exclude reference="E50-bf-4fM"/>
+                                <exclude reference="DHV-Ai-xgj"/>
+                                <exclude reference="Nu4-AP-Hxx"/>
+                                <exclude reference="Ir7-Xu-HIB"/>
+                                <exclude reference="XVb-wf-ZI1"/>
+                                <exclude reference="p6J-fd-8zA"/>
                                 <exclude reference="KtU-3S-Cq2"/>
                                 <exclude reference="Lah-DT-GwC"/>
                                 <exclude reference="M5B-BZ-c26"/>
                                 <exclude reference="aWn-VN-Xta"/>
                                 <exclude reference="ctl-Cf-PWs"/>
                                 <exclude reference="yTs-B9-jih"/>
-                                <exclude reference="p6J-fd-8zA"/>
-                                <exclude reference="DHV-Ai-xgj"/>
-                                <exclude reference="Nu4-AP-Hxx"/>
-                                <exclude reference="5gY-t6-cfD"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4822,20 +4822,20 @@
                                 <include reference="CpO-Nq-ZwT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ir7-Xu-HIB"/>
-                                <include reference="XVb-wf-ZI1"/>
+                                <include reference="5gY-t6-cfD"/>
                                 <include reference="3bt-4s-XIP"/>
                                 <include reference="E50-bf-4fM"/>
+                                <include reference="DHV-Ai-xgj"/>
+                                <include reference="Nu4-AP-Hxx"/>
+                                <include reference="Ir7-Xu-HIB"/>
+                                <include reference="XVb-wf-ZI1"/>
+                                <include reference="p6J-fd-8zA"/>
                                 <include reference="KtU-3S-Cq2"/>
                                 <include reference="Lah-DT-GwC"/>
                                 <include reference="M5B-BZ-c26"/>
                                 <include reference="aWn-VN-Xta"/>
                                 <include reference="ctl-Cf-PWs"/>
                                 <include reference="yTs-B9-jih"/>
-                                <include reference="p6J-fd-8zA"/>
-                                <include reference="DHV-Ai-xgj"/>
-                                <include reference="Nu4-AP-Hxx"/>
-                                <include reference="5gY-t6-cfD"/>
                             </mask>
                         </variation>
                     </view>
