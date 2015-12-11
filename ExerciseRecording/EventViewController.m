@@ -8,8 +8,9 @@
 
 #import "EventViewController.h"
 #import "Support.h"
-//#import "MotivationalQuoteInfo.h"
 #import "MotivationalQuoteHelper.h"
+
+#import <ExerciseRecording-Swift.h>
 
 @interface EventViewController ()
 
@@ -18,10 +19,11 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem    *editExercise;
 @property (weak, nonatomic) IBOutlet UITextView         *motivationalTextOutlet;
 @property  (nonatomic, strong) IBOutlet UITapGestureRecognizer *tapRecognizer;
-@property (copy, nonatomic) NSString *motivationalStatement;
+@property (copy, nonatomic) NSString                    *motivationalStatement;
 @property (strong, nonatomic) MotivationalQuoteHelper   *motivationalHelper;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *setupExerciseData;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem    *setupExerciseData;
 
+- (IBAction)faqButton:(id)sender;
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification;
 
 @end
@@ -145,8 +147,6 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    firstRun = YES;
-
     return firstRun;
 }
 
@@ -184,6 +184,11 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
     [self configureTheButtons];
 }
 
+- (IBAction)faqButton:(id)sender
+{
+    NSLog(@"FAQ Button pressed!");
+}
+
 - (void)exerciseDataAddedNotification:(NSNotificationCenter *)notification
 {
     [self configureTheButtons];
@@ -193,10 +198,12 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-    if ([segue.identifier isEqualToString:@"SelectEventToAdd"]) {
-        SelectEventToAddTableViewController *addController = [segue destinationViewController];
-        addController.eventAddedDelegate = self;
+    if (![segue.identifier isEqualToString:@"FAQSegue"]) {
+        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
+        if ([segue.identifier isEqualToString:@"SelectEventToAdd"]) {
+            SelectEventToAddTableViewController *addController = [segue destinationViewController];
+            addController.eventAddedDelegate = self;
+        }
     }
 }
 

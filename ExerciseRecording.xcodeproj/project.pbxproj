@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2D0C18391B2664CD00ADB022 /* WorkoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */; };
+		2D1A33F61C0F026200764D55 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A33F51C0F026200764D55 /* FAQViewController.swift */; };
+		2D1A33F81C0F11BD00764D55 /* FAQList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A33F71C0F11BD00764D55 /* FAQList.plist */; };
+		2D1A34391C14812100764D55 /* Arrows.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A34381C14812100764D55 /* Arrows.xcassets */; };
+		2D1A343D1C14950600764D55 /* FAQAnswerVewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A343C1C14950600764D55 /* FAQAnswerVewController.swift */; };
+		2D1A34411C165FBB00764D55 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A34401C165FBB00764D55 /* ShareData.swift */; };
 		2D4451391C09D4B900467315 /* Tutorial.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D4451381C09D4B900467315 /* Tutorial.xcassets */; };
 		2D44513E1C0A058B00467315 /* TutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D44513D1C0A058B00467315 /* TutorialViewController.m */; };
 		2D4451401C0A06A000467315 /* TutorialPages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D44513F1C0A06A000467315 /* TutorialPages.plist */; };
@@ -93,6 +98,12 @@
 		2D0A07E81B75E72400F20112 /* ExerciseRecording 10.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 10.xcdatamodel"; sourceTree = "<group>"; };
 		2D0C18371B2664CD00ADB022 /* WorkoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorkoutViewController.h; sourceTree = "<group>"; };
 		2D0C18381B2664CD00ADB022 /* WorkoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WorkoutViewController.m; sourceTree = "<group>"; };
+		2D1A33F51C0F026200764D55 /* FAQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
+		2D1A33F71C0F11BD00764D55 /* FAQList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FAQList.plist; sourceTree = "<group>"; };
+		2D1A33F91C11184800764D55 /* ExerciseRecording-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExerciseRecording-Bridging-Header.h"; sourceTree = "<group>"; };
+		2D1A34381C14812100764D55 /* Arrows.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Arrows.xcassets; sourceTree = "<group>"; };
+		2D1A343C1C14950600764D55 /* FAQAnswerVewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQAnswerVewController.swift; sourceTree = "<group>"; };
+		2D1A34401C165FBB00764D55 /* ShareData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 		2D37EE4D1AFE0A8C00530FA1 /* ExerciseRecording 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ExerciseRecording 7.xcdatamodel"; sourceTree = "<group>"; };
 		2D4451381C09D4B900467315 /* Tutorial.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Tutorial.xcassets; sourceTree = "<group>"; };
 		2D44513C1C0A058B00467315 /* TutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialViewController.h; sourceTree = "<group>"; };
@@ -225,6 +236,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D1A33ED1C0EFC9600764D55 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				2D1A34401C165FBB00764D55 /* ShareData.swift */,
+				2D1A33F91C11184800764D55 /* ExerciseRecording-Bridging-Header.h */,
+				2D1A33F51C0F026200764D55 /* FAQViewController.swift */,
+				2D1A343C1C14950600764D55 /* FAQAnswerVewController.swift */,
+			);
+			name = Swift;
+			sourceTree = "<group>";
+		};
 		2D45788C1B3EA55C00585C11 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,10 +274,12 @@
 			isa = PBXGroup;
 			children = (
 				2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */,
+				2D1A34381C14812100764D55 /* Arrows.xcassets */,
 				2D4451381C09D4B900467315 /* Tutorial.xcassets */,
 				2DBCE83D1AAB98EB00303DE1 /* ExerciseRecording */,
-				2DFD82181ADF38D700BD9D86 /* TableViews */,
 				2DBCE8731AACDB3000303DE1 /* ControllerFiles */,
+				2DFD82181ADF38D700BD9D86 /* TableViews */,
+				2D1A33ED1C0EFC9600764D55 /* Swift */,
 				2DBCE8721AACDAEB00303DE1 /* DataFiles */,
 				2DB6F4431AEFCC7F00FCE207 /* CorePlot */,
 				2D7D7C051ABDC13D0069E888 /* Utilities */,
@@ -352,6 +376,7 @@
 				2D7D7C691AC720CB0069E888 /* WeightLiftingEvent.h */,
 				2D7D7C6A1AC720CB0069E888 /* WeightLiftingEvent.m */,
 				2D44513F1C0A06A000467315 /* TutorialPages.plist */,
+				2D1A33F71C0F11BD00764D55 /* FAQList.plist */,
 			);
 			name = DataFiles;
 			sourceTree = "<group>";
@@ -476,6 +501,7 @@
 		2DBCE8331AAB98EB00303DE1 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Douglas Alexander";
 				TargetAttributes = {
@@ -532,8 +558,10 @@
 				2DBCE84D1AAB98EB00303DE1 /* Main.storyboard in Resources */,
 				2D4451401C0A06A000467315 /* TutorialPages.plist in Resources */,
 				2DA73A201B5286E700596C3E /* Quotes.plist in Resources */,
+				2D1A34391C14812100764D55 /* Arrows.xcassets in Resources */,
 				2DBCE8521AAB98EB00303DE1 /* LaunchScreen.xib in Resources */,
 				2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */,
+				2D1A33F81C0F11BD00764D55 /* FAQList.plist in Resources */,
 				2DFD82141ADF33C000BD9D86 /* ExerciseSelection.plist in Resources */,
 				2D4451391C09D4B900467315 /* Tutorial.xcassets in Resources */,
 				2DBCE84F1AAB98EB00303DE1 /* Images.xcassets in Resources */,
@@ -579,6 +607,8 @@
 				2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */,
 				2D44513E1C0A058B00467315 /* TutorialViewController.m in Sources */,
 				2DB940011AF844FA0062AB0D /* EventDataSectionHeaderCell.m in Sources */,
+				2D1A343D1C14950600764D55 /* FAQAnswerVewController.swift in Sources */,
+				2D1A34411C165FBB00764D55 /* ShareData.swift in Sources */,
 				2DB6F4311AEBDD1000FCE207 /* EditEventTableViewCell.m in Sources */,
 				2DB93FFD1AF6AAE90062AB0D /* EventTableViewCell.m in Sources */,
 				2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */,
@@ -603,6 +633,7 @@
 				2DF9C0B51B13B54E002A497E /* DayCollectionViewCell.m in Sources */,
 				2DF9C0B21B134873002A497E /* CreateSheduleViewController.m in Sources */,
 				2D7D7C321AC0C5950069E888 /* AddEventDataViewController.m in Sources */,
+				2D1A33F61C0F026200764D55 /* FAQViewController.swift in Sources */,
 				2DBCE84A1AAB98EB00303DE1 /* EventViewController.m in Sources */,
 				2D7D7C621AC4D9A80069E888 /* AerobicEvent.m in Sources */,
 				2DB93FED1AF116140062AB0D /* HistoryEventSelectTableViewController.m in Sources */,
@@ -680,7 +711,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -700,6 +732,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ExercisRecording-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -723,7 +756,8 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = YES;
+				DEFINES_MODULE = NO;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -736,6 +770,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "ExercisRecording-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -747,7 +782,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -764,6 +801,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExerciseRecording-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -774,7 +813,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEFINES_MODULE = NO;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -791,6 +832,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ExerciseRecording-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
