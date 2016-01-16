@@ -74,9 +74,6 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
-//    NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
-//    [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -477,15 +474,15 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     return [self.period integerValue];
 }
 
-- (NSString *)plotDate:(NSUInteger)plotPoint
+- (NSMutableString *)plotDate:(NSUInteger)plotPoint
 {
-    NSString *date;
+    NSMutableString *date;
     static NSInteger setCount;
     switch (self.selectedEvent.eventCategory) {
         case kWeights:
             {
                 WeightLiftingEvent *weightEvent = self.weightLiftingEvents[plotPoint];
-                date = [Utilities dateToFormatMMddyyy:weightEvent.date];
+                date = [[Utilities dateToFormatMMddyyy:weightEvent.date] mutableCopy];
 
                 // only send back the first date in a set
                 if (plotPoint > 0) {
@@ -493,7 +490,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                     NSString *datePrev = [Utilities dateToFormatMMddyyy:weightEventPrev.date];
                     if ([datePrev isEqualToString:date]) {
                         setCount += 1;
-                        date = [NSString stringWithFormat:@"%ld",(long)setCount];
+                        date = [[NSString stringWithFormat:@"%ld",(long)setCount] mutableCopy];
                     } else {
                         setCount = 1;
                     }
@@ -506,10 +503,11 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
         default:
         {
             AerobicEvent *aerobicEvent = self.aerobicEvents[plotPoint];
-            date = [Utilities dateToFormatMMddyyy:aerobicEvent.date];
+            date = [[Utilities dateToFormatMMddyyy:aerobicEvent.date] mutableCopy];
         }
             break;
     }
+    [date replaceOccurrencesOfString:@"Date: " withString:@"" options:0 range:NSMakeRange(0, date.length)];
     NSLog(@"Date: %@ for %lu", date, (unsigned long)plotPoint);
     return date;
 }

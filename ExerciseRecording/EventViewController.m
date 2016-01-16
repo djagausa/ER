@@ -164,8 +164,10 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
     NSInteger space;
 
     motivationalQuoteInfo = [self.motivationalHelper provideMotivationQuoteInfo];
-    space = 75 - motivationalQuoteInfo.author.length;
+    
+    space = 40;
     NSString * quoteString = [NSString stringWithFormat:@"%@\n\n%*s - %@", motivationalQuoteInfo.motivtionalQuote, (int)space, " ", motivationalQuoteInfo.author];
+
     self.motivationalTextOutlet.text = quoteString;
 }
 

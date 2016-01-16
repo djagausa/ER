@@ -285,8 +285,8 @@ static NSArray *_cellAvailableColors;
     [self configureCell:cell day:indexPath.row week:indexPath.section];
     
     // the reloadSections call is necessary to ensure that the autolayout constraints are correctly established
-    // (there hav been bugs reported surrounding autolayout and collection view cells.)
-    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
+    // (there have been bugs reported surrounding autolayout and collection view cells.)
+//    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
 
     return cell;
 }

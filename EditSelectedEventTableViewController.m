@@ -166,19 +166,19 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                         if ([weightEvent.notes length] > 0) {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithNote];
                             cell.eventNote.text = weightEvent.notes;
-                            tableView.rowHeight = 44.0f;
+                            tableView.rowHeight = 54.0f;
                         } else {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
-                            tableView.rowHeight = 36.0f;
+                            tableView.rowHeight = 44.0f;
 
                         }
                         NSString *convertedDate = [dateFormatter stringFromDate:weightEvent.date];
                         NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
                         
                         cell.eventDate.text = formattedDate;
-                        cell.eventL1.text = [NSString stringWithFormat:@"Set: %@", weightEvent.setNumber];
-                        cell.eventL2.text = [NSString stringWithFormat:@"Reps: %@", weightEvent.repCount];
-                        cell.eventL3.text = [NSString stringWithFormat:@"Weight: %@", weightEvent.weight];
+                        cell.eventL1.text = [NSString stringWithFormat:@"Set:%@", weightEvent.setNumber];
+                        cell.eventL2.text = [NSString stringWithFormat:@"Reps:%@", weightEvent.repCount];
+                        cell.eventL3.text = [NSString stringWithFormat:@"Weight:%@", weightEvent.weight];
                         return cell;
                     }
                     break;
@@ -189,10 +189,10 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                         if ([aerobicEvent.note length] > 0) {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithNote];
                             cell.eventNote.text = aerobicEvent.note;
-                            tableView.rowHeight = 44.0f;
+                            tableView.rowHeight = 54.0f;
                         } else {
                             cell = [self.editSelectedEventTable dequeueReusableCellWithIdentifier:cellWithoutNote];
-                            tableView.rowHeight = 36.0f;
+                            tableView.rowHeight = 44.0f;
                         }
                         NSString *convertedDate = [dateFormatter stringFromDate:aerobicEvent.date];
                         NSString *formattedDate = [[NSString alloc] initWithFormat:@"%@", convertedDate];
@@ -203,9 +203,9 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                             case kWalking:
                             case kRunning:
                                 {
-                                    cell.eventL1.text = [NSString stringWithFormat:@"Time: %ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
-                                    cell.eventL2.text = [NSString stringWithFormat:@"HR: %@", aerobicEvent.heartRate];
-                                    cell.eventL3.text = [NSString stringWithFormat:@"Distance: %@", aerobicEvent.distance];
+                                    cell.eventL1.text = [NSString stringWithFormat:@"Time:%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
+                                    cell.eventL2.text = [NSString stringWithFormat:@"HR:%@", aerobicEvent.heartRate];
+                                    cell.eventL3.text = [NSString stringWithFormat:@"Distance:%@", aerobicEvent.distance];
                                     return cell;
                                 }
                                 break;
@@ -221,9 +221,9 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
                                 break;
                             case kBicycling:
                                 {
-                                    cell.eventL1.text = [NSString stringWithFormat:@"Time: %ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
-                                    cell.eventL2.text = [NSString stringWithFormat:@"HR: %@", aerobicEvent.heartRate];
-                                    cell.eventL3.text = [NSString stringWithFormat:@"CAD: %@", aerobicEvent.cadenace];
+                                    cell.eventL1.text = [NSString stringWithFormat:@"Time:%ld:%02ld", [aerobicEvent.duration integerValue]/ 60, [aerobicEvent.duration integerValue] % 60];
+                                    cell.eventL2.text = [NSString stringWithFormat:@"HR:%@", aerobicEvent.heartRate];
+                                    cell.eventL3.text = [NSString stringWithFormat:@"CAD:%@", aerobicEvent.cadenace];
                                     return cell;
                                 }
                                 break;

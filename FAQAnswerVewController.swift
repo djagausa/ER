@@ -84,6 +84,6 @@ import UIKit
         questionOutlet.text = currentFAQDescription["Question"] as? String
         
         answerOutlet.text = currentFAQDescription["Answer"] as? String
-        questionNumber.text = String(format: "Question \(selectedRow + 1) of \(faqDescriptions.count).")
+        questionNumber.text = "Question \(selectedRow + 1) of \(faqDescriptions.count)."
     }
 }

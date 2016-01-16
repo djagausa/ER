@@ -55,7 +55,7 @@ BOOL manualSingleEvent;
     [self formatButton:self.reviewButton];
     self.startNewScheduleButton.enabled = YES;
     
-    self.dateLabel.text = [Utilities dateToFormatMMddyyy:[NSDate date]];
+    self.dateLabel.text = [NSString stringWithFormat:@"Individual Event ---  %@", [Utilities dateToFormatMMddyyy:[NSDate date]]];
     [self fetchEvents];
 }
 
