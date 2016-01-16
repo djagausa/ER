@@ -17,10 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIButton           *addExerciseButton;
 @property (weak, nonatomic) IBOutlet UIButton           *reviewExerciseButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem    *editExercise;
+@property (weak, nonatomic) IBOutlet UIButton *editExerciseButton;
+@property (weak, nonatomic) IBOutlet UIButton *setupExerciseDataButton;
+
 @property (weak, nonatomic) IBOutlet UITextView         *motivationalTextOutlet;
 @property  (nonatomic, strong) IBOutlet UITapGestureRecognizer *tapRecognizer;
 @property (copy, nonatomic) NSString                    *motivationalStatement;
 @property (strong, nonatomic) MotivationalQuoteHelper   *motivationalHelper;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem    *setupExerciseData;
 
 - (IBAction)faqButton:(id)sender;
@@ -84,7 +88,7 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
     //  only turn the buttons if event data exists
     [self.addExerciseButton setEnabled:NO];
     [self.reviewExerciseButton setEnabled:NO];
-    [self.editExercise setEnabled:NO];
+    [self.editExerciseButton setEnabled:NO];
     
     // enable the review button only if events have been recorded
     NSInteger count = [self.coreDataHelper numberOfEntities:aerobicEventsEntityName];
@@ -108,7 +112,7 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
     if (count > 0)
     {
         [self.addExerciseButton setEnabled:YES];
-        [self.editExercise setEnabled:YES];
+        [self.editExerciseButton setEnabled:YES];
     }
     
     if ((self.addExerciseButton.enabled == YES) && (self.reviewExerciseButton.enabled == YES)) {
