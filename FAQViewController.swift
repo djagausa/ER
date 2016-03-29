@@ -74,7 +74,6 @@ import UIKit
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let currentFAQDescription = faqDescriptions[indexPath.row] as! [String: AnyObject]
         let cell = tableView.dequeueReusableCellWithIdentifier("FAQCell", forIndexPath: indexPath)
         cell.textLabel?.text = currentFAQDescription["Question"] as? String
@@ -83,7 +82,7 @@ import UIKit
     
     
     public func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 60.0
+        return 44.0
     }
     
     

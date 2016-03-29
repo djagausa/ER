@@ -22,9 +22,52 @@
 	</dict>
 	<dict>
 		<key>Question</key>
+		<string>Can I setup my own exercise event?</string>
+		<key>Answer</key>
+		<string>Yes. </string>
+	</dict>
+	<dict>
+		<key>Question</key>
 		<string>Is the data stored on the cloud?</string>
 		<key>Answer</key>
 		<string>No, maybe in a future release.</string>
 	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Can  I edii recorded data?</string>
+		<key>Answer</key>
+		<string>Yes. Select the bootom button labeled &apos;Edit Data&apos;. You can then edit all recorded events and schedules.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Can I edit event setup data?</string>
+		<key>Answer</key>
+		<string>Yes. Select the bottom button labed &apos;Edit Data&apos;, then selected the desired event. The first item listed in the table is the event setup data.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What is the event setup data?</string>
+		<key>Answer</key>
+		<string>The event setup data enables you to define starting parameters for the event. For ex: 50 lbs and 8 reps. Then when you select the event the starting parameters will be automatically configured as your starting point.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Why is the weight amount automatically being set to the last amount?</string>
+		<key>Answer</key>
+		<string>The first recorded weight amount is always used as the starting amount for the next workout.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What can I see in history?</string>
+		<key>Answer</key>
+		<string>Can see a list sorted by date of the recorded events. Selecting the Chart button will display a graph of the recorded data.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>How does the history chart work?</string>
+		<key>Answer</key>
+		<string>The history chart contains buttons that enable you to select the parameter (if applicable) and a time period.</string>
+	</dict>
+	<dict/>
 </array>
 </plist>

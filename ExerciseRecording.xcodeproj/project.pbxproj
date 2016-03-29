@@ -31,6 +31,7 @@
 		2DAF3B3C1B2AD724001DA3DE /* AbstractScheduleEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B3B1B2AD724001DA3DE /* AbstractScheduleEventViewController.m */; };
 		2DAF3B3F1B2D702C001DA3DE /* ScheduleStatusFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B3E1B2D702C001DA3DE /* ScheduleStatusFileHelper.m */; };
 		2DAF3B421B2E199B001DA3DE /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DAF3B411B2E199B001DA3DE /* Utilities.m */; };
+		2DB231731C56FC4D005F45A1 /* BackGround.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2DB231721C56FC4D005F45A1 /* BackGround.xcassets */; };
 		2DB6F41F1AE9075600FCE207 /* EditEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */; };
 		2DB6F4221AE9C3B000FCE207 /* EditSelectedEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F4211AE9C3B000FCE207 /* EditSelectedEventTableViewController.m */; };
 		2DB6F42E1AEAADCA00FCE207 /* AbstractEventDataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DB6F42D1AEAADCA00FCE207 /* AbstractEventDataViewController.m */; };
@@ -138,6 +139,7 @@
 		2DAF3B3E1B2D702C001DA3DE /* ScheduleStatusFileHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleStatusFileHelper.m; sourceTree = "<group>"; };
 		2DAF3B401B2E199B001DA3DE /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		2DAF3B411B2E199B001DA3DE /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		2DB231721C56FC4D005F45A1 /* BackGround.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BackGround.xcassets; sourceTree = "<group>"; };
 		2DB6F41D1AE9075600FCE207 /* EditEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditEventTableViewController.h; sourceTree = "<group>"; };
 		2DB6F41E1AE9075600FCE207 /* EditEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditEventTableViewController.m; sourceTree = "<group>"; };
 		2DB6F4201AE9C3B000FCE207 /* EditSelectedEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditSelectedEventTableViewController.h; sourceTree = "<group>"; };
@@ -177,7 +179,7 @@
 		2DBCE8481AAB98EB00303DE1 /* EventViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EventViewController.h; path = ExerciseRecording/EventViewController.h; sourceTree = "<group>"; };
 		2DBCE8491AAB98EB00303DE1 /* EventViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = EventViewController.m; path = ExerciseRecording/EventViewController.m; sourceTree = "<group>"; };
 		2DBCE84C1AAB98EB00303DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ExerciseRecording/Images.xcassets; sourceTree = "<group>"; };
 		2DBCE8511AAB98EB00303DE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2DBCE8571AAB98EC00303DE1 /* ExerciseRecordingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExerciseRecordingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DBCE85C1AAB98EC00303DE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -276,6 +278,8 @@
 				2DBCE84B1AAB98EB00303DE1 /* Main.storyboard */,
 				2D1A34381C14812100764D55 /* Arrows.xcassets */,
 				2D4451381C09D4B900467315 /* Tutorial.xcassets */,
+				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
+				2DB231721C56FC4D005F45A1 /* BackGround.xcassets */,
 				2DBCE83D1AAB98EB00303DE1 /* ExerciseRecording */,
 				2DBCE8731AACDB3000303DE1 /* ControllerFiles */,
 				2DFD82181ADF38D700BD9D86 /* TableViews */,
@@ -326,7 +330,6 @@
 				2DBCE83F1AAB98EB00303DE1 /* Info.plist */,
 				2DBCE8401AAB98EB00303DE1 /* main.m */,
 				2DBCE8501AAB98EB00303DE1 /* LaunchScreen.xib */,
-				2DBCE84E1AAB98EB00303DE1 /* Images.xcassets */,
 				2D4451411C0C6EEF00467315 /* CALayer+XibConfiguration.h */,
 				2D4451421C0C6EEF00467315 /* CALayer+XibConfiguration.m */,
 			);
@@ -563,6 +566,7 @@
 				2DBCE8681AACCBF100303DE1 /* ExerciseCategory.plist in Resources */,
 				2D1A33F81C0F11BD00764D55 /* FAQList.plist in Resources */,
 				2DFD82141ADF33C000BD9D86 /* ExerciseSelection.plist in Resources */,
+				2DB231731C56FC4D005F45A1 /* BackGround.xcassets in Resources */,
 				2D4451391C09D4B900467315 /* Tutorial.xcassets in Resources */,
 				2DBCE84F1AAB98EB00303DE1 /* Images.xcassets in Resources */,
 			);
