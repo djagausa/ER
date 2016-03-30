@@ -1,0 +1,3 @@
+[submodule "ExerciseRecording/CorePlot"]
+	path = ExerciseRecording/CorePlot
+	url = https://github.com/core-plot/core-plot
