@@ -315,11 +315,11 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     // Set up plot space
     [plotSpace scaleToFitPlots:[NSArray arrayWithObjects:eventPlot, nil]];
     CPTMutablePlotRange *xRange = [plotSpace.xRange mutableCopy];
-    [xRange expandRangeByFactor:CPTDecimalFromCGFloat(1.1f)];
+    [xRange expandRangeByFactor:@(1.1f)];
     plotSpace.xRange = xRange;
     CPTMutablePlotRange *yRange;
-    yRange = [CPTMutablePlotRange plotRangeWithLocation:CPTDecimalFromInt([self.yMin intValue] -6) length:CPTDecimalFromInt([self.yMax intValue] - [self.yMin intValue] +5)];
-    [yRange expandRangeByFactor:CPTDecimalFromCGFloat(1.4f)];
+    yRange = [CPTMutablePlotRange plotRangeWithLocation:@([self.yMin intValue] -6) length:@([self.yMax intValue] - [self.yMin intValue] +5)];
+    [yRange expandRangeByFactor:@(1.4f)];
     plotSpace.yRange = yRange;
     plotSpace.globalYRange = plotSpace.yRange;
     
@@ -387,7 +387,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
         CPTAxisLabel *label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%@", date]  textStyle:x.labelTextStyle];
         CGFloat location = i;
         i += jump;
-        label.tickLocation = CPTDecimalFromCGFloat(location);
+        label.tickLocation = @(location);
         label.offset = x.majorTickLength;
         label.rotation = M_PI / 4;
         if (label) {
@@ -434,7 +434,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
                 label = [[CPTAxisLabel alloc] initWithText:[NSString stringWithFormat:@"%li", (long)j] textStyle:y.labelTextStyle];
             }
             NSDecimal location = CPTDecimalFromInteger(j);
-            label.tickLocation = location;
+            label.tickLocation = @(j);
             label.offset = -y.majorTickLength - y.labelOffset;
             if (label) {
                 [yLabels addObject:label];
