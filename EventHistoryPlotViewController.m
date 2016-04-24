@@ -363,7 +363,7 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     CPTXYAxisSet *axisSet = (CPTXYAxisSet *) self.hostView.hostedGraph.axisSet;
     
     // Configure x-axis
-    axisSet.xAxis.orthogonalCoordinateDecimal = CPTDecimalFromInt([self.yMin intValue]-5);
+    axisSet.xAxis.orthogonalPosition = @([self.yMin intValue]-5);
     
     CPTAxis *x = axisSet.xAxis;
 //    x.title = [self.activitySelectorOutlet titleForSegmentAtIndex:self.activitySelectorOutlet.selectedSegmentIndex];
