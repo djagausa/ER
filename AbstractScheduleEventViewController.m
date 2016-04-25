@@ -45,6 +45,9 @@ static NSString *CellIdentifier = @"EventCell";
     _completedWeightEvents = [[NSMutableArray alloc] init];
     _scheduledEventInfo = [[ScheduledEventInfo alloc] init];
     _manualCompletedEvents = [[NSMutableSet alloc] init];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

@@ -21,6 +21,9 @@
     
     [self hideEntries];
     [self setupDisplayfor:self.selectedEvent.eventCategory];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)hideEntries

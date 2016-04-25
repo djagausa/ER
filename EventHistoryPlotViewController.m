@@ -51,6 +51,9 @@ typedef NS_ENUM(NSInteger, bicyclingEventMeasurements) {
     
     self.period = [self setEventPeriod:@(60)];
     [self getEventsForSPecificRange];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations

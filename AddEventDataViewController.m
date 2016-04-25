@@ -63,6 +63,9 @@ BOOL newEventDataAdded;         // used to set color on cell for newly added dat
     self.navigationItem.title = [NSString stringWithFormat:@"Add %@ Data", self.selectedEvent.eventName];
     
     [self.eventTable setRowHeight:UITableViewAutomaticDimension];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated

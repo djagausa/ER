@@ -57,6 +57,9 @@ BOOL manualSingleEvent;
     
     self.dateLabel.text = [NSString stringWithFormat:@"Individual Event ---  %@", [Utilities dateToFormatMMddyyy:[NSDate date]]];
     [self fetchEvents];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void) viewWillAppear:(BOOL)animated

@@ -53,6 +53,9 @@ typedef NS_ENUM(NSInteger, ScheduleActivity) {
     // register for events added notifications
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(exerciseDataAddedNotification:) name:eventAddedNotificationName object:nil];
+#ifdef DEBUG
+        NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)constructInfoLabel

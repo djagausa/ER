@@ -25,6 +25,9 @@
     _savedAerobicEvents = [[NSArray alloc] init];
     _savedWeightEvents = [[NSArray alloc] init];
     [self fetchEvents];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

@@ -2921,6 +2921,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="OTV-pe-Xs8" id="vba-tF-QTC"/>
                                             <outlet property="eventNameLabel" destination="Tbn-ka-Qcv" id="agN-ZB-Epv"/>
+                                            <segue destination="sr1-KO-kbA" kind="show" identifier="scheduledEvent" id="VZs-8B-g6g"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -5059,7 +5060,8 @@
                                                             <exclude reference="VZY-xI-Ifi"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="117" y="0.0" width="70" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="VZY-xI-Ifi"/>
                                                         </mask>
@@ -5080,7 +5082,8 @@
                                                             <exclude reference="fMY-7O-bgF"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="231" y="0.0" width="45" height="21"/>
                                                         <mask key="constraints">
                                                             <include reference="fMY-7O-bgF"/>
                                                         </mask>
@@ -5292,9 +5295,10 @@
         <image name="gear-purple-1" width="600" height="570"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zcK-bl-baJ"/>
-        <segue reference="Wri-AE-L0n"/>
+        <segue reference="cis-pU-7M6"/>
         <segue reference="hhk-20-Oeh"/>
-        <segue reference="FXZ-dg-PPC"/>
+        <segue reference="Wri-AE-L0n"/>
+        <segue reference="zcK-bl-baJ"/>
+        <segue reference="VZs-8B-g6g"/>
     </inferredMetricsTieBreakers>
 </document>

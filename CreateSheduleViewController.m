@@ -61,6 +61,9 @@ static NSArray *_cellAvailableColors;
     } else if (self.createScheduledEventInfo.scheduleEditMode == kScheduleEdit){
         [self configureScreenElements];
     }
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning {
@@ -284,10 +287,11 @@ static NSArray *_cellAvailableColors;
     cell.dayCellDayLabel.text = [NSString stringWithFormat:@"Day: %ld", indexPath.row +1];
     [self configureCell:cell day:indexPath.row week:indexPath.section];
     
-    // the reloadSections call is necessary to ensure that the autolayout constraints are correctly established
-    // (there have been bugs reported surrounding autolayout and collection view cells.)
-//    [self.scheduleCollectionView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section]];
 
+    // there seems to be a bug with collection view cell presenting; had to reload the cell to ensure
+    // the content was properly loaded
+    [self.scheduleCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+    
     return cell;
 }
 

@@ -43,6 +43,9 @@ static NSString *CellIdentifierNoNote = @"EventCellNoNote";
     gestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:gestureRecognizer];
     [self fetchEvents];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated

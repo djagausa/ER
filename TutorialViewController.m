@@ -43,6 +43,9 @@ static NSString * const navTitle = @"Exercise Recorder Tutorial";
     
     [[self navigationItem] setTitle:navTitle];
     [self handleButtons];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (IBAction)previousButton:(id)sender {

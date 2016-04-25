@@ -29,6 +29,9 @@ static NSString *cellName = @"ScheduleCell";
     _schduleFileHelper =[[ScheduleStatusFileHelper alloc] init];
     
     [self fetchSchedules];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

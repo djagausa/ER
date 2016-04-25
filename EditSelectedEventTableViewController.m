@@ -49,6 +49,9 @@ static NSString *cellWithoutNote = @"EditEventCellNoNote";
     _coreDataHelper.managedObjectContext = self.managedObjectContext;
 
     [self fetchEvents];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

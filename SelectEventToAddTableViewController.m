@@ -50,6 +50,9 @@ static NSString *scheduleCellId = @"scheduleCell";
     self.clearsSelectionOnViewWillAppear = NO;
 
     [self fetchPredefinedEvents];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated

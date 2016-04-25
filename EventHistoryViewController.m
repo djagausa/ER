@@ -28,6 +28,9 @@
     
 //    [self fetchEvents];
     [self setupLabels];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated

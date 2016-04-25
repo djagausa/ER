@@ -92,6 +92,9 @@ const CGFloat kTableCellHeight = 40.0;
     [[self selectedEventsTable] registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:@"sectionHeader"];
     
     [self findAndHighLiteDaysThatHaveAlreadyBeenSelected];
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)didReceiveMemoryWarning {

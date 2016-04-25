@@ -52,6 +52,9 @@ static NSString * const kTutorialAlertMessage = @"Would you like to view the tur
     [self.motivationalTextOutlet.layer setBorderWidth:2.0];
     self.motivationalTextOutlet.layer.cornerRadius = 5;
     self.motivationalTextOutlet.clipsToBounds = YES;
+#ifdef DEBUG
+    NSLog(@"**************   %s   ***************", __PRETTY_FUNCTION__);
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated
