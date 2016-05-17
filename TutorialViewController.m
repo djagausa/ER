@@ -26,7 +26,7 @@
 
 @end
 
-static NSString * const navTitle = @"Exercise Recorder Tutorial";
+static NSString * const navTitle = @"My Rep Guru";
 
 @implementation TutorialViewController
 

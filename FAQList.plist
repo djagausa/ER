@@ -4,15 +4,39 @@
 <array>
 	<dict>
 		<key>Question</key>
-		<string>How does the schedule operate?</string>
+		<string>What is the first step to using MyRepGuru?</string>
 		<key>Answer</key>
-		<string>The schedule has 2 modes of operate: manual or automatic. Automatic causes the days to advance with each new day. Manual mode requires that you advance the day.</string>
+		<string>Create exercise events?</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What are events?</string>
+		<key>Answer</key>
+		<string>Events are the exercise activity. For example: leg squats or running.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>How do I create exercise events?</string>
+		<key>Answer</key>
+		<string>On the bottom of the home page is a button titled Setup.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What are the existing events?</string>
+		<key>Answer</key>
+		<string>A large number of events have been prepopulate. You simply select an event and then add the starting parameters.</string>
 	</dict>
 	<dict>
 		<key>Question</key>
 		<string>How do I setup a schedule?</string>
 		<key>Answer</key>
 		<string>First you need to have setup all the events that you want to include in the exercise schedule. Then using setup section you create a schedule.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>How does the schedule operate?</string>
+		<key>Answer</key>
+		<string>The schedule has 2 modes of operate: manual or automatic. Automatic causes the days to advance with each new day. Manual mode requires that you advance the day.</string>
 	</dict>
 	<dict>
 		<key>Question</key>
@@ -25,6 +49,24 @@
 		<string>Is the data stored on the cloud?</string>
 		<key>Answer</key>
 		<string>No, maybe in a future release.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Is there a limit to the number of events?</string>
+		<key>Answer</key>
+		<string>No, create as many events as you require. </string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>Can I edit events and schedules?</string>
+		<key>Answer</key>
+		<string>You can edit events, schedules and recorded data.</string>
+	</dict>
+	<dict>
+		<key>Question</key>
+		<string>What is the green on the events row mean?</string>
+		<key>Answer</key>
+		<string>Green on an event row inidcates that event has been preformed for that day.</string>
 	</dict>
 </array>
 </plist>
